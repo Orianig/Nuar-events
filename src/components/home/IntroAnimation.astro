@@ -10,7 +10,7 @@ const {
 } = Astro.props;
 ---
 
-<div id="intro-animation" class="intro-container">
+<div id="intro-animation" class="intro-container intro-hidden">
   <div class="intro-screen">
     <div class="logo-container">
       <img
@@ -35,6 +35,10 @@ const {
   }
 
   .intro-container.hidden {
+    display: none;
+  }
+
+  .intro-hidden {
     display: none;
   }
 
@@ -190,15 +194,51 @@ const {
 
 <script>
   const introElement = document.getElementById('intro-animation');
-  
-  document.body.style.overflow = 'hidden';
-  
-  setTimeout(() => {
-    document.body.style.overflow = '';
-    if (introElement) {
+
+  if (!introElement) {
+    // Nada que mostrar
+    throw null;
+  }
+
+  // Tipo de navegación (reload, navigate, back_forward, etc.)
+  const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+  const navType = navEntry && 'type' in navEntry ? navEntry.type : 'navigate';
+
+  // Determinar si venimos de otra página interna del mismo sitio
+  let fromInternalPage = false;
+  if (document.referrer) {
+    try {
+      const ref = new URL(document.referrer);
+      const sameOrigin = ref.origin === window.location.origin;
+      if (sameOrigin && ref.pathname !== window.location.pathname) {
+        fromInternalPage = true;
+      }
+    } catch {
+      // Si falla el parseo del referrer, lo ignoramos
+    }
+  }
+
+  // Mostrar intro solo si:
+  // - Es recarga del home, o
+  // - Es entrada directa desde fuera (sin venir de otra ruta interna)
+  const shouldPlayIntro =
+    navType === 'reload' ||
+    (!fromInternalPage && navType === 'navigate');
+
+  if (!shouldPlayIntro) {
+    // Navegación interna u otro caso: no mostramos intro ni bloqueamos scroll
+    introElement.classList.remove('intro-hidden');
+    introElement.classList.add('hidden');
+  } else {
+    // Reproducir animación completa sin pantallazos
+    introElement.classList.remove('intro-hidden');
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+      document.body.style.overflow = '';
       setTimeout(() => {
         introElement.classList.add('hidden');
       }, 300);
-    }
-  }, 4700);
+    }, 4700);
+  }
 </script>
