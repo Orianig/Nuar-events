@@ -1,0 +1,67 @@
+---
+interface Props {
+  sectionTitle?: string;
+  items?: Array<{
+    image: string;
+    title: string;
+    description: string;
+  }>;
+  backgroundColor?: string;
+}
+
+const { 
+  sectionTitle,
+  items = [
+    {
+      image: "/placeholder1.jpg",
+      title: "El clima impacta",
+      description: "Descripción breve del impacto climático"
+    },
+    {
+      image: "/placeholder2.jpg",
+      title: "La propuesta es el camino",
+      description: "Explicación de nuestra propuesta"
+    },
+    {
+      image: "/placeholder3.jpg",
+      title: "El proceso también es punto",
+      description: "Importancia del proceso"
+    }
+  ],
+  backgroundColor = "bg-green-900"
+} = Astro.props;
+---
+
+<section class={`py-20 ${backgroundColor}`}>
+  <div class="container mx-auto px-6">
+    {sectionTitle && (
+      <h2 class="text-4xl font-bold text-center mb-16 text-white">
+        {sectionTitle}
+      </h2>
+    )}
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {items.map((item) => (
+        <div class="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="relative overflow-hidden aspect-square">
+            <img 
+              src={item.image} 
+              alt={item.title}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
+
+          <div class="p-6 space-y-3">
+            <h3 class="text-xl font-semibold text-white">
+              {item.title}
+            </h3>
+            <p class="text-gray-200 text-sm leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

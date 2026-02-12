@@ -1,0 +1,56 @@
+---
+interface Props {
+  slogan?: string;
+  backgroundImage?: string;
+  backgroundVideo?: string;
+  height?: string;
+}
+
+const { 
+  slogan = "Texto - Frase que nos representa",
+  backgroundImage = "/hero-bg.jpg",
+  backgroundVideo,
+  height = "h-screen"
+} = Astro.props;
+---
+
+<section class={`relative ${height} flex items-center justify-center overflow-hidden`}>
+  {backgroundVideo ? (
+    backgroundVideo.endsWith('.gif') ? (
+      <img 
+        src={backgroundVideo}
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    ) : (
+      <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src={backgroundVideo} type="video/mp4" />
+      </video>
+    )
+  ) : (
+    <div 
+      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+      style={`background-image: url('${backgroundImage}');`}
+    ></div>
+  )}
+
+  <div class="absolute inset-0 bg-black/30"></div>
+
+  <div class="relative z-10 text-center px-6 max-w-4xl">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl leading-tight">
+      {slogan}
+    </h1>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>

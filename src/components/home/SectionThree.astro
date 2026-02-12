@@ -1,0 +1,47 @@
+---
+interface Props {
+  image?: string;
+  centerText?: string;
+  effectType?: 'reveal' | 'zoom';
+  backgroundColor?: string;
+}
+
+const {
+  image = "/effect-image.jpg",
+  centerText = "NUAR",
+  effectType = 'reveal',
+  backgroundColor = "bg-amber-50"
+} = Astro.props;
+---
+
+<section class={`relative py-32 ${backgroundColor} overflow-hidden`}>
+  <div class="container mx-auto px-6">
+    <div class="relative max-w-5xl mx-auto">
+      <div
+        class="relative rounded-3xl overflow-hidden shadow-2xl"
+        style="min-height: 500px;"
+      >
+        <img 
+          src={image} 
+          alt="Imagen con efecto"
+          class={`w-full h-full object-cover ${
+            effectType === 'zoom' ? 'hover:scale-110 transition-transform duration-700' : ''
+          }`}
+          id="effect-image"
+        />
+
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="bg-white/80 backdrop-blur-sm rounded-full px-12 py-8 shadow-xl">
+            <h2 class="text-5xl font-bold text-gray-800 tracking-wider">
+              {centerText}
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center mt-8 text-gray-600 italic max-w-2xl mx-auto">
+        "Especie específica nativa protegida pero nuevo en ecosistemas dañados"
+      </p>
+    </div>
+  </div>
+</section>

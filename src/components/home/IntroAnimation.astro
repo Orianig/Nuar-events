@@ -1,0 +1,204 @@
+---
+interface Props {
+  logoSrc?: string;
+  backgroundColor?: string;
+}
+
+const {
+  logoSrc = "/Logo-2.png",
+  backgroundColor = "#d1cda7",
+} = Astro.props;
+---
+
+<div id="intro-animation" class="intro-container">
+  <div class="intro-screen">
+    <div class="logo-container">
+      <img
+        src={logoSrc}
+        alt="NUAR Logo"
+        class="logo"
+      />
+    </div>
+    <div class="reveal-window" style={`--mask-color: ${backgroundColor};`}></div>
+  </div>
+</div>
+
+<style>
+  .intro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .intro-container.hidden {
+    display: none;
+  }
+
+  .intro-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+  }
+
+  .logo-container {
+    width: 35%;
+    max-width: 250px;
+    position: relative;
+    z-index: 10001;
+    animation: 
+      logoPushUp 1s ease-out forwards,
+      logoFlyAway 1s ease-in forwards;
+    animation-delay: 1.5s, 3s;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .reveal-window {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 0;
+    background: transparent;
+    box-shadow: 0 0 0 9999px var(--mask-color, #d1cda7);
+    z-index: 10000;
+    animation: 
+      windowGrowUp 1s ease-out forwards,
+      windowExpand 1.5s ease-in-out forwards;
+    animation-delay: 1.5s, 3s;
+  }
+
+  @keyframes logoPushUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-80px);
+    }
+  }
+
+  @keyframes logoFlyAway {
+    0% {
+      transform: translateY(-80px);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-250px);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-500px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes windowGrowUp {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: 300px;
+    }
+  }
+
+  @keyframes windowExpand {
+    0% {
+      width: 200px;
+      height: 300px;
+      bottom: 0;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+      bottom: 0;
+      left: 50%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .logo-container {
+      width: 40%;
+    }
+
+    @keyframes logoFlyAway {
+      0% {
+        transform: translateY(-60px);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-200px);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-400px);
+        opacity: 0;
+      }
+    }
+    
+    .reveal-window {
+      width: 160px;
+    }
+
+    @keyframes logoPushUp {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-60px);
+      }
+    }
+
+    @keyframes windowGrowUp {
+      0% {
+        height: 0;
+      }
+      100% {
+        height: 240px;
+      }
+    }
+
+    @keyframes windowExpand {
+      0% {
+        width: 160px;
+        height: 240px;
+        bottom: 0;
+      }
+      100% {
+        width: 100vw;
+        height: 100vh;
+        bottom: 0;
+        left: 50%;
+      }
+    }
+  }
+</style>
+
+<script>
+  const introElement = document.getElementById('intro-animation');
+  
+  document.body.style.overflow = 'hidden';
+  
+  setTimeout(() => {
+    document.body.style.overflow = '';
+    if (introElement) {
+      setTimeout(() => {
+        introElement.classList.add('hidden');
+      }, 300);
+    }
+  }, 4700);
+</script>
