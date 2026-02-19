@@ -13,7 +13,7 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
 <div class="hidden md:block relative lang-switcher">
   <button
     type="button"
-    class="lang-btn flex items-center gap-1 px-3 py-1.5 rounded-full border border-bark/30 text-bark font-medium text-sm hover:bg-bark/10 transition-colors"
+    class="lang-btn flex items-center gap-2 px-4 py-1.5 rounded-full border border-bark/30 text-bark font-medium text-sm hover:bg-bark/10 transition-colors cursor-pointer"
     data-current={currentLang}
   >
     <span class="lang-current">{currentLabel}</span>
@@ -21,10 +21,10 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
     </svg>
   </button>
-  <div class="lang-dropdown hidden absolute left-0 right-0 top-full mt-1 py-1 rounded-full border border-bark/20 bg-stone shadow-lg z-10">
+  <div class="lang-dropdown hidden absolute left-0 right-0 top-full mt-1 rounded-full border border-bark/20 bg-stone shadow-lg z-10">
     <button
       type="button"
-      class="lang-switch lang-switch-dropdown w-full px-3 py-2 text-center text-bark text-sm font-medium hover:bg-bark/10 rounded-full transition-colors"
+      class="lang-switch lang-switch-dropdown w-full px-4 py-1.5 text-center text-bark text-sm font-medium hover:bg-bark/10 rounded-full transition-colors cursor-pointer"
       data-lang={otherLang}
     >
       <span class="lang-other">{otherLabel}</span>
@@ -36,7 +36,7 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
 <div class="md:hidden flex items-center gap-2 text-sm font-medium">
   <button
     type="button"
-    class="lang-switch px-3 py-1.5 rounded-full transition-colors"
+    class="lang-switch px-3 py-1.5 rounded-full transition-colors cursor-pointer"
     class:list={[
       currentLang === 'es' ? 'bg-bark/10 text-bark' : 'text-bark/60 hover:text-bark'
     ]}
@@ -47,7 +47,7 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
   <span class="text-bark/30">|</span>
   <button
     type="button"
-    class="lang-switch px-3 py-1.5 rounded-full transition-colors"
+    class="lang-switch px-3 py-1.5 rounded-full transition-colors cursor-pointer"
     class:list={[
       currentLang === 'en' ? 'bg-bark/10 text-bark' : 'text-bark/60 hover:text-bark'
     ]}
@@ -93,6 +93,12 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
       switchBtn.addEventListener('click', () => {
         const newLang = switchBtn.getAttribute('data-lang') as Lang;
         if (newLang === 'es' || newLang === 'en') {
+          // Cerrar dropdown si está abierto
+          if (dropdown) {
+            dropdown.classList.add('hidden');
+            chevron?.classList.remove('rotate-180');
+          }
+          
           setLang(newLang);
           // Actualizar labels dinámicamente
           updateLangLabels(newLang);

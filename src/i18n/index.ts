@@ -45,5 +45,7 @@ export function getLang(url?: URL): Lang {
 export function setLang(lang: Lang): void {
   if (typeof window !== 'undefined') {
     sessionStorage.setItem('nuar-lang', lang);
+    // Disparar evento personalizado para actualizar la UI
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
   }
 }
