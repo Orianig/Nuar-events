@@ -1,0 +1,83 @@
+/**
+ * Estilos de componentes que no se pueden cubrir solo con Tailwind
+ * (animaciones con keyframes, estados por JS, etc.)
+ */
+
+/* --- Navbar: estado al hacer scroll --- */
+#main-nav.nav-scrolled {
+  @apply bg-stone/95 border-b border-bark/10 shadow-sm;
+}
+
+/* --- IntroAnimation: animaciones y máscara --- */
+.intro-anim-logo {
+  animation:
+    intro-logo-push-up 1s ease-out forwards,
+    intro-logo-fly 1s ease-in forwards;
+  animation-delay: 1.5s, 3s;
+}
+
+.intro-anim-reveal {
+  box-shadow: 0 0 0 9999px var(--mask-color, #d1cda7);
+  animation:
+    intro-window-grow 1s ease-out forwards,
+    intro-window-expand 1.5s ease-in-out forwards;
+  animation-delay: 1.5s, 3s;
+}
+
+@keyframes intro-logo-push-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-80px); }
+}
+
+@keyframes intro-logo-fly {
+  0% { transform: translateY(-80px); opacity: 1; }
+  50% { transform: translateY(-250px); opacity: 0.3; }
+  100% { transform: translateY(-500px); opacity: 0; }
+}
+
+@keyframes intro-window-grow {
+  from { height: 0; }
+  to { height: 300px; }
+}
+
+@keyframes intro-window-expand {
+  0% { width: 200px; height: 300px; bottom: 0; }
+  100% { width: 100vw; height: 100vh; bottom: 0; left: 50%; }
+}
+
+@media (max-width: 768px) {
+  .intro-anim-logo {
+    animation:
+      intro-logo-push-up-sm 1s ease-out forwards,
+      intro-logo-fly-sm 1s ease-in forwards;
+    animation-delay: 1.5s, 3s;
+  }
+
+  .intro-anim-reveal {
+    animation:
+      intro-window-grow-sm 1s ease-out forwards,
+      intro-window-expand-sm 1.5s ease-in-out forwards;
+    animation-delay: 1.5s, 3s;
+  }
+
+  @keyframes intro-logo-push-up-sm {
+    from { transform: translateY(0); }
+    to { transform: translateY(-60px); }
+  }
+
+  @keyframes intro-logo-fly-sm {
+    0% { transform: translateY(-60px); opacity: 1; }
+    50% { transform: translateY(-200px); opacity: 0.3; }
+    100% { transform: translateY(-400px); opacity: 0; }
+  }
+
+  @keyframes intro-window-grow-sm {
+    from { height: 0; }
+    to { height: 240px; }
+  }
+
+  @keyframes intro-window-expand-sm {
+    0% { width: 160px; height: 240px; bottom: 0; }
+    100% { width: 100vw; height: 100vh; bottom: 0; left: 50%; }
+  }
+}

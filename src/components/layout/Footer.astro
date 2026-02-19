@@ -1,13 +1,17 @@
 ---
+import type { FooterProps } from '../../types';
+
+const { contactText } = Astro.props as FooterProps;
 ---
 
-<footer class="bg-gradient-to-r from-gray-800 to-gray-900 py-8">
+<footer class="bg-stone py-8 border-t border-bark/20">
   <div class="container mx-auto px-6 text-center">
     <a 
-      href="/contact" 
-      class="inline-block text-2xl font-semibold text-white hover:text-gray-300 transition-colors"
+      href="/contact"
+      data-i18n="footer.contact"
+      class="inline-block text-2xl font-semibold text-bark hover:opacity-80 transition-opacity"
     >
-      Contacto
+      {contactText}
     </a>
   </div>
 </footer>

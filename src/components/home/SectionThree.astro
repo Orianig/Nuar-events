@@ -1,20 +1,10 @@
 ---
-interface Props {
-  image?: string;
-  centerText?: string;
-  effectType?: 'reveal' | 'zoom';
-  backgroundColor?: string;
-}
+import type { SectionThreeProps } from '../../types';
 
-const {
-  image = "/effect-image.jpg",
-  centerText = "NUAR",
-  effectType = 'reveal',
-  backgroundColor = "bg-amber-50"
-} = Astro.props;
+const { image, centerText, quote, imageAlt, effectType = 'reveal', backgroundColor } = Astro.props as SectionThreeProps;
 ---
 
-<section class={`relative py-32 ${backgroundColor} overflow-hidden`}>
+<section class={`relative py-32 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
   <div class="container mx-auto px-6">
     <div class="relative max-w-5xl mx-auto">
       <div
@@ -23,7 +13,7 @@ const {
       >
         <img 
           src={image} 
-          alt="Imagen con efecto"
+          alt={imageAlt}
           class={`w-full h-full object-cover ${
             effectType === 'zoom' ? 'hover:scale-110 transition-transform duration-700' : ''
           }`}
@@ -31,16 +21,16 @@ const {
         />
 
         <div class="absolute inset-0 flex items-center justify-center">
-          <div class="bg-white/80 backdrop-blur-sm rounded-full px-12 py-8 shadow-xl">
-            <h2 class="text-5xl font-bold text-gray-800 tracking-wider">
+          <div class="bg-stone/90 backdrop-blur-sm rounded-full px-12 py-8 shadow-xl">
+            <h2 data-i18n="sectionThree.centerText" class="text-5xl font-bold text-olive tracking-wider">
               {centerText}
             </h2>
           </div>
         </div>
       </div>
 
-      <p class="text-center mt-8 text-gray-600 italic max-w-2xl mx-auto">
-        "Especie específica nativa protegida pero nuevo en ecosistemas dañados"
+      <p data-i18n="sectionThree.quote" class="text-center mt-8 text-olive italic max-w-2xl mx-auto">
+        "{quote}"
       </p>
     </div>
   </div>

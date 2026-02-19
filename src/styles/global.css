@@ -1,1 +1,45 @@
+/* Fuente actual: Plus Jakarta Sans. Alternativa: Cormorant Upright (comentada abajo) */
+@import url("https://fonts.googleapis.com/css2?family=Combo&family=Dynalight&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Combo&family=Cormorant+Upright:wght@300;400;500;600;700&display=swap"); */
 @import "tailwindcss";
+@import "./fonts.css";
+@import "./components.css";
+
+@theme {
+  /* Fuente principal (texto por defecto): Plus Jakarta Sans */
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  /* --font-body: "Cormorant Upright", serif; */
+  --font-title: "Combo", serif;
+  --default-font-family: var(--font-body);
+
+  /* Paleta Nuar — Tailwind genera text-bark, bg-stone, bg-stone-light, etc. */
+  --color-ink: #292205;
+  --color-ink-light: #3d3a0a;
+  --color-ink-dark: #1a1803;
+
+  --color-bark: #373318;
+  --color-bark-light: #4f4c22;
+  --color-bark-dark: #252209;
+
+  --color-olive: #5b5835;
+  --color-olive-light: #78754d;
+  --color-olive-dark: #3d3b23;
+
+  --color-sand: #aeaa85;
+  --color-sand-light: #c9c6a8;
+  --color-sand-dark: #8a8768;
+
+  --color-stone: #d1cda7;
+  --color-stone-light: #e5e2c9;
+  --color-stone-dark: #a19d7a;
+
+  --color-cream: #d4c6ae;
+  --color-cream-light: #e8dfce;
+  --color-cream-dark: #a89b82;
+}
+
+/* Fondo general y texto por defecto */
+body {
+  background-color: var(--color-stone);
+  color: var(--color-bark);
+}

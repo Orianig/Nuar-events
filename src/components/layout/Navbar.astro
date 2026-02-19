@@ -1,34 +1,34 @@
 ---
-interface Props {
-  brandName?: string;
-}
+import type { NavbarProps } from '../../types';
+import LangSwitcher from './LangSwitcher.astro';
 
-const { brandName = "NUAR" } = Astro.props;
+const { brandName, home, projects, contact, menuToggle, currentLang = 'es' } = Astro.props as NavbarProps;
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/30 border-b border-white/20 shadow-lg">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-stone/55 border-b border-transparent transition-all duration-300">
   <div class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold text-gray-800 hover:text-gray-600 transition-colors">
+      <a href="/" class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
         {brandName}
       </a>
 
       <div class="hidden md:flex items-center gap-8">
-        <a href="/" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">
-          Home
+        <a href="/" data-i18n="nav.home" class="text-bark hover:opacity-80 font-medium transition-opacity">
+          {home}
         </a>
-        <a href="/projects" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">
-          Proyectos
+        <a href="/projects" data-i18n="nav.projects" class="text-bark hover:opacity-80 font-medium transition-opacity">
+          {projects}
         </a>
-        <a href="/contact" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">
-          Contacto
+        <a href="/contact" data-i18n="nav.contact" class="text-bark hover:opacity-80 font-medium transition-opacity">
+          {contact}
         </a>
+        <LangSwitcher currentLang={currentLang} />
       </div>
 
       <button 
         id="mobile-menu-button"
-        class="md:hidden text-gray-800 hover:text-gray-600 transition-colors"
-        aria-label="Toggle menu"
+        class="md:hidden text-bark hover:opacity-80 transition-opacity"
+        aria-label={menuToggle}
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -38,23 +38,36 @@ const { brandName = "NUAR" } = Astro.props;
 
     <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
       <div class="flex flex-col gap-4">
-        <a href="/" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">
-          Home
+        <a href="/" data-i18n="nav.home" class="text-bark hover:opacity-80 font-medium transition-opacity">
+          {home}
         </a>
-        <a href="/projects" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">
-          Proyectos
+        <a href="/projects" data-i18n="nav.projects" class="text-bark hover:opacity-80 font-medium transition-opacity">
+          {projects}
         </a>
-        <a href="/contact" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">
-          Contacto
+        <a href="/contact" data-i18n="nav.contact" class="text-bark hover:opacity-80 font-medium transition-opacity">
+          {contact}
         </a>
+        <LangSwitcher currentLang={currentLang} />
       </div>
     </div>
   </div>
 </nav>
 
 <script>
+  const nav = document.getElementById('main-nav');
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+
+  function updateNavOnScroll() {
+    if (window.scrollY > 20) {
+      nav?.classList.add('nav-scrolled');
+    } else {
+      nav?.classList.remove('nav-scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateNavOnScroll, { passive: true });
+  updateNavOnScroll();
 
   menuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');

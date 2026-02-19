@@ -1,0 +1,139 @@
+---
+interface Props {
+  currentLang: 'es' | 'en';
+}
+
+const { currentLang } = Astro.props;
+const currentLabel = currentLang === 'es' ? 'ES' : 'EN';
+const otherLabel = currentLang === 'es' ? 'EN' : 'ES';
+const otherLang = currentLang === 'es' ? 'en' : 'es';
+---
+
+<!-- Desktop: Dropdown -->
+<div class="hidden md:block relative lang-switcher">
+  <button
+    type="button"
+    class="lang-btn flex items-center gap-1 px-3 py-1.5 rounded-full border border-bark/30 text-bark font-medium text-sm hover:bg-bark/10 transition-colors"
+    data-current={currentLang}
+  >
+    <span class="lang-current">{currentLabel}</span>
+    <svg class="lang-chevron w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div class="lang-dropdown hidden absolute left-0 right-0 top-full mt-1 py-1 rounded-full border border-bark/20 bg-stone shadow-lg z-10">
+    <button
+      type="button"
+      class="lang-switch lang-switch-dropdown w-full px-3 py-2 text-center text-bark text-sm font-medium hover:bg-bark/10 rounded-full transition-colors"
+      data-lang={otherLang}
+    >
+      <span class="lang-other">{otherLabel}</span>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile: Botones simples -->
+<div class="md:hidden flex items-center gap-2 text-sm font-medium">
+  <button
+    type="button"
+    class="lang-switch px-3 py-1.5 rounded-full transition-colors"
+    class:list={[
+      currentLang === 'es' ? 'bg-bark/10 text-bark' : 'text-bark/60 hover:text-bark'
+    ]}
+    data-lang="es"
+  >
+    ES
+  </button>
+  <span class="text-bark/30">|</span>
+  <button
+    type="button"
+    class="lang-switch px-3 py-1.5 rounded-full transition-colors"
+    class:list={[
+      currentLang === 'en' ? 'bg-bark/10 text-bark' : 'text-bark/60 hover:text-bark'
+    ]}
+    data-lang="en"
+  >
+    EN
+  </button>
+</div>
+
+<script>
+  import { setLang } from '../../i18n';
+  import type { Lang } from '../../i18n/types';
+
+  function initLangSwitcher() {
+    // Dropdown desktop
+    const btn = document.querySelector('.lang-switcher .lang-btn') as HTMLButtonElement | null;
+    const dropdown = document.querySelector('.lang-switcher .lang-dropdown') as HTMLElement | null;
+    const chevron = document.querySelector('.lang-switcher .lang-chevron') as SVGElement | null;
+
+    if (btn && dropdown) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        dropdown.classList.toggle('hidden');
+        chevron?.classList.toggle('rotate-180');
+      });
+
+      document.addEventListener('click', (e) => {
+        const switcher = document.querySelector('.lang-switcher');
+        if (switcher && !switcher.contains(e.target as Node)) {
+          dropdown.classList.add('hidden');
+          chevron?.classList.remove('rotate-180');
+        }
+      });
+
+      dropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Botones de cambio (desktop y mobile)
+    document.querySelectorAll('.lang-switch').forEach(switchBtn => {
+      switchBtn.addEventListener('click', () => {
+        const newLang = switchBtn.getAttribute('data-lang') as Lang;
+        if (newLang === 'es' || newLang === 'en') {
+          setLang(newLang);
+          // Actualizar labels dinámicamente
+          updateLangLabels(newLang);
+        }
+      });
+    });
+
+    // Escuchar cambios de idioma
+    window.addEventListener('languageChanged', (e: Event) => {
+      const customEvent = e as CustomEvent<{ lang: Lang }>;
+      updateLangLabels(customEvent.detail.lang);
+    });
+  }
+
+  function updateLangLabels(newLang: Lang) {
+    const currentLabel = document.querySelector('.lang-current');
+    const otherLabel = document.querySelector('.lang-other');
+    const dropdownBtn = document.querySelector('.lang-switch-dropdown') as HTMLElement | null;
+    
+    if (currentLabel) {
+      currentLabel.textContent = newLang === 'es' ? 'ES' : 'EN';
+    }
+    if (otherLabel) {
+      otherLabel.textContent = newLang === 'es' ? 'EN' : 'ES';
+    }
+    if (dropdownBtn) {
+      dropdownBtn.setAttribute('data-lang', newLang === 'es' ? 'en' : 'es');
+    }
+
+    // Actualizar mobile buttons
+    document.querySelectorAll('.lang-switch').forEach(btn => {
+      const btnLang = btn.getAttribute('data-lang');
+      if (btnLang === newLang) {
+        btn.classList.add('bg-bark/10', 'text-bark');
+        btn.classList.remove('text-bark/60', 'hover:text-bark');
+      } else if (btnLang === 'es' || btnLang === 'en') {
+        btn.classList.remove('bg-bark/10', 'text-bark');
+        btn.classList.add('text-bark/60', 'hover:text-bark');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initLangSwitcher);
+</script>

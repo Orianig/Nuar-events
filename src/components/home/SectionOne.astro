@@ -1,44 +1,21 @@
 ---
-interface Props {
-  sectionTitle?: string;
-  items?: Array<{
-    image: string;
-    title: string;
-    description: string;
-  }>;
-  backgroundColor?: string;
-}
+import type { SectionOneProps } from '../../types';
 
-const { 
-  sectionTitle = "Título sobre algo",
-  items = [
-    {
-      image: "/placeholder1.jpg",
-      title: "Título + frase de usar",
-      description: "Descripción del primer elemento con más detalles sobre el contenido."
-    },
-    {
-      image: "/placeholder2.jpg",
-      title: "Título + frase de usar",
-      description: "Descripción del segundo elemento con información relevante."
-    }
-  ],
-  backgroundColor = "bg-gray-50"
-} = Astro.props;
+const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionOneProps;
 ---
 
-<section class={`py-20 ${backgroundColor}`}>
+<section class={`py-20 ${backgroundColor ?? 'bg-stone'}`}>
   <div class="container mx-auto px-6">
     {sectionTitle && (
-      <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">
+      <h2 data-i18n="sectionOne.title" class="font-title text-4xl font-bold text-center mb-16 text-bark">
         {sectionTitle}
       </h2>
     )}
 
     <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
       {items.map((item) => (
-        <div class="group">
-          <div class="relative overflow-hidden rounded-2xl shadow-xl mb-6 aspect-[4/3]">
+        <div data-section="sectionOne" class="group">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl mb-6 aspect-4/3">
             <img 
               src={item.image} 
               alt={item.title}
@@ -47,10 +24,10 @@ const {
           </div>
 
           <div class="space-y-3">
-            <h3 class="text-2xl font-semibold text-gray-800">
+            <h3 data-i18n="title" class="font-title text-2xl font-semibold text-bark">
               {item.title}
             </h3>
-            <p class="text-gray-600 leading-relaxed">
+            <p data-i18n="description" class="font-body text-bark leading-relaxed">
               {item.description}
             </p>
           </div>

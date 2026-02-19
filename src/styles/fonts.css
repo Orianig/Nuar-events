@@ -1,0 +1,33 @@
+/**
+ * Tipografía Nuar
+ * Por defecto todo usa font-body (Plus Jakarta Sans).
+ * Para títulos/destacados: añade la clase font-title (Combo).
+ *
+ * Alternativa comentada: Cormorant Upright — descomenta en :root y en global.css
+ * el @import de Cormorant Upright para usarla.
+ */
+
+:root {
+  --font-title: "Combo", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  /* --font-body: "Cormorant Upright", serif; */
+  --font-slogan: "Dynalight", serif;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.font-title {
+  font-family: var(--font-title) !important;
+}
+
+.font-body {
+  font-family: var(--font-body) !important;
+  font-weight: 400;
+}
+
+.font-slogan {
+  font-family: var(--font-slogan) !important;
+}

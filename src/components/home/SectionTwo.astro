@@ -1,48 +1,20 @@
 ---
-interface Props {
-  sectionTitle?: string;
-  items?: Array<{
-    image: string;
-    title: string;
-    description: string;
-  }>;
-  backgroundColor?: string;
-}
+import type { SectionTwoProps } from '../../types';
 
-const { 
-  sectionTitle,
-  items = [
-    {
-      image: "/placeholder1.jpg",
-      title: "El clima impacta",
-      description: "Descripción breve del impacto climático"
-    },
-    {
-      image: "/placeholder2.jpg",
-      title: "La propuesta es el camino",
-      description: "Explicación de nuestra propuesta"
-    },
-    {
-      image: "/placeholder3.jpg",
-      title: "El proceso también es punto",
-      description: "Importancia del proceso"
-    }
-  ],
-  backgroundColor = "bg-green-900"
-} = Astro.props;
+const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionTwoProps;
 ---
 
-<section class={`py-20 ${backgroundColor}`}>
+<section class={`py-20 ${backgroundColor ?? 'bg-bark'}`}>
   <div class="container mx-auto px-6">
     {sectionTitle && (
-      <h2 class="text-4xl font-bold text-center mb-16 text-white">
+      <h2 data-i18n="sectionTwo.title" class="font-title text-4xl font-bold text-center mb-16 text-stone">
         {sectionTitle}
       </h2>
     )}
 
-    <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
       {items.map((item) => (
-        <div class="group bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+        <div data-section="sectionTwo" class="group bg-stone/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
           <div class="relative overflow-hidden aspect-square">
             <img 
               src={item.image} 
@@ -52,10 +24,10 @@ const {
           </div>
 
           <div class="p-6 space-y-3">
-            <h3 class="text-xl font-semibold text-white">
+            <h3 data-i18n="title" class="font-title text-xl font-semibold text-stone">
               {item.title}
             </h3>
-            <p class="text-gray-200 text-sm leading-relaxed">
+            <p data-i18n="description" class="font-body text-stone text-sm leading-relaxed">
               {item.description}
             </p>
           </div>

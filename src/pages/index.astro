@@ -7,28 +7,106 @@ import SectionOne from '../components/home/SectionOne.astro';
 import SectionTwo from '../components/home/SectionTwo.astro';
 import SectionThree from '../components/home/SectionThree.astro';
 import IntroAnimation from '../components/home/IntroAnimation.astro';
+import { getTranslations, getLang, type Lang } from '../i18n';
+
+const lang: Lang = getLang(Astro.url);
+const t = getTranslations(lang);
 ---
 
-<Layout title="Home - Nuar">
+<Layout title={t.pages.home.title}>
 	<IntroAnimation />
 	
-	<Navbar brandName="NUAR" />
+	<Navbar 
+		brandName={t.nav.brandName}
+		home={t.nav.home}
+		projects={t.nav.projects}
+		contact={t.nav.contact}
+		menuToggle={t.nav.menuToggle}
+		currentLang={lang}
+	/>
 
 	<Hero 
-		slogan="Texto - Frase que nos representa"
+		slogan={t.hero.slogan}
 		backgroundVideo="/Home-bg.mp4"
 	/>
 
 	<SectionOne 
-		sectionTitle="Título sobre algo"
+		sectionTitle={t.sectionOne.sectionTitle}
+		items={[...t.sectionOne.items]}
 	/>
 
-	<SectionTwo />
+	<SectionTwo 
+		sectionTitle={t.sectionTwo.sectionTitle || undefined}
+		items={[...t.sectionTwo.items]}
+	/>
 
 	<SectionThree
-		centerText="NUAR"
+		image={t.sectionThree.image}
+		centerText={t.sectionThree.centerText}
+		quote={t.sectionThree.quote}
+		imageAlt={t.sectionThree.imageAlt}
 		effectType="reveal"
 	/>
 
-	<Footer />
+	<Footer contactText={t.footer.contact} />
 </Layout>
+
+<script>
+  import { setLang, getTranslations } from '../i18n';
+  import type { Lang } from '../i18n/types';
+
+  // Actualizar contenido dinámicamente sin recargar
+  function updateContent(newLang: Lang) {
+    setLang(newLang);
+    const t = getTranslations(newLang);
+
+    // Actualizar navbar
+    document.querySelectorAll('[data-i18n="nav.home"]').forEach(el => el.textContent = t.nav.home);
+    document.querySelectorAll('[data-i18n="nav.projects"]').forEach(el => el.textContent = t.nav.projects);
+    document.querySelectorAll('[data-i18n="nav.contact"]').forEach(el => el.textContent = t.nav.contact);
+
+    // Actualizar hero
+    const heroSlogan = document.querySelector('[data-i18n="hero.slogan"]');
+    if (heroSlogan) heroSlogan.textContent = `"${t.hero.slogan}"`;
+
+    // Actualizar section one
+    const s1Title = document.querySelector('[data-i18n="sectionOne.title"]');
+    if (s1Title) s1Title.textContent = t.sectionOne.sectionTitle;
+    
+    document.querySelectorAll('[data-section="sectionOne"]').forEach((card, idx) => {
+      const item = t.sectionOne.items[idx];
+      if (!item) return;
+      const title = card.querySelector('[data-i18n="title"]');
+      const desc = card.querySelector('[data-i18n="description"]');
+      if (title) title.textContent = item.title;
+      if (desc) desc.textContent = item.description;
+    });
+
+    // Actualizar section two
+    const s2Title = document.querySelector('[data-i18n="sectionTwo.title"]');
+    if (s2Title && t.sectionTwo.sectionTitle) s2Title.textContent = t.sectionTwo.sectionTitle;
+    
+    document.querySelectorAll('[data-section="sectionTwo"]').forEach((card, idx) => {
+      const item = t.sectionTwo.items[idx];
+      if (!item) return;
+      const title = card.querySelector('[data-i18n="title"]');
+      const desc = card.querySelector('[data-i18n="description"]');
+      if (title) title.textContent = item.title;
+      if (desc) desc.textContent = item.description;
+    });
+
+    // Actualizar section three
+    const s3Text = document.querySelector('[data-i18n="sectionThree.centerText"]');
+    if (s3Text) s3Text.textContent = t.sectionThree.centerText;
+    const s3Quote = document.querySelector('[data-i18n="sectionThree.quote"]');
+    if (s3Quote) s3Quote.textContent = `"${t.sectionThree.quote}"`;
+
+    // Actualizar footer
+    document.querySelectorAll('[data-i18n="footer.contact"]').forEach(el => el.textContent = t.footer.contact);
+  }
+
+  // Escuchar cambios de idioma
+  window.addEventListener('languageChanged', ((e: CustomEvent) => {
+    updateContent(e.detail.lang);
+  }) as EventListener);
+</script>

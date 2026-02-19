@@ -1,196 +1,23 @@
 ---
-interface Props {
-  logoSrc?: string;
-  backgroundColor?: string;
-}
+import type { IntroAnimationProps } from '../../types';
 
 const {
   logoSrc = "/Logo-2.png",
-  backgroundColor = "#d1cda7",
-} = Astro.props;
+  backgroundColor = "#d1cda7"
+} = Astro.props as IntroAnimationProps;
 ---
 
-<div id="intro-animation" class="intro-container intro-hidden">
-  <div class="intro-screen">
-    <div class="logo-container">
-      <img
-        src={logoSrc}
-        alt="NUAR Logo"
-        class="logo"
-      />
+<div id="intro-animation" class="fixed inset-0 w-screen h-screen z-[9999] pointer-events-none hidden">
+  <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-transparent">
+    <div class="w-[35%] max-md:w-[40%] max-w-[250px] relative z-[10001] intro-anim-logo">
+      <img src={logoSrc} alt="NUAR Logo" class="w-full h-auto block" />
     </div>
-    <div class="reveal-window" style={`--mask-color: ${backgroundColor};`}></div>
+    <div
+      class="intro-anim-reveal absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] max-md:w-[160px] h-0 bg-transparent z-[10000]"
+      style={`--mask-color: ${backgroundColor};`}
+    ></div>
   </div>
 </div>
-
-<style>
-  .intro-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-    pointer-events: none;
-  }
-
-  .intro-container.hidden {
-    display: none;
-  }
-
-  .intro-hidden {
-    display: none;
-  }
-
-  .intro-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-  }
-
-  .logo-container {
-    width: 35%;
-    max-width: 250px;
-    position: relative;
-    z-index: 10001;
-    animation: 
-      logoPushUp 1s ease-out forwards,
-      logoFlyAway 1s ease-in forwards;
-    animation-delay: 1.5s, 3s;
-  }
-
-  .logo {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .reveal-window {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 0;
-    background: transparent;
-    box-shadow: 0 0 0 9999px var(--mask-color, #d1cda7);
-    z-index: 10000;
-    animation: 
-      windowGrowUp 1s ease-out forwards,
-      windowExpand 1.5s ease-in-out forwards;
-    animation-delay: 1.5s, 3s;
-  }
-
-  @keyframes logoPushUp {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-80px);
-    }
-  }
-
-  @keyframes logoFlyAway {
-    0% {
-      transform: translateY(-80px);
-      opacity: 1;
-    }
-    50% {
-      transform: translateY(-250px);
-      opacity: 0.3;
-    }
-    100% {
-      transform: translateY(-500px);
-      opacity: 0;
-    }
-  }
-
-  @keyframes windowGrowUp {
-    0% {
-      height: 0;
-    }
-    100% {
-      height: 300px;
-    }
-  }
-
-  @keyframes windowExpand {
-    0% {
-      width: 200px;
-      height: 300px;
-      bottom: 0;
-    }
-    100% {
-      width: 100vw;
-      height: 100vh;
-      bottom: 0;
-      left: 50%;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .logo-container {
-      width: 40%;
-    }
-
-    @keyframes logoFlyAway {
-      0% {
-        transform: translateY(-60px);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(-200px);
-        opacity: 0.3;
-      }
-      100% {
-        transform: translateY(-400px);
-        opacity: 0;
-      }
-    }
-    
-    .reveal-window {
-      width: 160px;
-    }
-
-    @keyframes logoPushUp {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-60px);
-      }
-    }
-
-    @keyframes windowGrowUp {
-      0% {
-        height: 0;
-      }
-      100% {
-        height: 240px;
-      }
-    }
-
-    @keyframes windowExpand {
-      0% {
-        width: 160px;
-        height: 240px;
-        bottom: 0;
-      }
-      100% {
-        width: 100vw;
-        height: 100vh;
-        bottom: 0;
-        left: 50%;
-      }
-    }
-  }
-</style>
 
 <script>
   const introElement = document.getElementById('intro-animation');
@@ -218,20 +45,13 @@ const {
     }
   }
 
-  // Mostrar intro solo si:
-  // - Es recarga del home, o
-  // - Es entrada directa desde fuera (sin venir de otra ruta interna)
-  const shouldPlayIntro =
-    navType === 'reload' ||
-    (!fromInternalPage && navType === 'navigate');
+  // Mostrar intro solo si es entrada directa desde fuera (no reload ni navegación interna)
+  const shouldPlayIntro = !fromInternalPage && navType === 'navigate';
 
   if (!shouldPlayIntro) {
-    // Navegación interna u otro caso: no mostramos intro ni bloqueamos scroll
-    introElement.classList.remove('intro-hidden');
     introElement.classList.add('hidden');
   } else {
-    // Reproducir animación completa sin pantallazos
-    introElement.classList.remove('intro-hidden');
+    introElement.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 
     setTimeout(() => {

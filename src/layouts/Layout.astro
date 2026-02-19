@@ -1,11 +1,8 @@
 ---
 import '../styles/global.css';
+import type { LayoutProps } from '../types';
 
-interface Props {
-	title?: string;
-}
-
-const { title = 'Nuar' } = Astro.props;
+const { title } = Astro.props as LayoutProps;
 ---
 
 <!doctype html>

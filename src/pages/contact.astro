@@ -1,20 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import { getTranslations, getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const t = getTranslations(lang);
+const p = t.pages.contact;
 ---
 
-<Layout title="Contacto - Nuar">
-	<div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-teal-100 p-8">
+<Layout title={p.title}>
+	<Navbar
+		brandName={t.nav.brandName}
+		home={t.nav.home}
+		projects={t.nav.projects}
+		contact={t.nav.contact}
+		menuToggle={t.nav.menuToggle}
+		currentLang={lang}
+	/>
+	<div class="min-h-screen flex flex-col items-center justify-center bg-stone pt-24 pb-8 px-8">
 		<div class="text-center space-y-8">
-			<h1 class="text-4xl font-bold text-gray-800">Hola, soy Contact</h1>
+			<h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
 			
 			<div class="flex flex-wrap gap-4 justify-center">
 				<a href="/" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md">
-					Ir a Home
+					{p.goHome}
 				</a>
 				<a href="/projects" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md">
-					Ir a Proyectos
+					{p.goProjects}
 				</a>
 			</div>
 		</div>
 	</div>
+	<Footer contactText={t.footer.contact} />
 </Layout>
