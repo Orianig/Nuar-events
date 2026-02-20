@@ -40,8 +40,11 @@ export interface Translations {
     };
   };
   sectionOne: {
-    sectionTitle: string;
-    items: SectionItem[];
+    image1: string;
+    image2: string;
+    title: string;
+    paragraph: string;
+    bullets: string[];
   };
   sectionTwo: {
     sectionTitle: string;

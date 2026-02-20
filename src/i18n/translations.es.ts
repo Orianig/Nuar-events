@@ -37,20 +37,15 @@ export const es: Translations = {
     },
   },
   sectionOne: {
-    sectionTitle: 'Título sobre algo',
-    items: [
-      {
-        image: '/placeholder1.jpg',
-        title: 'Título + frase de usar',
-        description:
-          'Descripción del primer elemento con más detalles sobre el contenido.',
-      },
-      {
-        image: '/placeholder2.jpg',
-        title: 'Título + frase de usar',
-        description:
-          'Descripción del segundo elemento con información relevante.',
-      },
+    image1: '/SectionTwo-PictureOne.jpg',
+    image2: '/SectionTwo-PictureTwo.jpg',
+    title: 'Eventos que se sienten antes de empezar',
+    paragraph:
+      'Diseñamos celebraciones donde el ritmo se desacelera, la conversación fluye y cada detalle tiene un propósito. Creamos espacios donde las personas vuelven a ser el centro.',
+    bullets: [
+      'Celebraciones que se viven despacio',
+      'Espacios que invitan a quedarse',
+      'Recuerdos que perduran',
     ],
   },
   sectionTwo: {
