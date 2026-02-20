@@ -11,6 +11,7 @@ const p = t.pages.contact;
 
 <Layout title={p.title}>
 	<Navbar
+		currentPath={Astro.url.pathname}
 		brandName={t.nav.brandName}
 		home={t.nav.home}
 		projects={t.nav.projects}
@@ -23,10 +24,10 @@ const p = t.pages.contact;
 			<h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
 			
 			<div class="flex flex-wrap gap-4 justify-center">
-				<a href="/" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md">
+				<a href={lang === 'en' ? '/?lang=en' : '/'} class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md">
 					{p.goHome}
 				</a>
-				<a href="/projects" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md">
+				<a href={lang === 'en' ? '/projects?lang=en' : '/projects'} class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md">
 					{p.goProjects}
 				</a>
 			</div>

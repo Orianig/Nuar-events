@@ -2,27 +2,28 @@
 import type { NavbarProps } from '../../types';
 import LangSwitcher from './LangSwitcher.astro';
 
-const { brandName, home, projects, contact, menuToggle, currentLang = 'es' } = Astro.props as NavbarProps;
+const { brandName, home, projects, contact, menuToggle, currentLang = 'es', currentPath = '/' } = Astro.props as NavbarProps;
+const langQuery = currentLang === 'en' ? '?lang=en' : '';
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-stone/55 border-b border-transparent transition-all duration-300">
   <div class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
+      <a href={langQuery ? '/' + langQuery : '/'} class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
         {brandName}
       </a>
 
       <div class="hidden md:flex items-center gap-8">
-        <a href="/" data-i18n="nav.home" class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={langQuery ? '/' + langQuery : '/'} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {home}
         </a>
-        <a href="/projects" data-i18n="nav.projects" class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={langQuery ? '/projects' + langQuery : '/projects'} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {projects}
         </a>
-        <a href="/contact" data-i18n="nav.contact" class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={langQuery ? '/contact' + langQuery : '/contact'} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {contact}
         </a>
-        <LangSwitcher currentLang={currentLang} />
+        <LangSwitcher currentLang={currentLang} currentPath={currentPath} />
       </div>
 
       <button 
@@ -38,16 +39,16 @@ const { brandName, home, projects, contact, menuToggle, currentLang = 'es' } = A
 
     <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
       <div class="flex flex-col gap-4">
-        <a href="/" data-i18n="nav.home" class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={langQuery ? '/' + langQuery : '/'} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {home}
         </a>
-        <a href="/projects" data-i18n="nav.projects" class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={langQuery ? '/projects' + langQuery : '/projects'} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {projects}
         </a>
-        <a href="/contact" data-i18n="nav.contact" class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={langQuery ? '/contact' + langQuery : '/contact'} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {contact}
         </a>
-        <LangSwitcher currentLang={currentLang} />
+        <LangSwitcher currentLang={currentLang} currentPath={currentPath} />
       </div>
     </div>
   </div>

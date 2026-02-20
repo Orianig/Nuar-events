@@ -23,6 +23,7 @@ const t = getTranslations(lang);
 		contact={t.nav.contact}
 		menuToggle={t.nav.menuToggle}
 		currentLang={lang}
+		currentPath={Astro.url.pathname}
 	/>
 
 	<Hero 
@@ -50,56 +51,3 @@ const t = getTranslations(lang);
 
 	<Footer contactText={t.footer.contact} />
 </Layout>
-
-<script>
-  import { setLang, getTranslations } from '../i18n';
-  import type { Lang } from '../i18n/types';
-
-  function updateContent(newLang: Lang) {
-    setLang(newLang);
-    const t = getTranslations(newLang);
-
-    document.querySelectorAll('[data-i18n="nav.home"]').forEach(el => el.textContent = t.nav.home);
-    document.querySelectorAll('[data-i18n="nav.projects"]').forEach(el => el.textContent = t.nav.projects);
-    document.querySelectorAll('[data-i18n="nav.contact"]').forEach(el => el.textContent = t.nav.contact);
-
-    const heroSlogan = document.querySelector('[data-i18n="hero.slogan"]');
-    if (heroSlogan) heroSlogan.textContent = `"${t.hero.slogan}"`;
-
-    const s1Title = document.querySelector('[data-i18n="sectionOne.title"]');
-    if (s1Title) s1Title.textContent = t.sectionOne.sectionTitle;
-    
-    document.querySelectorAll('[data-section="sectionOne"]').forEach((card, idx) => {
-      const item = t.sectionOne.items[idx];
-      if (!item) return;
-      const title = card.querySelector('[data-i18n="title"]');
-      const desc = card.querySelector('[data-i18n="description"]');
-      if (title) title.textContent = item.title;
-      if (desc) desc.textContent = item.description;
-    });
-
-    const s2Title = document.querySelector('[data-i18n="sectionTwo.title"]');
-    if (s2Title && t.sectionTwo.sectionTitle) s2Title.textContent = t.sectionTwo.sectionTitle;
-    
-    document.querySelectorAll('[data-section="sectionTwo"]').forEach((card, idx) => {
-      const item = t.sectionTwo.items[idx];
-      if (!item) return;
-      const title = card.querySelector('[data-i18n="title"]');
-      const desc = card.querySelector('[data-i18n="description"]');
-      if (title) title.textContent = item.title;
-      if (desc) desc.textContent = item.description;
-    });
-
-    const s3Text = document.querySelector('[data-i18n="sectionThree.centerText"]');
-    if (s3Text) s3Text.textContent = t.sectionThree.centerText;
-    const s3Quote = document.querySelector('[data-i18n="sectionThree.quote"]');
-    if (s3Quote) s3Quote.textContent = `"${t.sectionThree.quote}"`;
-
-    document.querySelectorAll('[data-i18n="footer.contact"]').forEach(el => el.textContent = t.footer.contact);
-  }
-
-
-  window.addEventListener('languageChanged', ((e: CustomEvent) => {
-    updateContent(e.detail.lang);
-  }) as EventListener);
-</script>

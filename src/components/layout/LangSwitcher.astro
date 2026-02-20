@@ -1,20 +1,28 @@
 ---
 interface Props {
   currentLang: 'es' | 'en';
+  /** pathname actual (ej. /, /projects, /contact) para construir ?lang= */
+  currentPath: string;
 }
 
-const { currentLang } = Astro.props;
+const { currentLang, currentPath } = Astro.props;
 const currentLabel = currentLang === 'es' ? 'ES' : 'EN';
 const otherLabel = currentLang === 'es' ? 'EN' : 'ES';
 const otherLang = currentLang === 'es' ? 'en' : 'es';
+// Español = URL limpia (es el valor por defecto). Inglés = ?lang=en
+const hrefOther = otherLang === 'es' ? currentPath : `${currentPath}?lang=en`;
+const hrefEs = currentPath;
+const hrefEn = `${currentPath}?lang=en`;
 ---
 
-<!-- Desktop: Dropdown -->
+<!-- Desktop: Dropdown con enlace (recarga la página con el otro idioma) -->
 <div class="hidden md:block relative lang-switcher">
   <button
     type="button"
     class="lang-btn flex items-center gap-2 px-4 py-1.5 rounded-full border border-bark/30 text-bark font-medium text-sm hover:bg-bark/10 transition-colors cursor-pointer"
-    data-current={currentLang}
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-label="Cambiar idioma"
   >
     <span class="lang-current">{currentLabel}</span>
     <svg class="lang-chevron w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,57 +30,52 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
     </svg>
   </button>
   <div class="lang-dropdown hidden absolute left-0 right-0 top-full mt-1 rounded-full border border-bark/20 bg-stone shadow-lg z-10">
-    <button
-      type="button"
-      class="lang-switch lang-switch-dropdown w-full px-4 py-1.5 text-center text-bark text-sm font-medium hover:bg-bark/10 rounded-full transition-colors cursor-pointer"
-      data-lang={otherLang}
+    <a
+      href={hrefOther}
+      class="lang-switch-dropdown block w-full px-4 py-1.5 text-center text-bark text-sm font-medium hover:bg-bark/10 rounded-full transition-colors"
     >
-      <span class="lang-other">{otherLabel}</span>
-    </button>
+      {otherLabel}
+    </a>
   </div>
 </div>
 
-<!-- Mobile: Botones simples -->
+<!-- Mobile: Enlaces (recargan la página con el idioma elegido) -->
 <div class="md:hidden flex items-center gap-2 text-sm font-medium">
-  <button
-    type="button"
-    class="lang-switch px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+  <a
+    href={hrefEs}
+    class="px-3 py-1.5 rounded-full transition-colors font-medium"
     class:list={[
       currentLang === 'es' ? 'bg-bark/10 text-bark' : 'text-bark/60 hover:text-bark'
     ]}
-    data-lang="es"
   >
     ES
-  </button>
+  </a>
   <span class="text-bark/30">|</span>
-  <button
-    type="button"
-    class="lang-switch px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+  <a
+    href={hrefEn}
+    class="px-3 py-1.5 rounded-full transition-colors font-medium"
     class:list={[
       currentLang === 'en' ? 'bg-bark/10 text-bark' : 'text-bark/60 hover:text-bark'
     ]}
-    data-lang="en"
   >
     EN
-  </button>
+  </a>
 </div>
 
 <script>
-  import { setLang } from '../../i18n';
-  import type { Lang } from '../../i18n/types';
-
+  // Solo abrir/cerrar el dropdown; el cambio de idioma es por enlace (recarga).
   function initLangSwitcher() {
-    // Dropdown desktop
     const btn = document.querySelector('.lang-switcher .lang-btn') as HTMLButtonElement | null;
     const dropdown = document.querySelector('.lang-switcher .lang-dropdown') as HTMLElement | null;
     const chevron = document.querySelector('.lang-switcher .lang-chevron') as SVGElement | null;
 
     if (btn && dropdown) {
       btn.addEventListener('click', (e) => {
-        e.stopPropagation();
         e.preventDefault();
+        e.stopPropagation();
         dropdown.classList.toggle('hidden');
         chevron?.classList.toggle('rotate-180');
+        btn.setAttribute('aria-expanded', dropdown.classList.contains('hidden') ? 'false' : 'true');
       });
 
       document.addEventListener('click', (e) => {
@@ -80,65 +83,10 @@ const otherLang = currentLang === 'es' ? 'en' : 'es';
         if (switcher && !switcher.contains(e.target as Node)) {
           dropdown.classList.add('hidden');
           chevron?.classList.remove('rotate-180');
+          btn.setAttribute('aria-expanded', 'false');
         }
       });
-
-      dropdown.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
     }
-
-    // Botones de cambio (desktop y mobile)
-    document.querySelectorAll('.lang-switch').forEach(switchBtn => {
-      switchBtn.addEventListener('click', () => {
-        const newLang = switchBtn.getAttribute('data-lang') as Lang;
-        if (newLang === 'es' || newLang === 'en') {
-          // Cerrar dropdown si está abierto
-          if (dropdown) {
-            dropdown.classList.add('hidden');
-            chevron?.classList.remove('rotate-180');
-          }
-          
-          setLang(newLang);
-          // Actualizar labels dinámicamente
-          updateLangLabels(newLang);
-        }
-      });
-    });
-
-    // Escuchar cambios de idioma
-    window.addEventListener('languageChanged', (e: Event) => {
-      const customEvent = e as CustomEvent<{ lang: Lang }>;
-      updateLangLabels(customEvent.detail.lang);
-    });
-  }
-
-  function updateLangLabels(newLang: Lang) {
-    const currentLabel = document.querySelector('.lang-current');
-    const otherLabel = document.querySelector('.lang-other');
-    const dropdownBtn = document.querySelector('.lang-switch-dropdown') as HTMLElement | null;
-    
-    if (currentLabel) {
-      currentLabel.textContent = newLang === 'es' ? 'ES' : 'EN';
-    }
-    if (otherLabel) {
-      otherLabel.textContent = newLang === 'es' ? 'EN' : 'ES';
-    }
-    if (dropdownBtn) {
-      dropdownBtn.setAttribute('data-lang', newLang === 'es' ? 'en' : 'es');
-    }
-
-    // Actualizar mobile buttons
-    document.querySelectorAll('.lang-switch').forEach(btn => {
-      const btnLang = btn.getAttribute('data-lang');
-      if (btnLang === newLang) {
-        btn.classList.add('bg-bark/10', 'text-bark');
-        btn.classList.remove('text-bark/60', 'hover:text-bark');
-      } else if (btnLang === 'es' || btnLang === 'en') {
-        btn.classList.remove('bg-bark/10', 'text-bark');
-        btn.classList.add('text-bark/60', 'hover:text-bark');
-      }
-    });
   }
 
   document.addEventListener('DOMContentLoaded', initLangSwitcher);

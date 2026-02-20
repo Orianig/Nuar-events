@@ -15,37 +15,13 @@ export function getTranslations(lang: Lang = 'es'): Translations {
 }
 
 /**
- * Obtiene el idioma: primero de sessionStorage, luego de URL, por defecto 'es'
+ * Obtiene el idioma desde la URL (?lang=es|en). Por defecto 'es'.
+ * Enfoque Astro: el idioma es parte de la URL, sin estado en cliente.
  */
 export function getLang(url?: URL): Lang {
-  // En el cliente, preferir sessionStorage
-  if (typeof window !== 'undefined') {
-    const stored = sessionStorage.getItem('nuar-lang');
-    if (stored === 'en' || stored === 'es') return stored;
-  }
-  
-  // En el servidor o si no hay sessionStorage, leer de URL
   if (url) {
     const param = url.searchParams.get('lang');
-    if (param === 'en' || param === 'es') {
-      // Guardar en sessionStorage si estamos en el cliente
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('nuar-lang', param);
-      }
-      return param;
-    }
+    if (param === 'en' || param === 'es') return param;
   }
-  
   return 'es';
-}
-
-/**
- * Cambia el idioma y guarda en sessionStorage
- */
-export function setLang(lang: Lang): void {
-  if (typeof window !== 'undefined') {
-    sessionStorage.setItem('nuar-lang', lang);
-    // Disparar evento personalizado para actualizar la UI
-    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
-  }
 }

@@ -18,6 +18,8 @@ export interface NavbarProps {
   contact?: string;
   menuToggle?: string;
   currentLang?: Lang;
+  /** pathname actual para enlaces de idioma (ej. /, /projects, /contact) */
+  currentPath?: string;
 }
 
 export interface FooterProps {

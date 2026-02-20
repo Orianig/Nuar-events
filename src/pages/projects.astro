@@ -11,6 +11,7 @@ const p = t.pages.projects;
 
 <Layout title={p.title}>
 	<Navbar
+		currentPath={Astro.url.pathname}
 		brandName={t.nav.brandName}
 		home={t.nav.home}
 		projects={t.nav.projects}
