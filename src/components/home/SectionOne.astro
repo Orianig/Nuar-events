@@ -19,9 +19,9 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
         </p>
       </div>
       <div class="grid grid-cols-2 gap-3 items-center">
-        <ul class="gap-y-2 list-none pl-0 flex flex-col items-center">
+        <ul class="gap-2 list-none pl-0 flex flex-col items-start w-full">
           {bullets.map((bullet) => (
-            <li class="flex items-start gap-2 font-body text-bark text-sm">
+            <li class="flex items-start gap-2 font-body text-bark text-sm w-full">
               <span
                 class="shrink-0 w-4 h-4 rounded-full border-2 border-bark/60 mt-0.5"
                 aria-hidden="true"
@@ -56,7 +56,7 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
         <p class="font-body text-bark/90 text-base leading-relaxed mb-6">
           {paragraph}
         </p>
-        <ul class="space-y-4 list-none pl-0">
+        <ul class="gap-4 list-none pl-0 flex flex-col">
           {bullets.map((bullet) => (
             <li class="flex items-start gap-3 font-body text-bark text-base">
               <span
