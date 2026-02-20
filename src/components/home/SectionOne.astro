@@ -36,23 +36,25 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
       </div>
     </div>
 
-    <div class="hidden md:grid md:grid-cols-2 gap-8 items-start">
-      <div class="grid grid-cols-2 gap-3 relative">
-        <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-3/4 min-h-[280px]">
-          <img src={image1} alt="" class="w-full h-full object-cover" />
+    <div class="hidden md:grid md:grid-cols-2 gap-8 items-stretch">
+      <div class="grid grid-cols-2 gap-7 h-full min-h-0 relative">
+        <div class="relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
+          <img src={image1} alt="" class="w-full h-full object-cover absolute inset-0" />
         </div>
-        <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-3/4 min-h-[280px]">
-          <img src={image2} alt="" class="w-full h-full object-cover" />
+        <div class="relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
+          <img src={image2} alt="" class="w-full h-full object-cover absolute inset-0" />
         </div>
         <div
           class="hidden md:block absolute left-1/4 bottom-0 w-1/2 border-b border-dashed border-bark/25 -translate-y-4"
           aria-hidden="true"
         />
       </div>
-      <div class="md:pl-8 md:border-l md:border-dashed md:border-bark/20">
-        <h2 class="font-title text-4xl font-semibold text-bark leading-tight mb-6 text-center">
-          {title}
-        </h2>
+      <div class="md:pl-8 md:border-l md:border-dashed md:border-bark/20 flex flex-col">
+        <div class="w-full text-center md:text-left mb-6">
+          <h2 class="font-title text-4xl font-semibold text-bark leading-tight inline">
+            {title}
+          </h2>
+        </div>
         <p class="font-body text-bark/90 text-base leading-relaxed mb-6">
           {paragraph}
         </p>
