@@ -55,21 +55,17 @@ const t = getTranslations(lang);
   import { setLang, getTranslations } from '../i18n';
   import type { Lang } from '../i18n/types';
 
-  // Actualizar contenido dinámicamente sin recargar
   function updateContent(newLang: Lang) {
     setLang(newLang);
     const t = getTranslations(newLang);
 
-    // Actualizar navbar
     document.querySelectorAll('[data-i18n="nav.home"]').forEach(el => el.textContent = t.nav.home);
     document.querySelectorAll('[data-i18n="nav.projects"]').forEach(el => el.textContent = t.nav.projects);
     document.querySelectorAll('[data-i18n="nav.contact"]').forEach(el => el.textContent = t.nav.contact);
 
-    // Actualizar hero
     const heroSlogan = document.querySelector('[data-i18n="hero.slogan"]');
     if (heroSlogan) heroSlogan.textContent = `"${t.hero.slogan}"`;
 
-    // Actualizar section one
     const s1Title = document.querySelector('[data-i18n="sectionOne.title"]');
     if (s1Title) s1Title.textContent = t.sectionOne.sectionTitle;
     
@@ -82,7 +78,6 @@ const t = getTranslations(lang);
       if (desc) desc.textContent = item.description;
     });
 
-    // Actualizar section two
     const s2Title = document.querySelector('[data-i18n="sectionTwo.title"]');
     if (s2Title && t.sectionTwo.sectionTitle) s2Title.textContent = t.sectionTwo.sectionTitle;
     
@@ -95,17 +90,15 @@ const t = getTranslations(lang);
       if (desc) desc.textContent = item.description;
     });
 
-    // Actualizar section three
     const s3Text = document.querySelector('[data-i18n="sectionThree.centerText"]');
     if (s3Text) s3Text.textContent = t.sectionThree.centerText;
     const s3Quote = document.querySelector('[data-i18n="sectionThree.quote"]');
     if (s3Quote) s3Quote.textContent = `"${t.sectionThree.quote}"`;
 
-    // Actualizar footer
     document.querySelectorAll('[data-i18n="footer.contact"]').forEach(el => el.textContent = t.footer.contact);
   }
 
-  // Escuchar cambios de idioma
+
   window.addEventListener('languageChanged', ((e: CustomEvent) => {
     updateContent(e.detail.lang);
   }) as EventListener);
