@@ -4,7 +4,7 @@ import type { SectionOneProps } from '../../types';
 const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astro.props as SectionOneProps;
 ---
 
-<section class={`py-10 md:py-20 ${backgroundColor ?? 'bg-stone'}`}>
+<section id="section-one" class={`py-10 md:py-20 ${backgroundColor ?? 'bg-stone'}`}>
   <div class="container mx-auto px-6 max-w-7xl">
     <div class="md:hidden flex flex-col gap-6">
       <h2 class="font-title text-3xl font-semibold text-bark leading-tight text-center pb-4">
@@ -36,40 +36,139 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
       </div>
     </div>
 
-    <div class="hidden md:grid md:grid-cols-2 gap-8 items-stretch">
+    <div class="hidden md:grid md:grid-cols-2 gap-8 items-stretch section-one-desktop">
       <div class="grid grid-cols-2 gap-7 h-full min-h-0 relative">
-        <div class="relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
+        <div class="section-one-img1 relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
           <img src={image1} alt="" class="w-full h-full object-cover absolute inset-0" />
         </div>
-        <div class="relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
+        <div class="section-one-img2 relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
           <img src={image2} alt="" class="w-full h-full object-cover absolute inset-0" />
         </div>
-        <div
-          class="hidden md:block absolute left-1/4 bottom-0 w-1/2 border-b border-dashed border-bark/25 -translate-y-4"
-          aria-hidden="true"
-        />
       </div>
       <div class="md:pl-8 md:border-l md:border-dashed md:border-bark/20 flex flex-col">
-        <div class="w-full text-center md:text-left mb-6">
+        <div class="section-one-title w-full text-center md:text-left mb-6 overflow-hidden">
           <h2 class="font-title text-4xl font-semibold text-bark leading-tight inline">
             {title}
           </h2>
         </div>
-        <p class="font-body text-bark/90 text-base leading-relaxed mb-6">
-          {paragraph}
-        </p>
-        <ul class="gap-4 list-none pl-0 flex flex-col">
-          {bullets.map((bullet) => (
-            <li class="flex items-start gap-3 font-body text-bark text-base">
-              <span
-                class="shrink-0 w-5 h-5 rounded-full border-2 border-bark/60 mt-0.5"
-                aria-hidden="true"
-              />
-              <span>{bullet}</span>
-            </li>
-          ))}
-        </ul>
+        <div class="section-one-text">
+          <p class="font-body text-bark/90 text-base leading-relaxed mb-6">
+            {paragraph}
+          </p>
+          <ul class="gap-4 list-none pl-0 flex flex-col">
+            {bullets.map((bullet) => (
+              <li class="flex items-start gap-3 font-body text-bark text-base">
+                <span
+                  class="shrink-0 w-5 h-5 rounded-full border-2 border-bark/60 mt-0.5"
+                  aria-hidden="true"
+                />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  @media (min-width: 768px) {
+    #section-one .section-one-img1,
+    #section-one .section-one-img2,
+    #section-one .section-one-text {
+      opacity: 0;
+    }
+    #section-one .section-one-img1 {
+      transform-origin: top left;
+      transform: scale(0);
+    }
+    #section-one .section-one-img2 {
+      transform-origin: bottom right;
+      transform: scale(0);
+    }
+    #section-one .section-one-title {
+      overflow: hidden;
+    }
+    #section-one .section-one-title h2 {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    #section-one .section-one-text {
+      transform-origin: top left;
+      transform: scale(0.92);
+    }
+
+    #section-one.section-one-in-view .section-one-img1 {
+      animation: section-one-scale-tl 0.85s ease-out forwards;
+    }
+    #section-one.section-one-in-view .section-one-img2 {
+      animation: section-one-scale-br 0.85s ease-out 0.85s forwards;
+    }
+    #section-one.section-one-in-view .section-one-title h2 {
+      animation: section-one-reveal-lr 0.75s ease-out 1.7s forwards;
+    }
+    #section-one.section-one-in-view .section-one-text {
+      animation: section-one-text-in 0.75s ease-out 2.45s forwards;
+    }
+  }
+
+  @keyframes section-one-text-in {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes section-one-scale-tl {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes section-one-scale-br {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes section-one-reveal-lr {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('section-one');
+  if (section) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('section-one-in-view');
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0 }
+    );
+    observer.observe(section);
+  }
+</script>
