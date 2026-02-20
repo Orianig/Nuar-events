@@ -7,19 +7,23 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
 <section id="section-one" class={`py-10 md:py-20 ${backgroundColor ?? 'bg-stone'}`}>
   <div class="container mx-auto px-6 max-w-7xl">
     <div class="md:hidden flex flex-col gap-6">
-      <h2 class="font-title text-3xl font-semibold text-bark leading-tight text-center pb-4">
-        {title}
-      </h2>
+      <div class="section-one-m-title overflow-hidden">
+        <h2 class="font-title text-3xl font-semibold text-bark leading-tight text-center pb-4">
+          {title}
+        </h2>
+      </div>
       <div class="grid grid-cols-2 gap-3 pb-4 items-center">
-        <div class="relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
+        <div class="section-one-m-img1 relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
           <img src={image1} alt="" class="w-full h-full object-cover" />
         </div>
-        <p class="font-body text-bark/90 text-sm leading-relaxed text-center">
-          {paragraph}
-        </p>
+        <div class="section-one-m-para">
+          <p class="font-body text-bark/90 text-sm leading-relaxed text-center">
+            {paragraph}
+          </p>
+        </div>
       </div>
       <div class="grid grid-cols-2 gap-3 items-center">
-        <ul class="gap-2 list-none pl-0 flex flex-col items-start w-full">
+        <ul class="section-one-m-bullets gap-2 list-none pl-0 flex flex-col items-start w-full">
           {bullets.map((bullet) => (
             <li class="flex items-start gap-2 font-body text-bark text-sm w-full">
               <span
@@ -30,7 +34,7 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
             </li>
           ))}
         </ul>
-        <div class="relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
+        <div class="section-one-m-img2 relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
           <img src={image2} alt="" class="w-full h-full object-cover" />
         </div>
       </div>
@@ -154,6 +158,87 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
       transform: translateX(0);
     }
   }
+
+  @media (max-width: 767px) {
+    #section-one .section-one-m-title h2 {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    #section-one .section-one-m-img1 {
+      transform-origin: top left;
+      transform: scale(0);
+      opacity: 0;
+    }
+    #section-one .section-one-m-para {
+      transform-origin: top left;
+      transform: scale(0);
+      opacity: 0;
+    }
+    #section-one .section-one-m-bullets {
+      opacity: 0;
+    }
+    #section-one .section-one-m-img2 {
+      transform-origin: bottom right;
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    #section-one.section-one-m-section-in-view .section-one-m-title h2 {
+      animation: section-one-m-reveal-lr 0.8s ease-out 0s forwards;
+    }
+    #section-one.section-one-m-section-in-view .section-one-m-img1 {
+      animation: section-one-m-scale-tl 0.8s ease-out 0.8s forwards;
+    }
+    #section-one.section-one-m-section-in-view .section-one-m-para {
+      animation: section-one-m-scale-tl 0.8s ease-out 1.6s forwards;
+    }
+    #section-one.section-one-m-section-in-view .section-one-m-img2 {
+      animation: section-one-m-scale-br 0.65s ease-out 2.4s forwards;
+    }
+    #section-one.section-one-m-section-in-view .section-one-m-bullets {
+      animation: section-one-m-fade-in 0.55s ease-out 3.05s forwards;
+    }
+  }
+
+  @keyframes section-one-m-reveal-lr {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes section-one-m-scale-tl {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes section-one-m-scale-br {
+    from {
+      opacity: 0;
+      transform: scale(0);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes section-one-m-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
@@ -164,6 +249,7 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('section-one-in-view');
+            entry.target.classList.add('section-one-m-section-in-view');
           }
         });
       },
