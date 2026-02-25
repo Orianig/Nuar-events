@@ -1,56 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/layout/Navbar.astro';
-import Footer from '../components/layout/Footer.astro';
-import Hero from '../components/home/Hero.astro';
-import SectionOne from '../components/home/SectionOne.astro';
-import SectionTwo from '../components/home/SectionTwo.astro';
-import SectionThree from '../components/home/SectionThree.astro';
-import IntroAnimation from '../components/home/IntroAnimation.astro';
-import { getTranslations, getLang, type Lang } from '../i18n';
-
-const lang: Lang = getLang(Astro.url);
-const t = getTranslations(lang);
+// Página raíz: redirección al idioma por defecto (español) vía meta refresh para static build
+const base = import.meta.env.BASE_URL;
+const target = base + 'es/';
 ---
-
-<Layout title={t.pages.home.title}>
-	<IntroAnimation />
-	
-	<Navbar 
-		brandName={t.nav.brandName}
-		home={t.nav.home}
-		projects={t.nav.projects}
-		contact={t.nav.contact}
-		menuToggle={t.nav.menuToggle}
-		currentLang={lang}
-		currentPath={Astro.url.pathname}
-	/>
-
-	<Hero 
-		slogan={t.hero.slogan}
-		backgroundVideo="/Home-bg.mp4"
-	/>
-
-	<SectionOne 
-		image1={t.sectionOne.image1}
-		image2={t.sectionOne.image2}
-		title={t.sectionOne.title}
-		paragraph={t.sectionOne.paragraph}
-		bullets={t.sectionOne.bullets}
-	/>
-
-	<SectionTwo 
-		sectionTitle={t.sectionTwo.sectionTitle || undefined}
-		items={[...t.sectionTwo.items]}
-	/>
-
-	<SectionThree
-		image={t.sectionThree.image}
-		centerText={t.sectionThree.centerText}
-		quote={t.sectionThree.quote}
-		imageAlt={t.sectionThree.imageAlt}
-		effectType="reveal"
-	/>
-
-	<Footer contactText={t.footer.contact} />
-</Layout>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Redirigiendo...</title>
+  </head>
+  <body>
+    <p>Redirigiendo a <a href={target}>versión en español</a>.</p>
+  </body>
+</html>

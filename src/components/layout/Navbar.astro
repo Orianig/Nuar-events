@@ -2,25 +2,28 @@
 import type { NavbarProps } from '../../types';
 import LangSwitcher from './LangSwitcher.astro';
 
-const { brandName, home, projects, contact, menuToggle, currentLang = 'es', currentPath = '/' } = Astro.props as NavbarProps;
-const langQuery = currentLang === 'en' ? '?lang=en' : '';
+const { brandName, home, projects, contact, menuToggle, currentLang = 'es', currentPath = '/', base = '' } = Astro.props as NavbarProps;
+const b = base.endsWith('/') ? base.slice(0, -1) : base;
+const hrefHome = b ? `${b}/${currentLang}/` : `/${currentLang}/`;
+const hrefProjects = b ? `${b}/${currentLang}/projects` : `/${currentLang}/projects`;
+const hrefContact = b ? `${b}/${currentLang}/contact` : `/${currentLang}/contact`;
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-stone/55 border-b border-transparent transition-all duration-300">
   <div class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a href={langQuery ? '/' + langQuery : '/'} class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
+      <a href={hrefHome} class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
         {brandName}
       </a>
 
       <div class="hidden md:flex items-center gap-8">
-        <a href={langQuery ? '/' + langQuery : '/'} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={hrefHome} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {home}
         </a>
-        <a href={langQuery ? '/projects' + langQuery : '/projects'} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={hrefProjects} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {projects}
         </a>
-        <a href={langQuery ? '/contact' + langQuery : '/contact'} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={hrefContact} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {contact}
         </a>
         <LangSwitcher currentLang={currentLang} currentPath={currentPath} />
@@ -39,13 +42,13 @@ const langQuery = currentLang === 'en' ? '?lang=en' : '';
 
     <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
       <div class="flex flex-col gap-4 items-center">
-        <a href={langQuery ? '/' + langQuery : '/'} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={hrefHome} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {home}
         </a>
-        <a href={langQuery ? '/projects' + langQuery : '/projects'} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={hrefProjects} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {projects}
         </a>
-        <a href={langQuery ? '/contact' + langQuery : '/contact'} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a href={hrefContact} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {contact}
         </a>
         <LangSwitcher currentLang={currentLang} currentPath={currentPath} />

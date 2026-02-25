@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Hero from '../../components/home/Hero.astro';
+import SectionOne from '../../components/home/SectionOne.astro';
+import SectionTwo from '../../components/home/SectionTwo.astro';
+import SectionThree from '../../components/home/SectionThree.astro';
+import IntroAnimation from '../../components/home/IntroAnimation.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const langSafe: Lang = lang === 'en' || lang === 'es' ? lang : 'es';
+const t = getTranslations(langSafe);
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title={t.pages.home.title}>
+	<IntroAnimation />
+	
+	<Navbar 
+		brandName={t.nav.brandName}
+		home={t.nav.home}
+		projects={t.nav.projects}
+		contact={t.nav.contact}
+		menuToggle={t.nav.menuToggle}
+		currentLang={langSafe}
+		currentPath={Astro.url.pathname}
+		base={base}
+	/>
+
+	<Hero 
+		slogan={t.hero.slogan}
+		backgroundVideo="/Home-bg.mp4"
+	/>
+
+	<SectionOne 
+		image1={t.sectionOne.image1}
+		image2={t.sectionOne.image2}
+		title={t.sectionOne.title}
+		paragraph={t.sectionOne.paragraph}
+		bullets={t.sectionOne.bullets}
+	/>
+
+	<SectionTwo 
+		sectionTitle={t.sectionTwo.sectionTitle || undefined}
+		items={[...t.sectionTwo.items]}
+	/>
+
+	<SectionThree
+		image={t.sectionThree.image}
+		centerText={t.sectionThree.centerText}
+		quote={t.sectionThree.quote}
+		imageAlt={t.sectionThree.imageAlt}
+		effectType="reveal"
+	/>
+
+	<Footer contactText={t.footer.contact} />
+</Layout>

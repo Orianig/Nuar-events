@@ -1,7 +1,7 @@
 ---
 interface Props {
   currentLang: 'es' | 'en';
-  /** pathname actual (ej. /, /projects, /contact) para construir ?lang= */
+  /** pathname actual (ej. /Nuar/es/, /Nuar/es/projects) para enlace al otro idioma */
   currentPath: string;
 }
 
@@ -9,10 +9,10 @@ const { currentLang, currentPath } = Astro.props;
 const currentLabel = currentLang === 'es' ? 'ES' : 'EN';
 const otherLabel = currentLang === 'es' ? 'EN' : 'ES';
 const otherLang = currentLang === 'es' ? 'en' : 'es';
-// Español = URL limpia (es el valor por defecto). Inglés = ?lang=en
-const hrefOther = otherLang === 'es' ? currentPath : `${currentPath}?lang=en`;
-const hrefEs = currentPath;
-const hrefEn = `${currentPath}?lang=en`;
+// Rutas por idioma: intercambiar /es/ <-> /en/ en el path
+const hrefEs = currentPath.replace(/\/en(\/|$)/, '/es$1');
+const hrefEn = currentPath.replace(/\/es(\/|$)/, '/en$1');
+const hrefOther = otherLang === 'es' ? hrefEs : hrefEn;
 ---
 
 <!-- Desktop: Dropdown con enlace (recarga la página con el otro idioma) -->
