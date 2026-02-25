@@ -40,6 +40,9 @@ jobs:
           mv _astro Nuar-events/
           for f in *.mp4 *.png *.jpg *.svg; do [ -f "$f" ] && mv "$f" Nuar-events/; done || true
 
+      - name: Copy CNAME to deploy root
+        run: cp CNAME dist/CNAME
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
