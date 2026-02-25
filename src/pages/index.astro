@@ -1,7 +1,8 @@
 ---
 // Página raíz: redirección al idioma por defecto (español) vía meta refresh para static build
 const base = import.meta.env.BASE_URL;
-const target = base + 'es/';
+const baseSlash = base.endsWith('/') ? base : base + '/';
+const target = baseSlash + 'es/';
 ---
 <!DOCTYPE html>
 <html lang="es">

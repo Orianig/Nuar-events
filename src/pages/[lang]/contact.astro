@@ -13,6 +13,7 @@ const langSafe: Lang = lang === 'en' || lang === 'es' ? lang : 'es';
 const t = getTranslations(langSafe);
 const p = t.pages.contact;
 const base = import.meta.env.BASE_URL;
+const baseSlash = base.endsWith('/') ? base : base + '/';
 ---
 
 <Layout title={p.title}>
@@ -31,10 +32,10 @@ const base = import.meta.env.BASE_URL;
 			<h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
 			
 			<div class="flex flex-wrap gap-4 justify-center">
-				<a href={base + (langSafe === 'en' ? 'en/' : 'es/')} class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md">
+				<a href={baseSlash + (langSafe === 'en' ? 'en/' : 'es/')} class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md">
 					{p.goHome}
 				</a>
-				<a href={base + (langSafe === 'en' ? 'en/projects' : 'es/projects')} class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md">
+				<a href={baseSlash + (langSafe === 'en' ? 'en/projects' : 'es/projects')} class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md">
 					{p.goProjects}
 				</a>
 			</div>
