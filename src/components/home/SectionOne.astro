@@ -27,11 +27,11 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
         </div>
       </div>
       <div class="grid grid-cols-2 gap-3 items-center">
-        <ul class="section-one-m-bullets gap-2 list-none pl-0 flex flex-col items-start w-full">
+        <ul class="section-one-m-bullets gap-2 list-none pl-0 flex flex-col items-start justify-center h-full w-full">
           {bullets.map((bullet) => (
-            <li class="flex items-start gap-2 font-body text-bark text-sm w-full">
+            <li class="flex items-center gap-2 font-body text-bark text-sm w-full">
               <span
-                class="shrink-0 w-4 h-4 rounded-full border-2 border-bark/60 mt-0.5"
+                class="shrink-0 w-4 h-4 rounded-full border-2 border-bark/60"
                 aria-hidden="true"
               />
               <span>{bullet}</span>
