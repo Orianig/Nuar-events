@@ -2,14 +2,14 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-// GitHub Pages: repo "Nuar-events" → https://usuario.github.io/Nuar-events/
-const base = '/Nuar-events';
+// Configuración para dominio propio https://www.nuarevents.es
+const base = '/';
 
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
   base,
-  site: 'https://tu-usuario.github.io',
+  site: 'https://www.nuarevents.es',
   redirects:
     base === '/' ? { '/': '/es/' } : { [base + '/']: base + 'es/' },
   vite: {

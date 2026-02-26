@@ -32,14 +32,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prepare for GitHub Pages (base path)
-        run: |
-          cd dist
-          mkdir -p Nuar-events
-          mv es Nuar-events/ && mv en Nuar-events/
-          mv _astro Nuar-events/
-          for f in *.mp4 *.png *.jpg *.svg; do [ -f "$f" ] && mv "$f" Nuar-events/; done || true
-
       - name: Copy CNAME to deploy root
         run: cp CNAME dist/CNAME
 
