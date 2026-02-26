@@ -1,7 +1,10 @@
 ---
 import type { SectionThreeProps } from '../../types';
 
-const { image, centerText, quote, imageAlt, effectType = 'reveal', backgroundColor } = Astro.props as SectionThreeProps;
+const { image = '', centerText, quote, imageAlt, effectType = 'reveal', backgroundColor } = Astro.props as SectionThreeProps;
+const base = import.meta.env.BASE_URL;
+const assetBase = base.endsWith('/') ? base : base + '/';
+const imageSrc = image.startsWith('http') ? image : `${assetBase}${image.replace(/^\/+/, '')}`;
 ---
 
 <section class={`relative py-32 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
@@ -12,7 +15,7 @@ const { image, centerText, quote, imageAlt, effectType = 'reveal', backgroundCol
         style="min-height: 500px;"
       >
         <img 
-          src={image} 
+          src={imageSrc} 
           alt={imageAlt}
           class={`w-full h-full object-cover ${
             effectType === 'zoom' ? 'hover:scale-110 transition-transform duration-700' : ''

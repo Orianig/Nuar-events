@@ -2,6 +2,9 @@
 import type { SectionTwoProps } from '../../types';
 
 const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionTwoProps;
+const base = import.meta.env.BASE_URL;
+const assetBase = base.endsWith('/') ? base : base + '/';
+const toAssetUrl = (path: string) => `${assetBase}${path.replace(/^\/+/, '')}`;
 ---
 
 <section class={`py-20 ${backgroundColor ?? 'bg-bark'}`}>
@@ -17,7 +20,7 @@ const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionTwoP
         <div data-section="sectionTwo" class="group bg-stone/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
           <div class="relative overflow-hidden aspect-square">
             <img 
-              src={item.image} 
+              src={toAssetUrl(item.image)} 
               alt={item.title}
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />

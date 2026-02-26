@@ -17,6 +17,7 @@ const { lang } = Astro.params as { lang: Lang };
 const langSafe: Lang = lang === 'en' || lang === 'es' ? lang : 'es';
 const t = getTranslations(langSafe);
 const base = import.meta.env.BASE_URL;
+const assetBase = base.endsWith('/') ? base : base + '/';
 ---
 
 <Layout title={t.pages.home.title}>
@@ -35,7 +36,7 @@ const base = import.meta.env.BASE_URL;
 
 	<Hero 
 		slogan={t.hero.slogan}
-		backgroundVideo="/Home-bg.mp4"
+		backgroundVideo={`${assetBase}Home-bg.mp4`}
 	/>
 
 	<SectionOne 

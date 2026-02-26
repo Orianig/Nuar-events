@@ -2,6 +2,10 @@
 import type { SectionOneProps } from '../../types';
 
 const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astro.props as SectionOneProps;
+const base = import.meta.env.BASE_URL;
+const assetBase = base.endsWith('/') ? base : base + '/';
+const image1Src = image1.startsWith('http') ? image1 : `${assetBase}${image1.replace(/^\/+/, '')}`;
+const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.replace(/^\/+/, '')}`;
 ---
 
 <section id="section-one" class={`py-10 md:py-20 ${backgroundColor ?? 'bg-stone'}`}>
@@ -14,7 +18,7 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
       </div>
       <div class="grid grid-cols-2 gap-3 pb-4 items-center">
         <div class="section-one-m-img1 relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
-          <img src={image1} alt="" class="w-full h-full object-cover" />
+          <img src={image1Src} alt="" class="w-full h-full object-cover" />
         </div>
         <div class="section-one-m-para">
           <p class="font-body text-bark/90 text-sm leading-relaxed text-center">
@@ -35,7 +39,7 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
           ))}
         </ul>
         <div class="section-one-m-img2 relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
-          <img src={image2} alt="" class="w-full h-full object-cover" />
+          <img src={image2Src} alt="" class="w-full h-full object-cover" />
         </div>
       </div>
     </div>
@@ -43,10 +47,10 @@ const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astr
     <div class="hidden md:grid md:grid-cols-2 gap-8 items-stretch section-one-desktop">
       <div class="grid grid-cols-2 gap-7 h-full min-h-0 relative">
         <div class="section-one-img1 relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
-          <img src={image1} alt="" class="w-full h-full object-cover absolute inset-0" />
+          <img src={image1Src} alt="" class="w-full h-full object-cover absolute inset-0" />
         </div>
         <div class="section-one-img2 relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
-          <img src={image2} alt="" class="w-full h-full object-cover absolute inset-0" />
+          <img src={image2Src} alt="" class="w-full h-full object-cover absolute inset-0" />
         </div>
       </div>
       <div class="md:pl-8 md:border-l md:border-dashed md:border-bark/20 flex flex-col">

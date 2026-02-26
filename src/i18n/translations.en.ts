@@ -37,8 +37,8 @@ export const en: Translations = {
     },
   },
   sectionOne: {
-    image1: '/SectionTwo-PictureOne.jpg',
-    image2: '/SectionTwo-PictureTwo.jpg',
+    image1: '/SectionOne-PictureOne.jpg',
+    image2: '/SectionOne-PictureTwo.jpg',
     title: 'Events you feel before they begin',
     paragraph:
       'We design celebrations where the pace slows down, conversation flows and every detail has a purpose. We create spaces where people become the centre again.',
@@ -52,13 +52,13 @@ export const en: Translations = {
     sectionTitle: '',
     items: [
       {
-        image: '/placeholder1.jpg',
+        image: '',
         title: 'Climate impacts',
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
       },
       {
-        image: '/placeholder2.jpg',
+        image: '',
         title: 'The proposal is the path',
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
@@ -66,7 +66,7 @@ export const en: Translations = {
     ],
   },
   sectionThree: {
-    image: '/effect-image.jpg',
+    image: '',
     centerText: 'NUAR',
     quote: 'Native protected specific species but new in damaged ecosystems',
     imageAlt: 'Image with effect',

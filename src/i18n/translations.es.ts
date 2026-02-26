@@ -37,8 +37,8 @@ export const es: Translations = {
     },
   },
   sectionOne: {
-    image1: '/SectionTwo-PictureOne.jpg',
-    image2: '/SectionTwo-PictureTwo.jpg',
+    image1: '/SectionOne-PictureOne.jpg',
+    image2: '/SectionOne-PictureTwo.jpg',
     title: 'Eventos que se sienten antes de empezar',
     paragraph:
       'Diseñamos celebraciones donde el ritmo se desacelera, la conversación fluye y cada detalle tiene un propósito. Creamos espacios donde las personas vuelven a ser el centro.',
@@ -52,13 +52,13 @@ export const es: Translations = {
     sectionTitle: '',
     items: [
       {
-        image: '/placeholder1.jpg',
+        image: '',
         title: 'El clima impacta',
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
       },
       {
-        image: '/placeholder2.jpg',
+        image: '',
         title: 'La propuesta es el camino',
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
@@ -66,7 +66,7 @@ export const es: Translations = {
     ],
   },
   sectionThree: {
-    image: '/effect-image.jpg',
+    image: '',
     centerText: 'NUAR',
     quote:
       'Especie específica nativa protegida pero nuevo en ecosistemas dañados',
