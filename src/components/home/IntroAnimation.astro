@@ -13,13 +13,13 @@ const logoPath = logoSrc.startsWith('http')
   : `${assetBase}${logoSrc.replace(/^\/+/, '')}`;
 ---
 
-<div id="intro-animation" class="fixed inset-0 w-screen h-screen z-[9999] pointer-events-none hidden">
+<div id="intro-animation" class="fixed inset-0 w-screen h-screen z-50 pointer-events-none hidden">
   <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-transparent">
-    <div class="w-[35%] max-md:w-[40%] max-w-[250px] relative z-[10001] intro-anim-logo">
+    <div class="w-[35%] max-md:w-[40%] max-w-[250px] relative z-60 intro-anim-logo">
       <img src={logoPath} alt="NUAR Logo" class="w-full h-auto block" />
     </div>
     <div
-      class="intro-anim-reveal absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] max-md:w-[160px] h-0 bg-transparent z-[10000]"
+      class="intro-anim-reveal absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] max-md:w-[160px] h-0 bg-transparent z-55"
       style={`--mask-color: ${backgroundColor};`}
     ></div>
   </div>
@@ -29,15 +29,12 @@ const logoPath = logoSrc.startsWith('http')
   const introElement = document.getElementById('intro-animation');
 
   if (!introElement) {
-    // Nada que mostrar
     throw null;
   }
 
-  // Tipo de navegación (reload, navigate, back_forward, etc.)
   const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
   const navType = navEntry && 'type' in navEntry ? navEntry.type : 'navigate';
 
-  // Determinar si venimos de otra página interna del mismo sitio
   let fromInternalPage = false;
   if (document.referrer) {
     try {
@@ -47,11 +44,9 @@ const logoPath = logoSrc.startsWith('http')
         fromInternalPage = true;
       }
     } catch {
-      // Si falla el parseo del referrer, lo ignoramos
     }
   }
 
-  // Mostrar intro solo si es entrada directa desde fuera (no reload ni navegación interna)
   const shouldPlayIntro = !fromInternalPage && navType === 'navigate';
 
   if (!shouldPlayIntro) {
