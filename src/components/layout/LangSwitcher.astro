@@ -8,11 +8,23 @@ interface Props {
 const { currentLang, currentPath } = Astro.props;
 const currentLabel = currentLang === 'es' ? 'ES' : 'EN';
 const otherLabel = currentLang === 'es' ? 'EN' : 'ES';
-const otherLang = currentLang === 'es' ? 'en' : 'es';
-// Rutas por idioma: intercambiar /es/ <-> /en/ en el path
-const hrefEs = currentPath.replace(/\/en(\/|$)/, '/es$1');
-const hrefEn = currentPath.replace(/\/es(\/|$)/, '/en$1');
-const hrefOther = otherLang === 'es' ? hrefEs : hrefEn;
+
+function toSpanishPath(path: string): string {
+  if (path === '/en' || path === '/en/') return '/';
+  if (path.startsWith('/en/')) return path.replace(/^\/en/, '');
+  return path;
+}
+
+function toEnglishPath(path: string): string {
+  if (path === '/' || path === '') return '/en/';
+  if (path.startsWith('/en/')) return path;
+  if (path === '/en') return '/en/';
+  return `/en${path.startsWith('/') ? path : `/${path}`}`;
+}
+
+const hrefEs = toSpanishPath(currentPath);
+const hrefEn = toEnglishPath(currentPath);
+const hrefOther = currentLang === 'es' ? hrefEn : hrefEs;
 ---
 
 <!-- Desktop: Dropdown con enlace (recarga la página con el otro idioma) -->

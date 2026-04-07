@@ -10,8 +10,12 @@ export default defineConfig({
   output: 'static',
   base,
   site: 'https://www.nuarevents.es',
-  redirects:
-    base === '/' ? { '/': '/es/' } : { [base + '/']: base + 'es/' },
+  redirects: {
+    '/es': '/',
+    '/es/': '/',
+    '/es/projects': '/projects',
+    '/es/contact': '/contact',
+  },
   vite: {
     plugins: [tailwindcss()]
   }

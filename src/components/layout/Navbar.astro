@@ -4,9 +4,10 @@ import LangSwitcher from './LangSwitcher.astro';
 
 const { brandName, home, projects, contact, menuToggle, currentLang = 'es', currentPath = '/', base = '' } = Astro.props as NavbarProps;
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
-const hrefHome = b ? `${b}/${currentLang}/` : `/${currentLang}/`;
-const hrefProjects = b ? `${b}/${currentLang}/projects` : `/${currentLang}/projects`;
-const hrefContact = b ? `${b}/${currentLang}/contact` : `/${currentLang}/contact`;
+const isSpanish = currentLang === 'es';
+const hrefHome = isSpanish ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
+const hrefProjects = isSpanish ? (b ? `${b}/projects` : '/projects') : (b ? `${b}/en/projects` : '/en/projects');
+const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-45 bg-stone/55 border-b border-transparent transition-all duration-300">
