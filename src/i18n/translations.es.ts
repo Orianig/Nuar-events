@@ -53,15 +53,21 @@ export const es: Translations = {
     items: [
       {
         image: '',
-        title: 'El clima impacta',
+        title: 'El ritmo importa.',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+          'No todo tiene que pasar rápido para ser valioso. Diseñamos eventos donde las personas pueden parar, conversar y habitar el momento sin prisas ni estímulos innecesarios.',
       },
       {
         image: '',
-        title: 'La propuesta es el camino',
+        title: 'La experiencia es el centro.',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+          'No organizamos eventos para impresionar. Cada decisión —desde el espacio hasta los pequeños detalles— busca crear una experiencia que se sienta auténtica y cercana.',
+      },
+      {
+        image: '',
+        title: 'El proceso también es parte.',
+        description:
+          'Creemos que un buen evento empieza mucho antes del día señalado. Acompañamos cada proyecto desde el principio para que el camino sea tan cuidado como el resultado final.',
       },
     ],
   },

@@ -3,6 +3,29 @@
  * (animaciones con keyframes, estados por JS, etc.)
  */
 
+/* --- SectionTwo: dos marcos; exterior menos redondeado, interior con forma; mismo bg que la sección --- */
+.section-two-panel {
+  background: transparent;
+  border: 3px solid var(--color-bark-dark);
+  border-radius: 0.5rem;
+}
+.section-two-panel::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--color-stone);
+  border-radius: 1.25rem;
+  pointer-events: none;
+}
+
+/* Puntitos del carrusel mobile: activo relleno */
+.section-two-dot[aria-selected="true"] {
+  background-color: var(--color-stone);
+}
+.section-two-dot[aria-selected="false"] {
+  background-color: transparent;
+}
+
 /* --- Navbar: estado al hacer scroll --- */
 #main-nav.nav-scrolled {
   @apply bg-stone/95 border-b border-bark/10 shadow-sm;

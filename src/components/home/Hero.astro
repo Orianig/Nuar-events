@@ -15,13 +15,7 @@ const { slogan, backgroundVideo, height = "h-screen" } = Astro.props as HeroProp
     <source src={backgroundVideo} type="video/mp4" />
   </video>
 
-  <div class="absolute inset-0 bg-black/40"></div>
-
-  <div class="relative z-10 text-center px-6 max-w-4xl">
-    <p data-i18n="hero.slogan" class="font-slogan text-4xl md:text-6xl font-normal text-white drop-shadow-2xl leading-tight">
-      "{slogan}"
-    </p>
-  </div>
+  <div class="absolute inset-0 bg-black/2"></div>
 
   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

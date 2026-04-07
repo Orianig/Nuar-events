@@ -53,15 +53,21 @@ export const en: Translations = {
     items: [
       {
         image: '',
-        title: 'Climate impacts',
+        title: 'The rhythm matters.',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+          'Not everything has to happen fast to be valuable. We design events where people can pause, talk and inhabit the moment without rush or unnecessary stimuli.',
       },
       {
         image: '',
-        title: 'The proposal is the path',
+        title: 'The experience is the centre.',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+          "We don't organise events to impress. Every decision —from the space to the smallest details— aims to create an experience that feels authentic and close.",
+      },
+      {
+        image: '',
+        title: 'The process is part of it too.',
+        description:
+          'We believe a good event starts long before the big day. We accompany each project from the beginning so the journey is as cared for as the final result.',
       },
     ],
   },

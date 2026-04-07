@@ -2,41 +2,135 @@
 import type { SectionTwoProps } from '../../types';
 
 const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionTwoProps;
-const base = import.meta.env.BASE_URL;
-const assetBase = base.endsWith('/') ? base : base + '/';
-const toAssetUrl = (path: string) => `${assetBase}${path.replace(/^\/+/, '')}`;
 ---
 
 <section class={`py-20 ${backgroundColor ?? 'bg-bark'}`}>
-  <div class="container mx-auto px-6">
+  <div class="container mx-auto px-6 max-w-6xl">
     {sectionTitle && (
-      <h2 data-i18n="sectionTwo.title" class="font-title text-4xl font-bold text-center mb-16 text-stone">
+      <h2 class="font-title text-3xl md:text-4xl font-semibold text-center text-stone mb-12">
         {sectionTitle}
       </h2>
     )}
 
-    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+    <!-- Desktop: 3 columnas -->
+    <div class="hidden md:grid gap-8 md:grid-cols-3">
       {items.map((item) => (
-        <div data-section="sectionTwo" class="group bg-stone/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-          <div class="relative overflow-hidden aspect-square">
-            <img 
-              src={toAssetUrl(item.image)} 
-              alt={item.title}
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-          </div>
-
-          <div class="p-6 flex flex-col gap-3">
-            <h3 data-i18n="title" class="font-title text-xl font-semibold text-stone">
+        <article class="section-two-panel relative px-8 py-10 flex flex-col justify-between">
+          <div>
+            <h3 class="font-title text-2xl text-stone mb-4 leading-snug">
               {item.title}
             </h3>
-            <p data-i18n="description" class="font-body text-stone text-sm leading-relaxed">
+            <div class="h-px w-12 bg-stone/60 mb-6"></div>
+            <p class="font-body text-stone/80 text-sm leading-relaxed">
               {item.description}
             </p>
           </div>
-        </div>
+          <div class="mt-8 flex items-center justify-center gap-3 text-stone/60 text-xs tracking-[0.2em] uppercase">
+            <span class="h-px w-10 bg-stone/40" />
+            <span class="inline-flex h-6 w-10 items-center justify-center rounded-full border border-stone/30 text-[10px]">
+              NUAR
+            </span>
+            <span class="h-px w-10 bg-stone/40" />
+          </div>
+        </article>
       ))}
     </div>
 
+    <!-- Mobile: carrusel con tres puntitos -->
+    <div id="section-two-carousel" class="md:hidden overflow-hidden">
+      <div
+        id="section-two-track"
+        class="flex transition-transform duration-300 ease-out"
+        style="width: 300%"
+      >
+        {items.map((item) => (
+          <div class="w-1/3 shrink-0 px-1">
+            <article class="section-two-panel relative px-6 py-8 flex flex-col justify-between min-h-[280px]">
+              <div>
+                <h3 class="font-title text-xl text-stone mb-3 leading-snug">
+                  {item.title}
+                </h3>
+                <div class="h-px w-10 bg-stone/60 mb-4"></div>
+                <p class="font-body text-stone/80 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+              <div class="mt-6 flex items-center justify-center gap-2 text-stone/60 text-xs tracking-[0.2em] uppercase">
+                <span class="h-px w-8 bg-stone/40" />
+                <span class="inline-flex h-5 w-8 items-center justify-center rounded-full border border-stone/30 text-[9px]">
+                  NUAR
+                </span>
+                <span class="h-px w-8 bg-stone/40" />
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+      <div
+        id="section-two-dots"
+        class="flex justify-center gap-2 mt-6"
+        role="tablist"
+        aria-label="Seleccionar panel"
+      >
+        {items.map((_, i) => (
+          <button
+            type="button"
+            class="section-two-dot w-2.5 h-2.5 rounded-full border-2 border-stone/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-stone/50"
+            data-index={i}
+            aria-label={`Panel ${i + 1}`}
+            aria-selected={i === 0}
+          />
+        ))}
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    const track = document.getElementById('section-two-track');
+    const dotsContainer = document.getElementById('section-two-dots');
+    if (!track || !dotsContainer) return;
+    const trackEl = track;
+
+    const dots = dotsContainer.querySelectorAll('.section-two-dot');
+    const total = dots.length;
+    if (total === 0) return;
+
+    let index = 0;
+    function goTo(i: number) {
+      index = Math.max(0, Math.min(i, total - 1));
+      trackEl.style.transform = `translateX(-${index * (100 / 3)}%)`;
+      dots.forEach((dot, j) => {
+        dot.setAttribute('aria-selected', String(j === index));
+      });
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => goTo(i));
+    });
+
+    let startX = 0;
+    trackEl.addEventListener(
+      'touchstart',
+      (e) => {
+        startX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    trackEl.addEventListener(
+      'touchend',
+      (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goTo(index + 1);
+          else goTo(index - 1);
+        }
+      },
+      { passive: true }
+    );
+
+    goTo(0);
+  })();
+</script>
