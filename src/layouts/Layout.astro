@@ -2,18 +2,57 @@
 import '../styles/global.css';
 import type { LayoutProps } from '../types';
 
-const { title } = Astro.props as LayoutProps;
+const {
+  title,
+  description = 'Nuar Events diseña eventos y celebraciones con una experiencia cuidada, cercana y memorable.',
+  lang = 'es',
+  currentPath = '/',
+  noindex = false,
+} = Astro.props as LayoutProps;
+
+const siteName = 'Nuar Events';
+const pageTitle = title ? `${siteName} | ${title}` : siteName;
+const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const normalizedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+const canonicalUrl = siteOrigin ? `${siteOrigin}${normalizedPath}` : undefined;
+const esPath = normalizedPath === '/en' || normalizedPath === '/en/' ? '/' : normalizedPath.replace(/^\/en/, '') || '/';
+const enPath =
+  normalizedPath === '/' || normalizedPath === ''
+    ? '/en/'
+    : normalizedPath.startsWith('/en/')
+      ? normalizedPath
+      : `/en${normalizedPath}`;
+const hrefEs = siteOrigin ? `${siteOrigin}${esPath}` : undefined;
+const hrefEn = siteOrigin ? `${siteOrigin}${enPath}` : undefined;
+const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/Logo-4.png?v=2" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/Logo-4.png?v=2" />
+		<link rel="apple-touch-icon" sizes="192x192" href="/Logo-4.png?v=2" />
+		<link rel="shortcut icon" href="/Logo-4.png?v=2" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content={robotsContent} />
+		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		{hrefEs && <link rel="alternate" hreflang="es" href={hrefEs} />}
+		{hrefEn && <link rel="alternate" hreflang="en" href={hrefEn} />}
+		{hrefEs && <link rel="alternate" hreflang="x-default" href={hrefEs} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		<title>{pageTitle}</title>
 	</head>
 	<body>
 		<slot />

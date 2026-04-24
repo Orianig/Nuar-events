@@ -11,7 +11,12 @@ const base = import.meta.env.BASE_URL;
 const baseSlash = base.endsWith('/') ? base : base + '/';
 ---
 
-<Layout title={p.title}>
+<Layout
+  title={p.title}
+  description="Contacta con Nuar Events para disenar experiencias y celebraciones cuidadas de principio a fin."
+  lang={langSafe}
+  currentPath={Astro.url.pathname}
+>
   <Navbar
     currentPath={Astro.url.pathname}
     brandName={t.nav.brandName}
@@ -36,5 +41,5 @@ const baseSlash = base.endsWith('/') ? base : base + '/';
       </div>
     </div>
   </div>
-  <Footer contactText={t.footer.contact} />
+  <Footer contactText={t.footer.contact} currentLang={langSafe} base={base} />
 </Layout>

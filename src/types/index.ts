@@ -26,6 +26,8 @@ export interface NavbarProps {
 
 export interface FooterProps {
   contactText?: string;
+  currentLang?: Lang;
+  base?: string;
 }
 
 export interface HeroProps {
@@ -65,4 +67,8 @@ export interface SectionThreeProps {
 
 export interface LayoutProps {
   title?: string;
+  description?: string;
+  lang?: Lang;
+  currentPath?: string;
+  noindex?: boolean;
 }

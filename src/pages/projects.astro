@@ -10,7 +10,12 @@ const p = t.pages.projects;
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title={p.title}>
+<Layout
+  title={p.title}
+  description="Proyectos de eventos y celebraciones disenados por Nuar Events."
+  lang={langSafe}
+  currentPath={Astro.url.pathname}
+>
   <Navbar
     currentPath={Astro.url.pathname}
     brandName={t.nav.brandName}
@@ -26,5 +31,5 @@ const base = import.meta.env.BASE_URL;
       <h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
     </div>
   </div>
-  <Footer contactText={t.footer.contact} />
+  <Footer contactText={t.footer.contact} currentLang={langSafe} base={base} />
 </Layout>
