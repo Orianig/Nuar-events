@@ -12,7 +12,7 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
   <div class="container mx-auto px-6 max-w-7xl">
     <div class="md:hidden flex flex-col gap-6">
       <div class="section-one-m-title overflow-hidden">
-        <h2 class="font-title text-3xl font-semibold text-bark leading-tight text-center pb-4">
+        <h2 class="font-title text-3xl font-semibold text-bark leading-tight text-left pb-4">
           {title}
         </h2>
       </div>
@@ -21,7 +21,7 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
           <img src={image1Src} alt="" class="w-full h-full object-cover" />
         </div>
         <div class="section-one-m-para">
-          <p class="font-body text-bark/90 text-sm leading-relaxed text-center">
+          <p class="font-body text-bark/90 text-sm leading-relaxed text-left">
             {paragraph}
           </p>
         </div>
