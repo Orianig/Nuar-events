@@ -39,7 +39,7 @@ export const en: Translations = {
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',
-    title: 'Events you feel before they begin',
+    title: 'Creating moments, because life is measured by them',
     paragraph:
       'We design celebrations where the pace slows down, conversation flows and every detail has a purpose. We create spaces where people become the centre again.',
     bullets: [
@@ -61,7 +61,7 @@ export const en: Translations = {
         image: '',
         title: 'The experience is the centre.',
         description:
-          "We don't organise events to impress. Every decision —from the space to the smallest details— aims to create an experience that feels authentic and close.",
+          "We don't organise events to impress. Every decision, from the space to the smallest details, aims to create an experience that feels authentic and close.",
       },
       {
         image: '',

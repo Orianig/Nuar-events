@@ -39,7 +39,7 @@ export const es: Translations = {
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',
-    title: 'Eventos que se sienten antes de empezar',
+    title: 'Creando momentos, porque la vida se mide en ellos',
     paragraph:
       'Diseñamos celebraciones donde el ritmo se desacelera, la conversación fluye y cada detalle tiene un propósito. Creamos espacios donde las personas vuelven a ser el centro.',
     bullets: [
@@ -61,7 +61,7 @@ export const es: Translations = {
         image: '',
         title: 'La experiencia es el centro.',
         description:
-          'No organizamos eventos para impresionar. Cada decisión —desde el espacio hasta los pequeños detalles— busca crear una experiencia que se sienta auténtica y cercana.',
+          'No organizamos eventos para impresionar. Cada decisión,desde el espacio hasta los pequeños detalles, busca crear una experiencia que se sienta auténtica y cercana.',
       },
       {
         image: '',
