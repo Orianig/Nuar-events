@@ -18,7 +18,15 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
       </div>
       <div class="grid grid-cols-2 gap-3 pb-4 items-center">
         <div class="section-one-m-img1 relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
-          <img src={image1Src} alt="" class="w-full h-full object-cover" />
+          <img
+            src={image1Src}
+            alt=""
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
         </div>
         <div class="section-one-m-para">
           <p class="font-body text-bark/90 text-sm leading-relaxed text-left">
@@ -39,7 +47,15 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
           ))}
         </ul>
         <div class="section-one-m-img2 relative overflow-hidden rounded-xl shadow-lg aspect-3/4 min-h-[200px]">
-          <img src={image2Src} alt="" class="w-full h-full object-cover" />
+          <img
+            src={image2Src}
+            alt=""
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>
@@ -47,10 +63,26 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
     <div class="hidden md:grid md:grid-cols-2 gap-8 items-stretch section-one-desktop">
       <div class="grid grid-cols-2 gap-7 h-full min-h-0 relative">
         <div class="section-one-img1 relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
-          <img src={image1Src} alt="" class="w-full h-full object-cover absolute inset-0" />
+          <img
+            src={image1Src}
+            alt=""
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover absolute inset-0"
+          />
         </div>
         <div class="section-one-img2 relative overflow-hidden rounded-2xl shadow-lg h-full min-h-0">
-          <img src={image2Src} alt="" class="w-full h-full object-cover absolute inset-0" />
+          <img
+            src={image2Src}
+            alt=""
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover absolute inset-0"
+          />
         </div>
       </div>
       <div class="md:pl-8 md:border-l md:border-dashed md:border-bark/20 flex flex-col">

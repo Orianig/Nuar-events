@@ -17,6 +17,10 @@ const imageSrc = image.startsWith('http') ? image : `${assetBase}${image.replace
         <img 
           src={imageSrc} 
           alt={imageAlt}
+          width="1600"
+          height="1000"
+          loading="lazy"
+          decoding="async"
           class={`w-full h-full object-cover ${
             effectType === 'zoom' ? 'hover:scale-110 transition-transform duration-700' : ''
           }`}

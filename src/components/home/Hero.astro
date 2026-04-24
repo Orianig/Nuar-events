@@ -10,6 +10,8 @@ const { slogan, backgroundVideo, height = "h-screen" } = Astro.props as HeroProp
     muted
     loop
     playsinline
+    preload="metadata"
+    aria-label={slogan}
     class="absolute inset-0 w-full h-full object-cover"
   >
     <source src={backgroundVideo} type="video/mp4" />
