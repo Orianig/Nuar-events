@@ -1,44 +1,72 @@
 ---
 import type { SectionThreeProps } from '../../types';
 
-const { image = '', centerText, quote, imageAlt, effectType = 'reveal', backgroundColor } = Astro.props as SectionThreeProps;
-const base = import.meta.env.BASE_URL;
-const assetBase = base.endsWith('/') ? base : base + '/';
-const imageSrc = image.startsWith('http') ? image : `${assetBase}${image.replace(/^\/+/, '')}`;
+const { centerText, backgroundColor } = Astro.props as SectionThreeProps;
+const [firstLine = '', ...restWords] = (centerText ?? '').trim().split(/\s+/);
+const secondLine = restWords.join(' ');
 ---
 
-<section class={`relative py-32 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
-  <div class="container mx-auto px-6">
-    <div class="relative max-w-5xl mx-auto">
+<section class={`relative py-16 md:py-24 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
+  <div
+    class="pointer-events-none absolute inset-0 hidden md:block"
+    style="background: radial-gradient(ellipse at center, rgba(55, 51, 24, 0.22) 0%, rgba(55, 51, 24, 0.1) 38%, rgba(55, 51, 24, 0) 72%);"
+    aria-hidden="true"
+  ></div>
+  <div class="relative w-full">
+    <!-- Desktop -->
+    <div class="relative hidden md:block overflow-hidden h-[575px]">
       <div
-        class="relative rounded-3xl overflow-hidden shadow-2xl"
-        style="min-height: 500px;"
-      >
-        <img 
-          src={imageSrc} 
-          alt={imageAlt}
-          width="1600"
-          height="1000"
-          loading="lazy"
-          decoding="async"
-          class={`w-full h-full object-cover ${
-            effectType === 'zoom' ? 'hover:scale-110 transition-transform duration-700' : ''
-          }`}
-          id="effect-image"
-        />
-
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="bg-stone/90 backdrop-blur-sm rounded-full px-12 py-8 shadow-xl">
-            <h2 data-i18n="sectionThree.centerText" class="text-5xl font-bold text-olive tracking-wider">
-              {centerText}
-            </h2>
-          </div>
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-full bg-no-repeat bg-center origin-center md:scale-x-[1.04] lg:scale-x-[1.14] xl:scale-x-[1.24] 2xl:scale-x-[1.5]"
+        style="background-image: url('/SectionThree-Bg-Desktop.svg'); background-size: 100% 100%;"
+        aria-hidden="true"
+      ></div>
+      <div class="absolute inset-0 flex items-center justify-center px-6 pt-8">
+        <div
+          class="relative h-[450px] w-[450px] bg-no-repeat bg-center"
+          style="background-image: url('/SectionThree-Center-Desktop.svg'); background-size: 180% auto;"
+          aria-hidden="true"
+        ></div>
+        <div class="absolute left-1/2 top-3 -translate-x-1/2 text-center font-title text-3xl lg:text-4xl text-olive-dark leading-none">
+          <h2 class="block">{firstLine}</h2>
+          <span class="block">{secondLine}</span>
+        </div>
+        <div class="sr-only">
+          <h2>
+            {centerText}
+          </h2>
         </div>
       </div>
+    </div>
 
-      <p data-i18n="sectionThree.quote" class="text-center mt-8 text-olive italic max-w-2xl mx-auto">
-        "{quote}"
-      </p>
+    <!-- Mobile -->
+    <div class="relative md:hidden">
+      <img
+        src="/SectionThree-Bg-mobile.svg"
+        alt=""
+        aria-hidden="true"
+        width="900"
+        height="1200"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-auto"
+      />
+      <div class="absolute inset-0 flex items-center justify-center px-5">
+        <div class="relative w-full max-w-[330px]">
+          <img
+            src="/SectionThree-Center-Mobile.svg"
+            alt=""
+            aria-hidden="true"
+            width="330"
+            height="330"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto"
+          />
+          <h2 class="absolute inset-0 flex items-center justify-center text-center font-title text-4xl text-stone px-8">
+            {centerText}
+          </h2>
+        </div>
+      </div>
     </div>
   </div>
 </section>

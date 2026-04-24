@@ -73,7 +73,7 @@ export const en: Translations = {
   },
   sectionThree: {
     image: '',
-    centerText: 'NUAR',
+    centerText: 'Our values',
     quote: 'Native protected specific species but new in damaged ecosystems',
     imageAlt: 'Image with effect',
   },
