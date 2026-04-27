@@ -6,34 +6,36 @@ const [firstLine = '', ...restWords] = (centerText ?? '').trim().split(/\s+/);
 const secondLine = restWords.join(' ');
 ---
 
-<section class={`relative py-16 md:py-24 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
-  <div
-    class="pointer-events-none absolute inset-0 hidden md:block"
-    style="background: radial-gradient(ellipse at center, rgba(55, 51, 24, 0.22) 0%, rgba(55, 51, 24, 0.1) 38%, rgba(55, 51, 24, 0) 72%);"
-    aria-hidden="true"
-  ></div>
+<section class={`relative py-6 md:pb-4 md:pt-8 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
   <div class="relative w-full">
     <!-- Desktop -->
-    <div class="relative hidden md:block overflow-hidden h-[575px]">
-      <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-screen h-full bg-no-repeat bg-center origin-center md:scale-x-[1.04] lg:scale-x-[1.14] xl:scale-x-[1.24] 2xl:scale-x-[1.5]"
-        style="background-image: url('/SectionThree-Bg-Desktop.svg'); background-size: 100% 100%;"
-        aria-hidden="true"
-      ></div>
-      <div class="absolute inset-0 flex items-center justify-center px-6 pt-8">
-        <div
-          class="relative h-[450px] w-[450px] bg-no-repeat bg-center"
-          style="background-image: url('/SectionThree-Center-Desktop.svg'); background-size: 180% auto;"
+    <div class="relative hidden md:block overflow-hidden">
+      <div class="relative mx-auto w-full max-w-[1920px] h-[680px]">
+        <img
+          src="/SectionThree-Bg-Desktop.svg"
+          alt=""
           aria-hidden="true"
-        ></div>
-        <div class="absolute left-1/2 top-3 -translate-x-1/2 text-center font-title text-3xl lg:text-4xl text-olive-dark leading-none">
-          <h2 class="block">{firstLine}</h2>
-          <span class="block">{secondLine}</span>
-        </div>
-        <div class="sr-only">
-          <h2>
-            {centerText}
-          </h2>
+          width="1920"
+          height="1080"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-contain object-center"
+        />
+        <div class="absolute inset-0 flex items-center justify-center px-6 pt-8">
+          <div
+            class="relative h-[clamp(460px,40vw,560px)] w-[clamp(460px,40vw,560px)] bg-no-repeat bg-center"
+            style="background-image: url('/SectionThree-Center-Desktop.svg'); background-size: 180% auto;"
+            aria-hidden="true"
+          ></div>
+          <div class="absolute left-1/2 top-10 -translate-x-1/2 text-center font-title text-olive-dark leading-none">
+            <h2 class="block text-2xl lg:text-3xl">{firstLine}</h2>
+            <span class="block text-5xl lg:text-5xl">{secondLine}</span>
+          </div>
+          <div class="sr-only">
+            <h2>
+              {centerText}
+            </h2>
+          </div>
         </div>
       </div>
     </div>
@@ -50,8 +52,14 @@ const secondLine = restWords.join(' ');
         decoding="async"
         class="w-full h-auto"
       />
-      <div class="absolute inset-0 flex items-center justify-center px-5">
-        <div class="relative w-full max-w-[330px]">
+      <h2
+        class="absolute inset-x-0 top-[8%] flex flex-col items-center text-center font-title text-olive-dark leading-none px-6"
+      >
+        <span class="block text-[clamp(1.4rem,5.6vw,1.8rem)]">{firstLine}</span>
+        <span class="block text-[clamp(2.9rem,11vw,3.5rem)]">{secondLine}</span>
+      </h2>
+      <div class="absolute inset-0 flex items-center justify-center px-4">
+        <div class="relative w-[84%] max-w-[360px]">
           <img
             src="/SectionThree-Center-Mobile.svg"
             alt=""
@@ -62,9 +70,6 @@ const secondLine = restWords.join(' ');
             decoding="async"
             class="w-full h-auto"
           />
-          <h2 class="absolute inset-0 flex items-center justify-center text-center font-title text-4xl text-stone px-8">
-            {centerText}
-          </h2>
         </div>
       </div>
     </div>

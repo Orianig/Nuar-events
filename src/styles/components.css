@@ -45,9 +45,9 @@
 
 @media (max-width: 767px) {
   .section-two-panel {
-    background-position: 50% 45%;
+    background-position: 50% 50%;
     background-size: 168% auto;
-    min-height: 456px;
+    min-height: 500px;
   }
 
   .section-two-panel-content {
