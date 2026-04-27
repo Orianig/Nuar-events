@@ -8,7 +8,9 @@ export const es: Translations = {
   nav: {
     brandName: 'NUAR',
     home: 'Inicio',
-    projects: 'Proyectos',
+    projects: 'Eventos',
+    aboutNuar: 'Sobre Nuar',
+    upcomingEvents: 'Proximos Eventos',
     contact: 'Contacto',
     menuToggle: 'Abrir menú',
   },

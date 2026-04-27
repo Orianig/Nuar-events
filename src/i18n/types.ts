@@ -15,6 +15,8 @@ export interface Translations {
     brandName: string;
     home: string;
     projects: string;
+    aboutNuar: string;
+    upcomingEvents: string;
     contact: string;
     menuToggle: string;
   };

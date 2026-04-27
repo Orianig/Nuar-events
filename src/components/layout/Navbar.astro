@@ -2,11 +2,24 @@
 import type { NavbarProps } from '../../types';
 import LangSwitcher from './LangSwitcher.astro';
 
-const { brandName, home, projects, contact, menuToggle, currentLang = 'es', currentPath = '/', base = '' } = Astro.props as NavbarProps;
+const {
+  brandName,
+  home,
+  projects,
+  aboutNuar,
+  upcomingEvents,
+  contact,
+  menuToggle,
+  currentLang = 'es',
+  currentPath = '/',
+  base = '',
+} = Astro.props as NavbarProps;
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
 const isSpanish = currentLang === 'es';
 const hrefHome = isSpanish ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
 const hrefProjects = isSpanish ? (b ? `${b}/projects` : '/projects') : (b ? `${b}/en/projects` : '/en/projects');
+const hrefAboutNuar = hrefHome;
+const hrefUpcomingEvents = `${hrefProjects}#upcoming-events`;
 const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
 ---
 
@@ -21,9 +34,30 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
         <a href={hrefHome} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {home}
         </a>
-        <a href={hrefProjects} class="text-bark hover:opacity-80 font-medium transition-opacity">
-          {projects}
-        </a>
+        <div class="relative group events-dropdown">
+          <button
+            type="button"
+            class="events-trigger inline-flex items-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {projects}
+            <svg class="events-chevron w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="events-menu hidden absolute left-1/2 top-full z-20 mt-2 w-48 -translate-x-1/2 rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
+            <a href={hrefAboutNuar} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
+              {aboutNuar}
+            </a>
+            <a href={hrefProjects} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
+              {projects}
+            </a>
+            <a href={hrefUpcomingEvents} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
+              {upcomingEvents}
+            </a>
+          </div>
+        </div>
         <a href={hrefContact} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {contact}
         </a>
@@ -46,9 +80,30 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
         <a href={hrefHome} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {home}
         </a>
-        <a href={hrefProjects} class="text-bark hover:opacity-80 font-medium transition-opacity">
-          {projects}
-        </a>
+        <div class="w-full max-w-[220px]">
+          <button
+            id="mobile-events-button"
+            type="button"
+            class="w-full inline-flex items-center justify-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer"
+            aria-expanded="false"
+          >
+            {projects}
+            <svg id="mobile-events-chevron" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div id="mobile-events-menu" class="hidden mt-3 flex-col items-center gap-3 text-center">
+            <a href={hrefAboutNuar} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
+              {aboutNuar}
+            </a>
+            <a href={hrefProjects} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
+              {projects}
+            </a>
+            <a href={hrefUpcomingEvents} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
+              {upcomingEvents}
+            </a>
+          </div>
+        </div>
         <a href={hrefContact} class="text-bark hover:opacity-80 font-medium transition-opacity">
           {contact}
         </a>
@@ -62,6 +117,12 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
   const nav = document.getElementById('main-nav');
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+  const eventsTrigger = document.querySelector('.events-trigger') as HTMLButtonElement | null;
+  const eventsMenu = document.querySelector('.events-menu') as HTMLElement | null;
+  const eventsChevron = document.querySelector('.events-chevron') as SVGElement | null;
+  const mobileEventsButton = document.getElementById('mobile-events-button') as HTMLButtonElement | null;
+  const mobileEventsMenu = document.getElementById('mobile-events-menu');
+  const mobileEventsChevron = document.getElementById('mobile-events-chevron');
 
   function updateNavOnScroll() {
     if (window.scrollY > 20) {
@@ -76,5 +137,42 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
 
   menuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
+  });
+
+  eventsTrigger?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isHidden = eventsMenu?.classList.toggle('hidden');
+    eventsTrigger.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+    eventsChevron?.classList.toggle('rotate-180', !isHidden);
+  });
+
+  document.addEventListener('click', (e) => {
+    const inside = (e.target as Node)?.parentElement?.closest('.events-dropdown');
+    if (!inside) {
+      eventsMenu?.classList.add('hidden');
+      eventsTrigger?.setAttribute('aria-expanded', 'false');
+      eventsChevron?.classList.remove('rotate-180');
+    }
+  });
+
+  mobileEventsButton?.addEventListener('click', () => {
+    const isHidden = mobileEventsMenu?.classList.toggle('hidden');
+    mobileEventsMenu?.classList.toggle('flex', !isHidden);
+    mobileEventsButton.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+    mobileEventsChevron?.classList.toggle('rotate-180', !isHidden);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu || !menuButton) return;
+    const target = e.target as Node;
+    const clickedInsideMenu = mobileMenu.contains(target);
+    const clickedToggleButton = menuButton.contains(target);
+    if (window.innerWidth < 768 && !clickedInsideMenu && !clickedToggleButton) {
+      mobileMenu.classList.add('hidden');
+      mobileEventsMenu?.classList.add('hidden');
+      mobileEventsMenu?.classList.remove('flex');
+      mobileEventsButton?.setAttribute('aria-expanded', 'false');
+      mobileEventsChevron?.classList.remove('rotate-180');
+    }
   });
 </script>
