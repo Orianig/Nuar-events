@@ -51,35 +51,40 @@ const secondLine = restWords.join(' ');
     </div>
 
     <!-- Mobile -->
-    <div class="relative md:hidden">
-      <img
-        src="/SectionThree-Bg-mobile.svg"
-        alt=""
-        aria-hidden="true"
-        width="900"
-        height="1200"
-        loading="lazy"
-        decoding="async"
-        class="w-full h-auto"
-      />
-      <h2
-        class="absolute inset-x-0 top-[8%] flex flex-col items-center text-center font-title text-olive-dark leading-none px-6"
-      >
-        <span class="block text-[clamp(1.4rem,5.6vw,1.8rem)]">{firstLine}</span>
-        <span class="block text-[clamp(2.9rem,11vw,3.5rem)]">{secondLine}</span>
-      </h2>
-      <div class="absolute inset-0 flex items-center justify-center px-4">
-        <div class="relative w-[84%] max-w-[360px]">
+    <div class="relative md:hidden overflow-hidden py-4">
+      <div class="relative w-full h-[620px] sm:h-[700px]">
+        <img
+          src="/SectionThree-BgGr-mobile.svg"
+          alt=""
+          aria-hidden="true"
+          width="900"
+          height="1200"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-[108%] w-full m-auto object-cover object-center"
+        />
+        <div
+          aria-hidden="true"
+          class="absolute inset-0 h-full w-full"
+          style="background-image: url('/SectionThree-Bg-Desktop.svg'); background-size: 100% 100%; background-repeat: no-repeat;"
+        ></div>
+        <div class="absolute inset-0 flex items-center justify-center">
           <img
-            src="/SectionThree-Center-Mobile.svg"
+            src="/SectionThree-Center-Desktop.svg"
             alt=""
             aria-hidden="true"
-            width="330"
-            height="330"
+            width="900"
+            height="1200"
             loading="lazy"
             decoding="async"
-            class="w-full h-auto"
+            class="absolute left-1/2 top-[56%] h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 object-contain object-center"
           />
+          <h2
+            class="absolute inset-x-0 top-[7%] flex flex-col items-center text-center font-title text-olive-dark leading-none px-6"
+          >
+            <span class="block text-[1.75rem]">{firstLine}</span>
+            <span class="block text-[3.4rem]">{secondLine}</span>
+          </h2>
         </div>
       </div>
     </div>
