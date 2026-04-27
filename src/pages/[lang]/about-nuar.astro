@@ -1,5 +1,5 @@
 ---
-import HomePage from '../../components/pages/HomePage.astro';
+import AboutNuarPage from '../../components/pages/AboutNuarPage.astro';
 import type { Lang } from '../../i18n';
 
 export function getStaticPaths() {
@@ -11,4 +11,4 @@ const langSafe: Lang = lang === 'en' ? 'en' : 'es';
 const base = import.meta.env.BASE_URL;
 ---
 
-<HomePage lang={langSafe} currentPath={Astro.url.pathname} base={base} />
+<AboutNuarPage lang={langSafe} currentPath={Astro.url.pathname} base={base} />

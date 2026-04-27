@@ -1,0 +1,7 @@
+---
+import AboutNuarPage from '../components/pages/AboutNuarPage.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<AboutNuarPage lang="es" currentPath={Astro.url.pathname} base={base} />

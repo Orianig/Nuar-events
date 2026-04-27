@@ -18,7 +18,7 @@ const b = base.endsWith('/') ? base.slice(0, -1) : base;
 const isSpanish = currentLang === 'es';
 const hrefHome = isSpanish ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
 const hrefProjects = isSpanish ? (b ? `${b}/projects` : '/projects') : (b ? `${b}/en/projects` : '/en/projects');
-const hrefAboutNuar = hrefHome;
+const hrefAboutNuar = isSpanish ? (b ? `${b}/about-nuar` : '/about-nuar') : (b ? `${b}/en/about-nuar` : '/en/about-nuar');
 const hrefUpcomingEvents = `${hrefProjects}#upcoming-events`;
 const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
 ---

@@ -40,6 +40,24 @@ export interface Translations {
       goHome: string;
       goContact: string;
     };
+    aboutNuar: {
+      title: string;
+      description: string;
+      sectionOne: {
+        kicker: string;
+        lead: string;
+        paragraphs: string[];
+        connection: string;
+        intention: string;
+        experiences: string;
+        closing: string;
+      };
+      sectionTwo: {
+        kicker: string;
+        paragraphs: string[];
+        closing: string;
+      };
+    };
   };
   sectionOne: {
     image1: string;

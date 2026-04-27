@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+  base: string;
+}
+
+const { lang, currentPath, base } = Astro.props as Props;
+const t = getTranslations(lang);
+const p = t.pages.projects;
+const pageDescription =
+  lang === 'en'
+    ? 'Projects by Nuar Events for thoughtful and memorable celebrations.'
+    : 'Proyectos de eventos y celebraciones disenados por Nuar Events.';
+---
+
+<Layout title={p.title} description={pageDescription} lang={lang} currentPath={currentPath}>
+  <Navbar
+    currentPath={currentPath}
+    brandName={t.nav.brandName}
+    home={t.nav.home}
+    projects={t.nav.projects}
+    aboutNuar={t.nav.aboutNuar}
+    upcomingEvents={t.nav.upcomingEvents}
+    contact={t.nav.contact}
+    menuToggle={t.nav.menuToggle}
+    currentLang={lang}
+    base={base}
+  />
+  <div class="min-h-screen flex flex-col items-center justify-center bg-stone pt-24 pb-8 px-8">
+    <div class="text-center flex flex-col gap-8">
+      <h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
+    </div>
+  </div>
+  <Footer contactText={t.footer.contact} currentLang={lang} base={base} />
+</Layout>

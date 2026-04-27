@@ -1,44 +1,14 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/layout/Navbar.astro';
-import Footer from '../../components/layout/Footer.astro';
-import { getTranslations, type Lang } from '../../i18n';
+import ProjectsPage from '../../components/pages/ProjectsPage.astro';
+import type { Lang } from '../../i18n';
 
 export function getStaticPaths() {
   return [{ params: { lang: 'en' } }];
 }
 
 const { lang } = Astro.params as { lang: Lang };
-const langSafe: Lang = lang === 'en' || lang === 'es' ? lang : 'es';
-const t = getTranslations(langSafe);
-const p = t.pages.projects;
+const langSafe: Lang = lang === 'en' ? 'en' : 'es';
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout
-	title={p.title}
-	description={langSafe === 'en'
-		? 'Projects by Nuar Events for thoughtful and memorable celebrations.'
-		: 'Proyectos de eventos y celebraciones disenados por Nuar Events.'}
-	lang={langSafe}
-	currentPath={Astro.url.pathname}
->
-	<Navbar
-		currentPath={Astro.url.pathname}
-		brandName={t.nav.brandName}
-		home={t.nav.home}
-		projects={t.nav.projects}
-		aboutNuar={t.nav.aboutNuar}
-		upcomingEvents={t.nav.upcomingEvents}
-		contact={t.nav.contact}
-		menuToggle={t.nav.menuToggle}
-		currentLang={langSafe}
-		base={base}
-	/>
-	<div class="min-h-screen flex flex-col items-center justify-center bg-stone pt-24 pb-8 px-8">
-		<div class="text-center flex flex-col gap-8">
-			<h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
-		</div>
-	</div>
-	<Footer contactText={t.footer.contact} currentLang={langSafe} base={base} />
-</Layout>
+<ProjectsPage lang={langSafe} currentPath={Astro.url.pathname} base={base} />

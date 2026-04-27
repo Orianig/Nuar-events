@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import Hero from '../home/Hero.astro';
+import SectionOne from '../home/SectionOne.astro';
+import SectionTwo from '../home/SectionTwo.astro';
+import SectionThree from '../home/SectionThree.astro';
+import IntroAnimation from '../home/IntroAnimation.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+  base: string;
+}
+
+const { lang, currentPath, base } = Astro.props as Props;
+const t = getTranslations(lang);
+const assetBase = base.endsWith('/') ? base : `${base}/`;
+---
+
+<Layout title={t.pages.home.title} description={t.hero.slogan} lang={lang} currentPath={currentPath}>
+  <IntroAnimation />
+
+  <Navbar
+    brandName={t.nav.brandName}
+    home={t.nav.home}
+    projects={t.nav.projects}
+    aboutNuar={t.nav.aboutNuar}
+    upcomingEvents={t.nav.upcomingEvents}
+    contact={t.nav.contact}
+    menuToggle={t.nav.menuToggle}
+    currentLang={lang}
+    currentPath={currentPath}
+    base={base}
+  />
+
+  <Hero slogan={t.hero.slogan} backgroundVideo={`${assetBase}Home-bg.mp4`} />
+  <h1 class="sr-only">{t.sectionOne.title}</h1>
+
+  <SectionOne
+    image1={t.sectionOne.image1}
+    image2={t.sectionOne.image2}
+    title={t.sectionOne.title}
+    paragraph={t.sectionOne.paragraph}
+    bullets={t.sectionOne.bullets}
+  />
+
+  <SectionTwo sectionTitle={t.sectionTwo.sectionTitle || undefined} items={[...t.sectionTwo.items]} />
+
+  <SectionThree
+    image={t.sectionThree.image}
+    centerText={t.sectionThree.centerText}
+    quote={t.sectionThree.quote}
+    imageAlt={t.sectionThree.imageAlt}
+    effectType="reveal"
+  />
+
+  <Footer contactText={t.footer.contact} currentLang={lang} base={base} />
+</Layout>

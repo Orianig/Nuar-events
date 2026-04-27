@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import { getTranslations, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+  base: string;
+}
+
+const { lang, currentPath, base } = Astro.props as Props;
+const t = getTranslations(lang);
+const p = t.pages.aboutNuar;
+---
+
+<Layout title={p.title} description={p.description} lang={lang} currentPath={currentPath}>
+  <Navbar
+    currentPath={currentPath}
+    brandName={t.nav.brandName}
+    home={t.nav.home}
+    projects={t.nav.projects}
+    aboutNuar={t.nav.aboutNuar}
+    upcomingEvents={t.nav.upcomingEvents}
+    contact={t.nav.contact}
+    menuToggle={t.nav.menuToggle}
+    currentLang={lang}
+    base={base}
+  />
+  <main class="bg-stone pt-[96px] md:pt-[108px] px-4 md:px-8 pb-10">
+    <div class="mx-auto max-w-7xl flex flex-col gap-6">
+      <div class="rounded-[26px] border-2 border-olive/50 bg-stone-light p-4 md:p-8">
+        <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+          <div class="w-full md:w-1/2 flex flex-col gap-4">
+            <div>
+              <p class="font-title text-olive text-xl md:text-2xl">{p.sectionOne.kicker}</p>
+              <div class="flex items-end gap-3">
+                <h2 class="font-title text-bark text-[3.4rem] md:text-[5.2rem] leading-none">NUAR</h2>
+                <img src="/hoja.png" alt="" aria-hidden="true" class="h-12 md:h-16 w-auto object-contain mb-1 md:mb-2" />
+              </div>
+            </div>
+            <p class="font-semibold text-bark text-sm md:text-base leading-snug">{p.sectionOne.lead}</p>
+            <div class="flex flex-col gap-2">
+              {p.sectionOne.paragraphs.map((paragraph) => (
+                <p class="text-bark/90 text-sm leading-relaxed">{paragraph}</p>
+              ))}
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="rounded-xl bg-stone p-3"><p class="text-[11px] font-semibold text-bark">{p.sectionOne.connection}</p></div>
+              <div class="rounded-xl bg-stone p-3"><p class="text-[11px] font-semibold text-bark">{p.sectionOne.intention}</p></div>
+              <div class="rounded-xl bg-stone p-3"><p class="text-[11px] font-semibold text-bark">{p.sectionOne.experiences}</p></div>
+            </div>
+            <p class="text-bark/90 text-sm leading-relaxed">{p.sectionOne.closing}</p>
+          </div>
+          <div class="w-full md:w-1/2 flex flex-col gap-4">
+            <div class="rounded-3xl overflow-hidden shadow-md bg-bark/10">
+              <img src="/foto1.png" alt="Evento NUAR" class="w-full h-[260px] md:h-[360px] object-cover" />
+            </div>
+            <div class="rounded-3xl overflow-hidden shadow-md bg-bark/10">
+              <img src="/foto2.png" alt="" aria-hidden="true" class="w-full h-[180px] md:h-[220px] object-cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[26px] border-2 border-sand-dark/60 bg-sand-light p-4 md:p-8">
+        <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+          <div class="w-full md:w-1/2 flex flex-col gap-4">
+            <div>
+              <p class="font-title text-bark/80 text-xl md:text-2xl">{p.sectionTwo.kicker}</p>
+              <h2 class="font-title text-bark text-[3.2rem] md:text-[4.8rem] leading-none">NUAR???</h2>
+            </div>
+            <div class="flex flex-col gap-2">
+              {p.sectionTwo.paragraphs.map((paragraph) => (
+                <p class="text-bark text-sm leading-relaxed">{paragraph}</p>
+              ))}
+            </div>
+            <p class="font-semibold text-bark text-sm leading-relaxed">{p.sectionTwo.closing}</p>
+          </div>
+          <div class="w-full md:w-1/2 flex flex-col gap-4">
+            <div class="rounded-3xl overflow-hidden shadow-md bg-bark/10">
+              <img src="/foto1.png" alt="Asi empezo todo" class="w-full h-[220px] md:h-[260px] object-cover" />
+            </div>
+            <div class="rounded-3xl overflow-hidden shadow-md bg-bark/10">
+              <img src="/foto2.png" alt="Momentos que se quedan" class="w-full h-[220px] md:h-[260px] object-cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer contactText={t.footer.contact} currentLang={lang} base={base} />
+</Layout>

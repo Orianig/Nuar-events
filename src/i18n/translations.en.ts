@@ -37,6 +37,32 @@ export const en: Translations = {
       goHome: 'Go to Home',
       goContact: 'Go to Contact',
     },
+    aboutNuar: {
+      title: 'About Nuar - Nuar',
+      description: 'Get to know NUAR origin and mission',
+      sectionOne: {
+        kicker: 'What is',
+        lead: 'We create events. But not the kind you forget the next day.',
+        paragraphs: [
+          'We design experiences that pull you out of autopilot.',
+          'In a world that moves too fast, NUAR creates moments to slow down and reconnect with people and yourself.',
+          'Every detail has intention, so each experience feels real and meaningful.',
+        ],
+        connection: 'Connection',
+        intention: 'Intention',
+        experiences: 'Experiences',
+        closing: "We're not here to make more events. We're here to change how they are lived.",
+      },
+      sectionTwo: {
+        kicker: 'Where it starts',
+        paragraphs: [
+          'It all started by chance, during a run through a calm allotment area.',
+          'What began as curiosity became a lifestyle with gardens, family, cats and calmer days.',
+          'That feeling led to one question: what if we could create this for others too?',
+        ],
+        closing: 'That is how NUAR was born. NUcita + ARes.',
+      },
+    },
   },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
