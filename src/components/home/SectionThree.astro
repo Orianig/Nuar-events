@@ -6,11 +6,11 @@ const [firstLine = '', ...restWords] = (centerText ?? '').trim().split(/\s+/);
 const secondLine = restWords.join(' ');
 ---
 
-<section class={`relative py-6 md:pb-4 md:pt-8 ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
+<section class={`relative  ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
   <div class="relative w-full">
     <!-- Desktop -->
     <div class="relative hidden md:block overflow-hidden">
-      <div class="relative mx-auto w-full max-w-[1920px]">
+      <div class="relative w-full h-[480px] lg:h-[540px] xl:h-[580px]">
         <img
           src="/SectionThree-BgGr-Desktop.svg"
           alt=""
@@ -19,7 +19,7 @@ const secondLine = restWords.join(' ');
           height="1080"
           loading="lazy"
           decoding="async"
-          class="block w-full h-auto"
+          class="absolute inset-0 h-full w-full object-cover object-center"
         />
         <img
           src="/SectionThree-Bg-Desktop.svg"
@@ -29,9 +29,9 @@ const secondLine = restWords.join(' ');
           height="1080"
           loading="lazy"
           decoding="async"
-          class="absolute inset-0 h-full w-full object-contain object-center"
+          class="absolute inset-0 h-[94%] w-full m-auto object-contain object-center"
         />
-        <div class="absolute inset-0 flex items-center justify-center px-6 pt-8">
+        <div class="absolute inset-0 flex items-center justify-center">
           <img
             src="/SectionThree-Center-Desktop.svg"
             alt=""
@@ -40,7 +40,7 @@ const secondLine = restWords.join(' ');
             height="1080"
             loading="lazy"
             decoding="async"
-            class="absolute inset-0 h-full w-full object-contain object-center"
+            class="absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 object-contain object-center"
           />
           <div class="absolute left-1/2 top-10 -translate-x-1/2 text-center font-title text-olive-dark leading-none">
             <h2 class="block text-2xl lg:text-3xl">{firstLine}</h2>
