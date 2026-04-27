@@ -10,7 +10,17 @@ const secondLine = restWords.join(' ');
   <div class="relative w-full">
     <!-- Desktop -->
     <div class="relative hidden md:block overflow-hidden">
-      <div class="relative mx-auto w-full max-w-[1920px] h-[680px]">
+      <div class="relative mx-auto w-full max-w-[1920px]">
+        <img
+          src="/SectionThree-BgGr-Desktop.svg"
+          alt=""
+          aria-hidden="true"
+          width="1920"
+          height="1080"
+          loading="lazy"
+          decoding="async"
+          class="block w-full h-auto"
+        />
         <img
           src="/SectionThree-Bg-Desktop.svg"
           alt=""
@@ -22,11 +32,16 @@ const secondLine = restWords.join(' ');
           class="absolute inset-0 h-full w-full object-contain object-center"
         />
         <div class="absolute inset-0 flex items-center justify-center px-6 pt-8">
-          <div
-            class="relative h-[clamp(460px,40vw,560px)] w-[clamp(460px,40vw,560px)] bg-no-repeat bg-center"
-            style="background-image: url('/SectionThree-Center-Desktop.svg'); background-size: 180% auto;"
+          <img
+            src="/SectionThree-Center-Desktop.svg"
+            alt=""
             aria-hidden="true"
-          ></div>
+            width="1920"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 h-full w-full object-contain object-center"
+          />
           <div class="absolute left-1/2 top-10 -translate-x-1/2 text-center font-title text-olive-dark leading-none">
             <h2 class="block text-2xl lg:text-3xl">{firstLine}</h2>
             <span class="block text-5xl lg:text-5xl">{secondLine}</span>
