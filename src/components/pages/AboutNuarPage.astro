@@ -14,6 +14,7 @@ const { lang, currentPath, base } = Astro.props as Props;
 const t = getTranslations(lang);
 const p = t.pages.aboutNuar;
 const sectionOne = p.whatIsNuar;
+const sectionTwo = p.originStory;
 ---
 
 <Layout title={p.title} description={p.description} lang={lang} currentPath={currentPath}>
@@ -95,10 +96,58 @@ const sectionOne = p.whatIsNuar;
   <div class="bg-blue-300 w-full md:w-[40%] min-h-[720px]"></div>
     </div>      
     
-    <div class="bg-blue-500 w-full flex flex-col md:flex-row gap-6 p-6 pb-10">
-      <div class="bg-red-300 w-full md:w-[60%] min-h-[720px]"></div>
-      <div class="bg-blue-300 w-full md:w-[40%] min-h-[720px]"></div>
+    <div class="w-full flex flex-col md:flex-row gap-8 p-10 bg-olive-light/40">
+      <div class="w-full md:w-[60%] text-bark">
+        <div class="w-full flex flex-col">
+          <div class=" inline-flex w-fit flex-col rounded-md bg-stone-light/80 px-5 py-3 md:px-16 md:py-4">
+            <p class="font-title text-2xl md:text-3xl">{sectionTwo.kicker}</p>
+            <h2 class="font-title text-6xl md:text-7xl">{sectionTwo.title}</h2>
+          </div>
 
+          <div class="relative pt-4 pl-5 flex flex-col gap-5">
+            <div
+              aria-hidden="true"
+              class="about-origin-timeline-line absolute left-[27px] top-0 bottom-3 w-[2px]"
+            ></div>
+            {sectionTwo.blocks.map((block, idx) => {
+              const icon = block.icon ?? '/icons/leaf.png';
+              return (
+                <div class="relative flex items-start gap-3 md:gap-4">
+                  <div class="relative w-6 md:w-7 shrink-0 pt-2">
+                    <span class="absolute left-[8px] top-[14px] -translate-x-1/2 h-2 w-2 rounded-full bg-bark"></span>
+                  </div>
+                  <img src={icon} alt="" aria-hidden="true" class="w-6 h-6 md:w-8 md:h-8 object-contain shrink-0 mt-2" />
+                  <div class="text-sm md:text-base leading-relaxed md:leading-loose">
+                    {block.lines?.map((line, lineIdx) => {
+                      const isLastLine = lineIdx === block.lines!.length - 1;
+                      if (block.highlight && isLastLine) {
+                        return (
+                          <p>
+                            {line}
+                            <span class="font-semibold">{block.highlight}</span>
+                          </p>
+                        );
+                      }
+                      return <p>{line}</p>;
+                    })}
+                    {block.highlight && !block.lines?.length && (
+                      <p class="font-semibold">{block.highlight}</p>
+                    )}
+                    {block.paragraph && <p>{block.paragraph}</p>}
+                    {block.linesAfter?.map((line) => (
+                      <p>{line}</p>
+                    ))}
+                    {block.closing?.map((line) => (
+                      <p>{line}</p>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-[40%] min-h-[720px] rounded-[28px] bg-blue-300"></div>
     </div>
   </main>
   <Footer contactText={t.footer.contact} currentLang={lang} base={base} />

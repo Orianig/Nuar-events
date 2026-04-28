@@ -74,7 +74,7 @@ export const es: Translations = {
         real: 'NUAR va justo de lo contrario. De hacerlo real. De acercarte a experiencias que parecen lejanas. De demostrarte que sí, que puedes estar ahí.',
       
         customEvents: {
-          lineOne: 'Creamos eventos a medida —para marcas, equipos o personas—',
+          lineOne: 'Creamos eventos a medida — para marcas, equipos o personas —',
           lineTwo: 'Siempre con una idea clara: que no sea un plan más, sino algo que se viva de verdad.',
         },
       
@@ -95,6 +95,7 @@ export const es: Translations = {
       
         blocks: [
           {
+            icon: '/icons/people.png',
             lines: [
               'Todo empezó sin querer.',
               'Un día de esos en los que tienes conflictos existenciales, mi pareja me convenció para salir a correr con él y despejar la cabeza.',
@@ -102,6 +103,7 @@ export const es: Translations = {
             ],
           },
           {
+            icon: '/icons/direction.png',
             lines: [
               'Y entonces lo vi.',
               'Un cartel que ponía:',
@@ -110,10 +112,12 @@ export const es: Translations = {
             ],
           },
           {
+            icon: '/icons/leaf.png',
             paragraph:
               'Me fui a casa con esa idea rondando en la cabeza y acabé encontrando varios sitios. Probé uno en Picassent… y lo que empezó como curiosidad terminó arrastrando a toda mi familia a la vida de hortelanos.',
           },
           {
+            icon: '/icons/heart.png',
             lines: [
               'Sin darnos cuenta, habíamos recuperado algo que ni sabíamos que echábamos de menos.',
               'Ese contacto con lo natural.',
@@ -121,18 +125,21 @@ export const es: Translations = {
             ],
           },
           {
+            icon: '/icons/cat.png',
             lines: [
               'Y luego, un día, una gata del huerto tuvo gatitos y Paola decidió adoptar a uno, su nombre es Nucita, (como una chuche que nos gusta mucho),',
               'Un año después, otra gata tuvo más gatitos… y claro, Nucita necesitaba un hermanito. Ahí llegó Ares. Nombre épico. Comportamiento... Más un Gremlin que un gato.',
             ],
           },
           {
+            icon: '/icons/stars.png',
             lines: [
               'Y entre huertos, gatos y días más tranquilos, algo cambió.',
               'Nos sentíamos mejor. Más presentes. Más conectados.',
             ],
           },
           {
+            icon: '/icons/people.png',
             lines: [
               'Así que surgió la pregunta inevitable:',
               '¿y si esto no fuera solo para nosotras?',
@@ -140,6 +147,7 @@ export const es: Translations = {
             ],
           },
           {
+            icon: '/icons/leaf.png',
             lines: [
               'Así nace ',
             ],
@@ -150,6 +158,7 @@ export const es: Translations = {
             ],
           },
           {
+            icon: '/icons/catFace.png',
             lines: [
               'Y sí… si te lo estabas preguntando, el nombre viene de los michis:',
             ],

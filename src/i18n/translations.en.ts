@@ -70,7 +70,7 @@ export const en: Translations = {
         ],
         real: 'NUAR is the exact opposite. Making it real. Bringing experiences that seem far away closer to you. Showing you that yes, you can be there.',
         customEvents: {
-          lineOne: 'We design bespoke events —for brands, teams or individuals—',
+          lineOne: 'We design bespoke events — for brands, teams or individuals —',
           lineTwo: 'always with one clear idea: that it is not just another plan, but something truly lived.',
         },
         closing: {
@@ -83,6 +83,7 @@ export const en: Translations = {
         title: 'NUAR???',
         blocks: [
           {
+            icon: '/icons/people.png',
             lines: [
               'It all started by chance.',
               'One of those days when you are having an existential crisis, my partner convinced me to go for a run with him and clear my head.',
@@ -90,6 +91,7 @@ export const en: Translations = {
             ],
           },
           {
+            icon: '/icons/direction.png',
             lines: [
               'And then I saw it.',
               'A sign that said:',
@@ -98,10 +100,12 @@ export const en: Translations = {
             ],
           },
           {
+            icon: '/icons/leaf.png',
             paragraph:
               'I went home with that idea spinning in my mind and ended up finding several places. I tried one in Picassent… and what started as curiosity ended up bringing my whole family into allotment life.',
           },
           {
+            icon: '/icons/heart.png',
             lines: [
               "Without realizing it, we had recovered something we didn't even know we were missing.",
               'That contact with nature.',
@@ -109,18 +113,21 @@ export const en: Translations = {
             ],
           },
           {
+            icon: '/icons/cat.jpg',
             lines: [
               'And then, one day, a cat from the allotment had kittens and Paola decided to adopt one; her name is Nucita, like a sweet we really like.',
               'A year later, another cat had more kittens… and of course, Nucita needed a little brother. That is when Ares arrived. Epic name. Behaviour… more Gremlin than cat.',
             ],
           },
           {
+            icon: '/icons/stars.png',
             lines: [
               'And between allotments, cats, and calmer days, something changed.',
               'We felt better. More present. More connected.',
             ],
           },
           {
+            icon: '/icons/people.png',
             lines: [
               'So the inevitable question came up:',
               'What if this were not just for us?',
@@ -128,6 +135,7 @@ export const en: Translations = {
             ],
           },
           {
+            icon: '/icons/leaf.png',
             lines: [
               'That is how ',
             ],
@@ -139,6 +147,7 @@ export const en: Translations = {
             ],
           },
           {
+            icon: '/icons/catFace.png',
             lines: [
               'And yes… if you were wondering, the name comes from our cats:',
             ],

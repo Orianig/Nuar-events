@@ -79,6 +79,15 @@
   @apply bg-stone/95 border-b border-bark/10 shadow-sm;
 }
 
+/* --- AboutNuar: timeline vertical punteada --- */
+.about-origin-timeline-line {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(79 76 34 / 65%) 0 10px,
+    transparent 10px 16px
+  );
+}
+
 /* --- IntroAnimation: animaciones y máscara --- */
 .intro-anim-logo {
   animation:

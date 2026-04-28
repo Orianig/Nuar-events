@@ -27,6 +27,7 @@ export interface AboutStoryItem {
 }
 
 export interface AboutStoryBlock {
+  icon?: string;
   items?: AboutStoryItem[];
   extraSpacing?: boolean;
   closingItems?: AboutStoryItem[];
