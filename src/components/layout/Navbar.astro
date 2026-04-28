@@ -21,9 +21,26 @@ const hrefProjects = isSpanish ? (b ? `${b}/projects` : '/projects') : (b ? `${b
 const hrefAboutNuar = isSpanish ? (b ? `${b}/about-nuar` : '/about-nuar') : (b ? `${b}/en/about-nuar` : '/en/about-nuar');
 const hrefUpcomingEvents = `${hrefProjects}#upcoming-events`;
 const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+
+function normalizePath(path: string): string {
+  if (!path) return '/';
+  const p = path.split('#')[0].split('?')[0];
+  if (p.length > 1 && p.endsWith('/')) return p.slice(0, -1);
+  return p || '/';
+}
+
+const current = normalizePath(currentPath);
+const homePath = normalizePath(hrefHome);
+const projectsPath = normalizePath(hrefProjects);
+const aboutNuarPath = normalizePath(hrefAboutNuar);
+const contactPath = normalizePath(hrefContact);
+
+const isHomeActive = current === homePath;
+const isEventsActive = current === projectsPath || current === aboutNuarPath || current.startsWith(`${projectsPath}/`) || current.startsWith(`${aboutNuarPath}/`);
+const isContactActive = current === contactPath || current.startsWith(`${contactPath}/`);
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-45 bg-stone/55 border-b border-transparent transition-all duration-300">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-45 bg-stone/55 border-b border-bark/20 transition-all duration-300">
   <div class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       <a href={hrefHome} class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
@@ -31,13 +48,22 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
       </a>
 
       <div class="hidden md:flex items-center gap-8">
-        <a href={hrefHome} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a
+          href={hrefHome}
+          class:list={[
+            'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+            isHomeActive ? 'border-bark' : 'border-transparent',
+          ]}
+        >
           {home}
         </a>
         <div class="relative group events-dropdown">
           <button
             type="button"
-            class="events-trigger inline-flex items-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer"
+            class:list={[
+              'events-trigger inline-flex items-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer pb-1 border-b-2',
+              isEventsActive ? 'border-bark' : 'border-transparent',
+            ]}
             aria-haspopup="true"
             aria-expanded="false"
           >
@@ -58,7 +84,13 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
             </a>
           </div>
         </div>
-        <a href={hrefContact} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a
+          href={hrefContact}
+          class:list={[
+            'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+            isContactActive ? 'border-bark' : 'border-transparent',
+          ]}
+        >
           {contact}
         </a>
         <LangSwitcher currentLang={currentLang} currentPath={currentPath} />
@@ -77,14 +109,23 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
 
     <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
       <div class="flex flex-col gap-4 items-center">
-        <a href={hrefHome} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a
+          href={hrefHome}
+          class:list={[
+            'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+            isHomeActive ? 'border-bark' : 'border-transparent',
+          ]}
+        >
           {home}
         </a>
         <div class="w-full max-w-[220px]">
           <button
             id="mobile-events-button"
             type="button"
-            class="w-full inline-flex items-center justify-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer"
+            class:list={[
+              'w-full inline-flex items-center justify-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer pb-1 border-b-2',
+              isEventsActive ? 'border-bark' : 'border-transparent',
+            ]}
             aria-expanded="false"
           >
             {projects}
@@ -104,7 +145,13 @@ const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/e
             </a>
           </div>
         </div>
-        <a href={hrefContact} class="text-bark hover:opacity-80 font-medium transition-opacity">
+        <a
+          href={hrefContact}
+          class:list={[
+            'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+            isContactActive ? 'border-bark' : 'border-transparent',
+          ]}
+        >
           {contact}
         </a>
         <LangSwitcher currentLang={currentLang} currentPath={currentPath} />
