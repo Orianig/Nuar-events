@@ -18,6 +18,7 @@ interface Props {
 const { lang, currentPath, base } = Astro.props as Props;
 const t = getTranslations(lang);
 const assetBase = base.endsWith('/') ? base : `${base}/`;
+const heroVideo = lang === 'en' ? `${assetBase}Home-bg-en.mp4` : `${assetBase}Home-bg-es.mp4`;
 ---
 
 <Layout title={t.pages.home.title} description={t.hero.slogan} lang={lang} currentPath={currentPath}>
@@ -36,7 +37,7 @@ const assetBase = base.endsWith('/') ? base : `${base}/`;
     base={base}
   />
 
-  <Hero slogan={t.hero.slogan} backgroundVideo={`${assetBase}Home-bg.mp4`} />
+  <Hero slogan={t.hero.slogan} backgroundVideo={heroVideo} />
   <h1 class="sr-only">{t.sectionOne.title}</h1>
 
   <SectionOne

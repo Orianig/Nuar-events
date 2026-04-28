@@ -43,8 +43,15 @@ const isContactActive = current === contactPath || current.startsWith(`${contact
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-45 bg-stone/55 border-b border-bark/20 transition-all duration-300">
   <div class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a href={hrefHome} class="text-2xl font-bold text-bark hover:opacity-80 transition-opacity">
-        {brandName}
+      <a href={hrefHome} class="inline-flex items-center hover:opacity-80 transition-opacity">
+        <img
+          src="/Logo-5.png"
+          alt={brandName}
+          class="h-8 w-auto object-contain"
+          loading="eager"
+          decoding="async"
+        />
+        <span class="sr-only">{brandName}</span>
       </a>
 
       <div class="hidden md:flex items-center gap-8">
