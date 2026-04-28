@@ -30,12 +30,20 @@ const sectionOne = p.whatIsNuar;
     base={base}
   />
   <main class="bg-stone flex flex-col text-base">
-    <div class=" w-full flex flex-col md:flex-row gap-6 p-10 pt-[96px] md:pt-[80px]">
+    <div class=" w-full flex flex-col md:flex-row gap-6 p-10 pt-[96px] md:pt-[100px]">
 <div class="w-full md:w-[60%] text-bark">
   <div class="w-full flex flex-col gap-5">
-    <div>
+    <div class="flex items-start">
+      <div>
       <p class="font-title  text-2xl md:text-4xl">{sectionOne.kicker}</p>
       <h1 class="font-title text-6xl md:text-8xl leading-none">{p.title}</h1>
+      </div>
+      <img
+        src="/icons/leaf2.png"
+        alt=""
+        aria-hidden="true"
+        class="w-20 h-20 md:w-28 md:h-28 object-contain inline-block brightness-75 rotate-20 origin-center"
+      />
     </div>
 
     <div class="font-semibold text-base md:text-lg leading-relaxed">
@@ -59,11 +67,19 @@ const sectionOne = p.whatIsNuar;
       ))}
     </div>
 
-    <p class="text-base leading-relaxed">{sectionOne.real}</p>
+    <p class="pt-4 text-base leading-relaxed w-[80%]">{sectionOne.real}</p>
 
-    <div class="rounded-xl border border-olive/30 bg-stone p-4 md:p-5">
-      <p class="text-base leading-relaxed">{sectionOne.customEvents.lineOne}</p>
-      <p class="text-base leading-relaxed">{sectionOne.customEvents.lineTwo}</p>
+    <div class="flex items-start w-[90%] relative">
+      <img
+        src="/icons/leaf2.png"
+        alt=""
+        aria-hidden="true"
+        class="w-14 h-14 md:w-20 md:h-20 object-contain shrink-0 mt-1 -mr-4 md:-mr-6"
+      />
+      <div class="rounded-xl bg-stone-dark/40 p-4 md:p-5 w-full">
+        <p class="text-base leading-relaxed">{sectionOne.customEvents.lineOne}</p>
+        <p class="text-base leading-relaxed">{sectionOne.customEvents.lineTwo}</p>
+      </div>
     </div>
 
     <div class="flex flex-col gap-1 text-base leading-relaxed">
@@ -87,3 +103,4 @@ const sectionOne = p.whatIsNuar;
   </main>
   <Footer contactText={t.footer.contact} currentLang={lang} base={base} />
 </Layout>
+
