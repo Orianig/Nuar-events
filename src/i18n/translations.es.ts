@@ -38,49 +38,128 @@ export const es: Translations = {
       goContact: 'Ir a Contacto',
     },
     aboutNuar: {
-      title: 'Sobre Nuar - Nuar',
-      description: 'Conoce el origen y la mision de NUAR',
-      sectionOne: {
-        kicker: 'Que es',
-        lead: 'Creamos eventos. Pero no de los que se olvidan al dia siguiente.',
-        paragraphs: [
-          'Disenamos experiencias que te sacan del piloto automatico.',
-          'En un mundo donde todo va rapido —demasiado rapido—, donde consumes planes casi igual que haces scroll, llega un punto en el que dejas de sentir lo que estas viviendo.',
-          'Ahi es donde entra NUAR.',
-          'Creamos encuentros pensados para bajar el ritmo. Para conectar con otras personas, con el entorno... y contigo.',
-          'Cada detalle tiene una intencion. Nada esta puesto porque si. Todo esta cuidado para que ocurra algo mas que pasar el rato.',
-          'Son momentos que se sienten. De los que recuerdas por como te hicieron estar, no solo por lo que hiciste.',
-          'Porque si —seguro que lo has pensado alguna vez— ves planes increibles en redes y piensas: "esto es solo para la foto", "esto no me va a pasar a mi".',
-          'NUAR va justo de lo contrario. De hacerlo real. De acercarte a experiencias que parecen lejanas. De demostrarte que si, que puedes estar ahi.',
-          'Y no se trata solo de lo que hacemos. Tambien de lo que podemos crear contigo. Disenamos eventos a medida —para marcas, equipos o personas— siempre con una idea clara: que no sea un plan mas, sino algo que se viva de verdad.',
-          'Estamos empezando. Pero lo tenemos claro: no venimos a hacer mas eventos. Venimos a cambiar la forma en la que se viven.',
+      title: 'Nuar',
+      description: 'Conoce el origen y la misión de NUAR',
+      whatIsNuar: {
+        kicker: 'Qué es',
+      
+        hero: {
+          lineOne: 'Creamos eventos.',
+          lineTwo: 'Pero no de los que se olvidan al día siguiente.',
+        },
+      
+        intro: [
+          'Diseñamos experiencias que te sacan del piloto automático.',
+          'En un mundo donde todo va rápido —demasiado rápido—, donde consumes planes casi igual que haces scroll, llega un punto en el que dejas de sentir lo que estás viviendo.',
+          'Ahí es donde entra NUAR.',
         ],
-        connection: 'Conexion',
-        intention: 'Intencion',
-        experiences: 'Experiencias',
-        closing: 'No venimos a hacer mas eventos. Venimos a cambiar la forma en la que se viven.',
-      },
-      sectionTwo: {
-        kicker: 'De donde nace',
-        paragraphs: [
-          'Todo empezo sin querer.',
-          'Un dia de esos en los que tienes conflictos existenciales, mi pareja me convencio para salir a correr con el y despejar la cabeza. La ruta era por una zona de huertas, tranquila, relajante.',
-          'Y entonces lo vi.',
-          'Un cartel que ponia: "Alquila tu propio huerto urbano. Conecta con lo terrenal."',
-          'Spoiler: hasta ahi llego mi salida a correr.',
-          'Me fui a casa con esa idea rondando en la cabeza y acabe encontrando varios sitios. Probe uno en Picassent... y lo que empezo como curiosidad termino arrastrando a toda mi familia a la vida de hortelanos.',
-          'Sin darnos cuenta, habiamos recuperado algo que ni sabiamos que echabamos de menos. Ese contacto con lo natural. Ese respiro fuera del ritmo de la ciudad.',
-          'Y luego, un dia, una gata del huerto tuvo gatitos y Paola decidio adoptar a uno: Nucita, como una chuche que nos gusta mucho.',
-          'Un ano despues, otra gata tuvo mas gatitos... y claro, Nucita necesitaba un hermanito. Ahi llego Ares, nombre epico. Actitud? mas un Gremlin que un gato.',
-          'Y entre huertos, gatos y dias mas tranquilos, algo cambio. Nos sentiamos mejor. Mas presentes. Mas conectadas.',
-          'Asi que surgio la pregunta inevitable: y si esto no fuera solo para nosotras? Y si pudieramos crear espacios donde otras personas sintieran lo mismo?',
-          'Asi nace NUAR. Un proyecto para compartir esa sensacion de estar en el lugar correcto, sin necesidad de hacer nada extraordinario.',
-          'Para crear experiencias cuidadas, con intencion, que te saquen de la rutina y te devuelvan a lo esencial.',
-          'Y si te lo estabas preguntando, el nombre viene de los michis: NUcita + ARes.',
-          'Porque al final, todo esto empezo ahi. En algo pequeno. Y en una sensacion que merecia la pena compartir.',
+      
+        pillars: [
+          {
+            title: 'Conexión',
+            description: 'Para conectar con otras personas, con el entorno… y contigo.',
+          },
+          {
+            title: 'Intención',
+            description: 'Cada detalle tiene una intención. Nada está puesto porque sí.',
+          },
+          {
+            title: 'Experiencias',
+            description: 'Momentos que se sienten. De los que recuerdas por cómo te hicieron estar.',
+          },
         ],
-        closing: 'Asi nace NUAR. NUcita + ARes.',
+      
+        real: 'NUAR va justo de lo contrario. De hacerlo real. De acercarte a experiencias que parecen lejanas. De demostrarte que sí, que puedes estar ahí.',
+      
+        customEvents: {
+          lineOne: 'Creamos eventos a medida —para marcas, equipos o personas—',
+          lineTwo: 'Siempre con una idea clara: que no sea un plan más, sino algo que se viva de verdad.',
+        },
+      
+        closing: {
+          lines: [
+            'Estamos empezando.',
+            'Pero lo tenemos claro:',
+          ],
+          strong: [
+            'No venimos a hacer solo eventos.',
+            'Venimos a cambiar la forma en la que se viven.',
+          ],
+        },
       },
+      originStory: {
+        kicker: 'De dónde nace',
+        title: 'NUAR???',
+      
+        blocks: [
+          {
+            lines: [
+              'Todo empezó sin querer.',
+              'Un día de esos en los que tienes conflictos existenciales, mi pareja me convenció para salir a correr con él y despejar la cabeza.',
+              'La ruta era por una zona de huertas, tranquila, relajante.',
+            ],
+          },
+          {
+            lines: [
+              'Y entonces lo vi.',
+              'Un cartel que ponía:',
+              '“Alquila tu propio huerto urbano. Conecta con lo terrenal.”',
+              'Spoiler: hasta ahí llegó mi salida a correr.',
+            ],
+          },
+          {
+            paragraph:
+              'Me fui a casa con esa idea rondando en la cabeza y acabé encontrando varios sitios. Probé uno en Picassent… y lo que empezó como curiosidad terminó arrastrando a toda mi familia a la vida de hortelanos.',
+          },
+          {
+            lines: [
+              'Sin darnos cuenta, habíamos recuperado algo que ni sabíamos que echábamos de menos.',
+              'Ese contacto con lo natural.',
+              'Ese respiro fuera del ritmo de la ciudad.',
+            ],
+          },
+          {
+            lines: [
+              'Y luego, un día, una gata del huerto tuvo gatitos y Paola decidió adoptar a uno, su nombre es Nucita, (como una chuche que nos gusta mucho),',
+              'Un año después, otra gata tuvo más gatitos… y claro, Nucita necesitaba un hermanito. Ahí llegó Ares. Nombre épico. Comportamiento... Más un Gremlin que un gato.',
+            ],
+          },
+          {
+            lines: [
+              'Y entre huertos, gatos y días más tranquilos, algo cambió.',
+              'Nos sentíamos mejor. Más presentes. Más conectados.',
+            ],
+          },
+          {
+            lines: [
+              'Así que surgió la pregunta inevitable:',
+              '¿y si esto no fuera solo para nosotras?',
+              '¿Y si pudiéramos crear espacios donde otras personas sintieran lo mismo?',
+            ],
+          },
+          {
+            lines: [
+              'Así nace ',
+            ],
+            highlight: 'NUAR.',
+            linesAfter: [
+              'Un proyecto para compartir esa sensación de estar en el lugar correcto, sin necesidad de hacer nada extraordinario.',
+              'Para crear experiencias cuidadas, con intención, que te saquen de la rutina y te devuelvan a lo esencial.',
+            ],
+          },
+          {
+            lines: [
+              'Y sí… si te lo estabas preguntando, el nombre viene de los michis:',
+            ],
+            highlight: 'NUcita + ARes.',
+            closing: [
+              'Porque al final, todo esto empezó ahí.',
+              'En algo pequeño.',
+              'Y en una sensación que merecía la pena compartir.',
+            ],
+          },
+        ] as any,
+      }
     },
   },
   sectionOne: {

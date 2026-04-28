@@ -10,6 +10,32 @@ export interface SectionItem {
   description: string;
 }
 
+export interface AboutPillar {
+  title: string;
+  description: string;
+}
+
+export interface AboutClosing {
+  lines: string[];
+  strong: string[];
+}
+
+export interface AboutStoryItem {
+  type: 'text' | 'paragraph' | 'highlight';
+  content: string;
+}
+
+export interface AboutStoryBlock {
+  items?: AboutStoryItem[];
+  extraSpacing?: boolean;
+  closingItems?: AboutStoryItem[];
+  lines?: string[];
+  paragraph?: string;
+  highlight?: string;
+  linesAfter?: string[];
+  closing?: string[];
+}
+
 export interface Translations {
   nav: {
     brandName: string;
@@ -43,19 +69,25 @@ export interface Translations {
     aboutNuar: {
       title: string;
       description: string;
-      sectionOne: {
+      whatIsNuar: {
         kicker: string;
-        lead: string;
-        paragraphs: string[];
-        connection: string;
-        intention: string;
-        experiences: string;
-        closing: string;
+        hero: {
+          lineOne: string;
+          lineTwo: string;
+        };
+        intro: string[];
+        pillars: AboutPillar[];
+        real: string;
+        customEvents: {
+          lineOne: string;
+          lineTwo: string;
+        };
+        closing: AboutClosing;
       };
-      sectionTwo: {
+      originStory: {
         kicker: string;
-        paragraphs: string[];
-        closing: string;
+        title: string;
+        blocks: AboutStoryBlock[];
       };
     };
   };

@@ -39,28 +39,115 @@ export const en: Translations = {
     },
     aboutNuar: {
       title: 'About Nuar - Nuar',
-      description: 'Get to know NUAR origin and mission',
-      sectionOne: {
+      description: "Get to know NUAR's origin and mission",
+      whatIsNuar: {
         kicker: 'What is',
-        lead: 'We create events. But not the kind you forget the next day.',
-        paragraphs: [
+        hero: {
+          lineOne: 'NUAR creates events.',
+          lineTwo: 'But not the kind you forget the next day.',
+        },
+        intro: [
           'We design experiences that pull you out of autopilot.',
-          'In a world that moves too fast, NUAR creates moments to slow down and reconnect with people and yourself.',
-          'Every detail has intention, so each experience feels real and meaningful.',
+          'In a world where everything moves fast —too fast— where you consume plans almost the same way you scroll, there comes a point when you stop feeling what you are actually living.',
+          "That's where NUAR comes in.",
         ],
-        connection: 'Connection',
-        intention: 'Intention',
-        experiences: 'Experiences',
-        closing: "We're not here to make more events. We're here to change how they are lived.",
+        pillars: [
+          {
+            title: 'Connection',
+            description: 'To connect with other people, with the environment… and with yourself.',
+          },
+          {
+            title: 'Intention',
+            description: 'Every detail has an intention. Nothing is there by chance.',
+          },
+          {
+            title: 'Experiences',
+            description: 'Moments you truly feel. The kind you remember because of how they made you feel.',
+          },
+        ],
+        real: 'NUAR is the exact opposite. Making it real. Bringing experiences that seem far away closer to you. Showing you that yes, you can be there.',
+        customEvents: {
+          lineOne: 'We design bespoke events —for brands, teams or individuals—',
+          lineTwo: 'always with one clear idea: that it is not just another plan, but something truly lived.',
+        },
+        closing: {
+          lines: ["We're just getting started.", "But we're clear about it:"],
+          strong: ["we're not here to make more events.", "We're here to change the way events are lived."],
+        },
       },
-      sectionTwo: {
-        kicker: 'Where it starts',
-        paragraphs: [
-          'It all started by chance, during a run through a calm allotment area.',
-          'What began as curiosity became a lifestyle with gardens, family, cats and calmer days.',
-          'That feeling led to one question: what if we could create this for others too?',
+      originStory: {
+        kicker: 'Where NUAR comes from',
+        title: 'NUAR???',
+        blocks: [
+          {
+            lines: [
+              'It all started by chance.',
+              'One of those days when you are having an existential crisis, my partner convinced me to go for a run with him and clear my head.',
+              'The route passed through an allotment area, calm and relaxing.',
+            ],
+          },
+          {
+            lines: [
+              'And then I saw it.',
+              'A sign that said:',
+              '“Rent your own urban allotment. Connect with the earth.”',
+              'Spoiler: that was the end of my run.',
+            ],
+          },
+          {
+            paragraph:
+              'I went home with that idea spinning in my mind and ended up finding several places. I tried one in Picassent… and what started as curiosity ended up bringing my whole family into allotment life.',
+          },
+          {
+            lines: [
+              "Without realizing it, we had recovered something we didn't even know we were missing.",
+              'That contact with nature.',
+              "That breathing space outside the city's pace.",
+            ],
+          },
+          {
+            lines: [
+              'And then, one day, a cat from the allotment had kittens and Paola decided to adopt one; her name is Nucita, like a sweet we really like.',
+              'A year later, another cat had more kittens… and of course, Nucita needed a little brother. That is when Ares arrived. Epic name. Behaviour… more Gremlin than cat.',
+            ],
+          },
+          {
+            lines: [
+              'And between allotments, cats, and calmer days, something changed.',
+              'We felt better. More present. More connected.',
+            ],
+          },
+          {
+            lines: [
+              'So the inevitable question came up:',
+              'What if this were not just for us?',
+              'What if we could create spaces where other people could feel the same?',
+            ],
+          },
+          {
+            lines: [
+              'That is how ',
+            ],
+            highlight: 'NUAR',
+            linesAfter: [
+              'was born.',
+              'A project to share that feeling of being in the right place, without needing to do anything extraordinary.',
+              'To create carefully designed experiences, with intention, that take you out of routine and bring you back to what is essential.',
+            ],
+          },
+          {
+            lines: [
+              'And yes… if you were wondering, the name comes from our cats:',
+            ],
+            highlight: 'NUcita + ARes.',
+            extraSpacing: true,
+            closing: [
+              'Because in the end, this all started there.',
+              'In something small.',
+              'And in a feeling that was worth sharing.',
+            ],
+          },
         ],
-        closing: 'That is how NUAR was born. NUcita + ARes.',
       },
     },
   },
