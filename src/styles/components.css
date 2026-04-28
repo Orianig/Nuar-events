@@ -88,6 +88,10 @@
   );
 }
 
+.about-paper-stretch-x {
+  transform: scaleX(1.15);
+}
+
 /* --- IntroAnimation: animaciones y máscara --- */
 .intro-anim-logo {
   animation:

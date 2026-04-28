@@ -70,7 +70,7 @@ const sectionTwo = p.originStory;
 
     <p class="py-4 text-base leading-relaxed w-[80%]">{sectionOne.real}</p>
 
-    <div class="flex items-start w-[90%] relative">
+    <div class="flex items-start w-[90%]">
       <img
         src="/icons/leaf2.png"
         alt=""
@@ -98,7 +98,7 @@ const sectionTwo = p.originStory;
       src="/collage.png"
       alt=""
       aria-hidden="true"
-      class="absolute right-0 top-[12%] w-[130%] max-w-none object-contain object-top"
+      class="absolute right-0 top-[12%] w-[130%] max-w-none"
       loading="lazy"
       decoding="async"
     />
@@ -108,12 +108,12 @@ const sectionTwo = p.originStory;
     <div class="w-full flex flex-col md:flex-row gap-8 p-10 bg-olive-light/40">
       <div class="w-full md:w-[60%] text-bark">
         <div class="w-full flex flex-col">
-          <div class="relative inline-flex w-fit flex-col overflow-hidden px-5 py-3 md:px-16 md:py-4">
+          <div class="relative inline-flex w-fit flex-col overflow-visible px-5 py-3 md:px-16 md:py-4">
             <img
               src="/PaperEf.png"
               alt=""
               aria-hidden="true"
-              class="absolute inset-0 h-full w-full object-fill"
+              class="absolute inset-0 h-[105%] w-full object-fill -translate-x-[3%] about-paper-stretch-x"
               loading="lazy"
               decoding="async"
             />
@@ -129,11 +129,11 @@ const sectionTwo = p.originStory;
             {sectionTwo.blocks.map((block, idx) => {
               const icon = block.icon ?? '/icons/leaf.png';
               return (
-                <div class="relative flex items-start gap-3 md:gap-4">
+                <div class="flex items-start gap-3 md:gap-4">
                   <div class="relative w-6 md:w-7 shrink-0 pt-2">
                     <span class="absolute left-[8px] top-[14px] -translate-x-1/2 h-2 w-2 rounded-full bg-bark"></span>
                   </div>
-                  <img src={icon} alt="" aria-hidden="true" class="w-6 h-6 md:w-8 md:h-8 object-contain shrink-0 mt-2" />
+                  <img src={icon} alt="" aria-hidden="true" class="w-6 h-6 md:w-9 md:h-9 object-contain shrink-0 mt-2" />
                   <div class="text-sm md:text-base leading-relaxed md:leading-loose">
                     {block.lines?.map((line, lineIdx) => {
                       const isLastLine = lineIdx === block.lines!.length - 1;

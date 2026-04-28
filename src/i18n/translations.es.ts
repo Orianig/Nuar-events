@@ -103,7 +103,7 @@ export const es: Translations = {
             ],
           },
           {
-            icon: '/icons/direction.png',
+            icon: '/icons/sign.png',
             lines: [
               'Y entonces lo vi.',
               'Un cartel que ponía:',
@@ -125,7 +125,7 @@ export const es: Translations = {
             ],
           },
           {
-            icon: '/icons/cat.png',
+            icon: '/icons/catFace.png',
             lines: [
               'Y luego, un día, una gata del huerto tuvo gatitos y Paola decidió adoptar a uno, su nombre es Nucita, (como una chuche que nos gusta mucho),',
               'Un año después, otra gata tuvo más gatitos… y claro, Nucita necesitaba un hermanito. Ahí llegó Ares. Nombre épico. Comportamiento... Más un Gremlin que un gato.',
@@ -139,7 +139,7 @@ export const es: Translations = {
             ],
           },
           {
-            icon: '/icons/people.png',
+            icon: '/icons/share.png',
             lines: [
               'Así que surgió la pregunta inevitable:',
               '¿y si esto no fuera solo para nosotras?',
@@ -147,7 +147,7 @@ export const es: Translations = {
             ],
           },
           {
-            icon: '/icons/leaf.png',
+            icon: '/icons/idea.png',
             lines: [
               'Así nace ',
             ],
@@ -158,7 +158,7 @@ export const es: Translations = {
             ],
           },
           {
-            icon: '/icons/catFace.png',
+            icon: '/icons/pawn.png',
             lines: [
               'Y sí… si te lo estabas preguntando, el nombre viene de los michis:',
             ],
