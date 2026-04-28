@@ -11,6 +11,7 @@ export interface SectionItem {
 }
 
 export interface AboutPillar {
+  icon: string;
   title: string;
   description: string;
 }

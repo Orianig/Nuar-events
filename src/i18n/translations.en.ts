@@ -38,12 +38,12 @@ export const en: Translations = {
       goContact: 'Go to Contact',
     },
     aboutNuar: {
-      title: 'About Nuar - Nuar',
+      title: 'NUAR',
       description: "Get to know NUAR's origin and mission",
       whatIsNuar: {
         kicker: 'What is',
         hero: {
-          lineOne: 'NUAR creates events.',
+          lineOne: 'We create events.',
           lineTwo: 'But not the kind you forget the next day.',
         },
         intro: [
@@ -53,14 +53,17 @@ export const en: Translations = {
         ],
         pillars: [
           {
+            icon: '/icons/people.png',
             title: 'Connection',
             description: 'To connect with other people, with the environment… and with yourself.',
           },
           {
+            icon: '/icons/leaf.png',
             title: 'Intention',
             description: 'Every detail has an intention. Nothing is there by chance.',
           },
           {
+            icon: '/icons/heart.png',
             title: 'Experiences',
             description: 'Moments you truly feel. The kind you remember because of how they made you feel.',
           },
