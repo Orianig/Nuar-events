@@ -32,7 +32,7 @@ const sectionTwo = p.originStory;
   />
   <main class="bg-stone flex flex-col text-base">
     <div class=" w-full flex flex-col md:flex-row gap-6 p-10 pt-[96px] md:pt-[100px]">
-<div class="w-full md:w-[60%] text-bark">
+<div class="w-full md:w-[55%] text-bark pr-8">
   <div class="w-full flex flex-col gap-5">
     <div class="flex items-start">
       <div>
@@ -40,10 +40,10 @@ const sectionTwo = p.originStory;
       <h1 class="font-title text-6xl md:text-8xl leading-none">{p.title}</h1>
       </div>
       <img
-        src="/icons/leaf2.png"
+        src="/icons/leaf1.png"
         alt=""
         aria-hidden="true"
-        class="w-20 h-20 md:w-28 md:h-28 object-contain inline-block brightness-75 rotate-20 origin-center"
+        class="w-20 h-20 md:w-28 md:h-28 opacity-50"
       />
     </div>
 
@@ -52,7 +52,7 @@ const sectionTwo = p.originStory;
       <p>{sectionOne.hero.lineTwo}</p>
     </div>
 
-    <div class="flex flex-col font-normal gap-4 text-lg leading-relaxed">
+    <div class="flex flex-col font-normal gap-4 text-lg leading-relaxed w-[90%]">
       {sectionOne.intro.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
@@ -68,14 +68,14 @@ const sectionTwo = p.originStory;
       ))}
     </div>
 
-    <p class="pt-4 text-base leading-relaxed w-[80%]">{sectionOne.real}</p>
+    <p class="py-4 text-base leading-relaxed w-[80%]">{sectionOne.real}</p>
 
     <div class="flex items-start w-[90%] relative">
       <img
         src="/icons/leaf2.png"
         alt=""
         aria-hidden="true"
-        class="w-14 h-14 md:w-20 md:h-20 object-contain shrink-0 mt-1 -mr-4 md:-mr-6"
+        class="w-14 h-14 md:w-20 md:h-20 object-contain shrink-0 mt-6 -mr-2 md:-mr-4 opacity-50"
       />
       <div class="rounded-xl bg-stone-dark/40 p-4 md:p-5 w-full">
         <p class="text-base leading-relaxed">{sectionOne.customEvents.lineOne}</p>
@@ -93,15 +93,32 @@ const sectionTwo = p.originStory;
     </div>
   </div>
 </div>
-  <div class="bg-blue-300 w-full md:w-[40%] min-h-[720px]"></div>
+  <div class="relative w-full md:w-[45%] min-h-[720px] overflow-visible">
+    <img
+      src="/collage.png"
+      alt=""
+      aria-hidden="true"
+      class="absolute right-0 top-[12%] w-[130%] max-w-none object-contain object-top"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
     </div>      
     
     <div class="w-full flex flex-col md:flex-row gap-8 p-10 bg-olive-light/40">
       <div class="w-full md:w-[60%] text-bark">
         <div class="w-full flex flex-col">
-          <div class=" inline-flex w-fit flex-col rounded-md bg-stone-light/80 px-5 py-3 md:px-16 md:py-4">
-            <p class="font-title text-2xl md:text-3xl">{sectionTwo.kicker}</p>
-            <h2 class="font-title text-6xl md:text-7xl">{sectionTwo.title}</h2>
+          <div class="relative inline-flex w-fit flex-col overflow-hidden px-5 py-3 md:px-16 md:py-4">
+            <img
+              src="/PaperEf.png"
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 h-full w-full object-fill"
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="relative z-10 font-title text-2xl md:text-3xl">{sectionTwo.kicker}</p>
+            <h2 class="relative z-10 font-title text-6xl md:text-7xl">{sectionTwo.title}</h2>
           </div>
 
           <div class="relative pt-4 pl-5 flex flex-col gap-5">
