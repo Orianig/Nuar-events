@@ -1,9 +1,4 @@
-/**
- * Traducciones en inglés
- */
-
 import type { Translations } from './types';
-
 export const en: Translations = {
   nav: {
     brandName: 'NUAR',
@@ -74,8 +69,14 @@ export const en: Translations = {
           lineTwo: 'always with one clear idea: that it is not just another plan, but something truly lived.',
         },
         closing: {
-          lines: ["We're just getting started.", "But we're clear about it:"],
-          strong: ["we're not here to make more events.", "We're here to change the way events are lived."],
+          lines: [
+            "We're just getting started.",
+            "But we're clear about it:",
+          ],
+          strong: [
+            "we're not here to make more events.",
+            "We're here to change the way events are lived.",
+          ],
         },
       },
       originStory: {
@@ -91,7 +92,7 @@ export const en: Translations = {
             ],
           },
           {
-            icon: '/icons/direction.png',
+            icon: '/icons/sign.png',
             lines: [
               'And then I saw it.',
               'A sign that said:',
@@ -113,7 +114,7 @@ export const en: Translations = {
             ],
           },
           {
-            icon: '/icons/cat.jpg',
+            icon: '/icons/catFace.png',
             lines: [
               'And then, one day, a cat from the allotment had kittens and Paola decided to adopt one; her name is Nucita, like a sweet we really like.',
               'A year later, another cat had more kittens… and of course, Nucita needed a little brother. That is when Ares arrived. Epic name. Behaviour… more Gremlin than cat.',
@@ -127,7 +128,7 @@ export const en: Translations = {
             ],
           },
           {
-            icon: '/icons/people.png',
+            icon: '/icons/share.png',
             lines: [
               'So the inevitable question came up:',
               'What if this were not just for us?',
@@ -135,31 +136,29 @@ export const en: Translations = {
             ],
           },
           {
-            icon: '/icons/leaf.png',
+            icon: '/icons/idea.png',
             lines: [
-              'That is how ',
+              'This is how ',
             ],
-            highlight: 'NUAR',
+            highlight: 'NUAR was born.',
             linesAfter: [
-              'was born.',
               'A project to share that feeling of being in the right place, without needing to do anything extraordinary.',
               'To create carefully designed experiences, with intention, that take you out of routine and bring you back to what is essential.',
             ],
           },
           {
-            icon: '/icons/catFace.png',
+            icon: '/icons/pawn.png',
             lines: [
               'And yes… if you were wondering, the name comes from our cats:',
             ],
             highlight: 'NUcita + ARes.',
-            extraSpacing: true,
             closing: [
               'Because in the end, this all started there.',
               'In something small.',
               'And in a feeling that was worth sharing.',
             ],
           },
-        ],
+        ] as any,
       },
     },
   },
@@ -201,7 +200,8 @@ export const en: Translations = {
   sectionThree: {
     image: '',
     centerText: 'Our values',
-    quote: 'Native protected specific species but new in damaged ecosystems',
+    quote: 
+    'Native protected specific species but new in damaged ecosystems',
     imageAlt: 'Image with effect',
   },
 };

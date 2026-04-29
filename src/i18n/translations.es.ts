@@ -1,9 +1,4 @@
-/**
- * Traducciones en español
- */
-
 import type { Translations } from './types';
-
 export const es: Translations = {
   nav: {
     brandName: 'NUAR',
@@ -46,13 +41,11 @@ export const es: Translations = {
           lineOne: 'Creamos eventos.',
           lineTwo: 'Pero no de los que se olvidan al día siguiente.',
         },
-      
         intro: [
           'Diseñamos experiencias que te sacan del piloto automático.',
           'En un mundo donde todo va rápido —demasiado rápido—, donde consumes planes casi igual que haces scroll, llega un punto en el que dejas de sentir lo que estás viviendo.',
           'Ahí es donde entra NUAR.',
         ],
-      
         pillars: [
           {
             icon: '/icons/people.png',
@@ -70,14 +63,11 @@ export const es: Translations = {
             description: 'Momentos que se sienten. De los que recuerdas por cómo te hicieron estar.',
           },
         ],
-      
         real: 'NUAR va justo de lo contrario. De hacerlo real. De acercarte a experiencias que parecen lejanas. De demostrarte que sí, que puedes estar ahí.',
-      
         customEvents: {
           lineOne: 'Creamos eventos a medida — para marcas, equipos o personas —',
           lineTwo: 'Siempre con una idea clara: que no sea un plan más, sino algo que se viva de verdad.',
         },
-      
         closing: {
           lines: [
             'Estamos empezando.',
@@ -92,7 +82,6 @@ export const es: Translations = {
       originStory: {
         kicker: 'De dónde nace',
         title: 'NUAR???',
-      
         blocks: [
           {
             icon: '/icons/people.png',
