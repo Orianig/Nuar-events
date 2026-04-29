@@ -168,7 +168,7 @@ export const en: Translations = {
     image2: '/SectionOne-PictureTwo.jpg',
     title: 'Creating moments, because life is measured by them',
     paragraph:
-      'We design celebrations where the pace slows down, conversation flows and every detail has a purpose. We create spaces where people become the centre again.',
+      'We design events and experiences in Valencia for brands and people looking for something more. We create celebrations where the pace slows down and people truly take center stage.',
     bullets: [
       'Celebrations to be lived slowly',
       'Spaces that invite you to stay',

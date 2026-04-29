@@ -178,7 +178,7 @@ export const es: Translations = {
     image2: '/SectionOne-PictureTwo.jpg',
     title: 'Creando momentos, porque la vida se mide en ellos',
     paragraph:
-      'Diseñamos celebraciones donde el ritmo se desacelera, la conversación fluye y cada detalle tiene un propósito. Creamos espacios donde las personas vuelven a ser el centro.',
+      'Diseñamos eventos y experiencias en Valencia para marcas y personas que buscan algo más que un plan. Creamos celebraciones donde el ritmo se desacelera y las personas vuelven a ser el centro.',
     bullets: [
       'Celebraciones que se viven despacio',
       'Espacios que invitan a quedarse',
