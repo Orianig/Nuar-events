@@ -58,9 +58,21 @@ export interface Translations {
     home: { title: string };
     contact: {
       title: string;
-      heading: string;
-      goHome: string;
-      goProjects: string;
+      description: string;
+      copyFeedback: string;
+      sectionOne: {
+        heading: string;
+        subheading: string;
+        body: string;
+        email: string;
+        phone: string;
+      };
+      sectionTwo: {
+        heading: string;
+        subheading: string;
+        lines: string[];
+        closing: string;
+      };
     };
     projects: {
       title: string;

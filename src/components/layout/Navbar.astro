@@ -17,9 +17,7 @@ const {
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
 const isSpanish = currentLang === 'es';
 const hrefHome = isSpanish ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
-const hrefProjects = isSpanish ? (b ? `${b}/projects` : '/projects') : (b ? `${b}/en/projects` : '/en/projects');
 const hrefAboutNuar = isSpanish ? (b ? `${b}/about-nuar` : '/about-nuar') : (b ? `${b}/en/about-nuar` : '/en/about-nuar');
-const hrefUpcomingEvents = `${hrefProjects}#upcoming-events`;
 const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
 
 function normalizePath(path: string): string {
@@ -31,13 +29,16 @@ function normalizePath(path: string): string {
 
 const current = normalizePath(currentPath);
 const homePath = normalizePath(hrefHome);
-const projectsPath = normalizePath(hrefProjects);
 const aboutNuarPath = normalizePath(hrefAboutNuar);
 const contactPath = normalizePath(hrefContact);
 
 const isHomeActive = current === homePath;
-const isEventsActive = current === projectsPath || current === aboutNuarPath || current.startsWith(`${projectsPath}/`) || current.startsWith(`${aboutNuarPath}/`);
+const isEventsActive = current === aboutNuarPath || current.startsWith(`${aboutNuarPath}/`);
 const isContactActive = current === contactPath || current.startsWith(`${contactPath}/`);
+
+const disabledNavClass =
+  'block rounded-xl px-3 py-2 text-sm text-bark/40 cursor-not-allowed select-none';
+const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text-sm';
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-45 bg-stone/55 border-b border-bark/20 transition-all duration-300">
@@ -83,12 +84,12 @@ const isContactActive = current === contactPath || current.startsWith(`${contact
             <a href={hrefAboutNuar} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
               {aboutNuar}
             </a>
-            <a href={hrefProjects} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
+            <span class={disabledNavClass} aria-disabled="true">
               {projects}
-            </a>
-            <a href={hrefUpcomingEvents} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
+            </span>
+            <span class={disabledNavClass} aria-disabled="true">
               {upcomingEvents}
-            </a>
+            </span>
           </div>
         </div>
         <a
@@ -144,12 +145,12 @@ const isContactActive = current === contactPath || current.startsWith(`${contact
             <a href={hrefAboutNuar} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
               {aboutNuar}
             </a>
-            <a href={hrefProjects} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
+            <span class={disabledNavClassMobile} aria-disabled="true">
               {projects}
-            </a>
-            <a href={hrefUpcomingEvents} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
+            </span>
+            <span class={disabledNavClassMobile} aria-disabled="true">
               {upcomingEvents}
-            </a>
+            </span>
           </div>
         </div>
         <a

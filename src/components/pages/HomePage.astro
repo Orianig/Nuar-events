@@ -7,15 +7,10 @@ import SectionOne from '../home/SectionOne.astro';
 import SectionTwo from '../home/SectionTwo.astro';
 import SectionThree from '../home/SectionThree.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
-import { getTranslations, type Lang } from '../../i18n';
+import { getTranslations } from '../../i18n';
+import type { PageProps } from '../../types';
 
-interface Props {
-  lang: Lang;
-  currentPath: string;
-  base: string;
-}
-
-const { lang, currentPath, base } = Astro.props as Props;
+const { lang, currentPath, base } = Astro.props as PageProps;
 const t = getTranslations(lang);
 const assetBase = base.endsWith('/') ? base : `${base}/`;
 const heroVideo = lang === 'en' ? `${assetBase}Home-bg-en.mp4` : `${assetBase}Home-bg-es.mp4`;

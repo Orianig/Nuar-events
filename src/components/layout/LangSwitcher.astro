@@ -1,11 +1,7 @@
 ---
-interface Props {
-  currentLang: 'es' | 'en';
-  /** pathname actual (ej. /Nuar/es/, /Nuar/es/projects) para enlace al otro idioma */
-  currentPath: string;
-}
+import type { LangSwitcherProps } from '../../types';
 
-const { currentLang, currentPath } = Astro.props;
+const { currentLang, currentPath } = Astro.props as LangSwitcherProps;
 const currentLabel = currentLang === 'es' ? 'ES' : 'EN';
 const otherLabel = currentLang === 'es' ? 'EN' : 'ES';
 

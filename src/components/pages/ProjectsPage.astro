@@ -2,15 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
-import { getTranslations, type Lang } from '../../i18n';
+import { getTranslations } from '../../i18n';
+import type { PageProps } from '../../types';
 
-interface Props {
-  lang: Lang;
-  currentPath: string;
-  base: string;
-}
-
-const { lang, currentPath, base } = Astro.props as Props;
+const { lang, currentPath, base } = Astro.props as PageProps;
 const t = getTranslations(lang);
 const p = t.pages.projects;
 const pageDescription =

@@ -2,27 +2,17 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
-import { getTranslations, type Lang } from '../../i18n';
+import { getTranslations } from '../../i18n';
+import type { PageProps } from '../../types';
 
-interface Props {
-  lang: Lang;
-  currentPath: string;
-  base: string;
-}
-
-const { lang, currentPath, base } = Astro.props as Props;
+const { lang, currentPath, base } = Astro.props as PageProps;
 const t = getTranslations(lang);
 const p = t.pages.contact;
-const baseSlash = base.endsWith('/') ? base : `${base}/`;
-const homeHref = lang === 'en' ? `${baseSlash}en/` : `${baseSlash}`;
-const projectsHref = lang === 'en' ? `${baseSlash}en/projects` : `${baseSlash}projects`;
-const pageDescription =
-  lang === 'en'
-    ? 'Contact Nuar Events to design meaningful celebrations from start to finish.'
-    : 'Contacta con Nuar Events para disenar experiencias y celebraciones cuidadas de principio a fin.';
+const s1 = p.sectionOne;
+const s2 = p.sectionTwo;
 ---
 
-<Layout title={p.title} description={pageDescription} lang={lang} currentPath={currentPath}>
+<Layout title={p.title} description={p.description} lang={lang} currentPath={currentPath}>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -35,18 +25,91 @@ const pageDescription =
     currentLang={lang}
     base={base}
   />
-  <div class="min-h-screen flex flex-col items-center justify-center bg-stone pt-24 pb-8 px-8">
-    <div class="text-center flex flex-col gap-8">
-      <h1 class="text-4xl font-bold text-gray-800">{p.heading}</h1>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href={homeHref} class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-md">
-          {p.goHome}
-        </a>
-        <a href={projectsHref} class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md">
-          {p.goProjects}
-        </a>
+  <main class="bg-stone text-bark">
+    <section class="flex min-h-[70vh] flex-col md:min-h-[85vh] md:flex-row">
+      <div class="flex w-full flex-col justify-between bg-olive-light/40 px-6 py-10 pt-[96px] md:w-1/2 md:px-10 md:py-14 md:pt-14 lg:px-10 lg:py-20">
+        <div class="flex flex-col gap-5 md:gap-6">
+          <h1 class="font-title text-4xl leading-tight md:text-5xl lg:text-6xl">{s1.heading}</h1>
+          <p class="font-slogan text-3xl leading-snug text-bark md:text-4xl lg:text-5xl">{s1.subheading}</p>
+          <p class="max-w-xl text-base leading-relaxed md:text-lg">{s1.body}</p>
+        </div>
+
+        <div class="mt-10 flex items-stretch gap-4 md:mt-12">
+          <div class="w-px shrink-0 bg-bark/40" aria-hidden="true"></div>
+          <div class="flex flex-col gap-1 text-base md:text-lg">
+            <button
+              type="button"
+              data-copy={s1.email}
+              class="w-fit cursor-pointer border-0 bg-transparent p-0 text-left text-inherit transition-opacity hover:opacity-80"
+            >
+              {s1.email}
+            </button>
+            <button
+              type="button"
+              data-copy={s1.phone}
+              class="w-fit cursor-pointer border-0 bg-transparent p-0 text-left text-inherit transition-opacity hover:opacity-80"
+            >
+              {s1.phone}
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="w-full md:w-1/2">
+        <img
+          src="/contactPage1.png"
+          alt=""
+          aria-hidden="true"
+          class="h-full min-h-[280px] w-full object-cover md:min-h-full"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <section class="flex flex-col md:flex-row">
+      <div class="order-2 w-full md:order-1 md:w-1/2">
+        <img
+          src="/contactPage2.jpg"
+          alt=""
+          aria-hidden="true"
+          class="h-full min-h-[280px] w-full object-cover md:min-h-[85vh]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div class="order-1 flex w-full flex-col justify-center bg-cream-light px-6 py-10 md:order-2 md:w-1/2 md:px-10 md:py-14 lg:px-16 lg:py-16">
+        <div class="flex max-w-lg flex-col gap-5 md:gap-6">
+          <h2 class="font-title text-3xl leading-tight md:text-4xl lg:text-5xl">{s2.heading}</h2>
+          <p class="font-title text-2xl italic leading-snug md:text-3xl">{s2.subheading}</p>
+          <div class="h-1.5 w-14 rounded-full bg-bark/75" aria-hidden="true"></div>
+          <div class="flex flex-col gap-2 text-base leading-relaxed md:text-lg">
+            {s2.lines.map((line) => (
+              <p>{line}</p>
+            ))}
+          </div>
+          <p class="pt-2 text-base font-semibold md:text-lg">{s2.closing}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div
+    data-copy-feedback
+    class="pointer-events-none fixed left-1/2 top-24 z-50 -translate-x-1/2 translate-y-1 scale-95 rounded-full border border-bark/15 bg-stone/92 px-5 py-2.5 text-sm text-bark shadow-lg backdrop-blur-md opacity-0 transition-all duration-300 ease-out"
+    role="status"
+    aria-live="polite"
+    aria-hidden="true"
+  >
+    {p.copyFeedback}
   </div>
+
   <Footer contactText={t.footer.contact} currentLang={lang} base={base} />
 </Layout>
+
+<script>
+  import { initCopyToClipboard } from '../../scripts/copy-to-clipboard';
+
+  initCopyToClipboard();
+</script>

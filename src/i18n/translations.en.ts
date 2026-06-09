@@ -22,9 +22,27 @@ export const en: Translations = {
     },
     contact: {
       title: 'Contact - Nuar',
-      heading: 'Hello, I am Contact',
-      goHome: 'Go to Home',
-      goProjects: 'Go to Projects',
+      description:
+        'Contact Nuar Events to design meaningful celebrations from start to finish.',
+      copyFeedback: 'Copied to clipboard',
+      sectionOne: {
+        heading: 'Tell us what you want to celebrate',
+        subheading: 'Every event starts with a conversation.',
+        body: 'Whether it is a family celebration, a gathering with friends, or a corporate experience, we would love to hear your idea and help you shape it.',
+        email: 'hola@nuarevents.es',
+        phone: '+34 656 49 93 02',
+      },
+      sectionTwo: {
+        heading: 'What matters is not the event.',
+        subheading: 'It is what happens around it.',
+        lines: [
+          'The conversations that emerge.',
+          'The reunions.',
+          'The stories that get told.',
+          'The impromptu toasts.',
+        ],
+        closing: 'We take care of the rest.',
+      },
     },
     projects: {
       title: 'Projects - Nuar',

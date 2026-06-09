@@ -22,9 +22,27 @@ export const es: Translations = {
     },
     contact: {
       title: 'Contacto - Nuar',
-      heading: 'Hola, soy Contact',
-      goHome: 'Ir a Inicio',
-      goProjects: 'Ir a Proyectos',
+      description:
+        'Contacta con Nuar Events para disenar experiencias y celebraciones cuidadas de principio a fin.',
+      copyFeedback: 'Copiado al portapapeles',
+      sectionOne: {
+        heading: 'Cuéntanos qué quieres celebrar',
+        subheading: 'Cada evento empieza con una conversación.',
+        body: 'Ya sea una celebración familiar, una reunión entre amigos o una experiencia de empresa, estaremos encantadas de escuchar tu idea y ayudarte a darle forma.',
+        email: 'hola@nuarevents.es',
+        phone: '+34 656 49 93 02',
+      },
+      sectionTwo: {
+        heading: 'Lo importante no es el evento.',
+        subheading: 'Es lo que ocurre alrededor de él.',
+        lines: [
+          'Las conversaciones que surgen.',
+          'Los reencuentros.',
+          'Las historias que se cuentan.',
+          'Los brindis improvisados.',
+        ],
+        closing: 'Nosotras nos encargamos del resto.',
+      },
     },
     projects: {
       title: 'Proyectos - Nuar',

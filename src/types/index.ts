@@ -1,10 +1,10 @@
+import type { Lang } from '../i18n/types';
+
 export interface SectionItem {
   image: string;
   title: string;
   description: string;
 }
-
-import type { Lang } from '../i18n/types';
 
 export interface NavbarProps {
   brandName?: string;
@@ -15,7 +15,6 @@ export interface NavbarProps {
   contact?: string;
   menuToggle?: string;
   currentLang?: Lang;
-
   currentPath?: string;
   base?: string;
 }
@@ -24,6 +23,11 @@ export interface FooterProps {
   contactText?: string;
   currentLang?: Lang;
   base?: string;
+}
+
+export interface LangSwitcherProps {
+  currentLang: Lang;
+  currentPath: string;
 }
 
 export interface HeroProps {
