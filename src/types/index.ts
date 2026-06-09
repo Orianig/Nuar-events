@@ -1,8 +1,3 @@
-/**
- * Tipos compartidos para componentes y layouts
- */
-
-/** Item de sección con imagen (SectionOne, SectionTwo) */
 export interface SectionItem {
   image: string;
   title: string;
@@ -20,9 +15,8 @@ export interface NavbarProps {
   contact?: string;
   menuToggle?: string;
   currentLang?: Lang;
-  /** pathname actual (ej. /Nuar/es/, /Nuar/es/projects) para enlaces y LangSwitcher */
+
   currentPath?: string;
-  /** base URL del sitio (ej. /Nuar) para construir enlaces por idioma */
   base?: string;
 }
 
@@ -73,4 +67,10 @@ export interface LayoutProps {
   lang?: Lang;
   currentPath?: string;
   noindex?: boolean;
+}
+
+export interface PageProps {
+  lang: Lang;
+  currentPath: string;
+  base: string;
 }
