@@ -1,0 +1,331 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import { getTranslations } from '../../i18n';
+import type { PageProps } from '../../types';
+
+const { lang, currentPath, base } = Astro.props as PageProps;
+const t = getTranslations(lang);
+const isEn = lang === 'en';
+
+const title = isEn ? 'Privacy policy' : 'Política de privacidad';
+const description = isEn
+  ? 'Privacy policy of Nuar Events: what personal data we collect through contact and advertising forms, and how we use it.'
+  : 'Política de privacidad de Nuar Events: qué datos personales recogemos en los formularios de contacto y publicidad, y cómo los utilizamos.';
+---
+
+<Layout title={title} description={description} lang={lang} currentPath={currentPath}>
+  <Navbar
+    currentPath={currentPath}
+    brandName={t.nav.brandName}
+    home={t.nav.home}
+    projects={t.nav.projects}
+    aboutNuar={t.nav.aboutNuar}
+    upcomingEvents={t.nav.upcomingEvents}
+    contact={t.nav.contact}
+    menuToggle={t.nav.menuToggle}
+    currentLang={lang}
+    base={base}
+  />
+
+  <main class="bg-stone text-bark">
+    <article class="mx-auto max-w-3xl px-6 pb-20 pt-28 md:px-10 md:pb-28 md:pt-32">
+      {
+        isEn ? (
+          <>
+            <h1 class="font-title text-4xl leading-tight md:text-5xl">Privacy policy – Nuar Events</h1>
+            <p class="mt-4 text-sm italic text-bark/80">Last updated: November 2026</p>
+
+            <h2 class="mt-10 text-xl font-semibold">1. Data controller</h2>
+            <p class="mt-3 leading-relaxed">
+              The controller of the personal data collected through Nuar Events contact and advertising forms is:
+            </p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>
+                <span class="font-medium">Controller:</span> Paola Marina Infante Gonzalez
+              </li>
+              <li>
+                <span class="font-medium">Trade name:</span> Nuar Events
+              </li>
+              <li>
+                <span class="font-medium">Tax ID (NIF):</span> 26880198Y
+              </li>
+              <li>
+                <span class="font-medium">Address:</span> Calle Marqués de Lozoya
+              </li>
+              <li>
+                <span class="font-medium">Email:</span>{' '}
+                <a class="underline underline-offset-2 hover:opacity-80" href="mailto:hola@nuarevents.es">
+                  hola@nuarevents.es
+                </a>
+              </li>
+            </ul>
+
+            <h2 class="mt-10 text-xl font-semibold">2. What data do we collect?</h2>
+            <p class="mt-3 leading-relaxed">Through our forms we may collect the following data:</p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>First and last name.</li>
+              <li>Email address.</li>
+              <li>Phone number.</li>
+              <li>Company and job title.</li>
+              <li>Type of event you want to organise.</li>
+              <li>Approximate number of guests.</li>
+              <li>Expected date and indicative budget.</li>
+              <li>Any additional information you choose to provide.</li>
+            </ul>
+            <p class="mt-3 leading-relaxed">We do not ask for personal data that is not needed to handle your enquiry.</p>
+
+            <h2 class="mt-10 text-xl font-semibold">3. What do we use your data for?</h2>
+            <p class="mt-3 leading-relaxed">We use the data you provide to:</p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>Respond to requests for information about our services.</li>
+              <li>Contact people and companies interested in organising an event.</li>
+              <li>Prepare proposals, quotes and tailored recommendations.</li>
+              <li>Follow up on the requests we receive.</li>
+              <li>Comply with any legal obligations that may apply.</li>
+            </ul>
+            <p class="mt-3 leading-relaxed">
+              We will not use the data to send commercial messages unrelated to your request unless we have a valid legal basis to do so.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">4. What is the legal basis for processing your data?</h2>
+            <p class="mt-3 leading-relaxed">
+              The main legal basis is taking steps prior to a contract at your request, when you ask for information or a quote for our services.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              Where needed, we will ask for your consent for additional purposes, such as sending commercial communications.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">5. How long do we keep the data?</h2>
+            <p class="mt-3 leading-relaxed">
+              Data is kept for as long as needed to handle your request and the related follow-up.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              When it is no longer needed, it will be deleted or kept blocked for the periods required by law in order to deal with possible liabilities.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">6. Do we share your data with third parties?</h2>
+            <p class="mt-3 leading-relaxed">We do not sell or transfer personal data to third parties for their own commercial purposes.</p>
+            <p class="mt-3 leading-relaxed">
+              Service providers that are necessary for our activity may have access to the data, such as email tools, web hosting or client management tools, where appropriate and under the conditions required by law.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              If you sent your data through a Meta form (Facebook or Instagram), Meta will also process information under its own privacy policy:{' '}
+              <a
+                class="break-all underline underline-offset-2 hover:opacity-80"
+                href="https://www.facebook.com/privacy/policy/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://www.facebook.com/privacy/policy/
+              </a>
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">7. Are there international data transfers?</h2>
+            <p class="mt-3 leading-relaxed">As a rule, we process data within the European Economic Area.</p>
+            <p class="mt-3 leading-relaxed">
+              Some technology providers may process or store data outside the European Economic Area. This includes Meta Platforms Ireland Limited and, where applicable, Meta Platforms, Inc., when you submit a Facebook or Instagram form or interact with our ads on those platforms. Those transfers rely on the safeguards required by law, such as the European Commission’s Standard Contractual Clauses or an adequacy decision, where one exists.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">8. What are your rights?</h2>
+            <p class="mt-3 leading-relaxed">You may request:</p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>Access to your data.</li>
+              <li>Rectification of inaccurate data.</li>
+              <li>Erasure of your data.</li>
+              <li>Restriction of processing.</li>
+              <li>Data portability.</li>
+              <li>Objection to processing.</li>
+            </ul>
+            <p class="mt-3 leading-relaxed">
+              If processing is based on consent, you may withdraw it at any time. Withdrawing consent does not affect the lawfulness of processing carried out before the withdrawal.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              You may also lodge a complaint with the Spanish Data Protection Agency (Agencia Española de Protección de Datos) if you believe the processing does not comply with the law:{' '}
+              <a
+                class="underline underline-offset-2 hover:opacity-80"
+                href="https://www.aepd.es"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                www.aepd.es
+              </a>
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">9. How can you exercise your rights?</h2>
+            <p class="mt-3 leading-relaxed">
+              Write to{' '}
+              <a class="underline underline-offset-2 hover:opacity-80" href="mailto:hola@nuarevents.es">hola@nuarevents.es</a>, stating the right you wish to exercise and a way for us to identify you and reply.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">10. Meta ads and forms</h2>
+            <p class="mt-3 leading-relaxed">
+              If you reach us through a Facebook or Instagram ad, or through a lead form on those platforms, Meta provides us with the information you enter in that form so we can respond to your request. We use it only for the purposes described in this policy.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              Meta also processes information for its own purposes, under its privacy policy. We do not control that processing.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">11. Children</h2>
+            <p class="mt-3 leading-relaxed">
+              Our services and forms are intended for adults and for companies. We do not knowingly collect data from children.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">12. Changes to this policy</h2>
+            <p class="mt-3 leading-relaxed">
+              We may update this policy when our activity or the applicable rules change. The date of the latest version appears at the top of this page.
+            </p>
+          </>
+        ) : (
+          <>
+            <h1 class="font-title text-4xl leading-tight md:text-5xl">Política de privacidad – Nuar Events</h1>
+            <p class="mt-4 text-sm italic text-bark/80">Última actualización: noviembre de 2026</p>
+
+            <h2 class="mt-10 text-xl font-semibold">1. Responsable del tratamiento</h2>
+            <p class="mt-3 leading-relaxed">
+              La responsable del tratamiento de los datos personales recogidos a través de los formularios de contacto y publicidad de Nuar Events es:
+            </p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>
+                <span class="font-medium">Responsable:</span> Paola Marina Infante Gonzalez
+              </li>
+              <li>
+                <span class="font-medium">Nombre comercial:</span> Nuar Events
+              </li>
+              <li>
+                <span class="font-medium">NIF:</span> 26880198Y
+              </li>
+              <li>
+                <span class="font-medium">Domicilio:</span> Calle Marqués de Lozoya
+              </li>
+              <li>
+                <span class="font-medium">Correo electrónico:</span>{' '}
+                <a class="underline underline-offset-2 hover:opacity-80" href="mailto:hola@nuarevents.es">
+                  hola@nuarevents.es
+                </a>
+              </li>
+            </ul>
+
+            <h2 class="mt-10 text-xl font-semibold">2. ¿Qué datos recogemos?</h2>
+            <p class="mt-3 leading-relaxed">A través de nuestros formularios podemos recoger los siguientes datos:</p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>Nombre y apellidos.</li>
+              <li>Correo electrónico.</li>
+              <li>Número de teléfono.</li>
+              <li>Empresa y puesto de trabajo.</li>
+              <li>Tipo de evento que se desea organizar.</li>
+              <li>Número aproximado de asistentes.</li>
+              <li>Fecha prevista y presupuesto orientativo.</li>
+              <li>Cualquier información adicional que la persona facilite voluntariamente.</li>
+            </ul>
+            <p class="mt-3 leading-relaxed">No solicitamos datos personales que no sean necesarios para atender la consulta.</p>
+
+            <h2 class="mt-10 text-xl font-semibold">3. ¿Para qué utilizamos tus datos?</h2>
+            <p class="mt-3 leading-relaxed">Utilizamos los datos facilitados para:</p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>Atender solicitudes de información sobre nuestros servicios.</li>
+              <li>Contactar con personas y empresas interesadas en organizar un evento.</li>
+              <li>Preparar propuestas, presupuestos y recomendaciones personalizadas.</li>
+              <li>Realizar el seguimiento de las solicitudes recibidas.</li>
+              <li>Cumplir las obligaciones legales que puedan resultar aplicables.</li>
+            </ul>
+            <p class="mt-3 leading-relaxed">
+              No utilizaremos los datos para enviar comunicaciones comerciales ajenas a la solicitud sin contar con la correspondiente base legal.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">4. ¿Cuál es la base legal para tratar tus datos?</h2>
+            <p class="mt-3 leading-relaxed">
+              La base jurídica principal es la aplicación de medidas precontractuales a petición de la persona interesada, cuando solicita información o un presupuesto sobre nuestros servicios.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              Cuando sea necesario, solicitaremos el consentimiento para finalidades adicionales, como el envío de comunicaciones comerciales.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">5. ¿Durante cuánto tiempo conservamos los datos?</h2>
+            <p class="mt-3 leading-relaxed">
+              Los datos se conservarán durante el tiempo necesario para atender la solicitud y realizar el seguimiento correspondiente.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              Cuando dejen de ser necesarios, se suprimirán o se conservarán bloqueados durante los plazos legalmente exigibles para atender posibles responsabilidades.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">6. ¿Compartimos tus datos con terceros?</h2>
+            <p class="mt-3 leading-relaxed">No vendemos ni cedemos los datos personales a terceros con fines comerciales.</p>
+            <p class="mt-3 leading-relaxed">
+              No obstante, pueden tener acceso a ellos proveedores que prestan servicios necesarios para nuestra actividad, como herramientas de correo electrónico, alojamiento web o gestión de clientes, siempre que corresponda y bajo las condiciones legalmente aplicables.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              Si has enviado tus datos mediante un formulario de Meta (Facebook o Instagram), Meta también tratará información conforme a su propia política de privacidad:{' '}
+              <a
+                class="break-all underline underline-offset-2 hover:opacity-80"
+                href="https://www.facebook.com/privacy/policy/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://www.facebook.com/privacy/policy/
+              </a>
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">7. ¿Se realizan transferencias internacionales de datos?</h2>
+            <p class="mt-3 leading-relaxed">Con carácter general, tratamos los datos dentro del Espacio Económico Europeo.</p>
+            <p class="mt-3 leading-relaxed">
+              Algunos proveedores tecnológicos pueden tratar o alojar datos fuera del Espacio Económico Europeo. En particular, Meta Platforms Ireland Limited y, en su caso, Meta Platforms, Inc., cuando envías un formulario de Facebook o Instagram o interactúas con nuestros anuncios en esas plataformas. Esas transferencias se amparan en las garantías exigidas por la normativa, como las Cláusulas Contractuales Tipo de la Comisión Europea o una decisión de adecuación, cuando exista.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">8. ¿Cuáles son tus derechos?</h2>
+            <p class="mt-3 leading-relaxed">Puedes solicitar:</p>
+            <ul class="mt-3 list-disc space-y-1 pl-5 leading-relaxed">
+              <li>Acceso a tus datos.</li>
+              <li>Rectificación de los datos inexactos.</li>
+              <li>Supresión de tus datos.</li>
+              <li>Limitación del tratamiento.</li>
+              <li>Portabilidad de los datos.</li>
+              <li>Oposición al tratamiento.</li>
+            </ul>
+            <p class="mt-3 leading-relaxed">
+              Si el tratamiento se basa en tu consentimiento, puedes retirarlo en cualquier momento. Retirarlo no afecta a la licitud del tratamiento realizado con anterioridad.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              También puedes presentar una reclamación ante la Agencia Española de Protección de Datos si consideras que el tratamiento no se ajusta a la normativa:{' '}
+              <a
+                class="underline underline-offset-2 hover:opacity-80"
+                href="https://www.aepd.es"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                www.aepd.es
+              </a>
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">9. ¿Cómo puedes ejercer tus derechos?</h2>
+            <p class="mt-3 leading-relaxed">
+              Escribiendo a{' '}
+              <a class="underline underline-offset-2 hover:opacity-80" href="mailto:hola@nuarevents.es">hola@nuarevents.es</a>, indicando el derecho que deseas ejercer y un medio para identificarte y responderte.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">10. Anuncios y formularios de Meta</h2>
+            <p class="mt-3 leading-relaxed">
+              Si llegas a través de un anuncio de Facebook o Instagram, o de un formulario de clientes potenciales en esas plataformas, Meta nos facilita los datos que introduces en ese formulario para que podamos atender tu solicitud. Los usamos solo para las finalidades descritas en esta política.
+            </p>
+            <p class="mt-3 leading-relaxed">
+              Meta trata además información por su propia cuenta, conforme a su política de privacidad. Ese tratamiento no depende de Nuar Events.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">11. Menores de edad</h2>
+            <p class="mt-3 leading-relaxed">
+              Nuestros servicios y formularios se dirigen a personas adultas y a empresas. No recabamos datos de menores de forma intencionada.
+            </p>
+
+            <h2 class="mt-10 text-xl font-semibold">12. Cambios en esta política</h2>
+            <p class="mt-3 leading-relaxed">
+              Podemos actualizar esta política cuando cambie nuestra actividad o la normativa aplicable. La fecha de la última versión figura al inicio de esta página.
+            </p>
+          </>
+        )
+      }
+    </article>
+  </main>
+
+  <Footer contactText={t.footer.contact} currentLang={lang} base={base} />
+</Layout>

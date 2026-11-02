@@ -1,0 +1,7 @@
+---
+import PrivacyPage from '../components/pages/PrivacyPage.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<PrivacyPage lang="es" currentPath={Astro.url.pathname} base={base} />
