@@ -253,6 +253,31 @@ export const es: Translations = {
       },
     },
   },
+  process: {
+    kicker: 'Así trabajamos contigo',
+    ctaLabel: 'Contacto',
+    steps: {
+      meet: {
+        title: '1. Nos conocemos',
+        description:
+          'Nos compartes tu idea, tus necesidades y lo que sueñas para tu evento.',
+      },
+      design: {
+        title: '2. Diseñamos la experiencia',
+        description:
+          'Creamos una propuesta personalizada, cuidando cada detalle y cada intención.',
+      },
+      coordinate: {
+        title: '3. Coordinamos el evento',
+        description:
+          'Nos encargamos de todo para que tú solo tengas que disfrutar del camino.',
+      },
+      enjoy: {
+        title: '4. Disfrutas',
+        description: 'Tú vives el momento. Nosotras hacemos que todo suceda.',
+      },
+    },
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',

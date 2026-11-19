@@ -55,6 +55,18 @@ export interface ValuesSectionProps {
   items: ValueItem[];
 }
 
+export interface ProcessStepItem {
+  title: string;
+  description: string;
+}
+
+export interface ProcessSectionProps {
+  kicker: string;
+  items: ProcessStepItem[];
+  ctaLabel?: string;
+  hrefContact?: string;
+}
+
 export interface FooterProps {
   brandName?: string;
   sloganLine1?: string;

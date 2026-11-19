@@ -142,6 +142,16 @@ export interface Translations {
       connection: { title: string; description: string };
     };
   };
+  process: {
+    kicker: string;
+    ctaLabel: string;
+    steps: {
+      meet: { title: string; description: string };
+      design: { title: string; description: string };
+      coordinate: { title: string; description: string };
+      enjoy: { title: string; description: string };
+    };
+  };
   sectionOne: {
     image1: string;
     image2: string;

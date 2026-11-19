@@ -1,0 +1,74 @@
+---
+import MessageSquare from '@lucide/astro/icons/message-square';
+import SwatchBook from '@lucide/astro/icons/swatch-book';
+import FileText from '@lucide/astro/icons/file-text';
+import Heart from '@lucide/astro/icons/heart';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import Button from '../ui/Button.astro';
+import type { ProcessSectionProps } from '../../types';
+
+const { kicker, items = [], ctaLabel, hrefContact } = Astro.props as ProcessSectionProps;
+
+const icons = [MessageSquare, SwatchBook, FileText, Heart] as const;
+---
+
+<section class="relative bg-white py-14 text-olive md:py-16">
+  <div class="pointer-events-none absolute inset-0 bg-sand-light/30" aria-hidden="true"></div>
+  <div class="page-gutter relative">
+    <div class="page-shell">
+      <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{kicker}</p>
+
+      <div class="mt-10 grid grid-cols-1 gap-0 sm:mt-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-12 lg:mt-12 lg:grid-cols-4 lg:gap-x-10">
+        {
+          items.map((item, i) => {
+            const Icon = icons[i] ?? MessageSquare;
+            const showArrow = i < items.length - 1;
+
+            return (
+              <article
+                class:list={[
+                  'relative flex min-w-0 flex-col items-center gap-4 text-center sm:items-start sm:text-left',
+                  i > 0 && 'border-t border-olive/25 pt-10 sm:border-t-0 sm:pt-0',
+                  i < items.length - 1 && 'pb-10 sm:pb-0',
+                ]}
+              >
+                {
+                  showArrow && (
+                    <div
+                      aria-hidden="true"
+                      class="pointer-events-none absolute top-[26px] left-[calc(55px+58px)] right-[calc(-2.5rem+58px)] z-0 hidden items-center lg:flex"
+                    >
+                      <span class="h-[3px] w-full bg-olive/45" />
+                      <ArrowRight class="size-5 -ml-1 shrink-0 text-olive/55" stroke-width={2.5} />
+                    </div>
+                  )
+                }
+
+                <div class="relative z-10 flex size-[55px] items-center justify-center text-olive">
+                  <Icon class="size-[55px]" stroke-width={1.4} aria-hidden="true" />
+                </div>
+
+                <h3 class="font-body !text-[20px] font-bold leading-snug text-olive">
+                  {item.title}
+                </h3>
+                <p class="font-body !text-[18px] leading-relaxed text-olive/90">
+                  {item.description}
+                </p>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      {
+        ctaLabel && hrefContact && (
+          <div class="pt-[15px]">
+            <Button href={hrefContact} variant="text" size="md" class="!px-0 !text-olive">
+              {ctaLabel}
+            </Button>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
