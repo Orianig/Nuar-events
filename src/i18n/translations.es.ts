@@ -278,6 +278,33 @@ export const es: Translations = {
       },
     },
   },
+  moments: {
+    kicker: 'Momentos que hemos creado',
+    title: 'Historias reales, emociones reales.',
+    ctaLabel: 'Ver eventos',
+    cards: [
+      {
+        event: 'Graduación de master',
+        attendees: '63 Asistentes',
+        location: 'Pelikano Beach Club',
+      },
+      {
+        event: 'Evento corporativo',
+        attendees: '13 Asistentes',
+        location: 'Alqueria La Albufera',
+      },
+      {
+        event: 'Cumpleaños 18',
+        attendees: '32 Asistentes',
+        location: 'Pelikano Beach Club',
+      },
+      {
+        event: 'Despedida de soltera',
+        attendees: '15 Asistentes',
+        location: 'Parque del Turia',
+      },
+    ],
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',

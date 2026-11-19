@@ -67,6 +67,22 @@ export interface ProcessSectionProps {
   hrefContact?: string;
 }
 
+export interface MomentCardItem {
+  event: string;
+  attendees: string;
+  location: string;
+  image?: string;
+  href?: string;
+}
+
+export interface MomentsSectionProps {
+  kicker: string;
+  title: string;
+  ctaLabel?: string;
+  hrefEvents?: string;
+  items: MomentCardItem[];
+}
+
 export interface FooterProps {
   brandName?: string;
   sloganLine1?: string;

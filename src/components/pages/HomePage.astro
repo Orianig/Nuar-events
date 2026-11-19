@@ -7,6 +7,7 @@ import ExperiencesSection from '../home/ExperiencesSection.astro';
 import ValuesSection from '../home/ValuesSection.astro';
 import SectionThree from '../home/SectionThree.astro';
 import ProcessSection from '../home/ProcessSection.astro';
+import MomentsSection from '../home/MomentsSection.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
 import { getTranslations } from '../../i18n';
 import { EVENT_TYPE_IMAGES, eventTypeHref } from '../../lib/eventTypes';
@@ -25,6 +26,20 @@ const hrefAboutNuar = isSpanish
   : b
     ? `${b}/en/about-nuar`
     : '/en/about-nuar';
+const hrefProjects = isSpanish
+  ? b
+    ? `${b}/projects`
+    : '/projects'
+  : b
+    ? `${b}/en/projects`
+    : '/en/projects';
+
+const momentImages = [
+  '/events/private%20celebrations/graduation-card-history.jpg',
+  '/events/corporate%20events/corporate-gifts.png',
+  '/events/private%20celebrations/celebrations-history-card.png',
+  '/events/private%20celebrations/bacherlorette-card-history.png',
+];
 
 const experienceItems = [
   {
@@ -125,6 +140,17 @@ const experienceItems = [
       t.process.steps.coordinate,
       t.process.steps.enjoy,
     ]}
+  />
+
+  <MomentsSection
+    kicker={t.moments.kicker}
+    title={t.moments.title}
+    ctaLabel={t.moments.ctaLabel}
+    hrefEvents={hrefProjects}
+    items={t.moments.cards.map((card, i) => ({
+      ...card,
+      image: momentImages[i],
+    }))}
   />
 
   <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />

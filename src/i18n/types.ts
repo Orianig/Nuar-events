@@ -152,6 +152,16 @@ export interface Translations {
       enjoy: { title: string; description: string };
     };
   };
+  moments: {
+    kicker: string;
+    title: string;
+    ctaLabel: string;
+    cards: {
+      event: string;
+      attendees: string;
+      location: string;
+    }[];
+  };
   sectionOne: {
     image1: string;
     image2: string;

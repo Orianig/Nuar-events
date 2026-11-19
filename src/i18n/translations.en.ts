@@ -278,6 +278,33 @@ export const en: Translations = {
       },
     },
   },
+  moments: {
+    kicker: 'Moments we have created',
+    title: 'Real stories, real emotions.',
+    ctaLabel: 'See events',
+    cards: [
+      {
+        event: 'Master’s graduation',
+        attendees: '63 Guests',
+        location: 'Pelikano Beach Club',
+      },
+      {
+        event: 'Corporate event',
+        attendees: '13 Guests',
+        location: 'Alqueria La Albufera',
+      },
+      {
+        event: '18th birthday',
+        attendees: '32 Guests',
+        location: 'Pelikano Beach Club',
+      },
+      {
+        event: 'Hen party',
+        attendees: '15 Guests',
+        location: 'Parque del Turia',
+      },
+    ],
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',
