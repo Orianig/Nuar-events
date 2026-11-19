@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
 import Chip from '../components/ui/Chip.astro';
+import FeaturedCard from '../components/ui/FeaturedCard.astro';
 import IconButton from '../components/ui/IconButton.astro';
+import ReviewCard from '../components/ui/ReviewCard.astro';
 import SocialIcon from '../components/ui/SocialIcon.astro';
 import { socialIcons, socialNetworks } from '../components/ui/icons';
 
@@ -63,6 +66,7 @@ const hexNotes = [
             <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#fuente">Fuente</a></li>
             <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#botones">Botones</a></li>
             <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#chips">Chips</a></li>
+            <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#cards">Cards</a></li>
             <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#iconos">Iconos</a></li>
           </ul>
         </nav>
@@ -232,6 +236,61 @@ const hexNotes = [
           <div class="flex items-center gap-4">
             <Chip preview="disabled">Todos</Chip>
             <span class="text-sm text-bark/70">Disabled</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="cards" class="mb-16 scroll-mt-8" aria-labelledby="cards-title">
+        <h2 id="cards-title" class="font-title text-3xl">Cards</h2>
+        <p class="mt-2 text-sm text-bark/70">Responsive al contenedor. Tres tipos: media, destacado y reseña.</p>
+
+        <div class="mt-8">
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Media</h3>
+          <p class="mb-4 text-sm text-bark/70">Hover: fondo 30%, sombra y CTA subrayado.</p>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <Card
+                title="Titulo de la card"
+                subtitle="Subtitulo"
+                description="Please add your content here. Keep it short and simple. And smile :)"
+                href="#cards"
+                network="instagram"
+              />
+              <span class="text-sm text-bark/70">Default</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <Card
+                title="Titulo de la card"
+                subtitle="Subtitulo"
+                description="Please add your content here. Keep it short and simple. And smile :)"
+                href="#cards"
+                network="instagram"
+                preview="hover"
+              />
+              <span class="text-sm text-bark/70">Hover</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Destacado</h3>
+          <div class="mx-auto max-w-xs">
+            <FeaturedCard
+              title="Titulo de la card"
+              description="Please add your content here. Keep it short and simple. And smile :)"
+              href="#cards"
+            />
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Reseña</h3>
+          <div class="mx-auto max-w-lg">
+            <ReviewCard
+              quote="Hicieron que todo fluyera de manera natural. Nuestros invitados no pararon de decir que era el mejor evento al que habían ido."
+              name="Gabriel"
+              detail="Evento corporativo en la Albufera"
+            />
           </div>
         </div>
       </section>

@@ -28,14 +28,11 @@ const isLoading = loading || preview === 'loading';
 const isActivePreview = preview === 'active';
 const isInactive = isDisabled || isLoading;
 
-const sizeClass =
-  variant === 'text'
-    ? ''
-    : {
-        sm: 'min-h-9 px-3.5 py-1.5',
-        md: 'min-h-11 px-4 py-2',
-        lg: 'min-h-14 px-5 py-3',
-      }[size];
+const sizeClass = {
+  sm: 'min-h-9 px-3.5 py-1.5',
+  md: 'min-h-11 px-4 py-2',
+  lg: 'min-h-14 px-5 py-3',
+}[size];
 
 const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive';
@@ -46,9 +43,7 @@ const baseClass = [
   isLoading ? 'cursor-wait' : isDisabled ? 'cursor-not-allowed' : 'cursor-pointer',
   focusRing,
   sizeClass,
-]
-  .filter(Boolean)
-  .join(' ');
+].join(' ');
 
 const primaryFill =
   'bg-btn-primary [background-image:radial-gradient(ellipse_55%_48%_at_50%_22%,var(--color-olive-light)_0%,transparent_72%)] shadow-btn';
@@ -100,7 +95,7 @@ const variantClass = (() => {
   if (isDisabled) {
     return 'border-transparent bg-transparent text-text-disabled';
   }
-  return 'group border-transparent bg-transparent px-4 py-2 text-sand-dark hover:text-olive-dark';
+  return 'group/btn border-transparent bg-transparent text-sand-dark hover:text-olive-dark';
 })();
 
 const Tag = href && !isInactive ? 'a' : 'button';
@@ -132,8 +127,8 @@ const Tag = href && !isInactive ? 'a' : 'button';
       </>
     ) : variant === 'text' ? (
       <>
-        <span class="group-hover:underline group-hover:underline-offset-[0.2em]">{<slot />}</span>
-        <span class="transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true">
+        <span class="group-hover/btn:underline group-hover/btn:underline-offset-[0.2em]">{<slot />}</span>
+        <span class="transition-transform group-hover/btn:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true">
           →
         </span>
       </>

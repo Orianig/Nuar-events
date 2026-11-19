@@ -1,0 +1,59 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  detail?: string;
+  avatar?: string;
+  avatarAlt?: string;
+  class?: string;
+}
+
+const {
+  quote,
+  name,
+  detail,
+  avatar,
+  avatarAlt = '',
+  class: className = '',
+} = Astro.props;
+---
+
+<figure
+  class:list={[
+    'flex h-full w-full min-w-0 flex-col rounded-3xl border-[0.8px] border-olive-light bg-stone-light/40 p-8',
+    className,
+  ]}
+>
+  <blockquote class="flex gap-3">
+    <span class="shrink-0 font-title text-4xl leading-none text-olive-light" aria-hidden="true">
+      “
+    </span>
+    <p class="font-body text-base font-normal leading-relaxed text-olive">{quote}</p>
+  </blockquote>
+
+  <figcaption class="mt-8 flex items-center gap-3">
+    <div class="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white">
+      {
+        avatar ? (
+          <img
+            src={avatar}
+            alt={avatarAlt || name}
+            class="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <span class="block h-full w-full bg-white" aria-hidden="true" />
+        )
+      }
+    </div>
+    <div class="min-w-0">
+      <p class="font-body text-sm font-medium leading-snug text-olive">{name}</p>
+      {
+        detail && (
+          <p class="mt-0.5 font-body text-sm font-normal leading-snug text-olive">{detail}</p>
+        )
+      }
+    </div>
+  </figcaption>
+</figure>
