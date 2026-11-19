@@ -1,6 +1,7 @@
 ---
 import ArrowLeft from '@lucide/astro/icons/arrow-left';
 import ArrowRight from '@lucide/astro/icons/arrow-right';
+import X from '@lucide/astro/icons/x';
 import Star from '@lucide/astro/icons/star';
 import ReviewCard from '../ui/ReviewCard.astro';
 import type { ReviewsSectionProps } from '../../types';
@@ -16,20 +17,18 @@ const nextLabel = 'Siguiente';
 
   <div class="page-gutter relative">
     <div class="page-shell">
-      <div class="flex items-end justify-between gap-4">
-        <div class="min-w-0">
-          <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{kicker}</p>
-          <h2 class="mt-3 font-body text-2xl font-normal leading-[1.25] text-olive md:text-[32px]">
-            {title}
-          </h2>
-        </div>
+      <div class="relative">
+        <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{kicker}</p>
+        <h2 class="mt-3 font-body text-2xl font-normal leading-[1.25] text-olive sm:max-w-[calc(100%-6rem)] md:text-[32px]">
+          {title}
+        </h2>
 
         {
           items.length > 0 && (
-            <div class="mb-0.5 flex shrink-0 items-center gap-2">
+            <div class="absolute bottom-0 right-0 z-10 hidden items-center gap-2 sm:flex">
               <button
                 type="button"
-                class="flex h-10 w-10 items-center justify-center rounded-full border border-olive-light/70 text-olive transition-colors hover:border-olive hover:bg-sand-light/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive disabled:pointer-events-none disabled:opacity-35"
+                class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-olive-light/70 text-olive transition-colors hover:border-olive hover:bg-sand-light/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive disabled:pointer-events-none disabled:opacity-35"
                 data-reviews-prev
                 aria-label={prevLabel}
               >
@@ -37,7 +36,7 @@ const nextLabel = 'Siguiente';
               </button>
               <button
                 type="button"
-                class="flex h-10 w-10 items-center justify-center rounded-full border border-olive-light/70 text-olive transition-colors hover:border-olive hover:bg-sand-light/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive disabled:pointer-events-none disabled:opacity-35"
+                class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-olive-light/70 text-olive transition-colors hover:border-olive hover:bg-sand-light/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive disabled:pointer-events-none disabled:opacity-35"
                 data-reviews-next
                 aria-label={nextLabel}
               >
@@ -50,33 +49,41 @@ const nextLabel = 'Siguiente';
 
       {
         items.length > 0 && (
-          <div class="mt-8 sm:mt-10" data-reviews-carousel>
-            <div
-              class="cursor-grab overflow-hidden active:cursor-grabbing touch-pan-y"
-              data-reviews-viewport
-            >
-              <ul class="flex gap-4 will-change-transform sm:gap-5" data-reviews-track>
-                {items.map((item) => (
-                  <li
-                    class="w-full shrink-0 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
-                    data-reviews-slide
-                  >
-                    <ReviewCard
-                      quote={item.quote}
-                      name={item.name}
-                      detail={item.detail}
-                      avatar={item.avatar}
-                      rating={5}
-                      compact
-                      interactive
-                    />
-                  </li>
-                ))}
-              </ul>
+          <div class="mt-8 overflow-visible" data-reviews-carousel>
+            <div class="relative">
+              <div
+                class="cursor-grab overflow-x-clip overflow-y-visible active:cursor-grabbing touch-pan-y"
+                data-reviews-viewport
+              >
+                <ul class="flex gap-3 will-change-transform sm:gap-5" data-reviews-track>
+                  {items.map((item) => (
+                    <li
+                      class="w-[85%] shrink-0 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
+                      data-reviews-slide
+                    >
+                      <ReviewCard
+                        quote={item.quote}
+                        name={item.name}
+                        detail={item.detail}
+                        avatar={item.avatar}
+                        rating={5}
+                        compact
+                        interactive
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 w-[18%] bg-gradient-to-l from-[#F5F2EB] via-[#F5F2EB]/70 to-transparent sm:hidden"
+                data-reviews-edge
+                aria-hidden="true"
+              />
             </div>
 
             <div
-              class="mt-8 flex flex-wrap items-center justify-center gap-2"
+              class="mt-6 flex flex-wrap items-center justify-center gap-2"
               data-reviews-dots
               role="tablist"
               aria-label={title}
@@ -99,11 +106,11 @@ const nextLabel = 'Siguiente';
     >
       <button
         type="button"
-        class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-olive transition-colors hover:bg-stone-light/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
+        class="absolute right-4 top-4 inline-flex size-9 cursor-pointer items-center justify-center rounded-full text-olive transition-colors hover:bg-stone-light/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
         data-review-close
         aria-label={closeLabel}
       >
-        <span class="text-2xl leading-none" aria-hidden="true">×</span>
+        <X class="size-4 shrink-0" stroke-width={2} aria-hidden="true" />
       </button>
 
       <blockquote class="flex gap-3 pr-8">
@@ -148,6 +155,45 @@ const nextLabel = 'Siguiente';
 <script>
   const DRAG_THRESHOLD = 12;
   const PAGE_THRESHOLD = 48;
+  const DOTS = 3;
+
+  function openReviewModal(trigger: HTMLElement) {
+    const modal = document.querySelector<HTMLDialogElement>('[data-review-modal]');
+    if (!modal) return;
+
+    const quoteEl = modal.querySelector<HTMLElement>('[data-review-modal-quote]');
+    const nameEl = modal.querySelector<HTMLElement>('[data-review-modal-name]');
+    const detailEl = modal.querySelector<HTMLElement>('[data-review-modal-detail]');
+    const avatarEl = modal.querySelector<HTMLImageElement>('[data-review-modal-avatar]');
+    const avatarFallback = modal.querySelector<HTMLElement>('[data-review-modal-avatar-fallback]');
+
+    const quote = trigger.dataset.reviewQuote || '';
+    const name = trigger.dataset.reviewName || '';
+    const detail = trigger.dataset.reviewDetail || '';
+    const avatar = trigger.dataset.reviewAvatar || '';
+
+    if (quoteEl) quoteEl.textContent = quote;
+    if (nameEl) nameEl.textContent = name;
+    if (detailEl) {
+      detailEl.textContent = detail;
+      detailEl.classList.toggle('hidden', !detail);
+    }
+    if (avatarEl && avatarFallback) {
+      if (avatar) {
+        avatarEl.src = avatar;
+        avatarEl.alt = name;
+        avatarEl.classList.remove('hidden');
+        avatarFallback.classList.add('hidden');
+      } else {
+        avatarEl.removeAttribute('src');
+        avatarEl.classList.add('hidden');
+        avatarFallback.classList.remove('hidden');
+      }
+    }
+
+    if (typeof modal.showModal === 'function') modal.showModal();
+    else modal.setAttribute('open', '');
+  }
 
   function initReviewsCarousels() {
     document.querySelectorAll<HTMLElement>('[data-reviews-carousel]').forEach((root) => {
@@ -158,6 +204,7 @@ const nextLabel = 'Siguiente';
       const viewport = root.querySelector<HTMLElement>('[data-reviews-viewport]');
       const track = root.querySelector<HTMLElement>('[data-reviews-track]');
       const dotsWrap = root.querySelector<HTMLElement>('[data-reviews-dots]');
+      const edge = root.querySelector<HTMLElement>('[data-reviews-edge]');
       const prevBtn = section.querySelector<HTMLButtonElement>('[data-reviews-prev]');
       const nextBtn = section.querySelector<HTMLButtonElement>('[data-reviews-next]');
       const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-reviews-slide]'));
@@ -171,7 +218,7 @@ const nextLabel = 'Siguiente';
       let dragging = false;
       let didDrag = false;
       let pointerId: number | null = null;
-      let suppressClickUntil = 0;
+      let blockClick = false;
 
       const getPerPage = () => {
         if (window.matchMedia('(min-width: 1024px)').matches) return 3;
@@ -193,9 +240,6 @@ const nextLabel = 'Siguiente';
         track.style.transform = `translate3d(${x}px, 0, 0)`;
       };
 
-      /** 3 dots decorativos que ciclan con cada página (page % 3) */
-      const DOTS = 3;
-
       const updateChrome = () => {
         const total = pageCount();
         const active = page % DOTS;
@@ -207,6 +251,7 @@ const nextLabel = 'Siguiente';
         });
         if (prevBtn) prevBtn.disabled = total <= 1;
         if (nextBtn) nextBtn.disabled = total <= 1;
+        edge?.classList.toggle('opacity-0', page >= total - 1);
       };
 
       const goTo = (next: number, animate = true) => {
@@ -217,7 +262,6 @@ const nextLabel = 'Siguiente';
         updateChrome();
       };
 
-      /** Clic en un dot: avanza hasta que el activo sea ese puntito */
       const goToDot = (slot: number) => {
         const current = page % DOTS;
         if (slot === current) {
@@ -236,7 +280,7 @@ const nextLabel = 'Siguiente';
           btn.setAttribute('role', 'tab');
           btn.setAttribute('aria-label', `${i + 1} / ${DOTS}`);
           btn.className =
-            'h-2.5 w-2.5 rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive';
+            'h-2.5 w-2.5 cursor-pointer rounded-full bg-sand-light transition-colors duration-200 hover:bg-olive/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive';
           btn.addEventListener('click', () => goToDot(i));
           dotsWrap.appendChild(btn);
         }
@@ -256,8 +300,10 @@ const nextLabel = 'Siguiente';
         pointerId = null;
 
         if (wasDrag) {
-          // Bloquea el click sintético post-drag para no abrir el popup
-          suppressClickUntil = Date.now() + 400;
+          blockClick = true;
+          window.setTimeout(() => {
+            blockClick = false;
+          }, 0);
           if (dragDelta <= -PAGE_THRESHOLD) goTo(page + 1);
           else if (dragDelta >= PAGE_THRESHOLD) goTo(page - 1);
           else goTo(page);
@@ -271,27 +317,28 @@ const nextLabel = 'Siguiente';
 
       viewport.addEventListener('pointerdown', (e) => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
-        // No iniciar drag desde flechas/dots (fuera del viewport)
         dragging = true;
         didDrag = false;
         pointerId = e.pointerId;
         dragStartX = e.clientX;
         dragDelta = 0;
         baseX = pageOffset(page);
-        try {
-          viewport.setPointerCapture(e.pointerId);
-        } catch {
-          /* ignore */
-        }
+        // No capturar aún: sin drag el click llega a la card y abre el popup
       });
 
       viewport.addEventListener('pointermove', (e) => {
         if (!dragging || pointerId !== e.pointerId) return;
         dragDelta = e.clientX - dragStartX;
-        if (Math.abs(dragDelta) >= DRAG_THRESHOLD) {
+        if (Math.abs(dragDelta) < DRAG_THRESHOLD) return;
+        if (!didDrag) {
           didDrag = true;
-          setTransform(baseX + dragDelta, false);
+          try {
+            viewport.setPointerCapture(e.pointerId);
+          } catch {
+            /* ignore */
+          }
         }
+        setTransform(baseX + dragDelta, false);
       });
 
       viewport.addEventListener('pointerup', (e) => {
@@ -303,18 +350,18 @@ const nextLabel = 'Siguiente';
         endDrag();
       });
 
-      // Clic vs drag: bloquear apertura del popup tras un arrastre
-      root.addEventListener(
-        'click',
-        (e) => {
-          if (Date.now() > suppressClickUntil) return;
-          const trigger = (e.target as HTMLElement | null)?.closest?.('[data-review-trigger]');
-          if (!trigger) return;
+      root.addEventListener('click', (e) => {
+        const trigger = (e.target as HTMLElement | null)?.closest?.(
+          '[data-review-trigger]',
+        ) as HTMLElement | null;
+        if (!trigger || !root.contains(trigger)) return;
+        if (blockClick || didDrag) {
           e.preventDefault();
           e.stopPropagation();
-        },
-        true,
-      );
+          return;
+        }
+        openReviewModal(trigger);
+      });
 
       prevBtn?.addEventListener('click', () => goTo(page - 1));
       nextBtn?.addEventListener('click', () => goTo(page + 1));
@@ -330,11 +377,6 @@ const nextLabel = 'Siguiente';
     if (!section || !modal || modal.dataset.ready === '1') return;
     modal.dataset.ready = '1';
 
-    const quoteEl = modal.querySelector<HTMLElement>('[data-review-modal-quote]');
-    const nameEl = modal.querySelector<HTMLElement>('[data-review-modal-name]');
-    const detailEl = modal.querySelector<HTMLElement>('[data-review-modal-detail]');
-    const avatarEl = modal.querySelector<HTMLImageElement>('[data-review-modal-avatar]');
-    const avatarFallback = modal.querySelector<HTMLElement>('[data-review-modal-avatar-fallback]');
     const closeBtn = modal.querySelector<HTMLElement>('[data-review-close]');
     const backdrop = modal.querySelector<HTMLElement>('[data-review-backdrop]');
 
@@ -342,45 +384,6 @@ const nextLabel = 'Siguiente';
       if (typeof modal.close === 'function') modal.close();
       else modal.removeAttribute('open');
     };
-
-    const open = (trigger: HTMLElement) => {
-      const quote = trigger.dataset.reviewQuote || '';
-      const name = trigger.dataset.reviewName || '';
-      const detail = trigger.dataset.reviewDetail || '';
-      const avatar = trigger.dataset.reviewAvatar || '';
-
-      if (quoteEl) quoteEl.textContent = quote;
-      if (nameEl) nameEl.textContent = name;
-      if (detailEl) {
-        detailEl.textContent = detail;
-        detailEl.classList.toggle('hidden', !detail);
-      }
-      if (avatarEl && avatarFallback) {
-        if (avatar) {
-          avatarEl.src = avatar;
-          avatarEl.alt = name;
-          avatarEl.classList.remove('hidden');
-          avatarFallback.classList.add('hidden');
-        } else {
-          avatarEl.removeAttribute('src');
-          avatarEl.classList.add('hidden');
-          avatarFallback.classList.remove('hidden');
-        }
-      }
-
-      if (typeof modal.showModal === 'function') modal.showModal();
-      else modal.setAttribute('open', '');
-    };
-
-    section.addEventListener('click', (e) => {
-      const trigger = (e.target as HTMLElement | null)?.closest?.('[data-review-trigger]') as
-        | HTMLElement
-        | null;
-      if (!trigger || !section.contains(trigger)) return;
-      // Si el carrusel marcó suppress, el capture ya lo cortó; doble check
-      if (e.defaultPrevented) return;
-      open(trigger);
-    });
 
     closeBtn?.addEventListener('click', close);
     backdrop?.addEventListener('click', close);
