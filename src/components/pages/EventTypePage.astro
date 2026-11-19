@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import { getTranslations } from '../../i18n';
+import { EVENT_TYPE_SLUGS, type EventTypeSlug } from '../../lib/eventTypes';
+import type { PageProps } from '../../types';
+
+interface Props extends PageProps {
+  eventType: EventTypeSlug;
+}
+
+const { lang, currentPath, base, eventType } = Astro.props as Props;
+const t = getTranslations(lang);
+const b = base.endsWith('/') ? base.slice(0, -1) : base;
+
+const labels = {
+  corporativos: t.nav.eventTypes.corporate,
+  celebraciones: t.nav.eventTypes.celebrations,
+  bodas: t.nav.eventTypes.weddings,
+  'experiencias-nuar': t.nav.eventTypes.experiences,
+} as const;
+
+const title = `${labels[eventType]} - Nuar`;
+const description =
+  lang === 'en'
+    ? `Nuar Events — ${labels[eventType]}. Page coming soon.`
+    : `Nuar Events — ${labels[eventType]}. Página en construcción.`;
+
+const eventTypes = EVENT_TYPE_SLUGS.map((slug) => ({
+  label: labels[slug],
+  href: lang === 'en' ? (b ? `${b}/en/eventos/${slug}` : `/en/eventos/${slug}`) : b ? `${b}/eventos/${slug}` : `/eventos/${slug}`,
+}));
+---
+
+<Layout title={title} description={description} lang={lang} currentPath={currentPath}>
+  <Navbar
+    currentPath={currentPath}
+    brandName={t.nav.brandName}
+    home={t.nav.home}
+    projects={t.nav.projects}
+    aboutNuar={t.nav.aboutNuar}
+    upcomingEvents={t.nav.upcomingEvents}
+    contact={t.nav.contact}
+    menuToggle={t.nav.menuToggle}
+    eventTypes={eventTypes}
+    currentLang={lang}
+    base={base}
+  />
+
+  <main class="flex min-h-[70vh] flex-col items-center justify-center bg-stone px-8 pb-16 pt-28 text-center">
+    <p class="font-slogan text-2xl text-bark md:text-3xl">{t.experiences.kicker}</p>
+    <h1 class="mt-4 font-title text-4xl text-bark md:text-5xl">{labels[eventType]}</h1>
+    <p class="mt-6 max-w-md font-body text-base text-bark/80">
+      {
+        lang === 'en'
+          ? 'This page will be available soon.'
+          : 'Esta página estará disponible pronto.'
+      }
+    </p>
+  </main>
+
+  <Footer
+    brandName={t.nav.brandName}
+    sloganLine1={t.footer.sloganLine1}
+    sloganLine2={t.footer.sloganLine2}
+    followUs={t.footer.followUs}
+    privacy={t.footer.privacy}
+    currentLang={lang}
+    base={base}
+  />
+</Layout>

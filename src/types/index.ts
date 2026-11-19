@@ -6,6 +6,11 @@ export interface SectionItem {
   description: string;
 }
 
+export interface NavEventType {
+  label: string;
+  href: string;
+}
+
 export interface NavbarProps {
   brandName?: string;
   home?: string;
@@ -14,9 +19,27 @@ export interface NavbarProps {
   upcomingEvents?: string;
   contact?: string;
   menuToggle?: string;
+  eventTypes?: NavEventType[];
   currentLang?: Lang;
   currentPath?: string;
   base?: string;
+}
+
+export interface ExperienceCardItem {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+}
+
+export interface ExperiencesSectionProps {
+  kicker: string;
+  titleLine1: string;
+  titleLine2: string;
+  paragraphs: string[];
+  ctaLabel: string;
+  hrefAbout: string;
+  items: ExperienceCardItem[];
 }
 
 export interface FooterProps {

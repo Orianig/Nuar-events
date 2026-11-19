@@ -47,6 +47,12 @@ export interface Translations {
     upcomingEvents: string;
     contact: string;
     menuToggle: string;
+    eventTypes: {
+      corporate: string;
+      celebrations: string;
+      weddings: string;
+      experiences: string;
+    };
   };
   hero: {
     slogan: string;
@@ -111,6 +117,19 @@ export interface Translations {
         title: string;
         blocks: AboutStoryBlock[];
       };
+    };
+  };
+  experiences: {
+    kicker: string;
+    titleLine1: string;
+    titleLine2: string;
+    paragraphs: string[];
+    ctaLabel: string;
+    cards: {
+      corporate: { title: string; description: string };
+      celebrations: { title: string; description: string };
+      weddings: { title: string; description: string };
+      experiences: { title: string; description: string };
     };
   };
   sectionOne: {

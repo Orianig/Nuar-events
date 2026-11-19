@@ -1,6 +1,8 @@
 ---
 import type { NavbarProps } from '../../types';
 import LangSwitcher from './LangSwitcher.astro';
+import { getTranslations } from '../../i18n';
+import { EVENT_TYPE_SLUGS, eventTypeHref } from '../../lib/eventTypes';
 
 const {
   brandName,
@@ -10,15 +12,32 @@ const {
   upcomingEvents,
   contact,
   menuToggle,
+  eventTypes,
   currentLang = 'es',
   currentPath = '/',
   base = '',
 } = Astro.props as NavbarProps;
+
+const t = getTranslations(currentLang);
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
 const isSpanish = currentLang === 'es';
 const hrefHome = isSpanish ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
 const hrefAboutNuar = isSpanish ? (b ? `${b}/about-nuar` : '/about-nuar') : (b ? `${b}/en/about-nuar` : '/en/about-nuar');
 const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+
+const labelBySlug = {
+  corporativos: t.nav.eventTypes.corporate,
+  celebraciones: t.nav.eventTypes.celebrations,
+  bodas: t.nav.eventTypes.weddings,
+  'experiencias-nuar': t.nav.eventTypes.experiences,
+} as const;
+
+const resolvedEventTypes =
+  eventTypes ??
+  EVENT_TYPE_SLUGS.map((slug) => ({
+    label: labelBySlug[slug],
+    href: eventTypeHref(slug, currentLang, base),
+  }));
 
 function normalizePath(path: string): string {
   if (!path) return '/';
@@ -31,9 +50,14 @@ const current = normalizePath(currentPath);
 const homePath = normalizePath(hrefHome);
 const aboutNuarPath = normalizePath(hrefAboutNuar);
 const contactPath = normalizePath(hrefContact);
+const eventosRoot = isSpanish ? (b ? `${b}/eventos` : '/eventos') : b ? `${b}/en/eventos` : '/en/eventos';
 
 const isHomeActive = current === homePath;
-const isEventsActive = current === aboutNuarPath || current.startsWith(`${aboutNuarPath}/`);
+const isEventsActive =
+  current === aboutNuarPath ||
+  current.startsWith(`${aboutNuarPath}/`) ||
+  current === normalizePath(eventosRoot) ||
+  current.startsWith(`${normalizePath(eventosRoot)}/`);
 const isContactActive = current === contactPath || current.startsWith(`${contactPath}/`);
 
 const disabledNavClass =
@@ -71,7 +95,7 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
           >
             {home}
           </a>
-          <div class="relative group events-dropdown">
+          <div class="relative events-dropdown">
             <button
               type="button"
               class:list={[
@@ -86,13 +110,37 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="events-menu hidden absolute left-1/2 top-full z-20 mt-2 w-48 -translate-x-1/2 rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
+            <div class="events-menu hidden absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
               <a href={hrefAboutNuar} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
                 {aboutNuar}
               </a>
-              <span class={disabledNavClass} aria-disabled="true">
-                {projects}
-              </span>
+
+              <div class="events-types-dropdown relative">
+                <button
+                  type="button"
+                  class="events-types-trigger flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-bark hover:bg-bark/10 transition-colors cursor-pointer"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <span>{projects}</span>
+                  <svg class="events-types-chevron h-3.5 w-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+                <div class="events-types-menu absolute left-full top-0 z-30 ml-1 hidden w-56 rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
+                  {
+                    resolvedEventTypes.map((item) => (
+                      <a
+                        href={item.href}
+                        class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors"
+                      >
+                        {item.label}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+
               <span class={disabledNavClass} aria-disabled="true">
                 {upcomingEvents}
               </span>
@@ -132,7 +180,7 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
           >
             {home}
           </a>
-          <div class="w-full max-w-[220px]">
+          <div class="w-full max-w-[260px]">
             <button
               id="mobile-events-button"
               type="button"
@@ -151,9 +199,28 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
               <a href={hrefAboutNuar} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
                 {aboutNuar}
               </a>
-              <span class={disabledNavClassMobile} aria-disabled="true">
+
+              <button
+                id="mobile-event-types-button"
+                type="button"
+                class="inline-flex items-center justify-center gap-1 text-bark/85 text-sm hover:opacity-80 transition-opacity cursor-pointer"
+                aria-expanded="false"
+              >
                 {projects}
-              </span>
+                <svg id="mobile-event-types-chevron" class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id="mobile-event-types-menu" class="hidden w-full flex-col items-center gap-2.5">
+                {
+                  resolvedEventTypes.map((item) => (
+                    <a href={item.href} class="text-bark/75 hover:opacity-80 text-sm transition-opacity">
+                      {item.label}
+                    </a>
+                  ))
+                }
+              </div>
+
               <span class={disabledNavClassMobile} aria-disabled="true">
                 {upcomingEvents}
               </span>
@@ -182,9 +249,35 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
   const eventsTrigger = document.querySelector('.events-trigger') as HTMLButtonElement | null;
   const eventsMenu = document.querySelector('.events-menu') as HTMLElement | null;
   const eventsChevron = document.querySelector('.events-chevron') as SVGElement | null;
+  const eventsTypesTrigger = document.querySelector('.events-types-trigger') as HTMLButtonElement | null;
+  const eventsTypesMenu = document.querySelector('.events-types-menu') as HTMLElement | null;
+  const eventsTypesChevron = document.querySelector('.events-types-chevron') as SVGElement | null;
   const mobileEventsButton = document.getElementById('mobile-events-button') as HTMLButtonElement | null;
   const mobileEventsMenu = document.getElementById('mobile-events-menu');
   const mobileEventsChevron = document.getElementById('mobile-events-chevron');
+  const mobileEventTypesButton = document.getElementById('mobile-event-types-button') as HTMLButtonElement | null;
+  const mobileEventTypesMenu = document.getElementById('mobile-event-types-menu');
+  const mobileEventTypesChevron = document.getElementById('mobile-event-types-chevron');
+
+  function closeDesktopEventsMenu() {
+    eventsMenu?.classList.add('hidden');
+    eventsTrigger?.setAttribute('aria-expanded', 'false');
+    eventsChevron?.classList.remove('rotate-180');
+    eventsTypesMenu?.classList.add('hidden');
+    eventsTypesTrigger?.setAttribute('aria-expanded', 'false');
+  }
+
+  function closeMobileMenus() {
+    mobileMenu?.classList.add('hidden');
+    mobileEventsMenu?.classList.add('hidden');
+    mobileEventsMenu?.classList.remove('flex');
+    mobileEventsButton?.setAttribute('aria-expanded', 'false');
+    mobileEventsChevron?.classList.remove('rotate-180');
+    mobileEventTypesMenu?.classList.add('hidden');
+    mobileEventTypesMenu?.classList.remove('flex');
+    mobileEventTypesButton?.setAttribute('aria-expanded', 'false');
+    mobileEventTypesChevron?.classList.remove('rotate-180');
+  }
 
   function updateNavOnScroll() {
     if (window.scrollY > 20) {
@@ -203,18 +296,27 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
 
   eventsTrigger?.addEventListener('click', (e) => {
     e.preventDefault();
-    const isHidden = eventsMenu?.classList.toggle('hidden');
-    eventsTrigger.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
-    eventsChevron?.classList.toggle('rotate-180', !isHidden);
+    e.stopPropagation();
+    const willOpen = eventsMenu?.classList.contains('hidden');
+    if (willOpen) {
+      eventsMenu?.classList.remove('hidden');
+      eventsTrigger.setAttribute('aria-expanded', 'true');
+      eventsChevron?.classList.add('rotate-180');
+    } else {
+      closeDesktopEventsMenu();
+    }
+  });
+
+  eventsTypesTrigger?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isHidden = eventsTypesMenu?.classList.toggle('hidden');
+    eventsTypesTrigger.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
   });
 
   document.addEventListener('click', (e) => {
-    const inside = (e.target as Node)?.parentElement?.closest('.events-dropdown');
-    if (!inside) {
-      eventsMenu?.classList.add('hidden');
-      eventsTrigger?.setAttribute('aria-expanded', 'false');
-      eventsChevron?.classList.remove('rotate-180');
-    }
+    const inside = (e.target as Node | null)?.parentElement?.closest('.events-dropdown');
+    if (!inside) closeDesktopEventsMenu();
   });
 
   mobileEventsButton?.addEventListener('click', () => {
@@ -222,6 +324,19 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
     mobileEventsMenu?.classList.toggle('flex', !isHidden);
     mobileEventsButton.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
     mobileEventsChevron?.classList.toggle('rotate-180', !isHidden);
+    if (isHidden) {
+      mobileEventTypesMenu?.classList.add('hidden');
+      mobileEventTypesMenu?.classList.remove('flex');
+      mobileEventTypesButton?.setAttribute('aria-expanded', 'false');
+      mobileEventTypesChevron?.classList.remove('rotate-180');
+    }
+  });
+
+  mobileEventTypesButton?.addEventListener('click', () => {
+    const isHidden = mobileEventTypesMenu?.classList.toggle('hidden');
+    mobileEventTypesMenu?.classList.toggle('flex', !isHidden);
+    mobileEventTypesButton.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+    mobileEventTypesChevron?.classList.toggle('rotate-180', !isHidden);
   });
 
   document.addEventListener('click', (e) => {
@@ -230,11 +345,7 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
     const clickedInsideMenu = mobileMenu.contains(target);
     const clickedToggleButton = menuButton.contains(target);
     if (window.innerWidth < 768 && !clickedInsideMenu && !clickedToggleButton) {
-      mobileMenu.classList.add('hidden');
-      mobileEventsMenu?.classList.add('hidden');
-      mobileEventsMenu?.classList.remove('flex');
-      mobileEventsButton?.setAttribute('aria-expanded', 'false');
-      mobileEventsChevron?.classList.remove('rotate-180');
+      closeMobileMenus();
     }
   });
 </script>

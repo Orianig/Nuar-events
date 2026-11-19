@@ -3,11 +3,12 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
 import Hero from '../home/Hero.astro';
-import SectionOne from '../home/SectionOne.astro';
+import ExperiencesSection from '../home/ExperiencesSection.astro';
 import SectionTwo from '../home/SectionTwo.astro';
 import SectionThree from '../home/SectionThree.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
 import { getTranslations } from '../../i18n';
+import { EVENT_TYPE_IMAGES, eventTypeHref } from '../../lib/eventTypes';
 import type { PageProps } from '../../types';
 
 const { lang, currentPath, base } = Astro.props as PageProps;
@@ -23,6 +24,33 @@ const hrefAboutNuar = isSpanish
   : b
     ? `${b}/en/about-nuar`
     : '/en/about-nuar';
+
+const experienceItems = [
+  {
+    title: t.experiences.cards.corporate.title,
+    description: t.experiences.cards.corporate.description,
+    image: EVENT_TYPE_IMAGES.corporativos,
+    href: eventTypeHref('corporativos', lang, base),
+  },
+  {
+    title: t.experiences.cards.celebrations.title,
+    description: t.experiences.cards.celebrations.description,
+    image: EVENT_TYPE_IMAGES.celebraciones,
+    href: eventTypeHref('celebraciones', lang, base),
+  },
+  {
+    title: t.experiences.cards.weddings.title,
+    description: t.experiences.cards.weddings.description,
+    image: EVENT_TYPE_IMAGES.bodas,
+    href: eventTypeHref('bodas', lang, base),
+  },
+  {
+    title: t.experiences.cards.experiences.title,
+    description: t.experiences.cards.experiences.description,
+    image: EVENT_TYPE_IMAGES['experiencias-nuar'],
+    href: eventTypeHref('experiencias-nuar', lang, base),
+  },
+];
 ---
 
 <Layout title={t.pages.home.title} description={t.hero.slogan} lang={lang} currentPath={currentPath}>
@@ -51,12 +79,14 @@ const hrefAboutNuar = isSpanish
     backgroundImage={`${assetBase}home-bg-header.jpg`}
   />
 
-  <SectionOne
-    image1={t.sectionOne.image1}
-    image2={t.sectionOne.image2}
-    title={t.sectionOne.title}
-    paragraph={t.sectionOne.paragraph}
-    bullets={t.sectionOne.bullets}
+  <ExperiencesSection
+    kicker={t.experiences.kicker}
+    titleLine1={t.experiences.titleLine1}
+    titleLine2={t.experiences.titleLine2}
+    paragraphs={[...t.experiences.paragraphs]}
+    ctaLabel={t.experiences.ctaLabel}
+    hrefAbout={hrefAboutNuar}
+    items={experienceItems}
   />
 
   <SectionTwo sectionTitle={t.sectionTwo.sectionTitle || undefined} items={[...t.sectionTwo.items]} />

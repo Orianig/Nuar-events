@@ -8,6 +8,12 @@ export const es: Translations = {
     upcomingEvents: 'Proximos Eventos',
     contact: 'Contacto',
     menuToggle: 'Abrir menú',
+    eventTypes: {
+      corporate: 'Eventos corporativos',
+      celebrations: 'Celebraciones privadas',
+      weddings: 'Bodas',
+      experiences: 'Experiencias NUAR',
+    },
   },
   hero: {
     slogan:
@@ -191,6 +197,38 @@ export const es: Translations = {
           },
         ] as any,
       }
+    },
+  },
+  experiences: {
+    kicker: 'Experiencias que conectan',
+    titleLine1: 'Cada evento es una historia.',
+    titleLine2: 'Cada historia, inolvidable.',
+    paragraphs: [
+      'Organizamos eventos que parten de las personas y de aquello que quieren celebrar. Diseñamos cada experiencia desde cero, buscando una identidad propia y cuidando cómo conviven el espacio, la estética, los tiempos y cada uno de los detalles.',
+      'Para nosotras el entorno también forma parte de la historia, aprovechamos lo que hace especial a cada lugar para crear celebraciones que se sientan naturales, personales y, sobre todo, vuestras.',
+    ],
+    ctaLabel: 'Conócenos',
+    cards: {
+      corporate: {
+        title: 'Eventos Corporativos',
+        description:
+          'Encuentros de marca y de equipo pensados para generar conexión más allá del evento.',
+      },
+      celebrations: {
+        title: 'Celebraciones',
+        description:
+          'Cumpleaños, bautizos, graduaciones y cualquier ocasión que quieras celebrar.',
+      },
+      weddings: {
+        title: 'Bodas',
+        description:
+          'Diseñadas alrededor de vuestra historia, vuestra forma de celebrar y vuestro ritmo.',
+      },
+      experiences: {
+        title: 'Experiencias NUAR',
+        description:
+          'Encuentros creados por nosotras para descubrir, compartir y conectar con las personas.',
+      },
     },
   },
   sectionOne: {

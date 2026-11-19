@@ -1,0 +1,13 @@
+---
+import EventTypePage from '../../components/pages/EventTypePage.astro';
+import { EVENT_TYPE_SLUGS, type EventTypeSlug } from '../../lib/eventTypes';
+
+export function getStaticPaths() {
+  return EVENT_TYPE_SLUGS.map((type) => ({ params: { type } }));
+}
+
+const base = import.meta.env.BASE_URL;
+const type = Astro.params.type as EventTypeSlug;
+---
+
+<EventTypePage lang="es" currentPath={Astro.url.pathname} base={base} eventType={type} />

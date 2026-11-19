@@ -8,6 +8,12 @@ export const en: Translations = {
     upcomingEvents: 'Upcoming Events',
     contact: 'Contact',
     menuToggle: 'Open menu',
+    eventTypes: {
+      corporate: 'Corporate events',
+      celebrations: 'Private celebrations',
+      weddings: 'Weddings',
+      experiences: 'NUAR experiences',
+    },
   },
   hero: {
     slogan:
@@ -190,6 +196,38 @@ export const en: Translations = {
             ],
           },
         ] as any,
+      },
+    },
+  },
+  experiences: {
+    kicker: 'Experiences that connect',
+    titleLine1: 'Every event is a story.',
+    titleLine2: 'Every story, unforgettable.',
+    paragraphs: [
+      'We organise events that start from people and what they want to celebrate. We design every experience from scratch, looking for its own identity and carefully balancing space, aesthetics, timing and every detail.',
+      'For us the setting is also part of the story — we make the most of what makes each place special to create celebrations that feel natural, personal and, above all, yours.',
+    ],
+    ctaLabel: 'About us',
+    cards: {
+      corporate: {
+        title: 'Corporate Events',
+        description:
+          'Brand and team gatherings designed to create connection beyond the event.',
+      },
+      celebrations: {
+        title: 'Celebrations',
+        description:
+          'Birthdays, baptisms, graduations and any occasion you want to celebrate.',
+      },
+      weddings: {
+        title: 'Weddings',
+        description:
+          'Designed around your story, your way of celebrating and your rhythm.',
+      },
+      experiences: {
+        title: 'NUAR Experiences',
+        description:
+          'Gatherings created by us to discover, share and connect with people.',
       },
     },
   },
