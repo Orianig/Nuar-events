@@ -41,7 +41,7 @@ const focusRing =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive';
 
 const baseClass = [
-  'inline-flex items-center justify-center gap-2.5 rounded-[6px] border-[0.8px] border-transparent',
+  'inline-flex items-center justify-center gap-2.5 rounded-[6px] border-solid border-[0.8px]',
   'font-body text-sm font-bold leading-none no-underline transition-colors',
   isLoading ? 'cursor-wait' : isDisabled ? 'cursor-not-allowed' : 'cursor-pointer',
   focusRing,
@@ -76,7 +76,7 @@ const variantClass = (() => {
       return 'border-olive-light bg-btn-secondary text-olive-light';
     }
     if (isDisabled) {
-      return 'border-text-disabled bg-disabled text-text-disabled';
+      return 'border-text-disabled bg-transparent text-text-disabled';
     }
     if (isActivePreview) {
       return 'border-olive-light bg-stone-light text-olive-light';
@@ -98,9 +98,9 @@ const variantClass = (() => {
   }
 
   if (isDisabled) {
-    return 'border-0 bg-transparent text-text-disabled';
+    return 'border-transparent bg-transparent text-text-disabled';
   }
-  return 'group border-0 bg-transparent px-4 py-2 text-sand-dark hover:text-olive-dark';
+  return 'group border-transparent bg-transparent px-4 py-2 text-sand-dark hover:text-olive-dark';
 })();
 
 const Tag = href && !isInactive ? 'a' : 'button';

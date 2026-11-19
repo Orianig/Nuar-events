@@ -19,14 +19,14 @@ const isActive = active || preview === 'active';
 const isDisabled = disabled || preview === 'disabled';
 
 const classes = [
-  'inline-flex min-h-11 items-center justify-center rounded-[6px] border-[0.8px] px-4 py-2',
+  'inline-flex min-h-11 items-center justify-center rounded-[6px] border-solid border-[0.8px] px-4 py-2',
   'font-body text-sm font-bold leading-none transition-colors',
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive',
   isDisabled
-    ? 'cursor-not-allowed border-text-disabled bg-disabled text-text-disabled'
+    ? 'cursor-not-allowed border-transparent bg-disabled text-text-disabled'
     : isActive
-      ? 'cursor-pointer border-transparent bg-sand-light text-olive-light'
-      : 'cursor-pointer border-olive-light bg-stone-light/50 text-olive-light hover:bg-stone-light',
+      ? 'cursor-pointer border-olive-light bg-stone-light text-olive-light hover:bg-stone'
+      : 'cursor-pointer border-transparent bg-stone-light/50 text-olive-light hover:bg-stone-light/70',
   className,
 ]
   .filter(Boolean)
