@@ -32,12 +32,12 @@ const ariaLabel = label ?? icon.label;
 const Tag = href && !isDisabled ? 'a' : 'button';
 
 const classes = [
-  'relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full p-0 shadow-none transition-colors',
+  'relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full p-0 shadow-none transition-[color,filter,transform]',
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive',
   isDisabled
     ? 'cursor-not-allowed border-0 bg-disabled text-text-disabled'
     : isSocial
-      ? 'cursor-pointer border-0 bg-[url(/ui/redes-bg.png)] bg-cover bg-center text-stone-light'
+      ? 'cursor-pointer border-0 bg-[url(/ui/redes-bg.png)] bg-cover bg-center text-stone-light hover:brightness-110 hover:scale-[1.04]'
       : isFilled
         ? 'cursor-pointer border-[0.8px] border-olive-dark bg-olive-dark text-stone-light'
         : 'cursor-pointer border-[0.8px] border-olive-light bg-transparent text-olive-light hover:border-olive-dark hover:bg-stone-light/35 hover:text-olive-dark',

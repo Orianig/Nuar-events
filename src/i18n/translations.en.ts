@@ -15,6 +15,10 @@ export const en: Translations = {
   },
   footer: {
     contact: 'Contact',
+    sloganLine1: 'Creating moments, because in',
+    sloganLine2: 'the end, life is measured by them',
+    followUs: 'FOLLOW US',
+    privacy: 'Privacy policy',
   },
   pages: {
     home: {

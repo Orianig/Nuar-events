@@ -53,6 +53,10 @@ export interface Translations {
   };
   footer: {
     contact: string;
+    sloganLine1: string;
+    sloganLine2: string;
+    followUs: string;
+    privacy: string;
   };
   pages: {
     home: { title: string };

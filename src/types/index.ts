@@ -20,6 +20,11 @@ export interface NavbarProps {
 }
 
 export interface FooterProps {
+  brandName?: string;
+  sloganLine1?: string;
+  sloganLine2?: string;
+  followUs?: string;
+  privacy?: string;
   contactText?: string;
   currentLang?: Lang;
   base?: string;
