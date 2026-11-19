@@ -8,9 +8,11 @@ import ValuesSection from '../home/ValuesSection.astro';
 import SectionThree from '../home/SectionThree.astro';
 import ProcessSection from '../home/ProcessSection.astro';
 import MomentsSection from '../home/MomentsSection.astro';
+import ReviewsSection from '../home/ReviewsSection.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
 import { getTranslations } from '../../i18n';
 import { EVENT_TYPE_IMAGES, eventTypeHref } from '../../lib/eventTypes';
+import { reviews } from '../../data/reviews';
 import type { PageProps } from '../../types';
 
 const { lang, currentPath, base } = Astro.props as PageProps;
@@ -152,6 +154,8 @@ const experienceItems = [
       image: momentImages[i],
     }))}
   />
+
+  <ReviewsSection kicker={t.reviews.kicker} title={t.reviews.title} items={reviews} />
 
   <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />
 </Layout>

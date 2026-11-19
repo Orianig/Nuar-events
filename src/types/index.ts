@@ -83,6 +83,20 @@ export interface MomentsSectionProps {
   items: MomentCardItem[];
 }
 
+export interface ReviewCardItem {
+  quote: string;
+  name: string;
+  detail?: string;
+  avatar?: string;
+  rating?: number;
+}
+
+export interface ReviewsSectionProps {
+  kicker: string;
+  title: string;
+  items: ReviewCardItem[];
+}
+
 export interface FooterProps {
   brandName?: string;
   sloganLine1?: string;

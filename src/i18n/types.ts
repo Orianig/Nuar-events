@@ -162,6 +162,10 @@ export interface Translations {
       location: string;
     }[];
   };
+  reviews: {
+    kicker: string;
+    title: string;
+  };
   sectionOne: {
     image1: string;
     image2: string;

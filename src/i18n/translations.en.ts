@@ -285,7 +285,7 @@ export const en: Translations = {
     cards: [
       {
         event: 'Master’s graduation',
-        attendees: '63 Guests',
+        attendees: '65 Guests',
         location: 'Pelikano Beach Club',
       },
       {
@@ -300,10 +300,14 @@ export const en: Translations = {
       },
       {
         event: 'Hen party',
-        attendees: '15 Guests',
-        location: 'Parque del Turia',
+        attendees: '27 Guests',
+        location: 'Caseta del Perellonet',
       },
     ],
+  },
+  reviews: {
+    kicker: 'What they say about NUAR',
+    title: 'Words that inspire us.',
   },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
