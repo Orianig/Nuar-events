@@ -231,6 +231,28 @@ export const es: Translations = {
       },
     },
   },
+  values: {
+    kicker: 'Nuestros Valores',
+    titleLine1: 'Lo que nos define.',
+    titleLine2: 'Lo que nos guía.',
+    items: {
+      identity: {
+        title: 'Un evento, una identidad.',
+        description:
+          'No partimos de fórmulas. Diseñamos cada experiencia alrededor de las personas, su historia y aquello que quieren celebrar.',
+      },
+      environment: {
+        title: 'El entorno forma parte.',
+        description:
+          'No elegimos un lugar solo porque sea bonito. Buscamos espacios que tengan sentido y los integramos en la experiencia.',
+      },
+      connection: {
+        title: 'La conexión es la esencia.',
+        description:
+          'Diseñamos momentos que invitan a compartir, conversar y encontrarse. Porque un evento cobra sentido cuando algo sucede entre las personas.',
+      },
+    },
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',

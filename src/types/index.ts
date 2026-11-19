@@ -42,6 +42,19 @@ export interface ExperiencesSectionProps {
   items: ExperienceCardItem[];
 }
 
+export interface ValueItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface ValuesSectionProps {
+  kicker: string;
+  titleLine1: string;
+  titleLine2: string;
+  items: ValueItem[];
+}
+
 export interface FooterProps {
   brandName?: string;
   sloganLine1?: string;

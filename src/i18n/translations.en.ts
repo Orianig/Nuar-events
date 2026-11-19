@@ -231,6 +231,28 @@ export const en: Translations = {
       },
     },
   },
+  values: {
+    kicker: 'Our Values',
+    titleLine1: 'What defines us.',
+    titleLine2: 'What guides us.',
+    items: {
+      identity: {
+        title: 'One event, one identity.',
+        description:
+          'We don’t start from formulas. We design every experience around people, their story and what they want to celebrate.',
+      },
+      environment: {
+        title: 'The setting is part of it.',
+        description:
+          'We don’t choose a place just because it’s beautiful. We look for spaces that make sense and weave them into the experience.',
+      },
+      connection: {
+        title: 'Connection is the essence.',
+        description:
+          'We design moments that invite sharing, conversation and meeting. Because an event comes alive when something happens between people.',
+      },
+    },
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',

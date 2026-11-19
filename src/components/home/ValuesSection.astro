@@ -1,0 +1,75 @@
+---
+import type { ValuesSectionProps } from '../../types';
+
+const {
+  kicker,
+  titleLine1,
+  titleLine2,
+  items = [],
+} = Astro.props as ValuesSectionProps;
+---
+
+<section class="bg-bark py-16 text-cream-light md:py-20">
+  <div class="page-gutter">
+    <div class="page-shell">
+      <!--
+        Desktop (sm+): 3 cols fill, gap 50, líneas verticales centradas.
+        Stacked: separadores horizontales; texto compacto salvo móvil (<430px) a full.
+        Tipografía bloques: título 18 / descripción 16 (para no competir con el H2).
+      -->
+      <div
+        class="flex flex-col gap-10 min-[1366px]:flex-row min-[1366px]:items-start min-[1366px]:justify-between min-[1366px]:gap-10"
+      >
+        <div class="flex w-full flex-col gap-3 min-[1366px]:max-w-[280px] min-[1366px]:shrink-0 min-[1440px]:max-w-[300px]">
+          <p class="font-slogan text-xl leading-none text-cream-light md:text-2xl">{kicker}</p>
+          <h2 class="font-body text-2xl font-normal leading-[1.2] text-cream-light md:text-[32px]">
+            {titleLine1}
+            <br />
+            {titleLine2}
+          </h2>
+        </div>
+
+        <div
+          class="flex w-full flex-col gap-8 sm:flex-row sm:items-start sm:gap-[50px] min-[1366px]:min-w-0 min-[1366px]:flex-1"
+        >
+          {
+            items.map((item, i) => (
+              <article
+                class:list={[
+                  'relative mx-auto flex w-full max-w-md flex-col gap-5 max-[429px]:max-w-full sm:mx-0 sm:max-w-none sm:flex-1 sm:min-w-0',
+                  i > 0 && 'border-t border-cream-light/25 pt-8 sm:border-t-0 sm:pt-0',
+                ]}
+              >
+                {
+                  i > 0 && (
+                    <span
+                      aria-hidden="true"
+                      class="pointer-events-none absolute top-0 bottom-0 hidden w-px bg-cream-light/25 sm:block sm:-left-[25px]"
+                    />
+                  )
+                }
+                <div class="flex w-full justify-center">
+                  <img
+                    src={item.icon}
+                    alt=""
+                    width="48"
+                    height="48"
+                    class="values-icon h-10 w-10 object-contain md:h-12 md:w-12"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <h3 class="font-body text-center text-[18px] font-bold leading-snug text-cream-light">
+                  {item.title}
+                </h3>
+                <p class="font-body text-left text-base leading-relaxed text-cream-light/85 sm:text-left">
+                  {item.description}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

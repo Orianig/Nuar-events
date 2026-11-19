@@ -132,6 +132,16 @@ export interface Translations {
       experiences: { title: string; description: string };
     };
   };
+  values: {
+    kicker: string;
+    titleLine1: string;
+    titleLine2: string;
+    items: {
+      identity: { title: string; description: string };
+      environment: { title: string; description: string };
+      connection: { title: string; description: string };
+    };
+  };
   sectionOne: {
     image1: string;
     image2: string;

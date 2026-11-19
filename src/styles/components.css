@@ -73,6 +73,14 @@
   @apply border-stone bg-stone-light/95 shadow-sm;
 }
 
+/* Iconos de valores: cream-light (#E8DFCE) + trazo apenas más marcado */
+.values-icon {
+  filter:
+    brightness(0) invert(0.92) sepia(0.18) saturate(0.45) hue-rotate(5deg) opacity(0.95)
+    drop-shadow(0.2px 0 0 rgb(232 223 206 / 45%))
+    drop-shadow(-0.2px 0 0 rgb(232 223 206 / 45%));
+}
+
 /* --- Hero: bordes suaves hacia el bleed #16202C --- */
 .hero-bg-edge {
   position: absolute;

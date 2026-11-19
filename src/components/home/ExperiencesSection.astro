@@ -13,41 +13,37 @@ const {
 } = Astro.props as ExperiencesSectionProps;
 ---
 
-<section class="bg-btn-secondary py-10">
+<section class="bg-btn-secondary py-10 text-olive">
   <div class="page-gutter">
     <div class="page-shell">
       <!--
         Responsive (contenido dentro de 1440):
-        - ≥1366: texto izq + 4 cards a la derecha (siguiente tamaño típico tras 1440)
-        - ≥1440: más aire (gaps y texto un poco más anchos)
-        - md–1365: texto arriba (ancho completo) + 4 cards en fila
-        - 400–767: texto arriba + grid 2×2
+        - ≥1366: texto izq + 4 cards a la derecha
+        - md–1365: texto arriba + 4 cards en fila
+        - 400–767: 2×2
         - <400: 1 card por fila
       -->
       <div class="flex flex-col gap-3 min-[1366px]:gap-3.5">
-        <p class="font-slogan text-xl leading-none text-bark md:text-2xl">{kicker}</p>
+        <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{kicker}</p>
 
-        <div
-          class="flex flex-col gap-8 md:gap-10 min-[1366px]:flex-row min-[1366px]:items-start min-[1366px]:justify-between min-[1366px]:gap-8 min-[1440px]:gap-10"
-        >
+        <div class="flex flex-col gap-8 md:gap-8 min-[1366px]:flex-row min-[1366px]:items-start min-[1366px]:justify-between min-[1366px]:gap-8">
           <div
-            class="flex w-full flex-col items-start gap-3 min-[1366px]:max-w-[420px] min-[1366px]:shrink-0 min-[1366px]:gap-3.5 min-[1440px]:max-w-[480px]"
+            class="flex w-full max-w-full min-w-0 flex-col items-start gap-3 min-[1000px]:max-w-[72%] min-[1366px]:max-w-none min-[1366px]:flex-1 min-[1366px]:gap-3.5"
           >
-            <h2 class="font-title text-[1.75rem] leading-[1.2] text-bark md:text-[2rem] min-[1366px]:text-[2.05rem] min-[1440px]:text-[2.15rem]">
-              {titleLine1}
-              <br />
-              {titleLine2}
+            <h2 class="font-body text-2xl font-normal leading-[1.25] text-olive md:text-[32px]">
+              <span class="block min-[1366px]:whitespace-nowrap">{titleLine1}</span>
+              <span class="block min-[1366px]:whitespace-nowrap">{titleLine2}</span>
             </h2>
-            <div class="flex max-w-3xl flex-col gap-3 font-body text-sm leading-relaxed text-bark/90 min-[1366px]:max-w-none">
+            <div class="flex w-full flex-col gap-3 font-body text-base leading-relaxed text-olive/90">
               {paragraphs.map((p) => <p>{p}</p>)}
             </div>
-            <Button href={hrefAbout} variant="text" size="md" class="!mt-1 !px-0 !text-bark">
+            <Button href={hrefAbout} variant="text" size="md" class="!mt-1 !px-0 !text-olive">
               {ctaLabel}
             </Button>
           </div>
 
           <div
-            class="grid w-full grid-cols-2 gap-x-4 gap-y-6 max-[399px]:grid-cols-1 md:grid-cols-4 md:gap-x-6 min-[1366px]:flex min-[1366px]:w-auto min-[1366px]:shrink-0 min-[1366px]:gap-8 min-[1440px]:gap-10"
+            class="grid w-full grid-cols-2 gap-x-3 gap-y-6 max-[399px]:grid-cols-1 md:grid-cols-4 md:gap-x-4 min-[1366px]:ml-auto min-[1366px]:flex min-[1366px]:w-auto min-[1366px]:shrink-0 min-[1366px]:gap-4 min-[1440px]:gap-5"
           >
             {
               items.map((item) => (
@@ -67,8 +63,8 @@ const {
                     />
                   </div>
                   <div class="flex flex-col gap-2.5">
-                    <h3 class="font-body text-base font-bold leading-snug text-bark">{item.title}</h3>
-                    <p class="font-body text-xs leading-relaxed text-bark/80">{item.description}</p>
+                    <h3 class="font-body text-base font-bold leading-snug text-olive">{item.title}</h3>
+                    <p class="font-body text-sm leading-relaxed text-olive/80">{item.description}</p>
                   </div>
                 </a>
               ))

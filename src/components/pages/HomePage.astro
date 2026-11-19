@@ -4,7 +4,7 @@ import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
 import Hero from '../home/Hero.astro';
 import ExperiencesSection from '../home/ExperiencesSection.astro';
-import SectionTwo from '../home/SectionTwo.astro';
+import ValuesSection from '../home/ValuesSection.astro';
 import SectionThree from '../home/SectionThree.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
 import { getTranslations } from '../../i18n';
@@ -89,7 +89,28 @@ const experienceItems = [
     items={experienceItems}
   />
 
-  <SectionTwo sectionTitle={t.sectionTwo.sectionTitle || undefined} items={[...t.sectionTwo.items]} />
+  <ValuesSection
+    kicker={t.values.kicker}
+    titleLine1={t.values.titleLine1}
+    titleLine2={t.values.titleLine2}
+    items={[
+      {
+        icon: '/icons/idea.png',
+        title: t.values.items.identity.title,
+        description: t.values.items.identity.description,
+      },
+      {
+        icon: '/icons/leaf.png',
+        title: t.values.items.environment.title,
+        description: t.values.items.environment.description,
+      },
+      {
+        icon: '/icons/heart.png',
+        title: t.values.items.connection.title,
+        description: t.values.items.connection.description,
+      },
+    ]}
+  />
 
   <SectionThree
     image={t.sectionThree.image}
