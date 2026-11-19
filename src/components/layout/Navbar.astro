@@ -41,14 +41,19 @@ const disabledNavClass =
 const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text-sm';
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-45 bg-stone/55 border-b border-bark/20 transition-all duration-300">
-  <div class="container mx-auto px-10 py-4">
-    <div class="flex items-center justify-between">
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-45 min-h-[65px] border-b-[0.5px] border-stone bg-stone-light/58 transition-all duration-300"
+>
+  <div class="container mx-auto flex min-h-[65px] items-center px-10 py-2.5">
+    <div class="flex w-full items-center justify-between gap-2.5">
       <a href={hrefHome} class="inline-flex items-center hover:opacity-80 transition-opacity">
         <img
-          src="/Logo-5.png"
+          src="/NUAR-navbar.svg"
           alt={brandName}
-          class="h-8 w-auto object-contain"
+          width="126"
+          height="38"
+          class="h-[38px] w-auto object-contain"
           loading="eager"
           decoding="async"
         />
