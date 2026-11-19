@@ -52,13 +52,13 @@ const nextLabel = 'Siguiente';
           <div class="mt-8 overflow-visible" data-reviews-carousel>
             <div class="relative">
               <div
-                class="cursor-grab overflow-x-clip overflow-y-visible active:cursor-grabbing touch-pan-y"
+                class="cursor-grab overflow-x-clip overflow-y-visible active:cursor-grabbing touch-pan-y sm:-mx-2 sm:px-2 sm:py-3"
                 data-reviews-viewport
               >
                 <ul class="flex gap-3 will-change-transform sm:gap-5" data-reviews-track>
                   {items.map((item) => (
                     <li
-                      class="w-[85%] shrink-0 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
+                      class="w-[88%] min-w-0 shrink-0 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
                       data-reviews-slide
                     >
                       <ReviewCard
@@ -76,7 +76,7 @@ const nextLabel = 'Siguiente';
               </div>
 
               <div
-                class="pointer-events-none absolute inset-y-0 right-0 w-[18%] bg-gradient-to-l from-[#F5F2EB] via-[#F5F2EB]/70 to-transparent sm:hidden"
+                class="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-[#F5F2EB] to-transparent sm:hidden"
                 data-reviews-edge
                 aria-hidden="true"
               />
