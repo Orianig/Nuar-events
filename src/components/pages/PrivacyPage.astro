@@ -30,7 +30,9 @@ const description = isEn
   />
 
   <main class="bg-stone text-bark">
-    <article class="mx-auto max-w-3xl px-6 pb-20 pt-28 md:px-10 md:pb-28 md:pt-32">
+    <div class="page-gutter">
+    <div class="page-shell pb-20 pt-28 md:pb-28 md:pt-32">
+    <article class="max-w-3xl">
       {
         isEn ? (
           <>
@@ -325,6 +327,8 @@ const description = isEn
         )
       }
     </article>
+    </div>
+    </div>
   </main>
 
   <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />

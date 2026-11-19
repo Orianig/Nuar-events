@@ -26,7 +26,8 @@ const sectionTwo = p.originStory;
     base={base}
   />
   <main class="bg-stone flex flex-col text-base">
-    <div class="w-full flex flex-col md:flex-row gap-6 p-6 md:p-10 pt-[96px] md:pt-[100px]">
+    <div class="page-gutter">
+    <div class="page-shell flex flex-col gap-6 pb-6 pt-[96px] md:flex-row md:pb-10 md:pt-[100px]">
 <div class="w-full md:w-[55%] text-bark md:pr-8">
   <div class="w-full flex flex-col gap-5">
     <div class="flex items-start">
@@ -98,9 +99,12 @@ const sectionTwo = p.originStory;
       decoding="async"
     />
   </div>
-    </div>      
+    </div>
+    </div>
     
-    <div class="flex w-full flex-col gap-10 p-6 md:flex-row md:gap-10 md:p-10 md:pr-14 bg-olive-light/40">
+    <div class="bg-olive-light/40">
+    <div class="page-gutter">
+    <div class="page-shell flex w-full flex-col gap-10 py-6 md:flex-row md:gap-10 md:py-10">
       <div class="w-full md:w-[55%] md:min-w-0 text-bark md:pr-4">
         <div class="relative inline-flex w-fit flex-col overflow-visible px-5 py-3 md:px-16 md:py-4">
           <img
@@ -178,6 +182,8 @@ const sectionTwo = p.originStory;
           decoding="async"
         />
       </div>
+    </div>
+    </div>
     </div>
   </main>
   <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />
