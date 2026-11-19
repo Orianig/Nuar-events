@@ -11,7 +11,16 @@ export const en: Translations = {
   },
   hero: {
     slogan:
-      'Recover the feeling, closeness and emotion, integrating environments where the organic sets the pace.',
+      'Creating moments, because in the end, life is measured by them. We design unique experiences where every detail has intention and every moment creates connection.',
+    titleLines: [
+      'CREATING MOMENTS,',
+      'BECAUSE IN THE END,',
+      'LIFE IS MEASURED BY THEM.',
+    ],
+    subtitle:
+      'We design unique experiences where every detail has intention and every moment creates connection',
+    ctaPrimary: 'Plan your event',
+    ctaSecondary: 'Discover NUAR',
   },
   footer: {
     contact: 'Contact',

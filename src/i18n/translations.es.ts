@@ -11,7 +11,16 @@ export const es: Translations = {
   },
   hero: {
     slogan:
-      'Recuperar el sentimiento, la cercanía y la emoción, integrando entornos donde lo orgánico marca el ritmo.',
+      'Creando momentos, porque al final, la vida se mide en ellos. Diseñamos experiencias únicas donde cada detalle tiene intención y cada momento crea conexión.',
+    titleLines: [
+      'CREANDO MOMENTOS,',
+      'PORQUE AL FINAL,',
+      'LA VIDA SE MIDE EN ELLOS.',
+    ],
+    subtitle:
+      'Diseñamos experiencias únicas donde cada detalle tiene intención y cada momento crea conexión',
+    ctaPrimary: 'Organiza tu evento',
+    ctaSecondary: 'Descubre NUAR',
   },
   footer: {
     contact: 'Contacto',

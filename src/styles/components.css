@@ -73,6 +73,25 @@
   @apply border-stone bg-stone-light/95 shadow-sm;
 }
 
+/* --- Hero: bordes suaves hacia el bleed #16202C --- */
+.hero-bg-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(2.5rem, 5vw, 4.5rem);
+  pointer-events: none;
+}
+
+.hero-bg-edge-left {
+  left: 0;
+  background: linear-gradient(to right, var(--color-hero-bleed) 0%, transparent 100%);
+}
+
+.hero-bg-edge-right {
+  right: 0;
+  background: linear-gradient(to left, var(--color-hero-bleed) 0%, transparent 100%);
+}
+
 /* --- AboutNuar: timeline vertical punteada --- */
 .about-origin-timeline-line {
   background: repeating-linear-gradient(

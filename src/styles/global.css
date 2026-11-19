@@ -38,6 +38,7 @@
 
   --color-btn-primary: #6f6c46;
   --color-btn-secondary: #f2efea;
+  --color-hero-bleed: #16202c;
   --shadow-btn: 0 1px 4px 0 rgb(61 58 10 / 50%);
   --shadow-btn-active: 0 1px 2px 0 rgb(61 58 10 / 45%);
 }
@@ -52,17 +53,16 @@
   }
 }
 
-/* Nav / footer: contenido hasta 1440px */
+/* Contenedor de contenido: nav, footer y secciones a 1440px */
 @utility page-shell-nav {
   width: 100%;
   max-width: 90rem; /* 1440px */
   margin-inline: auto;
 }
 
-/* Secciones de contenido: hasta 1280px (fondos full-bleed en el <section>) */
 @utility page-shell {
   width: 100%;
-  max-width: 80rem; /* 1280px */
+  max-width: 90rem; /* 1440px — mismo tope que nav/footer */
   margin-inline: auto;
 }
 

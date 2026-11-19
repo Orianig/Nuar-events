@@ -36,8 +36,16 @@ export interface LangSwitcherProps {
 }
 
 export interface HeroProps {
+  titleLines?: string[];
+  subtitle?: string;
+  ctaPrimary?: string;
+  ctaSecondary?: string;
+  hrefPrimary?: string;
+  hrefSecondary?: string;
+  backgroundImage?: string;
+  /** @deprecated use backgroundImage */
   slogan?: string;
-  backgroundVideo: string;
+  backgroundVideo?: string;
   height?: string;
 }
 

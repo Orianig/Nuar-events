@@ -13,7 +13,16 @@ import type { PageProps } from '../../types';
 const { lang, currentPath, base } = Astro.props as PageProps;
 const t = getTranslations(lang);
 const assetBase = base.endsWith('/') ? base : `${base}/`;
-const heroVideo = lang === 'en' ? `${assetBase}Home-bg-en.mp4` : `${assetBase}Home-bg-es.mp4`;
+const b = base.endsWith('/') ? base.slice(0, -1) : base;
+const isSpanish = lang === 'es';
+const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+const hrefAboutNuar = isSpanish
+  ? b
+    ? `${b}/about-nuar`
+    : '/about-nuar'
+  : b
+    ? `${b}/en/about-nuar`
+    : '/en/about-nuar';
 ---
 
 <Layout title={t.pages.home.title} description={t.hero.slogan} lang={lang} currentPath={currentPath}>
@@ -32,8 +41,15 @@ const heroVideo = lang === 'en' ? `${assetBase}Home-bg-en.mp4` : `${assetBase}Ho
     base={base}
   />
 
-  <Hero slogan={t.hero.slogan} backgroundVideo={heroVideo} />
-  <h1 class="sr-only">{t.sectionOne.title}</h1>
+  <Hero
+    titleLines={[...t.hero.titleLines]}
+    subtitle={t.hero.subtitle}
+    ctaPrimary={t.hero.ctaPrimary}
+    ctaSecondary={t.hero.ctaSecondary}
+    hrefPrimary={hrefContact}
+    hrefSecondary={hrefAboutNuar}
+    backgroundImage={`${assetBase}home-bg-header.jpg`}
+  />
 
   <SectionOne
     image1={t.sectionOne.image1}

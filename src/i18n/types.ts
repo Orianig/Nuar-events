@@ -50,6 +50,10 @@ export interface Translations {
   };
   hero: {
     slogan: string;
+    titleLines: [string, string, string];
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
   };
   footer: {
     contact: string;

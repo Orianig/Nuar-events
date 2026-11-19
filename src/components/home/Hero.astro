@@ -1,27 +1,69 @@
 ---
 import type { HeroProps } from '../../types';
+import Button from '../ui/Button.astro';
 
-const { slogan, backgroundVideo, height = "h-screen" } = Astro.props as HeroProps;
+const {
+  titleLines = [],
+  subtitle = '',
+  ctaPrimary = 'Organiza tu evento',
+  ctaSecondary = 'Descubre NUAR',
+  hrefPrimary = '/contact',
+  hrefSecondary = '/about-nuar',
+  backgroundImage = '/home-bg-header.jpg',
+  height = 'h-[min(62svh,640px)] min-h-[420px] md:min-h-[520px]',
+} = Astro.props as HeroProps;
 ---
 
-<section class={`relative ${height} flex items-center justify-center overflow-hidden`}>
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-    aria-label={slogan}
-    class="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src={backgroundVideo} type="video/mp4" />
-  </video>
+<section class={`relative flex ${height} items-center overflow-hidden bg-hero-bleed`}>
+  <div class="pointer-events-none absolute inset-0 flex justify-center" aria-hidden="true">
+    <div class="hero-bg-frame relative h-full w-full max-w-[1480px]">
+      <img
+        src={backgroundImage}
+        alt=""
+        width="1480"
+        height="640"
+        class="h-full w-full object-cover object-center"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div class="hero-bg-edge hero-bg-edge-left"></div>
+      <div class="hero-bg-edge hero-bg-edge-right"></div>
+    </div>
+  </div>
 
-  <div class="absolute inset-0 bg-black/2"></div>
+  <div class="page-gutter relative z-10 w-full pt-[96px] pb-6 md:pt-[108px] md:pb-8">
+    <div class="page-shell-nav">
+      <div class="flex max-w-xl flex-col items-start gap-5 md:max-w-2xl md:gap-6">
+        <h1 class="font-title text-3xl leading-[1.22] tracking-wide text-stone-light uppercase sm:text-4xl md:text-[2.75rem] md:leading-[1.28] lg:text-[3.1rem]">
+          {
+            titleLines.map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))
+          }
+        </h1>
 
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-    </svg>
+        <p class="max-w-md font-body text-sm leading-relaxed text-stone-light/90 md:max-w-lg md:text-base">
+          {subtitle}
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 md:gap-4">
+          <Button href={hrefPrimary} variant="primary" size="lg">
+            {ctaPrimary}
+          </Button>
+          <Button
+            href={hrefSecondary}
+            variant="ghost"
+            size="lg"
+            class="!border-sand !text-sand hover:!bg-sand/15 active:!bg-sand/25"
+          >
+            {ctaSecondary}
+          </Button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
