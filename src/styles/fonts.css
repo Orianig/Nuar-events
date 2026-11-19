@@ -10,8 +10,7 @@
 :root {
   --font-title: "Combo", serif;
   --font-body: "Plus Jakarta Sans", sans-serif;
-  /* --font-body: "Cormorant Upright", serif; */
-  --font-slogan: "Dynalight", serif;
+  --font-slogan: "Dynalight", cursive;
 }
 
 body {

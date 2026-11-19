@@ -1,0 +1,144 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'text';
+  size?: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  disabled?: boolean;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  loadingLabel?: string;
+  preview?: 'active' | 'disabled' | 'loading';
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  disabled = false,
+  href,
+  type = 'button',
+  class: className = '',
+  loadingLabel = 'Cargando...',
+  preview,
+} = Astro.props;
+
+const isDisabled = disabled || preview === 'disabled';
+const isLoading = loading || preview === 'loading';
+const isActivePreview = preview === 'active';
+const isInactive = isDisabled || isLoading;
+
+const sizeClass =
+  variant === 'text'
+    ? ''
+    : {
+        sm: 'min-h-9 px-3.5 py-1.5',
+        md: 'min-h-11 px-4 py-2',
+        lg: 'min-h-14 px-5 py-3',
+      }[size];
+
+const focusRing =
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive';
+
+const baseClass = [
+  'inline-flex items-center justify-center gap-2.5 rounded-[6px] border-[0.8px] border-transparent',
+  'font-body text-sm font-bold leading-none no-underline transition-colors',
+  isLoading ? 'cursor-wait' : isDisabled ? 'cursor-not-allowed' : 'cursor-pointer',
+  focusRing,
+  sizeClass,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const primaryFill =
+  'bg-btn-primary [background-image:radial-gradient(ellipse_55%_48%_at_50%_22%,var(--color-olive-light)_0%,transparent_72%)] shadow-btn';
+
+const variantClass = (() => {
+  if (variant === 'primary') {
+    if (isLoading) {
+      return `border-transparent text-stone-light ${primaryFill}`;
+    }
+    if (isDisabled) {
+      return 'border-transparent bg-disabled text-text-disabled shadow-none';
+    }
+    if (isActivePreview) {
+      return 'border-transparent bg-olive-dark text-stone-light shadow-btn-active';
+    }
+    return [
+      `border-transparent text-stone-light ${primaryFill}`,
+      'hover:bg-olive hover:[background-image:none]',
+      'active:bg-olive-dark active:shadow-btn-active active:[background-image:none]',
+    ].join(' ');
+  }
+
+  if (variant === 'secondary') {
+    if (isLoading) {
+      return 'border-olive-light bg-btn-secondary text-olive-light';
+    }
+    if (isDisabled) {
+      return 'border-text-disabled bg-disabled text-text-disabled';
+    }
+    if (isActivePreview) {
+      return 'border-olive-light bg-stone-light text-olive-light';
+    }
+    return 'border-olive-light bg-btn-secondary text-olive-light hover:bg-cream-light/70 active:bg-stone-light';
+  }
+
+  if (variant === 'ghost') {
+    if (isLoading) {
+      return 'border-stone-light bg-transparent text-stone-light';
+    }
+    if (isDisabled) {
+      return 'border-text-disabled bg-transparent text-text-disabled';
+    }
+    if (isActivePreview) {
+      return 'border-stone-light bg-olive/55 text-stone-light';
+    }
+    return 'border-stone-light bg-transparent text-stone-light hover:bg-olive-light/50 active:bg-olive/55';
+  }
+
+  if (isDisabled) {
+    return 'border-0 bg-transparent text-text-disabled';
+  }
+  return 'group border-0 bg-transparent px-4 py-2 text-sand-dark hover:text-olive-dark';
+})();
+
+const Tag = href && !isInactive ? 'a' : 'button';
+---
+
+<Tag
+  class:list={[baseClass, variantClass, className]}
+  href={Tag === 'a' ? href : undefined}
+  type={Tag === 'button' ? type : undefined}
+  disabled={Tag === 'button' ? isInactive : undefined}
+  aria-disabled={Tag === 'a' && isInactive ? 'true' : undefined}
+  aria-busy={isLoading ? 'true' : undefined}
+>
+  {
+    isLoading ? (
+      <>
+        <svg
+          class="h-3.5 w-3.5 shrink-0 animate-spin motion-reduce:animate-none"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            fill="currentColor"
+            d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.75 10h-2.1A6 6 0 1 1 12 6c1.48 0 2.82.54 3.87 1.43L13.5 10H20V3.5l-2.35 2.85Z"
+          />
+        </svg>
+        <span>{loadingLabel}</span>
+      </>
+    ) : variant === 'text' ? (
+      <>
+        <span class="group-hover:underline group-hover:underline-offset-[0.2em]">{<slot />}</span>
+        <span class="transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true">
+          →
+        </span>
+      </>
+    ) : (
+      <slot />
+    )
+  }
+</Tag>

@@ -1,0 +1,25 @@
+---
+import type { SocialNetwork } from './icons';
+import { socialIcons } from './icons';
+
+interface Props {
+  network: SocialNetwork;
+  class?: string;
+  decorative?: boolean;
+}
+
+const { network, class: className = '', decorative = true } = Astro.props;
+const icon = socialIcons[network];
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={icon.viewBox}
+  class:list={['inline-block h-6 w-6 shrink-0 overflow-visible text-olive', className]}
+  aria-hidden={decorative ? 'true' : undefined}
+  role={decorative ? undefined : 'img'}
+  aria-label={decorative ? undefined : icon.label}
+  focusable="false"
+>
+  <path fill="currentColor" d={icon.path} />
+</svg>

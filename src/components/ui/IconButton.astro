@@ -1,0 +1,71 @@
+---
+import type { SocialNetwork } from './icons';
+import { socialIcons } from './icons';
+
+interface Props {
+  network: SocialNetwork;
+  href?: string;
+  label?: string;
+  filled?: boolean;
+  social?: boolean;
+  disabled?: boolean;
+  class?: string;
+  preview?: 'active' | 'disabled' | 'filled' | 'social';
+}
+
+const {
+  network,
+  href,
+  label,
+  filled = false,
+  social = false,
+  disabled = false,
+  class: className = '',
+  preview,
+} = Astro.props;
+
+const icon = socialIcons[network];
+const isDisabled = disabled || preview === 'disabled';
+const isSocial = social || preview === 'social';
+const isFilled = !isSocial && (filled || preview === 'filled' || preview === 'active');
+const ariaLabel = label ?? icon.label;
+const Tag = href && !isDisabled ? 'a' : 'button';
+
+const classes = [
+  'relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full p-0 shadow-none transition-colors',
+  'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive',
+  isDisabled
+    ? 'cursor-not-allowed border-0 bg-disabled text-text-disabled'
+    : isSocial
+      ? 'cursor-pointer border-0 bg-[url(/ui/redes-bg.png)] bg-cover bg-center text-stone-light'
+      : isFilled
+        ? 'cursor-pointer border-[0.8px] border-olive-dark bg-olive-dark text-stone-light'
+        : 'cursor-pointer border-[0.8px] border-olive-light bg-transparent text-olive-light hover:border-olive-dark hover:bg-stone-light/35 hover:text-olive-dark',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<Tag
+  class={classes}
+  href={Tag === 'a' ? href : undefined}
+  type={Tag === 'button' ? 'button' : undefined}
+  disabled={Tag === 'button' ? isDisabled : undefined}
+  aria-label={ariaLabel}
+  aria-disabled={Tag === 'a' && isDisabled ? 'true' : undefined}
+  target={Tag === 'a' ? '_blank' : undefined}
+  rel={Tag === 'a' ? 'noopener noreferrer' : undefined}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox={icon.viewBox}
+    width="28"
+    height="28"
+    class="block h-7 w-7 shrink-0 overflow-visible"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path fill="currentColor" d={icon.path} />
+  </svg>
+</Tag>

@@ -1,0 +1,277 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Chip from '../components/ui/Chip.astro';
+import IconButton from '../components/ui/IconButton.astro';
+import SocialIcon from '../components/ui/SocialIcon.astro';
+import { socialIcons, socialNetworks } from '../components/ui/icons';
+
+const sample = 'Somos NUAR events – Creamos momentos porque la vida se mide en ellos';
+const colorFamilies = ['Ink', 'Bark', 'Olive', 'Sand', 'Stone', 'Cream'] as const;
+
+const colorRows = [
+  {
+    name: 'Light',
+    swatches: ['bg-ink-light', 'bg-bark-light', 'bg-olive-light', 'bg-sand-light', 'bg-stone-light', 'bg-cream-light'],
+  },
+  {
+    name: 'Normal',
+    swatches: ['bg-ink', 'bg-bark', 'bg-olive', 'bg-sand', 'bg-stone', 'bg-cream'],
+  },
+  {
+    name: 'Dark',
+    swatches: ['bg-ink-dark', 'bg-bark-dark', 'bg-olive-dark', 'bg-sand-dark', 'bg-stone-dark', 'bg-cream-dark'],
+  },
+] as const;
+
+const hexNotes = [
+  'Ink: #3d3a0a / #292205 / #1a1803',
+  'Bark: #4f4c22 / #373318 / #252209',
+  'Olive: #78754d / #5b5835 / #3d3b23',
+  'Sand: #c9c6a8 / #aeaa85 / #8a8768',
+  'Stone: #e5e2c9 / #d1cda7 / #a19d7a',
+  'Cream: #e8dfce / #d4c6ae / #a89b82',
+  'Disabled: #eaeaea · Text disabled: #bababa',
+] as const;
+---
+
+<Layout
+  title="Design system"
+  description="Biblioteca interna de componentes, colores y tipografías de Nuar Events."
+  lang="es"
+  currentPath="/components"
+  noindex={true}
+>
+  <a
+    href="#contenido"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-olive focus:px-3 focus:py-2 focus:text-sm focus:text-stone-light"
+  >
+    Saltar al contenido
+  </a>
+
+  <main id="contenido" class="min-h-screen bg-stone-light text-bark">
+    <div class="mx-auto max-w-5xl px-6 py-12 md:px-10 md:py-16">
+      <header class="mb-12 border-b border-bark/15 pb-8">
+        <p class="text-sm uppercase tracking-[0.18em] text-bark/60">Design system</p>
+        <h1 class="mt-2 font-title text-4xl md:text-5xl">Componentes Nuar</h1>
+        <p class="mt-3 max-w-2xl text-base text-bark/80">
+          Página interna de preview. No indexada.
+        </p>
+        <nav class="mt-6" aria-label="Secciones del design system">
+          <ul class="flex flex-wrap gap-3 text-sm">
+            <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#colores">Colores</a></li>
+            <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#fuente">Fuente</a></li>
+            <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#botones">Botones</a></li>
+            <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#chips">Chips</a></li>
+            <li><a class="underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive" href="#iconos">Iconos</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section id="colores" class="mb-16 scroll-mt-8" aria-labelledby="colores-title">
+        <h2 id="colores-title" class="font-title text-3xl">Colores</h2>
+        <div class="mt-6 overflow-x-auto rounded-2xl bg-[#ececec] p-5 md:p-8">
+          <div
+            class="grid min-w-[34rem] grid-cols-[4.5rem_repeat(6,minmax(0,1fr))] gap-3"
+            role="list"
+            aria-label="Paleta de colores Nuar"
+          >
+            <div aria-hidden="true"></div>
+            {colorFamilies.map((family) => (
+              <p class="text-center text-sm font-medium text-bark/80" aria-hidden="true">
+                {family}
+              </p>
+            ))}
+            {colorRows.map((row) => (
+              <>
+                <p class="flex items-center text-sm text-bark/70" aria-hidden="true">
+                  {row.name}
+                </p>
+                {row.swatches.map((swatch, index) => (
+                  <div
+                    role="listitem"
+                    class:list={['aspect-square rounded-xl', swatch]}
+                    aria-label={`${colorFamilies[index]} ${row.name}`}
+                  />
+                ))}
+              </>
+            ))}
+          </div>
+          <div class="mt-6 grid gap-2 text-xs text-bark/70 sm:grid-cols-2 lg:grid-cols-3">
+            {hexNotes.map((note) => (
+              <p>{note}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="fuente" class="mb-16 scroll-mt-8" aria-labelledby="fuente-title">
+        <h2 id="fuente-title" class="font-title text-3xl">Fuente</h2>
+        <div class="mt-6 space-y-8 rounded-2xl bg-[#ececec] p-5 md:p-8">
+          <div>
+            <p class="mb-2 text-sm text-bark/60">Títulos — Combo</p>
+            <p class="font-title text-2xl leading-snug text-ink md:text-3xl">{sample}</p>
+          </div>
+          <div>
+            <p class="mb-2 text-sm text-bark/60">General — Plus Jakarta Sans</p>
+            <p class="font-body text-lg text-ink">{sample}</p>
+            <p class="mt-2 font-body text-lg font-bold text-ink">{sample}</p>
+            <p class="mt-2 font-body text-lg italic text-ink">{sample}</p>
+          </div>
+          <div>
+            <p class="mb-2 text-sm text-bark/60">Slogan — Dynalight</p>
+            <p class="font-slogan text-3xl leading-snug text-ink md:text-4xl">{sample}</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="botones" class="mb-16 scroll-mt-8" aria-labelledby="botones-title">
+        <h2 id="botones-title" class="font-title text-3xl">Botones</h2>
+        <p class="mt-2 text-sm text-bark/70">Small 36px · Medium 44px · Large 56px. Hover en el Default.</p>
+
+        <div class="mt-8 grid gap-8">
+          <div class="rounded-2xl bg-[#f5f5f5] p-6">
+            <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Primary</h3>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <Button>Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Default</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button preview="active">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Active</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button preview="disabled">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Disabled</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button preview="loading">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Loading</span>
+              </div>
+            </div>
+            <div class="mt-6 flex flex-wrap items-end gap-3" aria-label="Tamaños primary">
+              <Button size="sm">Small</Button>
+              <Button size="md">Medium</Button>
+              <Button size="lg">Large</Button>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-[#f5f5f5] p-6">
+            <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Secondary</h3>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <Button variant="secondary">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Default</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="secondary" preview="active">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Active</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="secondary" preview="disabled">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Disabled</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="secondary" preview="loading">Organiza tu evento</Button>
+                <span class="text-sm text-bark/70">Loading</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-[#f5f5f5] p-6">
+            <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Text</h3>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <Button variant="text">Conócenos más</Button>
+                <span class="text-sm text-bark/70">Default</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="text" preview="disabled">Conócenos más</Button>
+                <span class="text-sm text-bark/70">Disabled</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-ink p-6">
+            <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-cream-light/70">Ghost</h3>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-4">
+                <Button variant="ghost">Descubre más</Button>
+                <span class="text-sm text-stone-light/70">Default</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="ghost" preview="active">Descubre más</Button>
+                <span class="text-sm text-stone-light/70">Active</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="ghost" preview="disabled">Descubre más</Button>
+                <span class="text-sm text-stone-light/70">Disabled</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <Button variant="ghost" preview="loading">Descubre más</Button>
+                <span class="text-sm text-stone-light/70">Loading</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="chips" class="mb-16 scroll-mt-8" aria-labelledby="chips-title">
+        <h2 id="chips-title" class="font-title text-3xl">Chips</h2>
+        <div class="mt-6 flex flex-col gap-3 rounded-2xl bg-[#f5f5f5] p-6">
+          <div class="flex items-center gap-4">
+            <Chip>Todos</Chip>
+            <span class="text-sm text-bark/70">Default</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <Chip preview="active">Todos</Chip>
+            <span class="text-sm text-bark/70">Active</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <Chip preview="disabled">Todos</Chip>
+            <span class="text-sm text-bark/70">Disabled</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="iconos" class="mb-8 scroll-mt-8" aria-labelledby="iconos-title">
+        <h2 id="iconos-title" class="font-title text-3xl">Iconos</h2>
+
+        <div class="mt-6 rounded-2xl bg-[#f5f5f5] p-6">
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Botón icono</h3>
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-4">
+              <IconButton network="instagram" />
+              <span class="text-sm text-bark/70">Default</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <IconButton network="instagram" preview="active" />
+              <span class="text-sm text-bark/70">Active</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <IconButton network="instagram" preview="disabled" />
+              <span class="text-sm text-bark/70">Disabled</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <IconButton network="instagram" preview="social" />
+              <span class="text-sm text-bark/70">Redes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 rounded-2xl bg-[#f5f5f5] p-6">
+          <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Set de iconos</h3>
+          <ul class="flex flex-wrap items-center gap-5" aria-label="Iconos sociales">
+            {socialNetworks.map((network) => (
+              <li class="flex flex-col items-center gap-2">
+                <SocialIcon network={network} />
+                <span class="text-[10px] uppercase tracking-wide text-bark/50">{socialIcons[network].label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>

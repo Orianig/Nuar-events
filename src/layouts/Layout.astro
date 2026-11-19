@@ -39,19 +39,23 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta name="robots" content={robotsContent} />
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-		{hrefEs && <link rel="alternate" hreflang="es" href={hrefEs} />}
-		{hrefEn && <link rel="alternate" hreflang="en" href={hrefEn} />}
-		{hrefEs && <link rel="alternate" hreflang="x-default" href={hrefEs} />}
-		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={siteName} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={description} />
-		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-		<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={description} />
+		{!noindex && canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		{!noindex && hrefEs && <link rel="alternate" hreflang="es" href={hrefEs} />}
+		{!noindex && hrefEn && <link rel="alternate" hreflang="en" href={hrefEn} />}
+		{!noindex && hrefEs && <link rel="alternate" hreflang="x-default" href={hrefEs} />}
+		{!noindex && (
+			<>
+				<meta property="og:type" content="website" />
+				<meta property="og:site_name" content={siteName} />
+				<meta property="og:title" content={pageTitle} />
+				<meta property="og:description" content={description} />
+				{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+				<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content={pageTitle} />
+				<meta name="twitter:description" content={description} />
+			</>
+		)}
 		<title>{pageTitle}</title>
 	</head>
 	<body>

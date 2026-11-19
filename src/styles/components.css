@@ -1,9 +1,3 @@
-/**
- * Estilos de componentes que no se pueden cubrir solo con Tailwind
- * (animaciones con keyframes, estados por JS, etc.)
- */
-
-/* --- SectionTwo: panel con marco SVG y solo contenido textual --- */
 .section-two-panel {
   background-image: url('/SectionTwo-Responsive.svg');
   background-repeat: no-repeat;

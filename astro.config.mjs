@@ -11,7 +11,11 @@ export default defineConfig({
   output: 'static',
   base,
   site: 'https://www.nuarevents.es',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/components'),
+    }),
+  ],
   redirects: {
     '/es': '/',
     '/es/projects': '/projects',
