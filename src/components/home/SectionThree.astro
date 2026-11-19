@@ -1,90 +1,95 @@
 ---
 import type { SectionThreeProps } from '../../types';
 
-const { centerText, backgroundColor } = Astro.props as SectionThreeProps;
-const [firstLine = '', ...restWords] = (centerText ?? '').trim().split(/\s+/);
-const secondLine = restWords.join(' ');
+const { backgroundColor } = Astro.props as SectionThreeProps;
+
+const desktopFrame = {
+  width: '107.2738%',
+  height: '114.6228%',
+  left: '-3.3448%',
+  top: '-7.6499%',
+};
+
+const mobileFrame = {
+  width: '111.8012%',
+  height: '109.7143%',
+  left: '-6.3147%',
+  top: '-5.2571%',
+};
 ---
 
-<section class={`relative  ${backgroundColor ?? 'bg-sand'} overflow-hidden`}>
-  <div class="relative w-full">
-    <!-- Desktop -->
-    <div class="relative hidden md:block overflow-hidden py-8">
-      <div class="relative w-full h-[480px] lg:h-[540px] xl:h-[580px]">
-        <img
-          src="/SectionThree-BgGr-Desktop.svg"
-          alt=""
-          aria-hidden="true"
-          width="1920"
-          height="1080"
-          loading="lazy"
-          decoding="async"
-          class="absolute inset-0 h-[113%] w-full m-auto object-cover object-center"
-        />
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 w-full h-full"
-          style="background-image: url('/SectionThree-Bg-Desktop.svg'); background-size: 100% 100%; background-repeat: no-repeat;"
-        ></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-          <img
-            src="/SectionThree-Center-Desktop.svg"
-            alt=""
+<section class={`relative overflow-hidden ${backgroundColor ?? ''}`}>
+  <h2 class="sr-only">Valores</h2>
+
+  <div class="relative hidden md:block">
+    <div class="relative h-[480px] w-full lg:h-[540px] xl:h-[580px]">
+      <img
+        src="/SectionThree-BgGr-Desktop.svg"
+        alt=""
+        aria-hidden="true"
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+        class="pointer-events-none absolute inset-0 h-full w-full scale-105 object-cover object-center"
+      />
+
+      <div class="relative z-10 mx-auto box-border flex h-full w-full max-w-[1500px] px-6 py-8 lg:px-10 lg:py-10 xl:px-12 xl:py-12">
+        <div class="relative min-h-0 w-full flex-1 overflow-hidden">
+          <div
             aria-hidden="true"
-            width="1920"
-            height="1080"
-            loading="lazy"
-            decoding="async"
-            class="absolute left-1/2 top-[54%] h-[82%] w-[82%] -translate-x-1/2 -translate-y-1/2 object-contain object-center"
-          />
-          <div class="absolute left-1/2 top-4 -translate-x-1/2 text-center font-title text-olive-dark leading-none">
-            <h2 class="block text-2xl lg:text-3xl">{firstLine}</h2>
-            <span class="block text-5xl lg:text-5xl">{secondLine}</span>
-          </div>
-          <div class="sr-only">
-            <h2>
-              {centerText}
-            </h2>
+            class="pointer-events-none absolute bg-no-repeat"
+            style={`background-image: url('/SectionThree-Bg-Desktop.svg'); background-size: 100% 100%; width: ${desktopFrame.width}; height: ${desktopFrame.height}; left: ${desktopFrame.left}; top: ${desktopFrame.top};`}
+          ></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <img
+              src="/SectionThree-Center-Desktop.svg"
+              alt=""
+              aria-hidden="true"
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+              class="absolute left-1/2 top-[48%] h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain object-center"
+            />
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Mobile -->
-    <div class="relative md:hidden overflow-hidden py-2">
-      <div class="relative w-full h-[620px] sm:h-[700px]">
-        <img
-          src="/SectionThree-BgGr-mobile.png"
-          alt=""
-          aria-hidden="true"
-          width="900"
-          height="1200"
-          loading="lazy"
-          decoding="async"
-          class="absolute inset-0 z-10 h-[108%] w-full m-auto object-cover object-center"
-        />
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 z-0 h-full w-full"
-          style="background-image: url('/SectionThree-Bg-mobile.png'); background-size: 100% 100%; background-repeat: no-repeat;"
-        ></div>
-        <div class="absolute inset-0 z-20 flex items-center justify-center">
-          <img
-            src="/SectionThree-Center-Mobile.png"
-            alt=""
+  <div class="relative md:hidden">
+    <div class="relative h-[620px] w-full sm:h-[700px]">
+      <img
+        src="/SectionThree-BgGr-mobile.png"
+        alt=""
+        aria-hidden="true"
+        width="900"
+        height="1200"
+        loading="lazy"
+        decoding="async"
+        class="pointer-events-none absolute inset-0 z-0 h-full w-full scale-105 object-cover object-center"
+      />
+
+      <div class="relative z-10 mx-auto box-border flex h-full w-full max-w-[1500px] px-5 py-8 sm:px-6 sm:py-10">
+        <div class="relative min-h-0 w-full flex-1 overflow-hidden">
+          <div
             aria-hidden="true"
-            width="900"
-            height="1200"
-            loading="lazy"
-            decoding="async"
-            class="absolute left-1/2 top-[56%] h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 object-contain object-center"
-          />
-          <h2
-            class="absolute inset-x-0 top-[3%] flex flex-col items-center text-center font-title text-olive-dark leading-none px-6"
-          >
-            <span class="block text-[1.75rem]">{firstLine}</span>
-            <span class="block text-[3.4rem]">{secondLine}</span>
-          </h2>
+            class="pointer-events-none absolute z-0 bg-no-repeat"
+            style={`background-image: url('/SectionThree-Bg-mobile.png'); background-size: 100% 100%; width: ${mobileFrame.width}; height: ${mobileFrame.height}; left: ${mobileFrame.left}; top: ${mobileFrame.top};`}
+          ></div>
+          <div class="absolute inset-0 z-10 flex items-center justify-center">
+            <img
+              src="/SectionThree-Center-Mobile.png"
+              alt=""
+              aria-hidden="true"
+              width="900"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+              class="absolute left-1/2 top-[48%] h-[118%] w-[118%] -translate-x-1/2 -translate-y-1/2 object-contain object-center"
+            />
+          </div>
         </div>
       </div>
     </div>
