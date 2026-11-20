@@ -29,7 +29,7 @@ const {
   height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-[520px]',
 } = Astro.props as Props;
 
-const hasDossier = Boolean(hrefSecondary);
+const hasDossier = Boolean(hrefSecondary?.trim());
 ---
 
 <section
@@ -85,20 +85,17 @@ const hasDossier = Boolean(hrefSecondary);
           <Button href={hrefPrimary} variant="primary" size="lg" class="w-full md:w-auto">
             {ctaPrimary}
           </Button>
-          {
-            hasDossier && (
-              <Button
-                href={hrefSecondary}
-                target="_blank"
-                variant="ghost"
-                size="lg"
-                class="w-full md:w-auto"
-              >
-                {ctaSecondary}
-                <Download class="size-4 shrink-0" stroke-width={1.8} aria-hidden="true" />
-              </Button>
-            )
-          }
+          <Button
+            href={hasDossier ? hrefSecondary : undefined}
+            target={hasDossier ? '_blank' : undefined}
+            disabled={!hasDossier}
+            variant="ghost"
+            size="lg"
+            class="w-full md:w-auto"
+          >
+            {ctaSecondary}
+            <Download class="size-4 shrink-0" stroke-width={1.8} aria-hidden="true" />
+          </Button>
         </div>
       </div>
     </div>
