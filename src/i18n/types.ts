@@ -89,6 +89,10 @@ export interface Translations {
         lines: string[];
         closing: string;
       };
+      formTitle: string;
+      formIntro: string;
+      formCta: string;
+      formIframeTitle: string;
     };
     projects: {
       title: string;

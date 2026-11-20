@@ -64,6 +64,11 @@ export const es: Translations = {
         ],
         closing: 'Nosotras nos encargamos del resto.',
       },
+      formTitle: 'Rellena el formulario',
+      formIntro:
+        'Cuéntanos tu idea y te ayudamos a hacerla realidad. Trabajamos a medida, según tus prioridades.',
+      formCta: 'Rellenar formulario',
+      formIframeTitle: 'Formulario de contacto Nuar Events',
     },
     projects: {
       title: 'Proyectos - Nuar',

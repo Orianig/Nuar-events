@@ -64,6 +64,11 @@ export const en: Translations = {
         ],
         closing: 'We take care of the rest.',
       },
+      formTitle: 'Fill in the form',
+      formIntro:
+        'Tell us your idea and we will help make it real. We work fully tailored to your priorities.',
+      formCta: 'Fill in the form',
+      formIframeTitle: 'Nuar Events contact form',
     },
     projects: {
       title: 'Projects - Nuar',

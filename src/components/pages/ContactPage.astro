@@ -2,6 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
+import X from '@lucide/astro/icons/x';
+import Mail from '@lucide/astro/icons/mail';
+import Phone from '@lucide/astro/icons/phone';
+import MessageSquare from '@lucide/astro/icons/message-square';
+import SwatchBook from '@lucide/astro/icons/swatch-book';
+import FileText from '@lucide/astro/icons/file-text';
+import Heart from '@lucide/astro/icons/heart';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
 import { getTranslations } from '../../i18n';
 import type { PageProps } from '../../types';
 
@@ -10,6 +18,24 @@ const t = getTranslations(lang);
 const p = t.pages.contact;
 const s1 = p.sectionOne;
 const s2 = p.sectionTwo;
+
+const processItems = [
+  t.process.steps.meet,
+  t.process.steps.design,
+  t.process.steps.coordinate,
+  t.process.steps.enjoy,
+];
+const processIcons = [MessageSquare, SwatchBook, FileText, Heart] as const;
+
+/** Google Form Nuar — respuestas en el mismo Forms de siempre */
+const GOOGLE_FORM_EMBED =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfrlxRptERTPCQMIrGjz3O8x8AJpGHIJFA3xbFjS257pKMouw/viewform?embedded=true';
+
+/** Imagen hero contacto + bleed madera oscura (extensión natural de la foto) */
+const CONTACT_HERO_IMAGE = '/events/nuar%20experiences/experience-bg-page.jpg';
+const CONTACT_HERO_IMG_BLEED = '#241810';
+/** Bleed izquierdo bloque final: yeso de contactPage2 */
+const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
 ---
 
 <Layout title={p.title} description={p.description} lang={lang} currentPath={currentPath}>
@@ -25,79 +51,284 @@ const s2 = p.sectionTwo;
     currentLang={lang}
     base={base}
   />
-  <main class="bg-stone text-bark">
-    <section class="flex min-h-[70vh] w-full flex-col md:min-h-[85vh] md:flex-row">
-      <div class="flex w-full flex-col justify-between bg-olive-light/40 px-6 py-10 pt-[96px] md:w-1/2 md:px-10 md:py-14 md:pt-14 lg:py-20">
-        <div class="flex flex-col gap-5 md:gap-6">
-          <h1 class="font-body text-4xl leading-tight md:text-5xl lg:text-6xl">{s1.heading}</h1>
-          <p class="font-slogan text-3xl leading-snug text-bark md:text-4xl lg:text-5xl">{s1.subheading}</p>
-          <p class="max-w-xl text-base leading-relaxed md:text-lg">{s1.body}</p>
-        </div>
 
-        <div class="mt-10 flex items-stretch gap-4 md:mt-12">
-          <div class="w-px shrink-0 bg-bark/40" aria-hidden="true"></div>
-          <div class="flex flex-col gap-1 text-base md:text-lg">
-            <button
-              type="button"
-              data-copy={s1.email}
-              class="w-fit cursor-pointer border-0 bg-transparent p-0 text-left text-inherit transition-opacity hover:opacity-80"
-            >
-              {s1.email}
-            </button>
-            <button
-              type="button"
-              data-copy={s1.phone}
-              class="w-fit cursor-pointer border-0 bg-transparent p-0 text-left text-inherit transition-opacity hover:opacity-80"
-            >
-              {s1.phone}
-            </button>
+  {/*
+    Stone solo a la altura del nav (65px + py-2.5).
+    Antes pt-28 sobresalía ~27px y se veía como franja extra.
+    Cream/imagen empiezan justo debajo del nav.
+  */}
+  <main
+    class="bg-stone text-bark"
+    style={`--contact-nav-h: calc(65px + 1.25rem); --contact-hero-img-bleed: ${CONTACT_HERO_IMG_BLEED}`}
+  >
+    <div class="h-[var(--contact-nav-h)] bg-stone" aria-hidden="true"></div>
+
+    {/*
+      Cream full-bleed (sin bordes stone laterales).
+      Desktop: texto ~58% / imagen ~42% para que el CTA no se monte.
+      Móvil: imagen franja rectangular baja, object-bottom.
+    */}
+    <section class="contact-hero relative overflow-hidden bg-cream-light">
+      <div
+        class="pointer-events-none absolute inset-y-0 left-0 hidden w-[58%] bg-cream-light md:block"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] md:block"
+        style="background-color: var(--contact-hero-img-bleed)"
+        aria-hidden="true"
+      >
+        <img
+          src={CONTACT_HERO_IMAGE}
+          alt=""
+          width="1200"
+          height="900"
+          class="absolute inset-0 h-full w-full object-cover object-[center_bottom]"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div class="page-gutter relative z-10">
+        <div class="page-shell">
+          <div class="flex flex-col md:flex-row md:items-stretch">
+            <div class="flex w-full min-w-0 flex-col gap-16 pb-12 pt-10 md:w-[58%] md:gap-20 md:pb-16 md:pr-8 lg:pr-10">
+              <div class="flex max-w-lg flex-col gap-3 md:gap-3.5">
+                <p class="font-slogan text-2xl leading-none text-bark">
+                  {s1.subheading}
+                </p>
+                <h1 class="font-body text-[32px] font-normal leading-[1.25] text-bark">
+                  {s1.heading}
+                </h1>
+                <p class="font-body text-base leading-relaxed text-bark/90">
+                  {s1.body}
+                </p>
+              </div>
+
+              {/* Datos + CTA: en fila desde >500px; apilados solo en móvil estrecho */}
+              <div class="flex w-full max-w-lg flex-col gap-4 min-[501px]:flex-row min-[501px]:items-center min-[501px]:justify-between min-[501px]:gap-6">
+                <div class="flex min-w-0 flex-col gap-2.5">
+                  <button
+                    type="button"
+                    data-copy={s1.email}
+                    class="inline-flex w-fit max-w-full cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-left font-body text-base font-bold leading-snug text-bark transition-opacity hover:opacity-80"
+                  >
+                    <Mail class="size-5 shrink-0 text-olive" stroke-width={1.75} aria-hidden="true" />
+                    <span class="truncate">{s1.email}</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-copy={s1.phone}
+                    class="inline-flex w-fit max-w-full cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-left font-body text-base font-bold leading-snug text-bark transition-opacity hover:opacity-80"
+                  >
+                    <Phone class="size-5 shrink-0 text-olive" stroke-width={1.75} aria-hidden="true" />
+                    <span class="truncate">{s1.phone}</span>
+                  </button>
+                </div>
+
+                <div class="hidden h-12 w-px shrink-0 bg-bark/35 min-[501px]:block" aria-hidden="true"></div>
+
+                <button
+                  type="button"
+                  data-contact-form-open
+                  class="btn-primary-fill inline-flex min-h-11 w-fit shrink-0 cursor-pointer items-center justify-center gap-2.5 self-start rounded-[6px] border-[0.8px] border-transparent px-4 py-2 font-body text-sm font-bold leading-none text-stone-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive max-[500px]:w-full max-[500px]:self-auto"
+                >
+                  {p.formCta}
+                  <ArrowRight class="size-4 shrink-0" stroke-width={2.25} aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            {/* Spacer desktop: reserva el ancho de la imagen */}
+            <div class="hidden md:block md:w-[42%]" aria-hidden="true"></div>
           </div>
         </div>
       </div>
 
-      <div class="w-full md:w-1/2">
+      {/* Móvil: franja rectangular ~mitad, full-bleed, parte inferior */}
+      <div class="md:hidden" aria-hidden="true">
         <img
-          src="/contactPage1.png"
+          src={CONTACT_HERO_IMAGE}
           alt=""
-          aria-hidden="true"
-          class="h-full min-h-[280px] w-full object-cover md:min-h-full"
+          width="1200"
+          height="400"
+          class="h-40 w-full object-cover object-[center_bottom] sm:h-44"
           loading="eager"
           decoding="async"
         />
       </div>
     </section>
 
-    <section class="flex flex-col md:flex-row">
-      <div class="order-2 w-full md:order-1 md:w-1/2">
+    {/* Franja intermedia: Así trabajamos (sin rayas conectoras) */}
+    <section class="relative bg-white py-12 text-olive md:py-14">
+      <div class="pointer-events-none absolute inset-0 bg-sand-light/30" aria-hidden="true"></div>
+      <div class="page-gutter relative">
+        <div class="page-shell">
+          <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
+            <div class="flex w-full shrink-0 flex-col gap-3 lg:max-w-[200px]">
+              <p class="font-slogan text-xl leading-none text-olive md:text-2xl">
+                {t.process.kicker}
+              </p>
+              <div class="flex items-center gap-1" aria-hidden="true">
+                <span class="h-[2px] w-16 bg-olive/50"></span>
+                <ArrowRight class="size-4 shrink-0 text-olive/55" stroke-width={2.5} />
+              </div>
+            </div>
+
+            <div class="grid min-w-0 flex-1 grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
+              {
+                processItems.map((item, i) => {
+                  const Icon = processIcons[i] ?? MessageSquare;
+                  return (
+                    <article
+                      class:list={[
+                        'relative flex min-w-0 flex-col items-center gap-3 px-0 text-center sm:items-start sm:px-5 sm:text-left lg:px-6',
+                        i > 0 && 'border-t border-olive/25 pt-8 sm:border-t-0 sm:pt-0',
+                        i < processItems.length - 1 && 'pb-8 sm:pb-0',
+                      ]}
+                    >
+                      {i > 0 && (
+                        <span
+                          aria-hidden="true"
+                          class="pointer-events-none absolute top-0 bottom-0 hidden w-px bg-olive/25 sm:block sm:left-0"
+                        />
+                      )}
+                      <div class="flex size-11 items-center justify-center text-olive">
+                        <Icon class="size-11" stroke-width={1.4} aria-hidden="true" />
+                      </div>
+                      <h3 class="font-body text-[18px] font-bold leading-snug text-olive md:text-[20px]">
+                        {item.title}
+                      </h3>
+                      <p class="font-body text-base leading-relaxed text-olive/90 md:text-[17px]">
+                        {item.description}
+                      </p>
+                    </article>
+                  );
+                })
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Última sección: imagen izq (~42%) + copy der; móvil franja baja full-bleed */}
+    <section
+      class="contact-story relative overflow-hidden bg-cream-light"
+      style={`--contact-story-img-bleed: ${CONTACT_STORY_IMG_BLEED}`}
+    >
+      <div
+        class="pointer-events-none absolute inset-y-0 left-0 hidden w-[42%] md:block"
+        style="background-color: var(--contact-story-img-bleed)"
+        aria-hidden="true"
+      >
         <img
           src="/contactPage2.jpg"
           alt=""
-          aria-hidden="true"
-          class="h-full min-h-[280px] w-full object-cover md:min-h-[85vh]"
+          width="1200"
+          height="900"
+          class="absolute inset-0 h-full w-full object-cover object-[center_bottom]"
           loading="lazy"
           decoding="async"
         />
       </div>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] bg-cream-light md:block"
+        aria-hidden="true"
+      ></div>
 
-      <div class="order-1 flex w-full flex-col justify-center bg-cream-light px-6 py-10 md:order-2 md:w-1/2 md:px-10 md:py-14 lg:py-16">
-        <div class="flex max-w-lg flex-col gap-5 md:gap-6">
-          <h2 class="font-body text-3xl leading-tight md:text-4xl lg:text-5xl">{s2.heading}</h2>
-          <p class="font-body text-2xl italic leading-snug md:text-3xl">{s2.subheading}</p>
-          <div class="h-1.5 w-14 rounded-full bg-bark/75" aria-hidden="true"></div>
-          <div class="flex flex-col gap-2 text-base leading-relaxed md:text-lg">
-            {s2.lines.map((line) => (
-              <p>{line}</p>
-            ))}
+      <div class="page-gutter relative z-10">
+        <div class="page-shell">
+          <div class="flex flex-col md:flex-row md:items-stretch">
+            <div class="hidden md:block md:w-[42%]" aria-hidden="true"></div>
+
+            <div class="flex w-full min-w-0 flex-col justify-center pb-12 pt-10 md:w-[58%] md:pb-16 md:pl-8 lg:pl-10">
+              <div class="flex max-w-lg flex-col gap-5 md:gap-6">
+                <h2 class="font-body text-[32px] font-normal leading-[1.25] text-bark">
+                  {s2.heading}
+                </h2>
+                <p class="font-slogan text-2xl leading-none text-bark">
+                  {s2.subheading}
+                </p>
+                <div class="h-[3px] w-12 bg-olive" aria-hidden="true"></div>
+                <div class="flex flex-col gap-2 font-body text-base leading-relaxed text-bark/85">
+                  {s2.lines.map((line) => (
+                    <p>{line}</p>
+                  ))}
+                </div>
+                <p class="pt-1 font-body text-base font-semibold text-bark">{s2.closing}</p>
+              </div>
+            </div>
           </div>
-          <p class="pt-2 text-base font-semibold md:text-lg">{s2.closing}</p>
         </div>
+      </div>
+
+      <div class="order-last md:hidden" aria-hidden="true">
+        <img
+          src="/contactPage2.jpg"
+          alt=""
+          width="1200"
+          height="400"
+          class="h-40 w-full object-cover object-[center_bottom] sm:h-44"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
   </main>
 
+  {/* Popup formulario Google */}
+  <dialog
+    class="contact-form-modal fixed inset-0 z-50 m-0 h-full max-h-none w-full max-w-none border-0 bg-transparent p-0 open:flex open:items-center open:justify-center"
+    data-contact-form-modal
+    aria-labelledby="contact-form-modal-title"
+  >
+    <div
+      class="absolute inset-0 bg-bark/50 backdrop-blur-[2px]"
+      data-contact-form-backdrop
+      aria-hidden="true"
+    ></div>
+    <div
+      class="relative z-10 mx-4 flex max-h-[min(900px,90vh)] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-olive-light/40 bg-[#F2EFEA] shadow-[0_16px_48px_rgb(41_34_5_/_30%)]"
+      role="document"
+    >
+      <div class="flex shrink-0 items-start justify-between gap-4 border-b border-olive/10 px-5 py-4 sm:px-6">
+        <div class="min-w-0 pr-2">
+          <h2
+            id="contact-form-modal-title"
+            class="font-body text-xl font-normal leading-snug text-bark sm:text-2xl"
+          >
+            {p.formTitle}
+          </h2>
+          <p class="mt-1 font-body text-sm leading-relaxed text-bark/80">
+            {p.formIntro}
+          </p>
+        </div>
+        <button
+          type="button"
+          class="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-olive transition-colors hover:bg-stone-light/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
+          data-contact-form-close
+          aria-label={lang === 'en' ? 'Close' : 'Cerrar'}
+        >
+          <X class="size-4 shrink-0" stroke-width={2} aria-hidden="true" />
+        </button>
+      </div>
+      <div class="min-h-0 flex-1 overflow-y-auto bg-white">
+        <iframe
+          data-contact-form-iframe
+          data-src={GOOGLE_FORM_EMBED}
+          title={p.formIframeTitle}
+          class="block h-[min(720px,70vh)] w-full border-0"
+        >
+        </iframe>
+      </div>
+    </div>
+  </dialog>
+
   <div
     data-copy-feedback
-    class="pointer-events-none fixed left-1/2 top-24 z-50 -translate-x-1/2 translate-y-1 scale-95 rounded-full border border-bark/15 bg-stone/92 px-5 py-2.5 text-sm text-bark shadow-lg backdrop-blur-md opacity-0 transition-all duration-300 ease-out"
+    class="pointer-events-none fixed left-1/2 top-24 z-50 -translate-x-1/2 translate-y-1 scale-95 rounded-full border border-bark/15 bg-stone/92 px-5 py-2.5 font-body text-sm text-bark shadow-lg backdrop-blur-md opacity-0 transition-all duration-300 ease-out"
     role="status"
     aria-live="polite"
     aria-hidden="true"
@@ -105,11 +336,63 @@ const s2 = p.sectionTwo;
     {p.copyFeedback}
   </div>
 
-  <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />
+  <Footer
+    brandName={t.nav.brandName}
+    sloganLine1={t.footer.sloganLine1}
+    sloganLine2={t.footer.sloganLine2}
+    followUs={t.footer.followUs}
+    privacy={t.footer.privacy}
+    currentLang={lang}
+    base={base}
+  />
 </Layout>
+
+<style>
+  .contact-form-modal::backdrop {
+    background: transparent;
+  }
+</style>
 
 <script>
   import { initCopyToClipboard } from '../../scripts/copy-to-clipboard';
 
   initCopyToClipboard();
+
+  function initContactFormModal() {
+    const modal = document.querySelector<HTMLDialogElement>('[data-contact-form-modal]');
+    if (!modal || modal.dataset.ready === '1') return;
+    modal.dataset.ready = '1';
+
+    const iframe = modal.querySelector<HTMLIFrameElement>('[data-contact-form-iframe]');
+    const openBtns = document.querySelectorAll<HTMLElement>('[data-contact-form-open]');
+    const closeBtn = modal.querySelector<HTMLElement>('[data-contact-form-close]');
+    const backdrop = modal.querySelector<HTMLElement>('[data-contact-form-backdrop]');
+
+    const open = () => {
+      if (iframe && !iframe.getAttribute('src')) {
+        const src = iframe.dataset.src;
+        if (src) iframe.src = src;
+      }
+      if (typeof modal.showModal === 'function') modal.showModal();
+      else modal.setAttribute('open', '');
+      document.documentElement.style.overflow = 'hidden';
+    };
+
+    const close = () => {
+      if (typeof modal.close === 'function') modal.close();
+      else modal.removeAttribute('open');
+      document.documentElement.style.overflow = '';
+    };
+
+    openBtns.forEach((btn) => btn.addEventListener('click', open));
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+    modal.addEventListener('cancel', (e) => {
+      e.preventDefault();
+      close();
+    });
+  }
+
+  initContactFormModal();
+  document.addEventListener('astro:page-load', initContactFormModal);
 </script>
