@@ -76,6 +76,9 @@ export interface Translations {
       title: string;
       description: string;
       copyFeedback: string;
+      copyEmailLabel: string;
+      copyPhoneLabel: string;
+      closeLabel: string;
       sectionOne: {
         heading: string;
         subheading: string;

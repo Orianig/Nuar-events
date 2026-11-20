@@ -44,8 +44,11 @@ export const es: Translations = {
     contact: {
       title: 'Contacto - Nuar',
       description:
-        'Contacta con Nuar Events para disenar experiencias y celebraciones cuidadas de principio a fin.',
+        'Contacta con Nuar Events para diseñar experiencias y celebraciones cuidadas de principio a fin.',
       copyFeedback: 'Copiado al portapapeles',
+      copyEmailLabel: 'Copiar correo',
+      copyPhoneLabel: 'Copiar teléfono',
+      closeLabel: 'Cerrar',
       sectionOne: {
         heading: 'Cuéntanos qué quieres celebrar',
         subheading: 'Cada evento empieza con una conversación.',

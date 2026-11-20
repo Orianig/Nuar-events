@@ -46,6 +46,9 @@ export const en: Translations = {
       description:
         'Contact Nuar Events to design meaningful celebrations from start to finish.',
       copyFeedback: 'Copied to clipboard',
+      copyEmailLabel: 'Copy email',
+      copyPhoneLabel: 'Copy phone number',
+      closeLabel: 'Close',
       sectionOne: {
         heading: 'Tell us what you want to celebrate',
         subheading: 'Every event starts with a conversation.',

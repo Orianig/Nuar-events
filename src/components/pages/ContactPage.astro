@@ -27,14 +27,13 @@ const processItems = [
 ];
 const processIcons = [MessageSquare, SwatchBook, FileText, Heart] as const;
 
-/** Google Form Nuar — respuestas en el mismo Forms de siempre */
+/** Google Form Nuar — embed del Forms de contacto */
 const GOOGLE_FORM_EMBED =
   'https://docs.google.com/forms/d/e/1FAIpQLSfrlxRptERTPCQMIrGjz3O8x8AJpGHIJFA3xbFjS257pKMouw/viewform?embedded=true';
 
-/** Imagen hero contacto + bleed madera oscura (extensión natural de la foto) */
-const CONTACT_HERO_IMAGE = '/events/nuar%20experiences/experience-bg-page.jpg';
+const CONTACT_HERO_IMAGE_AVIF = '/events/nuar%20experiences/experience-bg-page.avif';
+const CONTACT_HERO_IMAGE_JPG = '/events/nuar%20experiences/experience-bg-page.sm.jpg';
 const CONTACT_HERO_IMG_BLEED = '#241810';
-/** Bleed izquierdo bloque final: yeso de contactPage2 */
 const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
 ---
 
@@ -52,25 +51,16 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
     base={base}
   />
 
-  {/*
-    Stone solo a la altura del nav (65px + py-2.5).
-    Antes pt-28 sobresalía ~27px y se veía como franja extra.
-    Cream/imagen empiezan justo debajo del nav.
-  */}
+  {/* Stone solo a la altura del nav; cream/imagen empiezan debajo */}
   <main
     class="bg-stone text-bark"
     style={`--contact-nav-h: calc(65px + 1.25rem); --contact-hero-img-bleed: ${CONTACT_HERO_IMG_BLEED}`}
   >
     <div class="h-[var(--contact-nav-h)] bg-stone" aria-hidden="true"></div>
 
-    {/*
-      Cream full-bleed (sin bordes stone laterales).
-      Desktop: texto ~58% / imagen ~42% para que el CTA no se monte.
-      Móvil: imagen franja rectangular baja, object-bottom.
-    */}
     <section class="contact-hero relative overflow-hidden bg-cream-light">
       <div
-        class="pointer-events-none absolute inset-y-0 left-0 hidden w-[58%] bg-cream-light md:block"
+        class="pointer-events-none absolute inset-y-0 left-0 hidden w-[58%] md:block"
         aria-hidden="true"
       ></div>
       <div
@@ -78,16 +68,19 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
         style="background-color: var(--contact-hero-img-bleed)"
         aria-hidden="true"
       >
-        <img
-          src={CONTACT_HERO_IMAGE}
-          alt=""
-          width="1200"
-          height="900"
-          class="absolute inset-0 h-full w-full object-cover object-[center_bottom]"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        />
+        <picture>
+          <source srcset={CONTACT_HERO_IMAGE_AVIF} type="image/avif" />
+          <img
+            src={CONTACT_HERO_IMAGE_JPG}
+            alt=""
+            width="1600"
+            height="900"
+            class="absolute inset-0 h-full w-full object-cover object-bottom"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
       </div>
 
       <div class="page-gutter relative z-10">
@@ -106,12 +99,12 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
                 </p>
               </div>
 
-              {/* Datos + CTA: en fila desde >500px; apilados solo en móvil estrecho */}
               <div class="flex w-full max-w-lg flex-col gap-4 min-[501px]:flex-row min-[501px]:items-center min-[501px]:justify-between min-[501px]:gap-6">
                 <div class="flex min-w-0 flex-col gap-2.5">
                   <button
                     type="button"
                     data-copy={s1.email}
+                    aria-label={`${p.copyEmailLabel}: ${s1.email}`}
                     class="inline-flex w-fit max-w-full cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-left font-body text-base font-bold leading-snug text-bark transition-opacity hover:opacity-80"
                   >
                     <Mail class="size-5 shrink-0 text-olive" stroke-width={1.75} aria-hidden="true" />
@@ -120,6 +113,7 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
                   <button
                     type="button"
                     data-copy={s1.phone}
+                    aria-label={`${p.copyPhoneLabel}: ${s1.phone}`}
                     class="inline-flex w-fit max-w-full cursor-pointer items-center gap-2.5 border-0 bg-transparent p-0 text-left font-body text-base font-bold leading-snug text-bark transition-opacity hover:opacity-80"
                   >
                     <Phone class="size-5 shrink-0 text-olive" stroke-width={1.75} aria-hidden="true" />
@@ -140,36 +134,39 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
               </div>
             </div>
 
-            {/* Spacer desktop: reserva el ancho de la imagen */}
             <div class="hidden md:block md:w-[42%]" aria-hidden="true"></div>
           </div>
         </div>
       </div>
 
-      {/* Móvil: franja rectangular ~mitad, full-bleed, parte inferior */}
       <div class="md:hidden" aria-hidden="true">
-        <img
-          src={CONTACT_HERO_IMAGE}
-          alt=""
-          width="1200"
-          height="400"
-          class="h-40 w-full object-cover object-[center_bottom] sm:h-44"
-          loading="eager"
-          decoding="async"
-        />
+        <picture>
+          <source srcset={CONTACT_HERO_IMAGE_AVIF} type="image/avif" />
+          <img
+            src={CONTACT_HERO_IMAGE_JPG}
+            alt=""
+            width="1600"
+            height="400"
+            class="h-40 w-full object-cover object-bottom sm:h-44"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </div>
     </section>
 
-    {/* Franja intermedia: Así trabajamos (sin rayas conectoras) */}
-    <section class="relative bg-white py-12 text-olive md:py-14">
+    <section class="relative bg-white py-12 text-olive md:py-14" aria-labelledby="contact-process-heading">
       <div class="pointer-events-none absolute inset-0 bg-sand-light/30" aria-hidden="true"></div>
       <div class="page-gutter relative">
         <div class="page-shell">
           <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12">
             <div class="flex w-full shrink-0 flex-col gap-3 lg:max-w-[200px]">
-              <p class="font-slogan text-xl leading-none text-olive md:text-2xl">
+              <h2
+                id="contact-process-heading"
+                class="font-slogan text-xl font-normal leading-none text-olive md:text-2xl"
+              >
                 {t.process.kicker}
-              </p>
+              </h2>
               <div class="flex items-center gap-1" aria-hidden="true">
                 <span class="h-[2px] w-16 bg-olive/50"></span>
                 <ArrowRight class="size-4 shrink-0 text-olive/55" stroke-width={2.5} />
@@ -213,10 +210,10 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
       </div>
     </section>
 
-    {/* Última sección: imagen izq (~42%) + copy der; móvil franja baja full-bleed */}
     <section
       class="contact-story relative overflow-hidden bg-cream-light"
       style={`--contact-story-img-bleed: ${CONTACT_STORY_IMG_BLEED}`}
+      aria-labelledby="contact-story-heading"
     >
       <div
         class="pointer-events-none absolute inset-y-0 left-0 hidden w-[42%] md:block"
@@ -228,7 +225,7 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
           alt=""
           width="1200"
           height="900"
-          class="absolute inset-0 h-full w-full object-cover object-[center_bottom]"
+          class="absolute inset-0 h-full w-full object-cover object-bottom"
           loading="lazy"
           decoding="async"
         />
@@ -245,7 +242,10 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
 
             <div class="flex w-full min-w-0 flex-col justify-center pb-12 pt-10 md:w-[58%] md:pb-16 md:pl-8 lg:pl-10">
               <div class="flex max-w-lg flex-col gap-5 md:gap-6">
-                <h2 class="font-body text-[32px] font-normal leading-[1.25] text-bark">
+                <h2
+                  id="contact-story-heading"
+                  class="font-body text-[32px] font-normal leading-[1.25] text-bark"
+                >
                   {s2.heading}
                 </h2>
                 <p class="font-slogan text-2xl leading-none text-bark">
@@ -264,13 +264,13 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
         </div>
       </div>
 
-      <div class="order-last md:hidden" aria-hidden="true">
+      <div class="md:hidden" aria-hidden="true">
         <img
           src="/contactPage2.jpg"
           alt=""
           width="1200"
           height="400"
-          class="h-40 w-full object-cover object-[center_bottom] sm:h-44"
+          class="h-40 w-full object-cover object-bottom sm:h-44"
           loading="lazy"
           decoding="async"
         />
@@ -278,7 +278,6 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
     </section>
   </main>
 
-  {/* Popup formulario Google */}
   <dialog
     class="contact-form-modal fixed inset-0 z-50 m-0 h-full max-h-none w-full max-w-none border-0 bg-transparent p-0 open:flex open:items-center open:justify-center"
     data-contact-form-modal
@@ -309,7 +308,7 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
           type="button"
           class="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-olive transition-colors hover:bg-stone-light/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
           data-contact-form-close
-          aria-label={lang === 'en' ? 'Close' : 'Cerrar'}
+          aria-label={p.closeLabel}
         >
           <X class="size-4 shrink-0" stroke-width={2} aria-hidden="true" />
         </button>
@@ -373,8 +372,12 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
         const src = iframe.dataset.src;
         if (src) iframe.src = src;
       }
-      if (typeof modal.showModal === 'function') modal.showModal();
-      else modal.setAttribute('open', '');
+      if (typeof modal.showModal === 'function') {
+        modal.showModal();
+      } else {
+        modal.setAttribute('open', '');
+        closeBtn?.focus();
+      }
       document.documentElement.style.overflow = 'hidden';
     };
 

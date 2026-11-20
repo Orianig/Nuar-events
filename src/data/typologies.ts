@@ -349,7 +349,7 @@ export const typologies: Typology[] = [
         },
       },
     ],
-    coverImage: '/events/nuar%20experiences/experience-bg-page.jpg',
+    coverImage: '/events/nuar%20experiences/experience-bg-page.avif',
     bleedColor: '#120e0a',
     dossier: '',
   },
