@@ -338,6 +338,15 @@ export const es: Translations = {
   typologyPage: {
     ctaPrimary: 'Solicitar presupuesto',
     ctaSecondary: 'Descargar dossier',
+    featuredKicker: 'Proyectos destacados',
+    featuredTitle: 'Encuentros que dejan huella.',
+    featuredCta: 'Ver eventos',
+    bottomCtaTitle: '¿Creamos vuestro próximo evento?',
+    bottomCtaDescriptionLines: [
+      'Diseñamos experiencias a medida, con una identidad propia',
+      'y cuidando cada detalle.',
+    ],
+    bottomCtaLabel: 'Cuéntanos tu idea',
   },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',

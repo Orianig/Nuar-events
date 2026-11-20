@@ -1,12 +1,16 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
 import TypologyHero from './TypologyHero.astro';
+import TypologyIntro from './TypologyIntro.astro';
+import TypologyItems from './TypologyItems.astro';
+import TypologyFeatured from './TypologyFeatured.astro';
+import ContactSection from '../home/ContactSection.astro';
 import { getTranslations } from '../../i18n';
-import { EVENT_TYPE_SLUGS, type EventTypeSlug } from '../../lib/eventTypes';
+import { EVENT_TYPE_SLUGS, allEventsHref, type EventTypeSlug } from '../../lib/eventTypes';
 import { getTypology, typologyTitleLines } from '../../data/typologies';
-import { localize } from '../../data/stories';
+import { getStoriesByType, localize, storyHref } from '../../data/stories';
 import type { PageProps } from '../../types';
 
 interface Props extends PageProps {
@@ -17,6 +21,7 @@ const { lang, currentPath, base, eventType } = Astro.props as Props;
 const t = getTranslations(lang);
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
 const hrefContact = lang === 'es' ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+const hrefAllEvents = allEventsHref(lang, base);
 
 const typology = getTypology(eventType);
 
@@ -50,6 +55,25 @@ const eventTypes = EVENT_TYPE_SLUGS.map((slug) => ({
 
 const titleLines = typology ? typologyTitleLines(typology.titleHero, lang) : [labels[eventType]];
 const dossierHref = typology?.dossier || undefined;
+
+const bodyTitle = typology ? localize(typology.title, lang).trim() : '';
+const bodyDescription = typology ? localize(typology.description, lang).trim() : '';
+const bodyItems =
+  typology?.items.map((item) => ({
+    icon: item.logo,
+    title: localize(item.title, lang),
+    description: localize(item.description, lang),
+  })) ?? [];
+
+const featuredStories = getStoriesByType(eventType, 4);
+const featuredItems = featuredStories.map((story) => ({
+  event: localize(story.name, lang),
+  attendees:
+    lang === 'en' ? `${story.attendees} guests` : `${story.attendees} Asistentes`,
+  location: localize(story.location, lang),
+  image: story.coverImage,
+  href: storyHref(story.code, lang, base),
+}));
 ---
 
 <Layout title={pageTitle} description={pageDescription} lang={lang} currentPath={currentPath}>
@@ -69,20 +93,49 @@ const dossierHref = typology?.dossier || undefined;
 
   {
     typology ? (
-      <TypologyHero
-        littleTitle={localize(typology.littleTitleHero, lang)}
-        titleLines={titleLines}
-        description={localize(typology.descriptionHero, lang)}
-        ctaPrimary={t.typologyPage.ctaPrimary}
-        ctaSecondary={t.typologyPage.ctaSecondary}
-        hrefPrimary={hrefContact}
-        hrefSecondary={dossierHref}
-        backgroundImage={typology.coverImage}
-        bleedColor={typology.bleedColor}
-      />
+      <>
+        <TypologyHero
+          littleTitle={localize(typology.littleTitleHero, lang)}
+          titleLines={titleLines}
+          description={localize(typology.descriptionHero, lang)}
+          ctaPrimary={t.typologyPage.ctaPrimary}
+          ctaSecondary={t.typologyPage.ctaSecondary}
+          hrefPrimary={hrefContact}
+          hrefSecondary={dossierHref}
+          backgroundImage={typology.coverImage}
+          bleedColor={typology.bleedColor}
+        />
+
+        <main class="relative bg-white text-olive">
+          <div class="pointer-events-none absolute inset-0 bg-cream-light/30" aria-hidden="true"></div>
+          <div class="page-gutter relative">
+            <div class="page-shell flex flex-col gap-10 py-10">
+              {bodyTitle && <TypologyIntro title={bodyTitle} description={bodyDescription} />}
+              {bodyItems.length > 0 && <TypologyItems items={bodyItems} />}
+              {featuredItems.length > 0 && (
+                <TypologyFeatured
+                  kicker={t.typologyPage.featuredKicker}
+                  title={t.typologyPage.featuredTitle}
+                  ctaLabel={t.typologyPage.featuredCta}
+                  hrefEvents={hrefAllEvents}
+                  items={featuredItems}
+                />
+              )}
+            </div>
+          </div>
+        </main>
+
+        <ContactSection
+          titleLines={[t.typologyPage.bottomCtaTitle]}
+          descriptionLines={[...t.typologyPage.bottomCtaDescriptionLines]}
+          ctaLabel={t.typologyPage.bottomCtaLabel}
+          hrefContact={hrefContact}
+          backgroundImage="/events/all-events-bg-section.avif"
+        />
+      </>
     ) : (
       <main class="flex min-h-[70vh] flex-col items-center justify-center bg-stone px-8 pb-16 pt-28 text-center">
-        <h1 class="font-title text-4xl text-bark md:text-5xl">{labels[eventType]}</h1>
+        <h1 class="font-body text-4xl text-bark md:text-5xl">{labels[eventType]}</h1>
       </main>
     )
   }

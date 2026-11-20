@@ -1,4 +1,4 @@
----
+﻿---
 import type { SectionOneProps } from '../../types';
 
 const { image1, image2, title, paragraph, bullets = [], backgroundColor } = Astro.props as SectionOneProps;
@@ -13,7 +13,7 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
   <div class="page-shell">
     <div class="md:hidden flex flex-col gap-6">
       <div class="section-one-m-title overflow-hidden">
-        <h2 class="font-title text-3xl font-semibold text-bark leading-tight text-left pb-4">
+        <h2 class="font-body text-3xl font-semibold text-bark leading-tight text-left pb-4">
           {title}
         </h2>
       </div>
@@ -88,7 +88,7 @@ const image2Src = image2.startsWith('http') ? image2 : `${assetBase}${image2.rep
       </div>
       <div class="md:pl-8 md:border-l md:border-dashed md:border-bark/20 flex flex-col">
         <div class="section-one-title w-full text-center md:text-left mb-6 overflow-hidden">
-          <h2 class="font-title text-4xl font-semibold text-bark leading-tight inline">
+          <h2 class="font-body text-4xl font-semibold text-bark leading-tight inline">
             {title}
           </h2>
         </div>

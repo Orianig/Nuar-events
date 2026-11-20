@@ -99,6 +99,7 @@ export interface ReviewsSectionProps {
 
 export interface ContactSectionProps {
   titleLines: string[];
+  descriptionLines?: string[];
   ctaLabel: string;
   hrefContact: string;
   backgroundImage?: string;

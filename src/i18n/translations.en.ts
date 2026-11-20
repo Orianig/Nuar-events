@@ -338,6 +338,15 @@ export const en: Translations = {
   typologyPage: {
     ctaPrimary: 'Request a quote',
     ctaSecondary: 'Download dossier',
+    featuredKicker: 'Featured projects',
+    featuredTitle: 'Gatherings that leave a mark.',
+    featuredCta: 'View events',
+    bottomCtaTitle: 'Shall we create your next event?',
+    bottomCtaDescriptionLines: [
+      'We design tailored experiences, with their own identity',
+      'and care in every detail.',
+    ],
+    bottomCtaLabel: 'Tell us your idea',
   },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',

@@ -186,6 +186,12 @@ export interface Translations {
   typologyPage: {
     ctaPrimary: string;
     ctaSecondary: string;
+    featuredKicker: string;
+    featuredTitle: string;
+    featuredCta: string;
+    bottomCtaTitle: string;
+    bottomCtaDescriptionLines: string[];
+    bottomCtaLabel: string;
   };
   sectionOne: {
     image1: string;

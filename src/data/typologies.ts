@@ -64,14 +64,59 @@ export const typologies: Typology[] = [
       en: 'Gatherings that strengthen teams, celebrate achievements and create connections beyond the workplace.',
     },
     title: {
-      es: '',
-      en: '',
+      es: 'Cada equipo tiene su propia historia.',
+      en: 'Every team has its own story.',
     },
     description: {
-      es: '',
-      en: '',
+      es: 'Diseñamos eventos que responden a la identidad de cada empresa, desde pequeños encuentros de equipo hasta grandes celebraciones, cuidando cada detalle y el entorno en el que suceden.',
+      en: 'We design events that reflect each company’s identity, from small team gatherings to large celebrations, caring for every detail and the setting where they take place.',
     },
-    items: [],
+    items: [
+      {
+        logo: '/icons/people.png',
+        title: {
+          es: 'Team buildings',
+          en: 'Team buildings',
+        },
+        description: {
+          es: 'Actividades que fortalecen la conexión del equipo.',
+          en: 'Activities that strengthen team connection.',
+        },
+      },
+      {
+        logo: '/icons/sign.png',
+        title: {
+          es: 'Comidas y cenas de empresa',
+          en: 'Company lunches and dinners',
+        },
+        description: {
+          es: 'Encuentros distendidos para compartir y celebrar.',
+          en: 'Relaxed gatherings to share and celebrate.',
+        },
+      },
+      {
+        logo: '/icons/stars.png',
+        title: {
+          es: 'Celebraciones y aniversarios',
+          en: 'Celebrations and anniversaries',
+        },
+        description: {
+          es: 'Momentos especiales que refuerzan la cultura de la empresa.',
+          en: 'Special moments that reinforce company culture.',
+        },
+      },
+      {
+        logo: '/icons/leaf.png',
+        title: {
+          es: 'Jornadas y encuentros',
+          en: 'Workshops and gatherings',
+        },
+        description: {
+          es: 'Espacios para inspirar, crear y planificar el futuro.',
+          en: 'Spaces to inspire, create and plan the future.',
+        },
+      },
+    ],
     coverImage: '/events/corporate%20events/corporate-bg-page.jpg',
     bleedColor: '#120e0a',
     dossier: '/documents/NuarEvents2026-Empresas.pdf',

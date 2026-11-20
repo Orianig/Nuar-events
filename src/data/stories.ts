@@ -124,6 +124,10 @@ export function getFeaturedStories(): Story[] {
   return FEATURED_STORY_CODES.map((code) => getStory(code)).filter(Boolean) as Story[];
 }
 
+export function getStoriesByType(type: EventTypeSlug, limit = 4): Story[] {
+  return stories.filter((s) => s.type === type).slice(0, limit);
+}
+
 export function storyHref(code: string, lang: 'es' | 'en', base = ''): string {
   const b = base.endsWith('/') ? base.slice(0, -1) : base;
   if (lang === 'en') {

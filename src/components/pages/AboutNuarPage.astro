@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
@@ -32,8 +32,8 @@ const sectionTwo = p.originStory;
   <div class="w-full flex flex-col gap-5">
     <div class="flex items-start">
       <div>
-      <p class="font-title  text-2xl md:text-4xl">{sectionOne.kicker}</p>
-      <h1 class="font-title text-6xl md:text-8xl leading-none">{p.title}</h1>
+      <p class="font-body  text-2xl md:text-4xl">{sectionOne.kicker}</p>
+      <h1 class="font-body text-6xl md:text-8xl leading-none">{p.title}</h1>
       </div>
       <img
         src="/icons/leaf1.png"
@@ -115,8 +115,8 @@ const sectionTwo = p.originStory;
             loading="lazy"
             decoding="async"
           />
-          <p class="relative z-10 font-title text-2xl md:text-3xl">{sectionTwo.kicker}</p>
-          <h2 class="relative z-10 font-title text-6xl md:text-7xl">{sectionTwo.title}</h2>
+          <p class="relative z-10 font-body text-2xl md:text-3xl">{sectionTwo.kicker}</p>
+          <h2 class="relative z-10 font-body text-6xl md:text-7xl">{sectionTwo.title}</h2>
         </div>
 
         <div class="relative pt-4 pl-5 flex flex-col gap-5">

@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
@@ -56,7 +56,7 @@ const hexNotes = [
     <div class="mx-auto max-w-5xl px-6 py-12 md:px-10 md:py-16">
       <header class="mb-12 border-b border-bark/15 pb-8">
         <p class="text-sm uppercase tracking-[0.18em] text-bark/60">Design system</p>
-        <h1 class="mt-2 font-title text-4xl md:text-5xl">Componentes Nuar</h1>
+        <h1 class="mt-2 font-body text-4xl md:text-5xl">Componentes Nuar</h1>
         <p class="mt-3 max-w-2xl text-base text-bark/80">
           Página interna de preview. No indexada.
         </p>
@@ -73,7 +73,7 @@ const hexNotes = [
       </header>
 
       <section id="colores" class="mb-16 scroll-mt-8" aria-labelledby="colores-title">
-        <h2 id="colores-title" class="font-title text-3xl">Colores</h2>
+        <h2 id="colores-title" class="font-body text-3xl">Colores</h2>
         <div class="mt-6 overflow-x-auto rounded-2xl bg-[#ececec] p-5 md:p-8">
           <div
             class="grid min-w-[34rem] grid-cols-[4.5rem_repeat(6,minmax(0,1fr))] gap-3"
@@ -110,15 +110,12 @@ const hexNotes = [
       </section>
 
       <section id="fuente" class="mb-16 scroll-mt-8" aria-labelledby="fuente-title">
-        <h2 id="fuente-title" class="font-title text-3xl">Fuente</h2>
+        <h2 id="fuente-title" class="font-body text-3xl">Fuente</h2>
         <div class="mt-6 space-y-8 rounded-2xl bg-[#ececec] p-5 md:p-8">
           <div>
-            <p class="mb-2 text-sm text-bark/60">Títulos — Combo</p>
-            <p class="font-title text-2xl leading-snug text-ink md:text-3xl">{sample}</p>
-          </div>
-          <div>
-            <p class="mb-2 text-sm text-bark/60">General — Plus Jakarta Sans</p>
-            <p class="font-body text-lg text-ink">{sample}</p>
+            <p class="mb-2 text-sm text-bark/60">Títulos y cuerpo — Plus Jakarta Sans</p>
+            <p class="font-body text-2xl leading-snug text-ink md:text-3xl">{sample}</p>
+            <p class="mt-2 font-body text-lg text-ink">{sample}</p>
             <p class="mt-2 font-body text-lg font-bold text-ink">{sample}</p>
             <p class="mt-2 font-body text-lg italic text-ink">{sample}</p>
           </div>
@@ -130,7 +127,7 @@ const hexNotes = [
       </section>
 
       <section id="botones" class="mb-16 scroll-mt-8" aria-labelledby="botones-title">
-        <h2 id="botones-title" class="font-title text-3xl">Botones</h2>
+        <h2 id="botones-title" class="font-body text-3xl">Botones</h2>
         <p class="mt-2 text-sm text-bark/70">Small 36px · Medium 44px · Large 56px. Hover en el Default.</p>
 
         <div class="mt-8 grid gap-8">
@@ -222,7 +219,7 @@ const hexNotes = [
       </section>
 
       <section id="chips" class="mb-16 scroll-mt-8" aria-labelledby="chips-title">
-        <h2 id="chips-title" class="font-title text-3xl">Chips</h2>
+        <h2 id="chips-title" class="font-body text-3xl">Chips</h2>
         <p class="mt-2 text-sm text-bark/70">Default sin borde · Active con borde · Hover en cada uno.</p>
         <div class="mt-6 flex flex-col gap-3 rounded-2xl bg-[#f5f5f5] p-6">
           <div class="flex items-center gap-4">
@@ -241,7 +238,7 @@ const hexNotes = [
       </section>
 
       <section id="cards" class="mb-16 scroll-mt-8" aria-labelledby="cards-title">
-        <h2 id="cards-title" class="font-title text-3xl">Cards</h2>
+        <h2 id="cards-title" class="font-body text-3xl">Cards</h2>
         <p class="mt-2 text-sm text-bark/70">Responsive al contenedor. Tres tipos: media, destacado y reseña.</p>
 
         <div class="mt-8">
@@ -296,7 +293,7 @@ const hexNotes = [
       </section>
 
       <section id="iconos" class="mb-8 scroll-mt-8" aria-labelledby="iconos-title">
-        <h2 id="iconos-title" class="font-title text-3xl">Iconos</h2>
+        <h2 id="iconos-title" class="font-body text-3xl">Iconos</h2>
 
         <div class="mt-6 rounded-2xl bg-[#f5f5f5] p-6">
           <h3 class="mb-4 text-sm font-semibold uppercase tracking-wide text-bark/60">Botón icono</h3>

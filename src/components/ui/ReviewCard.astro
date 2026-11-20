@@ -1,4 +1,4 @@
----
+﻿---
 import Star from '@lucide/astro/icons/star';
 
 interface Props {
@@ -57,7 +57,7 @@ const shellClass = [
         <div class:list={['flex min-h-0 gap-2', compact ? 'gap-2.5' : 'gap-3']}>
           <span
             class:list={[
-              'shrink-0 font-title leading-none text-olive-light',
+              'shrink-0 font-body leading-none text-olive-light',
               compact ? 'text-6xl md:text-7xl' : 'text-4xl',
             ]}
             aria-hidden="true"
@@ -119,7 +119,7 @@ const shellClass = [
       <blockquote class:list={['flex min-h-0 flex-1 gap-2', compact ? 'gap-2.5' : 'gap-3']}>
         <span
           class:list={[
-            'shrink-0 font-title leading-none text-olive-light',
+            'shrink-0 font-body leading-none text-olive-light',
             compact ? 'text-6xl md:text-7xl' : 'text-4xl',
           ]}
           aria-hidden="true"

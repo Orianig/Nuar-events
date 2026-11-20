@@ -4,6 +4,7 @@ import type { ContactSectionProps } from '../../types';
 
 const {
   titleLines = [],
+  descriptionLines = [],
   ctaLabel,
   hrefContact,
   backgroundImage = '/home-bg-section.jpg',
@@ -38,6 +39,19 @@ const {
             ))
           }
         </h2>
+
+        {
+          descriptionLines.length > 0 && (
+            <p class="font-body text-base leading-relaxed text-stone-light/85 md:text-lg">
+              {descriptionLines.map((line, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </p>
+          )
+        }
 
         {
           ctaLabel && hrefContact && (
