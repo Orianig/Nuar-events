@@ -71,10 +71,9 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
   />
 
   <main class="relative flex min-h-dvh flex-col bg-white pt-28 text-olive" data-events-all data-empty="0">
-    <div class="pointer-events-none absolute inset-0 bg-cream-light/30" aria-hidden="true"></div>
-
     <div class="page-gutter relative" data-events-main>
-      <div class="page-shell">
+      <div class="pointer-events-none absolute inset-0 bg-cream-light/30" aria-hidden="true"></div>
+      <div class="page-shell relative">
         <header class="max-w-2xl">
           <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{t.eventsAll.kicker}</p>
           <h1 class="mt-3 font-body text-2xl font-normal leading-[1.25] text-olive md:text-[32px]">
@@ -103,7 +102,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
         <div class="h-px w-full bg-olive/20" aria-hidden="true"></div>
 
         <div
-          class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-x-5 gap-y-5 pt-5 pb-6 sm:gap-y-6 sm:pb-8"
+          class="grid grid-cols-1 gap-x-5 gap-y-5 pt-5 pb-6 min-[480px]:grid-cols-2 min-[900px]:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] sm:gap-y-6 sm:pb-8"
           data-events-grid
         >
           {
@@ -136,23 +135,21 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
     </div>
 
     <section
-      class="events-all-cta relative mt-6 flex min-h-[240px] items-center overflow-hidden sm:mt-8 md:min-h-[280px] lg:min-h-[320px]"
+      class="events-all-cta relative z-[1] -mb-px mt-6 flex w-full min-h-[240px] items-center overflow-hidden bg-[#24281a] sm:mt-8 md:min-h-[280px] lg:min-h-[320px]"
       aria-labelledby="events-all-cta-title"
     >
-      <div class="pointer-events-none absolute inset-0 flex justify-center" aria-hidden="true">
-        <div class="events-all-cta-bg relative h-full w-full max-w-370">
-          <img
-            src="/events/all-events-bg-section.avif"
-            alt=""
-            width="1480"
-            height="640"
-            class="h-full w-full object-cover object-[center_55%] opacity-80 md:opacity-100 md:object-center"
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="events-all-cta-edge events-all-cta-edge-left"></div>
-          <div class="events-all-cta-edge events-all-cta-edge-right"></div>
-        </div>
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <img
+          src="/events/all-events-bg-section.avif"
+          alt=""
+          width="1480"
+          height="640"
+          class="absolute inset-0 h-full w-full scale-[1.02] object-cover object-[center_55%] opacity-80 md:opacity-100 md:object-center"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="events-all-cta-edge events-all-cta-edge-left"></div>
+        <div class="events-all-cta-edge events-all-cta-edge-right"></div>
       </div>
 
       <div class="page-gutter relative z-10 w-full py-7 md:py-8 lg:py-9">
@@ -178,7 +175,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
               href={hrefContact}
               variant="ghost"
               size="lg"
-              class="w-full border-stone-light! text-stone-light! hover:bg-stone-light/10! active:bg-stone-light/20! md:w-auto"
+              class="w-auto max-[430px]:w-full border-stone-light! text-stone-light! hover:bg-stone-light/10! active:bg-stone-light/20!"
             >
               {t.eventsAll.ctaLabel}
             </Button>
@@ -213,14 +210,14 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
     }
 
     .events-all-cta {
-      background-color: #24281a;
+      box-shadow: 0 2px 0 0 #24281a;
     }
 
     .events-all-cta-edge {
       position: absolute;
       top: 0;
       bottom: 0;
-      width: clamp(2.5rem, 6vw, 5.5rem);
+      width: clamp(4rem, 18vw, 14rem);
       pointer-events: none;
     }
 
@@ -229,7 +226,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
       background: linear-gradient(
         to right,
         #24281a 0%,
-        color-mix(in srgb, #24281a 70%, transparent) 40%,
+        color-mix(in srgb, #24281a 75%, transparent) 45%,
         transparent 100%
       );
     }

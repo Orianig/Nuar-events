@@ -54,7 +54,7 @@ const EventTypeIcon =
 
 const cardClass = [
   'group/card relative flex w-full min-w-0 flex-col overflow-hidden rounded-xl border-[0.8px] border-olive-light bg-white',
-  compact ? 'aspect-[280/340]' : 'aspect-[341/420]',
+  compact ? '' : 'aspect-[341/420]',
   'origin-center transition-[box-shadow,transform] duration-200',
   isHoverPreview ? 'scale-[1.02] shadow-btn' : 'shadow-none hover:scale-[1.02] hover:shadow-btn',
   'focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-olive',
@@ -64,14 +64,20 @@ const cardClass = [
   .join(' ');
 
 const bodyClass = [
-  'relative flex min-h-0 flex-1 flex-col items-center text-center transition-colors duration-200',
-  compact ? 'px-4 pb-3 pt-7' : 'px-5 pb-4 pt-9',
+  'relative flex min-h-0 flex-col items-center text-center transition-colors duration-200',
+  compact ? 'flex-none px-4 pb-3 pt-7' : 'flex-1 px-5 pb-4 pt-9',
   isHoverPreview ? 'bg-stone-light/45' : 'bg-stone-light/25 group-hover/card:bg-stone-light/45',
 ].join(' ');
 ---
 
 <article class={cardClass}>
-  <div class="relative h-[42%] w-full shrink-0 overflow-hidden bg-white" data-card-media>
+  <div
+    class:list={[
+      'relative w-full shrink-0 overflow-hidden bg-white',
+      compact ? 'aspect-[16/10]' : 'h-[42%]',
+    ]}
+    data-card-media
+  >
     {
       image ? (
         <img
@@ -139,7 +145,7 @@ const bodyClass = [
       }
     </div>
 
-    <div class:list={['mt-auto flex w-full justify-center', compact ? 'pt-3' : 'pt-6']}>
+    <div class:list={['flex w-full justify-center', compact ? 'mt-3 pt-1' : 'mt-auto pt-6']}>
       <Button variant="text" size={compact ? 'sm' : 'md'} href={href}>
         {ctaLabel}
       </Button>

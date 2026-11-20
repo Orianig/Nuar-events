@@ -11,20 +11,18 @@ const {
 ---
 
 <section class="cta-section relative flex min-h-[260px] items-center overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
-  <div class="pointer-events-none absolute inset-0 flex justify-center" aria-hidden="true">
-    <div class="cta-bg-frame relative h-full w-full max-w-370">
-      <img
-        src={backgroundImage}
-        alt=""
-        width="1480"
-        height="640"
-        class="h-full w-full object-cover object-[center_55%] opacity-70 md:opacity-100 md:object-center"
-        loading="lazy"
-        decoding="async"
-      />
-      <div class="cta-bg-edge cta-bg-edge-left"></div>
-      <div class="cta-bg-edge cta-bg-edge-right"></div>
-    </div>
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <img
+      src={backgroundImage}
+      alt=""
+      width="1480"
+      height="640"
+      class="absolute inset-0 h-full w-full scale-[1.02] object-cover object-[center_55%] opacity-70 md:opacity-100 md:object-center"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="cta-bg-edge cta-bg-edge-left"></div>
+    <div class="cta-bg-edge cta-bg-edge-right"></div>
   </div>
 
   <div class="page-gutter relative z-10 w-full py-10 md:py-12 lg:py-14">
@@ -47,7 +45,7 @@ const {
               href={hrefContact}
               variant="ghost"
               size="lg"
-              class="w-full border-stone-light! text-stone-light! hover:bg-stone-light/10! active:bg-stone-light/20! md:w-auto"
+              class="w-auto max-[430px]:w-full border-stone-light! text-stone-light! hover:bg-stone-light/10! active:bg-stone-light/20!"
             >
               {ctaLabel}
             </Button>
@@ -67,7 +65,7 @@ const {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: clamp(2.5rem, 6vw, 5.5rem);
+    width: clamp(4rem, 18vw, 14rem);
     pointer-events: none;
   }
 
@@ -76,7 +74,7 @@ const {
     background: linear-gradient(
       to right,
       var(--color-cta-bleed) 0%,
-      color-mix(in srgb, var(--color-cta-bleed) 70%, transparent) 40%,
+      color-mix(in srgb, var(--color-cta-bleed) 75%, transparent) 45%,
       transparent 100%
     );
   }
