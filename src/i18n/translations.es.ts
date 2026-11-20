@@ -309,6 +309,14 @@ export const es: Translations = {
     kicker: 'Lo que dicen de NUAR',
     title: 'Palabras que nos inspiran.',
   },
+  contactCta: {
+    titleLines: [
+      'Hay momentos que pasan.',
+      'Y otros que permanecen.',
+      'Empecemos a crear el tuyo.',
+    ],
+    ctaLabel: 'Hablemos de tu evento',
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',

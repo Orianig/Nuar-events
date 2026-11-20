@@ -1,0 +1,93 @@
+---
+import Button from '../ui/Button.astro';
+import type { ContactSectionProps } from '../../types';
+
+const {
+  titleLines = [],
+  ctaLabel,
+  hrefContact,
+  backgroundImage = '/home-bg-section.jpg',
+} = Astro.props as ContactSectionProps;
+---
+
+<section class="cta-section relative flex min-h-[260px] items-center overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+  <div class="pointer-events-none absolute inset-0 flex justify-center" aria-hidden="true">
+    <div class="cta-bg-frame relative h-full w-full max-w-370">
+      <img
+        src={backgroundImage}
+        alt=""
+        width="1480"
+        height="640"
+        class="h-full w-full object-cover object-[center_55%] opacity-70 md:opacity-100 md:object-center"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="cta-bg-edge cta-bg-edge-left"></div>
+      <div class="cta-bg-edge cta-bg-edge-right"></div>
+    </div>
+  </div>
+
+  <div class="page-gutter relative z-10 w-full py-10 md:py-12 lg:py-14">
+    <div class="page-shell">
+      <div class="flex w-full max-w-xl flex-col items-start gap-6 md:max-w-2xl md:gap-8">
+        <h2 class="font-body text-[32px] leading-[1.45] tracking-wide text-stone-light">
+          {
+            titleLines.map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))
+          }
+        </h2>
+
+        {
+          ctaLabel && hrefContact && (
+            <Button
+              href={hrefContact}
+              variant="ghost"
+              size="lg"
+              class="w-full border-stone-light! text-stone-light! hover:bg-stone-light/10! active:bg-stone-light/20! md:w-auto"
+            >
+              {ctaLabel}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    background-color: var(--color-cta-bleed);
+  }
+
+  .cta-bg-edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(2.5rem, 6vw, 5.5rem);
+    pointer-events: none;
+  }
+
+  .cta-bg-edge-left {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      var(--color-cta-bleed) 0%,
+      color-mix(in srgb, var(--color-cta-bleed) 70%, transparent) 40%,
+      transparent 100%
+    );
+  }
+
+  .cta-bg-edge-right {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      var(--color-cta-bleed) 0%,
+      color-mix(in srgb, var(--color-cta-bleed) 75%, transparent) 45%,
+      transparent 100%
+    );
+  }
+</style>

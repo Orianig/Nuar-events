@@ -97,6 +97,13 @@ export interface ReviewsSectionProps {
   items: ReviewCardItem[];
 }
 
+export interface ContactSectionProps {
+  titleLines: string[];
+  ctaLabel: string;
+  hrefContact: string;
+  backgroundImage?: string;
+}
+
 export interface FooterProps {
   brandName?: string;
   sloganLine1?: string;

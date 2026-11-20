@@ -166,6 +166,10 @@ export interface Translations {
     kicker: string;
     title: string;
   };
+  contactCta: {
+    titleLines: string[];
+    ctaLabel: string;
+  };
   sectionOne: {
     image1: string;
     image2: string;
