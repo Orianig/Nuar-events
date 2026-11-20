@@ -183,6 +183,10 @@ export interface Translations {
     ctaLabel: string;
     emptyFilter: string;
   };
+  typologyPage: {
+    ctaPrimary: string;
+    ctaSecondary: string;
+  };
   sectionOne: {
     image1: string;
     image2: string;

@@ -68,6 +68,64 @@
   background-color: transparent;
 }
 
+/* --- Button primary: fill CSS (sin imagen; misma forma de gradient en hover para evitar titileo) --- */
+a.btn-primary-fill,
+button.btn-primary-fill {
+  background-color: #78754d !important;
+  background-image: radial-gradient(
+    circle farthest-corner at center center,
+    #78754d 0%,
+    #646241 35%
+  ) !important;
+  box-shadow: var(--shadow-btn);
+  transition-property: color, border-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+a.btn-primary-fill:hover,
+button.btn-primary-fill:hover {
+  background-color: var(--color-olive) !important;
+  background-image: radial-gradient(
+    circle farthest-corner at center center,
+    var(--color-olive) 0%,
+    var(--color-olive) 35%
+  ) !important;
+}
+
+a.btn-primary-fill:active,
+button.btn-primary-fill:active {
+  background-color: var(--color-olive-dark) !important;
+  background-image: radial-gradient(
+    circle farthest-corner at center center,
+    var(--color-olive-dark) 0%,
+    var(--color-olive-dark) 35%
+  ) !important;
+  box-shadow: var(--shadow-btn-active);
+}
+
+a.btn-primary-fill.is-loading,
+button.btn-primary-fill.is-loading {
+  background-color: #78754d !important;
+  background-image: radial-gradient(
+    circle farthest-corner at center center,
+    #78754d 0%,
+    #646241 35%
+  ) !important;
+  box-shadow: var(--shadow-btn);
+}
+
+a.btn-primary-fill.is-active-preview,
+button.btn-primary-fill.is-active-preview {
+  background-color: var(--color-olive-dark) !important;
+  background-image: radial-gradient(
+    circle farthest-corner at center center,
+    var(--color-olive-dark) 0%,
+    var(--color-olive-dark) 35%
+  ) !important;
+  box-shadow: var(--shadow-btn-active);
+}
+
 /* --- Navbar: estado al hacer scroll --- */
 #main-nav.nav-scrolled {
   @apply border-stone bg-stone-light/95 shadow-sm;

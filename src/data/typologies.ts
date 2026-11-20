@@ -18,7 +18,7 @@ export type TypologyItem = {
 };
 
 /**
- * Contendido de cada página de tipología.
+ * Contenido de cada página de tipología.
  * Tipology → slug de ruta (corporativos | celebraciones | bodas | experiencias-nuar)
  */
 export type Typology = {
@@ -26,15 +26,19 @@ export type Typology = {
   id: EventTypeSlug;
   /** Clave legible: corporate | privateCelebrations | weddings | nuarExperiences */
   key: TypologyKey;
-  /** Etiqueta corta de tipología (kicker / chip) */
+  /** Etiqueta corta de tipología */
   typology: LocalizedString;
+  /** Título grande del hero (usar \\n para saltos de línea) */
   titleHero: LocalizedString;
   descriptionHero: LocalizedString;
+  /** Título slogan / cursiva encima del título */
   littleTitleHero: LocalizedString;
   title: LocalizedString;
   description: LocalizedString;
   items: TypologyItem[];
   coverImage: string;
+  /** Color de bleed lateral acorde a la imagen del hero */
+  bleedColor: string;
   /** PDF u otro recurso descargable; vacío si aún no hay */
   dossier: string;
 };
@@ -47,17 +51,17 @@ export const typologies: Typology[] = [
       es: 'Corporativo',
       en: 'Corporate',
     },
+    littleTitleHero: {
+      es: 'Experiencias que conectan',
+      en: 'Experiences that connect',
+    },
     titleHero: {
-      es: '',
-      en: '',
+      es: 'EVENTOS\nCORPORATIVOS',
+      en: 'CORPORATE\nEVENTS',
     },
     descriptionHero: {
-      es: '',
-      en: '',
-    },
-    littleTitleHero: {
-      es: '',
-      en: '',
+      es: 'Encuentros que fortalecen equipos, celebran logros y crean conexiones más allá del entorno de trabajo.',
+      en: 'Gatherings that strengthen teams, celebrate achievements and create connections beyond the workplace.',
     },
     title: {
       es: '',
@@ -69,7 +73,8 @@ export const typologies: Typology[] = [
     },
     items: [],
     coverImage: '/events/corporate%20events/corporate-bg-page.jpg',
-    dossier: '',
+    bleedColor: '#120e0a',
+    dossier: '/documents/NuarEvents2026-Empresas.pdf',
   },
   {
     id: 'celebraciones',
@@ -78,17 +83,17 @@ export const typologies: Typology[] = [
       es: 'Celebración privada',
       en: 'Private celebration',
     },
+    littleTitleHero: {
+      es: 'Experiencias que conectan',
+      en: 'Experiences that connect',
+    },
     titleHero: {
-      es: '',
-      en: '',
+      es: 'CELEBRACIONES\nPRIVADAS',
+      en: 'PRIVATE\nCELEBRATIONS',
     },
     descriptionHero: {
-      es: '',
-      en: '',
-    },
-    littleTitleHero: {
-      es: '',
-      en: '',
+      es: 'Momentos personales diseñados con calma, detalle y una identidad propia para cada celebración.',
+      en: 'Personal moments designed with calm, detail and a unique identity for every celebration.',
     },
     title: {
       es: '',
@@ -100,7 +105,8 @@ export const typologies: Typology[] = [
     },
     items: [],
     coverImage: '/events/private%20celebrations/celebrations-bg-page.jpg',
-    dossier: '',
+    bleedColor: '#120e0a',
+    dossier: '/documents/NuarEvents2026-Empresas.pdf',
   },
   {
     id: 'bodas',
@@ -109,17 +115,17 @@ export const typologies: Typology[] = [
       es: 'Boda',
       en: 'Wedding',
     },
+    littleTitleHero: {
+      es: 'Experiencias que conectan',
+      en: 'Experiences that connect',
+    },
     titleHero: {
-      es: '',
-      en: '',
+      es: 'BODAS',
+      en: 'WEDDINGS',
     },
     descriptionHero: {
-      es: '',
-      en: '',
-    },
-    littleTitleHero: {
-      es: '',
-      en: '',
+      es: 'El día más importante, pensado con sensibilidad, ritmo y cuidado en cada detalle.',
+      en: 'The most important day, planned with sensitivity, pace and care in every detail.',
     },
     title: {
       es: '',
@@ -131,7 +137,8 @@ export const typologies: Typology[] = [
     },
     items: [],
     coverImage: '/events/weddings/weddings-bg-page.jpg',
-    dossier: '',
+    bleedColor: '#120e0a',
+    dossier: '/documents/NuarEvents2026-Empresas.pdf',
   },
   {
     id: 'experiencias-nuar',
@@ -140,17 +147,17 @@ export const typologies: Typology[] = [
       es: 'Experiencia NUAR',
       en: 'NUAR experience',
     },
+    littleTitleHero: {
+      es: 'Experiencias que conectan',
+      en: 'Experiences that connect',
+    },
     titleHero: {
-      es: '',
-      en: '',
+      es: 'EXPERIENCIAS\nNUAR',
+      en: 'NUAR\nEXPERIENCES',
     },
     descriptionHero: {
-      es: '',
-      en: '',
-    },
-    littleTitleHero: {
-      es: '',
-      en: '',
+      es: 'Encuentros creados por nosotras para descubrir, compartir y conectar con las personas.',
+      en: 'Gatherings created by us to discover, share and connect with people.',
     },
     title: {
       es: '',
@@ -161,8 +168,10 @@ export const typologies: Typology[] = [
       en: '',
     },
     items: [],
+    // HEIF: poco soporte web; usar JPG cuando esté disponible
     coverImage: '/events/nuar%20experiences/experience-bg-page.heif',
-    dossier: '',
+    bleedColor: '#120e0a',
+    dossier: '/documents/NuarEvents2026-Empresas.pdf',
   },
 ];
 
@@ -172,4 +181,11 @@ export function getTypology(id: EventTypeSlug): Typology | undefined {
 
 export function getTypologyByKey(key: TypologyKey): Typology | undefined {
   return typologies.find((t) => t.key === key);
+}
+
+export function typologyTitleLines(titleHero: LocalizedString, lang: 'es' | 'en'): string[] {
+  return titleHero[lang]
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean);
 }

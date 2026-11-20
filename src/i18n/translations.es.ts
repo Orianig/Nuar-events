@@ -335,6 +335,10 @@ export const es: Translations = {
     emptyFilter:
       'Ahora no contamos con eventos de este tipo. Esperamos actualizarlo próximamente.',
   },
+  typologyPage: {
+    ctaPrimary: 'Solicitar presupuesto',
+    ctaSecondary: 'Descargar dossier',
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',

@@ -2,8 +2,11 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
+import TypologyHero from './TypologyHero.astro';
 import { getTranslations } from '../../i18n';
 import { EVENT_TYPE_SLUGS, type EventTypeSlug } from '../../lib/eventTypes';
+import { getTypology, typologyTitleLines } from '../../data/typologies';
+import { localize } from '../../data/stories';
 import type { PageProps } from '../../types';
 
 interface Props extends PageProps {
@@ -13,6 +16,9 @@ interface Props extends PageProps {
 const { lang, currentPath, base, eventType } = Astro.props as Props;
 const t = getTranslations(lang);
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
+const hrefContact = lang === 'es' ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+
+const typology = getTypology(eventType);
 
 const labels = {
   corporativos: t.nav.eventTypes.corporate,
@@ -21,19 +27,32 @@ const labels = {
   'experiencias-nuar': t.nav.eventTypes.experiences,
 } as const;
 
-const title = `${labels[eventType]} - Nuar`;
-const description =
-  lang === 'en'
-    ? `Nuar Events — ${labels[eventType]}. Page coming soon.`
-    : `Nuar Events — ${labels[eventType]}. Página en construcción.`;
+const pageTitle = typology
+  ? `${localize(typology.typology, lang)} - Nuar`
+  : `${labels[eventType]} - Nuar`;
+const pageDescription = typology
+  ? localize(typology.descriptionHero, lang)
+  : lang === 'en'
+    ? `Nuar Events — ${labels[eventType]}.`
+    : `Nuar Events — ${labels[eventType]}.`;
 
 const eventTypes = EVENT_TYPE_SLUGS.map((slug) => ({
   label: labels[slug],
-  href: lang === 'en' ? (b ? `${b}/en/eventos/${slug}` : `/en/eventos/${slug}`) : b ? `${b}/eventos/${slug}` : `/eventos/${slug}`,
+  href:
+    lang === 'en'
+      ? b
+        ? `${b}/en/eventos/${slug}`
+        : `/en/eventos/${slug}`
+      : b
+        ? `${b}/eventos/${slug}`
+        : `/eventos/${slug}`,
 }));
+
+const titleLines = typology ? typologyTitleLines(typology.titleHero, lang) : [labels[eventType]];
+const dossierHref = typology?.dossier || undefined;
 ---
 
-<Layout title={title} description={description} lang={lang} currentPath={currentPath}>
+<Layout title={pageTitle} description={pageDescription} lang={lang} currentPath={currentPath}>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -48,17 +67,25 @@ const eventTypes = EVENT_TYPE_SLUGS.map((slug) => ({
     base={base}
   />
 
-  <main class="flex min-h-[70vh] flex-col items-center justify-center bg-stone px-8 pb-16 pt-28 text-center">
-    <p class="font-slogan text-2xl text-bark md:text-3xl">{t.experiences.kicker}</p>
-    <h1 class="mt-4 font-title text-4xl text-bark md:text-5xl">{labels[eventType]}</h1>
-    <p class="mt-6 max-w-md font-body text-base text-bark/80">
-      {
-        lang === 'en'
-          ? 'This page will be available soon.'
-          : 'Esta página estará disponible pronto.'
-      }
-    </p>
-  </main>
+  {
+    typology ? (
+      <TypologyHero
+        littleTitle={localize(typology.littleTitleHero, lang)}
+        titleLines={titleLines}
+        description={localize(typology.descriptionHero, lang)}
+        ctaPrimary={t.typologyPage.ctaPrimary}
+        ctaSecondary={t.typologyPage.ctaSecondary}
+        hrefPrimary={hrefContact}
+        hrefSecondary={dossierHref}
+        backgroundImage={typology.coverImage}
+        bleedColor={typology.bleedColor}
+      />
+    ) : (
+      <main class="flex min-h-[70vh] flex-col items-center justify-center bg-stone px-8 pb-16 pt-28 text-center">
+        <h1 class="font-title text-4xl text-bark md:text-5xl">{labels[eventType]}</h1>
+      </main>
+    )
+  }
 
   <Footer
     brandName={t.nav.brandName}

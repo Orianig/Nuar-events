@@ -5,6 +5,10 @@ interface Props {
   loading?: boolean;
   disabled?: boolean;
   href?: string;
+  /** Si es string, fuerza descarga con ese nombre de archivo; si true, usa el nombre del recurso */
+  download?: boolean | string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  rel?: string;
   type?: 'button' | 'submit' | 'reset';
   class?: string;
   loadingLabel?: string;
@@ -17,11 +21,17 @@ const {
   loading = false,
   disabled = false,
   href,
+  download,
+  target,
+  rel,
   type = 'button',
   class: className = '',
   loadingLabel = 'Cargando...',
   preview,
 } = Astro.props;
+
+const linkRel =
+  rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined);
 
 const isDisabled = disabled || preview === 'disabled';
 const isLoading = loading || preview === 'loading';
@@ -39,31 +49,27 @@ const focusRing =
 
 const baseClass = [
   'inline-flex items-center justify-center gap-2.5 rounded-[6px] border-solid border-[0.8px]',
-  'font-body text-sm font-bold leading-none no-underline transition-colors',
+  'font-body text-sm font-bold leading-none no-underline',
+  variant === 'primary' ? '' : 'transition-colors',
   isLoading ? 'cursor-wait' : isDisabled ? 'cursor-not-allowed' : 'cursor-pointer',
   focusRing,
   sizeClass,
-].join(' ');
-
-const primaryFill =
-  'bg-btn-primary [background-image:radial-gradient(ellipse_55%_48%_at_50%_22%,var(--color-olive-light)_0%,transparent_72%)] shadow-btn';
+]
+  .filter(Boolean)
+  .join(' ');
 
 const variantClass = (() => {
   if (variant === 'primary') {
-    if (isLoading) {
-      return `border-transparent text-stone-light ${primaryFill}`;
-    }
     if (isDisabled) {
       return 'border-transparent bg-disabled text-text-disabled shadow-none';
     }
     if (isActivePreview) {
-      return 'border-transparent bg-olive-dark text-stone-light shadow-btn-active';
+      return 'btn-primary-fill is-active-preview border-transparent text-stone-light';
     }
-    return [
-      `border-transparent text-stone-light ${primaryFill}`,
-      'hover:bg-olive hover:[background-image:none]',
-      'active:bg-olive-dark active:shadow-btn-active active:[background-image:none]',
-    ].join(' ');
+    if (isLoading) {
+      return 'btn-primary-fill is-loading border-transparent text-stone-light';
+    }
+    return 'btn-primary-fill border-transparent text-stone-light';
   }
 
   if (variant === 'secondary') {
@@ -81,15 +87,15 @@ const variantClass = (() => {
 
   if (variant === 'ghost') {
     if (isLoading) {
-      return 'border-stone-light bg-transparent text-stone-light';
+      return 'border-cream-light bg-transparent text-cream-light';
     }
     if (isDisabled) {
       return 'border-text-disabled bg-transparent text-text-disabled';
     }
     if (isActivePreview) {
-      return 'border-stone-light bg-olive/55 text-stone-light';
+      return 'border-cream-light bg-cream-light/25 text-cream-light';
     }
-    return 'border-stone-light bg-transparent text-stone-light hover:bg-olive-light/50 active:bg-olive/55';
+    return 'border-cream-light bg-transparent text-cream-light hover:bg-cream-light/20 active:bg-cream-light/30';
   }
 
   if (isDisabled) {
@@ -104,6 +110,9 @@ const Tag = href && !isInactive ? 'a' : 'button';
 <Tag
   class:list={[baseClass, variantClass, className]}
   href={Tag === 'a' ? href : undefined}
+  download={Tag === 'a' && download != null ? download : undefined}
+  target={Tag === 'a' ? target : undefined}
+  rel={Tag === 'a' ? linkRel : undefined}
   type={Tag === 'button' ? type : undefined}
   disabled={Tag === 'button' ? isInactive : undefined}
   aria-disabled={Tag === 'a' && isInactive ? 'true' : undefined}
