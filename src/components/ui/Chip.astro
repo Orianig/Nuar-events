@@ -5,6 +5,7 @@ interface Props {
   class?: string;
   preview?: 'active' | 'disabled';
   type?: 'button' | 'submit' | 'reset';
+  value?: string;
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   class: className = '',
   preview,
   type = 'button',
+  value,
 } = Astro.props;
 
 const isActive = active || preview === 'active';
@@ -38,6 +40,7 @@ const classes = [
   class={classes}
   aria-pressed={isActive ? 'true' : 'false'}
   disabled={isDisabled}
+  data-value={value}
 >
   <slot />
 </button>

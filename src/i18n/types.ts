@@ -172,6 +172,13 @@ export interface Translations {
     titleLines: string[];
     ctaLabel: string;
   };
+  eventsAll: {
+    kicker: string;
+    title: string;
+    description: string;
+    filterAll: string;
+    cardCta: string;
+  };
   sectionOne: {
     image1: string;
     image2: string;

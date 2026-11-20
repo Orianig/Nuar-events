@@ -2,20 +2,55 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
+import Chip from '../ui/Chip.astro';
+import Card from '../ui/Card.astro';
 import { getTranslations } from '../../i18n';
+import { EVENT_TYPE_SLUGS, type EventTypeSlug } from '../../lib/eventTypes';
+import { stories, localize, storyHref } from '../../data/stories';
 import type { PageProps } from '../../types';
 
 const { lang, currentPath, base } = Astro.props as PageProps;
 const t = getTranslations(lang);
 
-const title = `${t.nav.eventTypes.all} - Nuar`;
-const description =
-  lang === 'en'
-    ? 'Nuar Events — All events. Page coming soon.'
-    : 'Nuar Events — Todos los eventos. Página en construcción.';
+const typeLabels: Record<EventTypeSlug, string> = {
+  corporativos: t.nav.eventTypes.corporate,
+  celebraciones: t.nav.eventTypes.celebrations,
+  bodas: t.nav.eventTypes.weddings,
+  'experiencias-nuar': t.nav.eventTypes.experiences,
+};
+
+const filters = [
+  { value: 'todos', label: t.eventsAll.filterAll },
+  ...EVENT_TYPE_SLUGS.map((slug) => ({ value: slug, label: typeLabels[slug] })),
+];
+
+const cards = stories.map((story) => {
+  const name = localize(story.name, lang);
+  const location = localize(story.location, lang);
+  const experience = localize(story.experience, lang);
+  const attendees =
+    lang === 'en' ? `${story.attendees} guests` : `${story.attendees} asistentes`;
+
+  return {
+    code: story.code,
+    type: story.type,
+    title: name,
+    subtitle: `${location} · ${attendees}`,
+    description: experience,
+    image: story.coverImage,
+    href: storyHref(story.code, lang, base),
+  };
+});
+
+const pageTitle = `${t.eventsAll.title} - Nuar`;
 ---
 
-<Layout title={title} description={description} lang={lang} currentPath={currentPath}>
+<Layout
+  title={pageTitle}
+  description={t.eventsAll.description}
+  lang={lang}
+  currentPath={currentPath}
+>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -29,16 +64,59 @@ const description =
     base={base}
   />
 
-  <main class="flex min-h-[70vh] flex-col items-center justify-center bg-stone px-8 pb-16 pt-28 text-center">
-    <p class="font-slogan text-2xl text-bark md:text-3xl">{t.experiences.kicker}</p>
-    <h1 class="mt-4 font-title text-4xl text-bark md:text-5xl">{t.nav.eventTypes.all}</h1>
-    <p class="mt-6 max-w-md font-body text-base text-bark/80">
-      {
-        lang === 'en'
-          ? 'This page will be available soon.'
-          : 'Esta página estará disponible pronto.'
-      }
-    </p>
+  <main class="relative min-h-screen bg-white pb-16 pt-28 text-olive" data-events-all>
+    <div class="pointer-events-none absolute inset-0 bg-cream-light/30" aria-hidden="true"></div>
+
+    <div class="page-gutter relative">
+      <div class="page-shell">
+        <header class="max-w-2xl">
+          <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{t.eventsAll.kicker}</p>
+          <h1 class="mt-3 font-body text-2xl font-normal leading-[1.25] text-olive md:text-[32px]">
+            {t.eventsAll.title}
+          </h1>
+          <p class="mt-4 font-body text-base leading-relaxed text-olive/85">
+            {t.eventsAll.description}
+          </p>
+        </header>
+
+        <div
+          class="mt-8 flex flex-wrap gap-2 sm:mt-10 sm:gap-3"
+          data-events-filters
+          role="group"
+          aria-label={t.eventsAll.title}
+        >
+          {
+            filters.map((filter, i) => (
+              <Chip value={filter.value} active={i === 0}>
+                {filter.label}
+              </Chip>
+            ))
+          }
+        </div>
+
+        <div
+          class="mt-8 flex flex-wrap justify-start gap-x-5 gap-y-5 sm:mt-10 sm:gap-x-5 sm:gap-y-6"
+          data-events-grid
+        >
+          {
+            cards.map((card) => (
+              <div class="w-full max-w-[260px] max-[399px]:max-w-none" data-event-type={card.type} data-event-card>
+                <Card
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  description={card.description}
+                  image={card.image}
+                  imageAlt={card.title}
+                  href={card.href}
+                  ctaLabel={t.eventsAll.cardCta}
+                  compact
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
   </main>
 
   <Footer
@@ -51,3 +129,46 @@ const description =
     base={base}
   />
 </Layout>
+
+<script>
+  function initEventsFilters() {
+    const root = document.querySelector<HTMLElement>('[data-events-all]');
+    if (!root || root.dataset.ready === '1') return;
+    root.dataset.ready = '1';
+
+    const filters = root.querySelector<HTMLElement>('[data-events-filters]');
+    const grid = root.querySelector<HTMLElement>('[data-events-grid]');
+    if (!filters || !grid) return;
+
+    const chips = Array.from(filters.querySelectorAll<HTMLButtonElement>('button[data-value]'));
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-event-card]'));
+
+    const setActive = (value: string) => {
+      chips.forEach((chip) => {
+        const on = chip.dataset.value === value;
+        chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+        chip.classList.toggle('border-olive-light', on);
+        chip.classList.toggle('bg-stone-light', on);
+        chip.classList.toggle('text-olive-light', on);
+        chip.classList.toggle('border-transparent', !on);
+        chip.classList.toggle('bg-stone-light/50', !on);
+      });
+
+      cards.forEach((card) => {
+        const type = card.dataset.eventType || '';
+        const show = value === 'todos' || type === value;
+        card.classList.toggle('hidden', !show);
+      });
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const value = chip.dataset.value || 'todos';
+        setActive(value);
+      });
+    });
+  }
+
+  initEventsFilters();
+  document.addEventListener('astro:page-load', initEventsFilters);
+</script>

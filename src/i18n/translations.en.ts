@@ -319,6 +319,14 @@ export const en: Translations = {
     ],
     ctaLabel: 'Let’s talk about your event',
   },
+  eventsAll: {
+    kicker: 'Moments we have created',
+    title: 'Our events',
+    description:
+      'Every celebration has a story. These are some of the ones we have had the pleasure of accompanying.',
+    filterAll: 'All',
+    cardCta: 'Learn more',
+  },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
     image2: '/SectionOne-PictureTwo.jpg',
