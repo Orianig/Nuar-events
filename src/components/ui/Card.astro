@@ -1,7 +1,12 @@
 ---
 import type { SocialNetwork } from './icons';
+import type { EventTypeSlug } from '../../lib/eventTypes';
 import Button from './Button.astro';
 import SocialIcon from './SocialIcon.astro';
+import Briefcase from '@lucide/astro/icons/briefcase';
+import PartyPopper from '@lucide/astro/icons/party-popper';
+import Heart from '@lucide/astro/icons/heart';
+import Sparkles from '@lucide/astro/icons/sparkles';
 
 interface Props {
   title: string;
@@ -12,6 +17,7 @@ interface Props {
   image?: string;
   imageAlt?: string;
   network?: SocialNetwork;
+  eventType?: EventTypeSlug;
   class?: string;
   preview?: 'hover';
   compact?: boolean;
@@ -26,12 +32,25 @@ const {
   image,
   imageAlt = '',
   network = 'instagram',
+  eventType,
   class: className = '',
   preview,
   compact = false,
 } = Astro.props;
 
 const isHoverPreview = preview === 'hover';
+const iconClass = compact ? 'size-4 text-stone-light' : 'size-5 text-stone-light';
+
+const EventTypeIcon =
+  eventType === 'corporativos'
+    ? Briefcase
+    : eventType === 'celebraciones'
+      ? PartyPopper
+      : eventType === 'bodas'
+        ? Heart
+        : eventType === 'experiencias-nuar'
+          ? Sparkles
+          : null;
 
 const cardClass = [
   'group/card relative flex w-full min-w-0 flex-col overflow-hidden rounded-xl border-[0.8px] border-olive-light bg-white',
@@ -76,10 +95,16 @@ const bodyClass = [
       ]}
       aria-hidden="true"
     >
-      <SocialIcon
-        network={network}
-        class={compact ? 'h-5 w-5 text-stone-light' : 'h-7 w-7 text-stone-light'}
-      />
+      {
+        EventTypeIcon ? (
+          <EventTypeIcon class={iconClass} stroke-width={1.8} />
+        ) : (
+          <SocialIcon
+            network={network}
+            class={compact ? 'h-5 w-5 text-stone-light' : 'h-7 w-7 text-stone-light'}
+          />
+        )
+      }
     </span>
 
     <div class="flex w-full max-w-[301px] flex-col items-center">
@@ -94,7 +119,7 @@ const bodyClass = [
 
       {
         subtitle && (
-          <p class="mt-1 font-body text-sm font-normal leading-snug text-olive-light line-clamp-1">
+          <p class="mt-1 line-clamp-1 font-body text-sm font-normal leading-snug text-olive-light">
             {subtitle}
           </p>
         )
