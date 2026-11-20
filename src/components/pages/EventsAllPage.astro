@@ -4,6 +4,7 @@ import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
 import Chip from '../ui/Chip.astro';
 import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
 import { getTranslations } from '../../i18n';
 import { EVENT_TYPE_SLUGS, type EventTypeSlug } from '../../lib/eventTypes';
 import { stories, localize, storyHref } from '../../data/stories';
@@ -11,6 +12,8 @@ import type { PageProps } from '../../types';
 
 const { lang, currentPath, base } = Astro.props as PageProps;
 const t = getTranslations(lang);
+const b = base.endsWith('/') ? base.slice(0, -1) : base;
+const hrefContact = lang === 'es' ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
 
 const typeLabels: Record<EventTypeSlug, string> = {
   corporativos: t.nav.eventTypes.corporate,
@@ -24,7 +27,7 @@ const filters = [
   ...EVENT_TYPE_SLUGS.map((slug) => ({ value: slug, label: typeLabels[slug] })),
 ];
 
-const cards = stories.map((story) => {
+const cardsBase = stories.map((story) => {
   const name = localize(story.name, lang);
   const location = localize(story.location, lang);
   const experience = localize(story.experience, lang);
@@ -41,6 +44,9 @@ const cards = stories.map((story) => {
     href: storyHref(story.code, lang, base),
   };
 });
+
+// Preview: triplicate content to judge denser grid layout
+const cards = [...cardsBase, ...cardsBase, ...cardsBase];
 
 const pageTitle = `${t.eventsAll.title} - Nuar`;
 ---
@@ -64,10 +70,10 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
     base={base}
   />
 
-  <main class="relative min-h-screen bg-white pb-16 pt-28 text-olive" data-events-all>
+  <main class="relative flex min-h-dvh flex-col bg-white pt-28 text-olive" data-events-all data-empty="0">
     <div class="pointer-events-none absolute inset-0 bg-cream-light/30" aria-hidden="true"></div>
 
-    <div class="page-gutter relative">
+    <div class="page-gutter relative" data-events-main>
       <div class="page-shell">
         <header class="max-w-2xl">
           <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{t.eventsAll.kicker}</p>
@@ -80,7 +86,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
         </header>
 
         <div
-          class="mt-8 flex flex-wrap gap-2 sm:mt-10 sm:gap-3"
+          class="mt-8 flex flex-wrap gap-2 pb-5 sm:mt-10 sm:gap-3"
           data-events-filters
           role="group"
           aria-label={t.eventsAll.title}
@@ -94,13 +100,15 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
           }
         </div>
 
+        <div class="h-px w-full bg-olive/20" aria-hidden="true"></div>
+
         <div
-          class="mt-8 flex flex-wrap justify-start gap-x-5 gap-y-5 sm:mt-10 sm:gap-x-5 sm:gap-y-6"
+          class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-x-5 gap-y-5 pt-5 pb-6 sm:gap-y-6 sm:pb-8"
           data-events-grid
         >
           {
             cards.map((card) => (
-              <div class="w-full max-w-[260px] max-[399px]:max-w-none" data-event-type={card.type} data-event-card>
+              <div class="min-w-0 w-full" data-event-type={card.type} data-event-card>
                 <Card
                   title={card.title}
                   subtitle={card.subtitle}
@@ -116,9 +124,126 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
             ))
           }
         </div>
+
+        <p
+          class="hidden pt-5 pb-6 text-center font-body text-base leading-relaxed text-olive/75 sm:pb-8 md:text-lg"
+          data-events-empty
+          role="status"
+        >
+          {t.eventsAll.emptyFilter}
+        </p>
       </div>
     </div>
+
+    <section
+      class="events-all-cta relative mt-6 flex min-h-[240px] items-center overflow-hidden sm:mt-8 md:min-h-[280px] lg:min-h-[320px]"
+      aria-labelledby="events-all-cta-title"
+    >
+      <div class="pointer-events-none absolute inset-0 flex justify-center" aria-hidden="true">
+        <div class="events-all-cta-bg relative h-full w-full max-w-370">
+          <img
+            src="/events/all-events-bg-section.avif"
+            alt=""
+            width="1480"
+            height="640"
+            class="h-full w-full object-cover object-[center_55%] opacity-80 md:opacity-100 md:object-center"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="events-all-cta-edge events-all-cta-edge-left"></div>
+          <div class="events-all-cta-edge events-all-cta-edge-right"></div>
+        </div>
+      </div>
+
+      <div class="page-gutter relative z-10 w-full py-7 md:py-8 lg:py-9">
+        <div class="page-shell">
+          <div class="flex w-full max-w-xl flex-col items-start gap-6 md:max-w-2xl md:gap-8">
+            <h2
+              id="events-all-cta-title"
+              class="font-body text-[32px] leading-[1.45] tracking-wide text-stone-light"
+            >
+              {t.eventsAll.ctaTitle}
+            </h2>
+            <p class="font-body text-base leading-relaxed text-stone-light/85 md:text-lg">
+              {
+                t.eventsAll.ctaDescriptionLines.map((line, i) => (
+                  <>
+                    {i > 0 && <br />}
+                    {line}
+                  </>
+                ))
+              }
+            </p>
+            <Button
+              href={hrefContact}
+              variant="ghost"
+              size="lg"
+              class="w-full border-stone-light! text-stone-light! hover:bg-stone-light/10! active:bg-stone-light/20! md:w-auto"
+            >
+              {t.eventsAll.ctaLabel}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <style>
+    [data-events-all][data-empty='1'] [data-events-main] {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    [data-events-all][data-empty='1'] [data-events-main] > .page-shell {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    [data-events-all][data-empty='1'] [data-events-empty] {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    [data-events-all][data-empty='1'] .events-all-cta {
+      margin-top: auto;
+    }
+
+    .events-all-cta {
+      background-color: #24281a;
+    }
+
+    .events-all-cta-edge {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: clamp(2.5rem, 6vw, 5.5rem);
+      pointer-events: none;
+    }
+
+    .events-all-cta-edge-left {
+      left: 0;
+      background: linear-gradient(
+        to right,
+        #24281a 0%,
+        color-mix(in srgb, #24281a 70%, transparent) 40%,
+        transparent 100%
+      );
+    }
+
+    .events-all-cta-edge-right {
+      right: 0;
+      background: linear-gradient(
+        to left,
+        #24281a 0%,
+        color-mix(in srgb, #24281a 75%, transparent) 45%,
+        transparent 100%
+      );
+    }
+  </style>
 
   <Footer
     brandName={t.nav.brandName}
@@ -139,7 +264,8 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
 
     const filters = root.querySelector<HTMLElement>('[data-events-filters]');
     const grid = root.querySelector<HTMLElement>('[data-events-grid]');
-    if (!filters || !grid) return;
+    const empty = root.querySelector<HTMLElement>('[data-events-empty]');
+    if (!filters || !grid || !empty) return;
 
     const chips = Array.from(filters.querySelectorAll<HTMLButtonElement>('button[data-value]'));
     const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-event-card]'));
@@ -155,11 +281,18 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
         chip.classList.toggle('bg-stone-light/50', !on);
       });
 
+      let visible = 0;
       cards.forEach((card) => {
         const type = card.dataset.eventType || '';
         const show = value === 'todos' || type === value;
         card.classList.toggle('hidden', !show);
+        if (show) visible += 1;
       });
+
+      const isEmpty = visible === 0;
+      root.dataset.empty = isEmpty ? '1' : '0';
+      grid.classList.toggle('hidden', isEmpty);
+      empty.classList.toggle('hidden', !isEmpty);
     };
 
     chips.forEach((chip) => {

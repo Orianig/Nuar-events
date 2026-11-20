@@ -178,6 +178,10 @@ export interface Translations {
     description: string;
     filterAll: string;
     cardCta: string;
+    ctaTitle: string;
+    ctaDescriptionLines: string[];
+    ctaLabel: string;
+    emptyFilter: string;
   };
   sectionOne: {
     image1: string;

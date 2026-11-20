@@ -326,6 +326,14 @@ export const en: Translations = {
       'Every celebration has a story. These are some of the ones we have had the pleasure of accompanying.',
     filterAll: 'All',
     cardCta: 'Learn more',
+    ctaTitle: 'Can you picture an event like this?',
+    ctaDescriptionLines: [
+      'We design tailor-made experiences, with their own identity',
+      'and care in every detail.',
+    ],
+    ctaLabel: 'Tell us your idea',
+    emptyFilter:
+      'We don’t have events of this type yet. We hope to update this soon.',
   },
   sectionOne: {
     image1: '/SectionOne-PictureOne.jpg',
