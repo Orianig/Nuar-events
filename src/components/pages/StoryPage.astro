@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../layout/Navbar.astro';
+import Footer from '../layout/Footer.astro';
+import { getTranslations } from '../../i18n';
+import { localize, type Story } from '../../data/stories';
+import type { PageProps } from '../../types';
+
+interface Props extends PageProps {
+  story: Story;
+}
+
+const { lang, currentPath, base, story } = Astro.props as Props;
+const t = getTranslations(lang);
+
+const name = localize(story.name, lang);
+const location = localize(story.location, lang);
+const experience = localize(story.experience, lang);
+const details = localize(story.details, lang);
+
+const attendeesLabel =
+  lang === 'en' ? `${story.attendees} Guests` : `${story.attendees} Asistentes`;
+
+const title = `${name} - Nuar`;
+const description = experience.slice(0, 160);
+---
+
+<Layout title={title} description={description} lang={lang} currentPath={currentPath}>
+  <Navbar
+    currentPath={currentPath}
+    brandName={t.nav.brandName}
+    home={t.nav.home}
+    projects={t.nav.projects}
+    aboutNuar={t.nav.aboutNuar}
+    upcomingEvents={t.nav.upcomingEvents}
+    contact={t.nav.contact}
+    menuToggle={t.nav.menuToggle}
+    currentLang={lang}
+    base={base}
+  />
+
+  <main class="bg-stone pb-16 pt-28 text-bark">
+    <div class="page-gutter">
+      <div class="page-shell mx-auto max-w-3xl">
+        <p class="font-slogan text-xl text-olive md:text-2xl">{t.moments.kicker}</p>
+        <h1 class="mt-3 font-body text-3xl font-normal leading-snug text-olive md:text-[32px]">
+          {name}
+        </h1>
+
+        <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-olive/90">
+          <span>{attendeesLabel}</span>
+          <span>{location}</span>
+        </div>
+
+        {
+          story.coverImage && (
+            <div class="mt-8 overflow-hidden rounded-[14px]">
+              <img
+                src={story.coverImage}
+                alt=""
+                class="aspect-[16/10] w-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          )
+        }
+
+        <section class="mt-10">
+          <h2 class="font-body text-lg font-medium text-olive">
+            {lang === 'en' ? 'The experience' : 'La experiencia'}
+          </h2>
+          <p class="mt-3 font-body text-base leading-relaxed text-olive/90">{experience}</p>
+        </section>
+
+        <section class="mt-8">
+          <h2 class="font-body text-lg font-medium text-olive">
+            {lang === 'en' ? 'The details' : 'Los detalles'}
+          </h2>
+          <p class="mt-3 font-body text-base leading-relaxed text-olive/90">{details}</p>
+        </section>
+
+        {
+          story.images.length > 1 && (
+            <section class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {story.images.slice(1).map((src) => (
+                <div class="overflow-hidden rounded-[14px]">
+                  <img
+                    src={src}
+                    alt=""
+                    class="aspect-square w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </section>
+          )
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer
+    brandName={t.nav.brandName}
+    sloganLine1={t.footer.sloganLine1}
+    sloganLine2={t.footer.sloganLine2}
+    followUs={t.footer.followUs}
+    privacy={t.footer.privacy}
+    currentLang={lang}
+    base={base}
+  />
+</Layout>

@@ -27,31 +27,15 @@ const logoPath = logoSrc.startsWith('http')
 
 <script>
   const introElement = document.getElementById('intro-animation');
+  if (!introElement) throw null;
 
-  if (!introElement) {
-    throw null;
-  }
+  const SESSION_KEY = 'nuar-intro-played';
+  const alreadyPlayed = sessionStorage.getItem(SESSION_KEY) === '1';
 
-  const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
-  const navType = navEntry && 'type' in navEntry ? navEntry.type : 'navigate';
-
-  let fromInternalPage = false;
-  if (document.referrer) {
-    try {
-      const ref = new URL(document.referrer);
-      const sameOrigin = ref.origin === window.location.origin;
-      if (sameOrigin && ref.pathname !== window.location.pathname) {
-        fromInternalPage = true;
-      }
-    } catch {
-    }
-  }
-
-  const shouldPlayIntro = !fromInternalPage && navType === 'navigate';
-
-  if (!shouldPlayIntro) {
+  if (alreadyPlayed) {
     introElement.classList.add('hidden');
   } else {
+    sessionStorage.setItem(SESSION_KEY, '1');
     introElement.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 

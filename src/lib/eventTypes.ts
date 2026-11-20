@@ -21,3 +21,11 @@ export function eventTypeHref(slug: EventTypeSlug, lang: 'es' | 'en', base = '')
   }
   return b ? `${b}/eventos/${slug}` : `/eventos/${slug}`;
 }
+
+export function allEventsHref(lang: 'es' | 'en', base = ''): string {
+  const b = base.endsWith('/') ? base.slice(0, -1) : base;
+  if (lang === 'en') {
+    return b ? `${b}/en/eventos` : `/en/eventos`;
+  }
+  return b ? `${b}/eventos` : `/eventos`;
+}

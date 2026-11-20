@@ -2,7 +2,7 @@
 import type { NavbarProps } from '../../types';
 import LangSwitcher from './LangSwitcher.astro';
 import { getTranslations } from '../../i18n';
-import { EVENT_TYPE_SLUGS, eventTypeHref } from '../../lib/eventTypes';
+import { EVENT_TYPE_SLUGS, eventTypeHref, allEventsHref } from '../../lib/eventTypes';
 
 const {
   brandName,
@@ -22,8 +22,15 @@ const t = getTranslations(currentLang);
 const b = base.endsWith('/') ? base.slice(0, -1) : base;
 const isSpanish = currentLang === 'es';
 const hrefHome = isSpanish ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
-const hrefAboutNuar = isSpanish ? (b ? `${b}/about-nuar` : '/about-nuar') : (b ? `${b}/en/about-nuar` : '/en/about-nuar');
+const hrefAboutNuar = isSpanish
+  ? b
+    ? `${b}/about-nuar`
+    : '/about-nuar'
+  : b
+    ? `${b}/en/about-nuar`
+    : '/en/about-nuar';
 const hrefContact = isSpanish ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+const hrefAllEvents = allEventsHref(currentLang, base);
 
 const labelBySlug = {
   corporativos: t.nav.eventTypes.corporate,
@@ -39,6 +46,11 @@ const resolvedEventTypes =
     href: eventTypeHref(slug, currentLang, base),
   }));
 
+const ourEventsLinks = [
+  ...resolvedEventTypes,
+  { label: t.nav.eventTypes.all, href: hrefAllEvents },
+];
+
 function normalizePath(path: string): string {
   if (!path) return '/';
   const p = path.split('#')[0].split('?')[0];
@@ -50,19 +62,24 @@ const current = normalizePath(currentPath);
 const homePath = normalizePath(hrefHome);
 const aboutNuarPath = normalizePath(hrefAboutNuar);
 const contactPath = normalizePath(hrefContact);
-const eventosRoot = isSpanish ? (b ? `${b}/eventos` : '/eventos') : b ? `${b}/en/eventos` : '/en/eventos';
+const eventosRoot = normalizePath(hrefAllEvents);
+const historiasRoot = isSpanish
+  ? normalizePath(b ? `${b}/historias` : '/historias')
+  : normalizePath(b ? `${b}/en/historias` : '/en/historias');
 
 const isHomeActive = current === homePath;
 const isEventsActive =
   current === aboutNuarPath ||
   current.startsWith(`${aboutNuarPath}/`) ||
-  current === normalizePath(eventosRoot) ||
-  current.startsWith(`${normalizePath(eventosRoot)}/`);
+  current === eventosRoot ||
+  current.startsWith(`${eventosRoot}/`) ||
+  current === historiasRoot ||
+  current.startsWith(`${historiasRoot}/`);
 const isContactActive = current === contactPath || current.startsWith(`${contactPath}/`);
 
 const disabledNavClass =
-  'block rounded-xl px-3 py-2 text-sm text-bark/40 cursor-not-allowed select-none';
-const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text-sm';
+  'block cursor-not-allowed select-none rounded-xl px-3 py-2 text-sm text-bark/40';
+const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark/40';
 ---
 
 <nav
@@ -72,7 +89,7 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
   <div class="page-gutter">
     <div class="page-shell-nav py-2.5">
       <div class="flex min-h-[65px] w-full items-center justify-between gap-2.5">
-        <a href={hrefHome} class="inline-flex items-center hover:opacity-80 transition-opacity">
+        <a href={hrefHome} class="inline-flex items-center transition-opacity hover:opacity-80">
           <img
             src="/NUAR-navbar.svg"
             alt={brandName}
@@ -85,71 +102,95 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
           <span class="sr-only">{brandName}</span>
         </a>
 
-        <div class="hidden md:flex items-center gap-8">
+        <div class="hidden items-center gap-8 md:flex">
           <a
             href={hrefHome}
             class:list={[
-              'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+              'border-b-2 pb-1 font-medium text-bark transition-opacity hover:opacity-80',
               isHomeActive ? 'border-bark' : 'border-transparent',
             ]}
           >
             {home}
           </a>
-          <div class="relative events-dropdown">
+
+          <div class="events-dropdown relative">
             <button
               type="button"
               class:list={[
-                'events-trigger inline-flex items-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer pb-1 border-b-2',
+                'events-trigger inline-flex cursor-pointer items-center gap-1 border-b-2 pb-1 font-medium text-bark transition-opacity hover:opacity-80',
                 isEventsActive ? 'border-bark' : 'border-transparent',
               ]}
               aria-haspopup="true"
               aria-expanded="false"
             >
               {projects}
-              <svg class="events-chevron w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                class="events-chevron h-4 w-4 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="events-menu hidden absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
-              <a href={hrefAboutNuar} class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors">
-                {aboutNuar}
-              </a>
 
-              <div class="events-types-dropdown relative">
-                <button
-                  type="button"
-                  class="events-types-trigger flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-bark hover:bg-bark/10 transition-colors cursor-pointer"
-                  aria-haspopup="true"
-                  aria-expanded="false"
+            <div class="events-menu absolute left-1/2 top-full z-20 mt-2 hidden w-56 -translate-x-1/2">
+              <div class="rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
+                <a
+                  href={hrefAboutNuar}
+                  class="block rounded-xl px-3 py-2 text-sm text-bark transition-colors hover:bg-bark/10"
                 >
-                  <span>{projects}</span>
-                  <svg class="events-types-chevron h-3.5 w-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-                <div class="events-types-menu absolute left-full top-0 z-30 ml-1 hidden w-56 rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
-                  {
-                    resolvedEventTypes.map((item) => (
-                      <a
-                        href={item.href}
-                        class="block rounded-xl px-3 py-2 text-sm text-bark hover:bg-bark/10 transition-colors"
-                      >
-                        {item.label}
-                      </a>
-                    ))
-                  }
-                </div>
-              </div>
+                  {aboutNuar ?? t.nav.aboutNuar}
+                </a>
 
-              <span class={disabledNavClass} aria-disabled="true">
-                {upcomingEvents}
-              </span>
+                <div class="group/types relative">
+                  <button
+                    type="button"
+                    class="flex w-full cursor-pointer items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-bark transition-colors hover:bg-bark/10"
+                    aria-haspopup="true"
+                  >
+                    <span>{t.nav.ourEvents}</span>
+                    <svg
+                      class="h-3.5 w-3.5 transition-transform group-hover/types:translate-x-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+
+                  <div
+                    class="invisible absolute left-full top-0 z-30 ml-1 w-56 opacity-0 transition-[opacity,visibility] duration-150 group-hover/types:visible group-hover/types:opacity-100 group-focus-within/types:visible group-focus-within/types:opacity-100"
+                  >
+                    <div class="rounded-2xl border border-bark/20 bg-stone/95 p-2 shadow-lg backdrop-blur">
+                      {
+                        ourEventsLinks.map((item) => (
+                          <a
+                            href={item.href}
+                            class="block rounded-xl px-3 py-2 text-sm text-bark transition-colors hover:bg-bark/10"
+                          >
+                            {item.label}
+                          </a>
+                        ))
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <span class={disabledNavClass} aria-disabled="true">
+                  {upcomingEvents ?? t.nav.upcomingEvents}
+                </span>
+              </div>
             </div>
           </div>
+
           <a
             href={hrefContact}
             class:list={[
-              'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+              'border-b-2 pb-1 font-medium text-bark transition-opacity hover:opacity-80',
               isContactActive ? 'border-bark' : 'border-transparent',
             ]}
           >
@@ -160,61 +201,63 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
 
         <button
           id="mobile-menu-button"
-          class="md:hidden text-bark hover:opacity-80 transition-opacity"
+          class="text-bark transition-opacity hover:opacity-80 md:hidden"
           aria-label={menuToggle}
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
-        <div class="flex flex-col gap-4 items-center">
+      <div id="mobile-menu" class="hidden pb-2 pt-4 md:hidden">
+        <div class="flex flex-col items-center gap-4">
           <a
             href={hrefHome}
             class:list={[
-              'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+              'border-b-2 pb-1 font-medium text-bark transition-opacity hover:opacity-80',
               isHomeActive ? 'border-bark' : 'border-transparent',
             ]}
           >
             {home}
           </a>
+
           <div class="w-full max-w-[260px]">
             <button
               id="mobile-events-button"
               type="button"
               class:list={[
-                'w-full inline-flex items-center justify-center gap-1 text-bark hover:opacity-80 font-medium transition-opacity cursor-pointer pb-1 border-b-2',
+                'inline-flex w-full cursor-pointer items-center justify-center gap-1 border-b-2 pb-1 font-medium text-bark transition-opacity hover:opacity-80',
                 isEventsActive ? 'border-bark' : 'border-transparent',
               ]}
               aria-expanded="false"
             >
               {projects}
-              <svg id="mobile-events-chevron" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="mobile-events-chevron" class="h-4 w-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div id="mobile-events-menu" class="hidden mt-3 flex-col items-center gap-3 text-center">
-              <a href={hrefAboutNuar} class="text-bark/85 hover:opacity-80 text-sm transition-opacity">
-                {aboutNuar}
+
+            <div id="mobile-events-menu" class="mt-3 hidden flex-col items-center gap-3 text-center">
+              <a href={hrefAboutNuar} class="text-sm text-bark/85 transition-opacity hover:opacity-80">
+                {aboutNuar ?? t.nav.aboutNuar}
               </a>
 
               <button
                 id="mobile-event-types-button"
                 type="button"
-                class="inline-flex items-center justify-center gap-1 text-bark/85 text-sm hover:opacity-80 transition-opacity cursor-pointer"
+                class="inline-flex cursor-pointer items-center justify-center gap-1 text-sm text-bark/85 transition-opacity hover:opacity-80"
                 aria-expanded="false"
               >
-                {projects}
-                <svg id="mobile-event-types-chevron" class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {t.nav.ourEvents}
+                <svg id="mobile-event-types-chevron" class="h-3.5 w-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               <div id="mobile-event-types-menu" class="hidden w-full flex-col items-center gap-2.5">
                 {
-                  resolvedEventTypes.map((item) => (
-                    <a href={item.href} class="text-bark/75 hover:opacity-80 text-sm transition-opacity">
+                  ourEventsLinks.map((item) => (
+                    <a href={item.href} class="text-sm text-bark/75 transition-opacity hover:opacity-80">
                       {item.label}
                     </a>
                   ))
@@ -222,14 +265,15 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
               </div>
 
               <span class={disabledNavClassMobile} aria-disabled="true">
-                {upcomingEvents}
+                {upcomingEvents ?? t.nav.upcomingEvents}
               </span>
             </div>
           </div>
+
           <a
             href={hrefContact}
             class:list={[
-              'text-bark hover:opacity-80 font-medium transition-opacity pb-1 border-b-2',
+              'border-b-2 pb-1 font-medium text-bark transition-opacity hover:opacity-80',
               isContactActive ? 'border-bark' : 'border-transparent',
             ]}
           >
@@ -249,9 +293,6 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
   const eventsTrigger = document.querySelector('.events-trigger') as HTMLButtonElement | null;
   const eventsMenu = document.querySelector('.events-menu') as HTMLElement | null;
   const eventsChevron = document.querySelector('.events-chevron') as SVGElement | null;
-  const eventsTypesTrigger = document.querySelector('.events-types-trigger') as HTMLButtonElement | null;
-  const eventsTypesMenu = document.querySelector('.events-types-menu') as HTMLElement | null;
-  const eventsTypesChevron = document.querySelector('.events-types-chevron') as SVGElement | null;
   const mobileEventsButton = document.getElementById('mobile-events-button') as HTMLButtonElement | null;
   const mobileEventsMenu = document.getElementById('mobile-events-menu');
   const mobileEventsChevron = document.getElementById('mobile-events-chevron');
@@ -263,8 +304,6 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
     eventsMenu?.classList.add('hidden');
     eventsTrigger?.setAttribute('aria-expanded', 'false');
     eventsChevron?.classList.remove('rotate-180');
-    eventsTypesMenu?.classList.add('hidden');
-    eventsTypesTrigger?.setAttribute('aria-expanded', 'false');
   }
 
   function closeMobileMenus() {
@@ -307,15 +346,8 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
     }
   });
 
-  eventsTypesTrigger?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const isHidden = eventsTypesMenu?.classList.toggle('hidden');
-    eventsTypesTrigger.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
-  });
-
   document.addEventListener('click', (e) => {
-    const inside = (e.target as Node | null)?.parentElement?.closest('.events-dropdown');
+    const inside = (e.target as HTMLElement | null)?.closest?.('.events-dropdown');
     if (!inside) closeDesktopEventsMenu();
   });
 
@@ -342,9 +374,7 @@ const disabledNavClassMobile = 'text-bark/40 cursor-not-allowed select-none text
   document.addEventListener('click', (e) => {
     if (!mobileMenu || !menuButton) return;
     const target = e.target as Node;
-    const clickedInsideMenu = mobileMenu.contains(target);
-    const clickedToggleButton = menuButton.contains(target);
-    if (window.innerWidth < 768 && !clickedInsideMenu && !clickedToggleButton) {
+    if (window.innerWidth < 768 && !mobileMenu.contains(target) && !menuButton.contains(target)) {
       closeMobileMenus();
     }
   });

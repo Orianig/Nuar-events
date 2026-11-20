@@ -43,6 +43,7 @@ export interface Translations {
     brandName: string;
     home: string;
     projects: string;
+    ourEvents: string;
     aboutNuar: string;
     upcomingEvents: string;
     contact: string;
@@ -52,6 +53,7 @@ export interface Translations {
       celebrations: string;
       weddings: string;
       experiences: string;
+      all: string;
     };
   };
   hero: {

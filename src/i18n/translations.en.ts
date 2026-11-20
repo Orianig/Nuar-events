@@ -4,6 +4,7 @@ export const en: Translations = {
     brandName: 'NUAR',
     home: 'Home',
     projects: 'Events',
+    ourEvents: 'Our Events',
     aboutNuar: 'About Nuar',
     upcomingEvents: 'Upcoming Events',
     contact: 'Contact',
@@ -13,6 +14,7 @@ export const en: Translations = {
       celebrations: 'Private celebrations',
       weddings: 'Weddings',
       experiences: 'NUAR experiences',
+      all: 'All events',
     },
   },
   hero: {

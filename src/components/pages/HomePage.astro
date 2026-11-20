@@ -12,8 +12,9 @@ import ReviewsSection from '../home/ReviewsSection.astro';
 import ContactSection from '../home/ContactSection.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
 import { getTranslations } from '../../i18n';
-import { EVENT_TYPE_IMAGES, eventTypeHref } from '../../lib/eventTypes';
+import { EVENT_TYPE_IMAGES, eventTypeHref, allEventsHref } from '../../lib/eventTypes';
 import { reviews } from '../../data/reviews';
+import { getFeaturedStories, localize, storyHref } from '../../data/stories';
 import type { PageProps } from '../../types';
 
 const { lang, currentPath, base } = Astro.props as PageProps;
@@ -29,20 +30,15 @@ const hrefAboutNuar = isSpanish
   : b
     ? `${b}/en/about-nuar`
     : '/en/about-nuar';
-const hrefProjects = isSpanish
-  ? b
-    ? `${b}/projects`
-    : '/projects'
-  : b
-    ? `${b}/en/projects`
-    : '/en/projects';
+const hrefAllEvents = allEventsHref(lang, base);
 
-const momentImages = [
-  '/events/private%20celebrations/graduation-card-history.jpg',
-  '/events/corporate%20events/corporate-gifts.png',
-  '/events/private%20celebrations/celebrations-history-card.png',
-  '/events/private%20celebrations/bacherlorette-card-history.png',
-];
+const momentItems = getFeaturedStories().map((story) => ({
+  event: localize(story.name, lang),
+  attendees: lang === 'en' ? `${story.attendees} Guests` : `${story.attendees} Asistentes`,
+  location: localize(story.location, lang),
+  image: story.coverImage,
+  href: storyHref(story.code, lang, base),
+}));
 
 const experienceItems = [
   {
@@ -104,7 +100,7 @@ const experienceItems = [
     titleLine2={t.experiences.titleLine2}
     paragraphs={[...t.experiences.paragraphs]}
     ctaLabel={t.experiences.ctaLabel}
-    hrefAbout={hrefAboutNuar}
+    hrefAbout={hrefAllEvents}
     items={experienceItems}
   />
 
@@ -149,11 +145,8 @@ const experienceItems = [
     kicker={t.moments.kicker}
     title={t.moments.title}
     ctaLabel={t.moments.ctaLabel}
-    hrefEvents={hrefProjects}
-    items={t.moments.cards.map((card, i) => ({
-      ...card,
-      image: momentImages[i],
-    }))}
+    hrefEvents={hrefAllEvents}
+    items={momentItems}
   />
 
   <ReviewsSection kicker={t.reviews.kicker} title={t.reviews.title} items={reviews} />
