@@ -82,9 +82,14 @@ const disabledNavClass =
 const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark/40';
 ---
 
+<div
+  id="mobile-menu-backdrop"
+  class="fixed inset-0 z-40 hidden bg-bark/55 md:hidden"
+  aria-hidden="true"
+></div>
 <nav
   id="main-nav"
-  class="fixed top-0 left-0 right-0 z-45 min-h-[65px] border-b-[0.5px] border-stone bg-stone-light/58 transition-all duration-300"
+  class="fixed top-0 left-0 right-0 z-45 min-h-[65px] border-b-[0.5px] border-stone bg-stone-light/58 transition-[box-shadow,background-color] duration-300"
 >
   <div class="page-gutter">
     <div class="page-shell-nav py-2.5">
@@ -203,6 +208,8 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
           id="mobile-menu-button"
           class="text-bark transition-opacity hover:opacity-80 md:hidden"
           aria-label={menuToggle}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
         >
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -290,6 +297,7 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
   const nav = document.getElementById('main-nav');
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
   const eventsTrigger = document.querySelector('.events-trigger') as HTMLButtonElement | null;
   const eventsMenu = document.querySelector('.events-menu') as HTMLElement | null;
   const eventsChevron = document.querySelector('.events-chevron') as SVGElement | null;
@@ -306,8 +314,19 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
     eventsChevron?.classList.remove('rotate-180');
   }
 
+  let ignoreOutsideClick = false;
+
+  function setMobileMenuOpen(open: boolean) {
+    mobileMenu?.classList.toggle('hidden', !open);
+    mobileBackdrop?.classList.toggle('hidden', !open);
+    mobileBackdrop?.setAttribute('aria-hidden', open ? 'false' : 'true');
+    nav?.classList.toggle('nav-menu-open', open);
+    menuButton?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
   function closeMobileMenus() {
-    mobileMenu?.classList.add('hidden');
+    setMobileMenuOpen(false);
     mobileEventsMenu?.classList.add('hidden');
     mobileEventsMenu?.classList.remove('flex');
     mobileEventsButton?.setAttribute('aria-expanded', 'false');
@@ -319,6 +338,7 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
   }
 
   function updateNavOnScroll() {
+    if (nav?.classList.contains('nav-menu-open')) return;
     if (window.scrollY > 20) {
       nav?.classList.add('nav-scrolled');
     } else {
@@ -329,8 +349,23 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
   window.addEventListener('scroll', updateNavOnScroll, { passive: true });
   updateNavOnScroll();
 
-  menuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+  menuButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = mobileMenu?.classList.contains('hidden');
+    if (willOpen) {
+      ignoreOutsideClick = true;
+      setMobileMenuOpen(true);
+      queueMicrotask(() => {
+        ignoreOutsideClick = false;
+      });
+    } else {
+      closeMobileMenus();
+    }
+  });
+
+  mobileBackdrop?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeMobileMenus();
   });
 
   eventsTrigger?.addEventListener('click', (e) => {
@@ -372,9 +407,14 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
   });
 
   document.addEventListener('click', (e) => {
-    if (!mobileMenu || !menuButton) return;
+    if (!mobileMenu || !menuButton || ignoreOutsideClick) return;
     const target = e.target as Node;
-    if (window.innerWidth < 768 && !mobileMenu.contains(target) && !menuButton.contains(target)) {
+    if (
+      window.innerWidth < 768 &&
+      !mobileMenu.contains(target) &&
+      !menuButton.contains(target) &&
+      !mobileBackdrop?.contains(target)
+    ) {
       closeMobileMenus();
     }
   });

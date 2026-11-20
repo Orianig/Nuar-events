@@ -126,9 +126,14 @@ button.btn-primary-fill.is-active-preview {
   box-shadow: var(--shadow-btn-active);
 }
 
-/* --- Navbar: estado al hacer scroll --- */
 #main-nav.nav-scrolled {
   @apply border-stone bg-stone-light/95 shadow-sm;
+}
+
+#main-nav.nav-menu-open {
+  background-color: var(--color-stone-light);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgb(0 0 0 / 6%));
+  transition: none;
 }
 
 /* Iconos de valores: cream-light (#E8DFCE) + trazo apenas más marcado */
