@@ -25,86 +25,108 @@ const sectionTwo = p.originStory;
     currentLang={lang}
     base={base}
   />
-  <main class="bg-stone flex flex-col text-base">
-    <div class="page-gutter">
-    <div class="page-shell flex flex-col gap-6 pb-6 pt-[96px] md:flex-row md:pb-10 md:pt-[100px]">
-<div class="w-full md:w-[55%] text-bark md:pr-8">
-  <div class="w-full flex flex-col gap-5">
-    <div class="flex items-start">
-      <div>
-      <p class="font-body  text-2xl md:text-4xl">{sectionOne.kicker}</p>
-      <h1 class="font-body text-6xl md:text-8xl leading-none">{p.title}</h1>
-      </div>
-      <img
-        src="/icons/leaf1.png"
-        alt=""
-        aria-hidden="true"
-        class="w-20 h-20 md:w-28 md:h-28 opacity-50"
-      />
-    </div>
+  <main class="flex flex-col text-base text-bark">
+    <section class="relative bg-white">
+      <div class="pointer-events-none absolute inset-0 bg-sand-light/30" aria-hidden="true"></div>
+      <div class="page-gutter relative">
+        <div class="page-shell flex flex-col gap-6 pb-6 pt-[96px] md:flex-row md:pb-10 md:pt-[100px]">
+          <div class="w-full text-bark md:w-[55%] md:pr-8">
+            <div class="flex w-full flex-col gap-5">
+              <div class="flex items-start">
+                <div>
+                  <p class="font-body text-2xl md:text-4xl">{sectionOne.kicker}</p>
+                  <h1 class="font-body text-6xl leading-none md:text-8xl">{p.title}</h1>
+                </div>
+                <img
+                  src="/icons/leaf1.png"
+                  alt=""
+                  aria-hidden="true"
+                  class="h-20 w-20 opacity-50 md:h-28 md:w-28"
+                />
+              </div>
 
-    <div class="font-semibold text-base md:text-lg leading-relaxed">
-      <p>{sectionOne.hero.lineOne}</p>
-      <p>{sectionOne.hero.lineTwo}</p>
-    </div>
+              <div class="text-base font-semibold leading-relaxed md:text-lg">
+                <p>{sectionOne.hero.lineOne}</p>
+                <p>{sectionOne.hero.lineTwo}</p>
+              </div>
 
-    <div class="flex flex-col font-normal gap-4 text-lg leading-relaxed w-[90%]">
-      {sectionOne.intro.map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
-    </div>
+              <div class="flex w-[90%] flex-col gap-4 text-base font-normal leading-relaxed">
+                {sectionOne.intro.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
 
-    <div class="flex w-full flex-col items-center gap-6 pt-4 md:flex-row md:items-stretch md:gap-x-8 md:justify-between">
-      {sectionOne.pillars.map((pillar) => (
-        <div class="flex w-[88%] max-w-[320px] flex-col items-center gap-y-2 rounded-2xl bg-stone-dark/20 p-4 text-center md:w-full md:max-w-[220px] md:items-start md:rounded-none md:bg-transparent md:p-0 md:text-left">
-            <img src={pillar.icon} alt="" aria-hidden="true" class="w-10 h-10 object-contain" />
-          <p class="font-bold text-lg">{pillar.title}</p>
-          <p class=" text-base leading-relaxed">{pillar.description}</p>
+              <div class="flex w-full flex-col gap-8 pt-4 sm:flex-row sm:items-start sm:gap-[50px]">
+                {sectionOne.pillars.map((pillar, i) => (
+                  <article
+                    class:list={[
+                      'relative mx-auto flex w-full max-w-md flex-col items-center gap-3 text-center max-[429px]:max-w-full sm:mx-0 sm:max-w-none sm:flex-1 sm:min-w-0',
+                      i > 0 && 'border-t border-bark/20 pt-8 sm:border-t-0 sm:pt-0',
+                    ]}
+                  >
+                    {i > 0 && (
+                      <span
+                        aria-hidden="true"
+                        class="pointer-events-none absolute top-0 bottom-0 hidden w-px bg-bark/25 sm:block sm:-left-[25px]"
+                      />
+                    )}
+                    <img
+                      src={pillar.icon}
+                      alt=""
+                      aria-hidden="true"
+                      class="h-10 w-10 object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <p class="font-body text-[18px] font-bold leading-snug text-bark">{pillar.title}</p>
+                    <p class="font-body text-base leading-relaxed text-bark/85">{pillar.description}</p>
+                  </article>
+                ))}
+              </div>
+
+              <p class="py-4 text-base leading-relaxed md:w-[80%]">{sectionOne.real}</p>
+
+              <div class="flex items-start md:w-[90%]">
+                <img
+                  src="/icons/leaf2.png"
+                  alt=""
+                  aria-hidden="true"
+                  class="-mr-2 mt-6 h-14 w-14 shrink-0 object-contain opacity-50 md:-mr-4 md:h-20 md:w-20"
+                />
+                <div class="w-full rounded-xl bg-stone-dark/40 p-4 md:p-5">
+                  <p class="text-base leading-relaxed">{sectionOne.customEvents.lineOne}</p>
+                  <p class="text-base leading-relaxed">{sectionOne.customEvents.lineTwo}</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-1 text-base leading-relaxed">
+                {sectionOne.closing.lines.map((line) => (
+                  <p>{line}</p>
+                ))}
+                {sectionOne.closing.strong.map((line) => (
+                  <p class="font-semibold">{line}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div class="relative mt-2 flex w-full justify-center overflow-hidden md:mt-0 md:w-[45%] md:min-h-[720px] md:justify-start md:overflow-visible">
+            <img
+              src="/collage.png"
+              alt=""
+              aria-hidden="true"
+              class="relative w-[120%] max-w-none -translate-x-[5%] object-contain object-center md:absolute md:right-0 md:top-[12%] md:w-[130%] md:max-w-none md:translate-x-0"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
-      ))}
-    </div>
-
-    <p class="py-4 text-base leading-relaxed md:w-[80%]">{sectionOne.real}</p>
-
-    <div class="flex items-start md:w-[90%]">
-      <img
-        src="/icons/leaf2.png"
-        alt=""
-        aria-hidden="true"
-        class="w-14 h-14 md:w-20 md:h-20 object-contain shrink-0 mt-6 -mr-2 md:-mr-4 opacity-50"
-      />
-      <div class="rounded-xl bg-stone-dark/40 p-4 md:p-5 w-full">
-        <p class="text-base leading-relaxed">{sectionOne.customEvents.lineOne}</p>
-        <p class="text-base leading-relaxed">{sectionOne.customEvents.lineTwo}</p>
       </div>
-    </div>
+    </section>
 
-    <div class="flex flex-col gap-1 text-base leading-relaxed">
-      {sectionOne.closing.lines.map((line) => (
-        <p>{line}</p>
-      ))}
-      {sectionOne.closing.strong.map((line) => (
-        <p class="font-semibold">{line}</p>
-      ))}
-    </div>
-  </div>
-</div>
-  <div class="relative mt-2 flex w-full justify-center overflow-hidden md:mt-0 md:w-[45%] md:min-h-[720px] md:justify-start md:overflow-visible">
-    <img
-      src="/collage.png"
-      alt=""
-      aria-hidden="true"
-      class="relative w-[120%] max-w-none -translate-x-[5%] object-contain object-center md:absolute md:right-0 md:top-[12%] md:w-[130%] md:max-w-none md:translate-x-0"
-      loading="lazy"
-      decoding="async"
-    />
-  </div>
-    </div>
-    </div>
-    
-    <div class="bg-olive-light/40">
-    <div class="page-gutter">
-    <div class="page-shell flex w-full flex-col gap-10 py-6 md:flex-row md:gap-10 md:py-10">
+    <section class="relative bg-white">
+      <div class="pointer-events-none absolute inset-0 bg-cream-light/30" aria-hidden="true"></div>
+      <div class="page-gutter relative">
+        <div class="page-shell flex w-full flex-col gap-10 py-6 md:flex-row md:gap-10 md:py-10">
       <div class="w-full md:w-[55%] md:min-w-0 text-bark md:pr-4">
         <div class="relative inline-flex w-fit flex-col overflow-visible px-5 py-3 md:px-16 md:py-4">
           <img
@@ -182,9 +204,9 @@ const sectionTwo = p.originStory;
           decoding="async"
         />
       </div>
-    </div>
-    </div>
-    </div>
+        </div>
+      </div>
+    </section>
   </main>
   <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />
 </Layout>
