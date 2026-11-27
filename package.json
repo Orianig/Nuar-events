@@ -13,7 +13,8 @@
     "@lucide/astro": "^1.76.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^6.1.9",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "xlsx": "^0.18.5"
   },
   "overrides": {
     "zwitch": "2.0.3",
