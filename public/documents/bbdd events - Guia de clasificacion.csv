@@ -1,0 +1,14 @@
+Tipología,Tipo de evento,Cuándo utilizarlo,,Elemento,Funcionalidad,,Elemento,Funcionalidad
+privateCelebration,birthday,Cumpleaños de cualquier edad,,tipology,Categoría principal,,code,"Identificador único del evento (001, 002, 003...). Permite identificarlo y relacionarlo con su carpeta de imágenes."
+privateCelebration,graduation,Graduaciones y fiestas de fin de estudios,,type,Tipo específico de servicio,,title,"Título creativo que aparecerá en la web. Por ejemplo, «Un día en la terreta»."
+privateCelebration,bachelorAndBacheloretteParty,Despedidas de soltería,,titleHero,Título de la cabecera,,tipology,"Categoría principal a la que pertenece el evento (corporate, privateCelebration, wedding, other)."
+privateCelebration,familyCelebration,"Bautizos, comuniones, reuniones familiares",,descriptionHero,Descripción breve de la cabecera,,type,"Tipo específico de evento dentro de la tipología (birthday, graduation, corporateEvent, etc.)."
+corporate,corporateEvent,"Comidas, cenas y encuentros de empresa",,title,Título de la sección explicativa,,date,"Fecha en la que se celebró el evento, en formato AAAA-MM-DD."
+corporate,teamBuilding,Actividades para fortalecer equipos,,description,Texto principal de la página,,name,"Nombre descriptivo del evento. Por ejemplo, «Cena de empresa» o «Graduación de Máster»."
+corporate,activation,Activaciones organizadas para marcas,,items,Bloques de contenido de la página,,attendees,Número de asistentes al evento. Se utiliza para mostrar la información en las tarjetas o en la página de detalle.
+wedding,wedding,Bodas y celebraciones nupciales,,coverImage,Ruta - general/tipologyEvents,,location,Nombre del espacio o lugar donde se celebró el evento.
+other,activation,Activaciones propias de NUAR o colaboraciones,,dossier,"Ruta del PDF, cuando exista - documents",,experience,"Descripción narrativa de cómo fue el evento, qué se celebró y qué experiencia vivieron los asistentes."
+other,otherEvent,Eventos que no encajan en las anteriores,,,,,details,"Descripción de los servicios, actividades, decoración y elementos que NUAR organizó para el evento."
+,,,,,,,coverImage,Ruta de la fotografía principal que representa el evento en las tarjetas y en su página individual.
+,,,,,,,gallery,Rutas de las fotografías adicionales que se mostrarán en la galería del evento.
+,,,,,,,published,Indica si el evento debe aparecer públicamente en la web (true / false). Permite preparar contenido sin publicarlo todavía.

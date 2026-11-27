@@ -105,7 +105,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
         >
           {
             cards.map((card) => (
-              <div class="min-w-0 w-full" data-event-type={card.type} data-event-card>
+              <div class="flex min-w-0 w-full" data-event-type={card.type} data-event-card>
                 <Card
                   title={card.title}
                   subtitle={card.subtitle}
@@ -142,12 +142,18 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
           alt=""
           width="1480"
           height="640"
-          class="absolute inset-0 h-full w-full scale-[1.02] object-cover object-[center_55%] opacity-80 md:opacity-100 md:object-center"
+          class="absolute inset-0 z-0 h-full w-full scale-[1.02] object-cover"
+          style="object-position: center 42%"
           loading="lazy"
           decoding="async"
         />
-        <div class="events-all-cta-edge events-all-cta-edge-left"></div>
-        <div class="events-all-cta-edge events-all-cta-edge-right"></div>
+        <div
+          class="absolute inset-0 z-[1]"
+          style="background: linear-gradient(to right, #24281acc 0%, #24281a99 32%, #24281a59 58%, #24281a26 78%, transparent 100%)"
+        >
+        </div>
+        <div class="events-all-cta-edge events-all-cta-edge-left z-[1]"></div>
+        <div class="events-all-cta-edge events-all-cta-edge-right z-[1]"></div>
       </div>
 
       <div class="page-gutter relative z-10 w-full py-7 md:py-8 lg:py-9">
@@ -221,10 +227,12 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
 
     .events-all-cta-edge-left {
       left: 0;
+      width: clamp(12rem, 48vw, 36rem);
       background: linear-gradient(
         to right,
-        #24281a 0%,
-        color-mix(in srgb, #24281a 75%, transparent) 45%,
+        #24281ae0 0%,
+        #24281ab8 35%,
+        #24281a66 65%,
         transparent 100%
       );
     }

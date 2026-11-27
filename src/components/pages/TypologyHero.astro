@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Button from '../ui/Button.astro';
 import Download from '@lucide/astro/icons/download';
 
@@ -10,9 +12,11 @@ interface Props {
   ctaSecondary: string;
   hrefPrimary: string;
   hrefSecondary?: string;
-  backgroundImage: string;
-  /** Bleed de respaldo / viñeta; debe armonizar con la foto (nunca el azul del home) */
+  backgroundImage: ImageMetadata;
+  /** Bleed / velo de texto; debe armonizar con la foto */
   bleedColor?: string;
+  /** Encuadre vertical/horizontal de la foto (solo esta tipología) */
+  objectPosition?: string;
   height?: string;
 }
 
@@ -26,6 +30,7 @@ const {
   hrefSecondary,
   backgroundImage,
   bleedColor = '#120e0a',
+  objectPosition = 'center 40%',
   height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-[520px]',
 } = Astro.props as Props;
 
@@ -37,18 +42,25 @@ const hasDossier = Boolean(hrefSecondary?.trim());
   style={`--typology-bleed: ${bleedColor}`}
 >
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <img
+    <Image
       src={backgroundImage}
       alt=""
-      width="1480"
-      height="640"
-      class="absolute inset-0 h-full w-full scale-[1.02] object-cover object-[center_40%] opacity-55 md:opacity-100 md:object-center"
+      widths={[720, 1080, 1440, 1920]}
+      sizes="100vw"
+      quality={88}
+      format="webp"
+      class="absolute inset-0 z-0 h-full w-full object-cover"
+      style={`object-position: ${objectPosition}`}
       loading="eager"
-      decoding="async"
       fetchpriority="high"
+      decoding="async"
     />
-    <div class="typology-hero-edge typology-hero-edge-left"></div>
-    <div class="typology-hero-edge typology-hero-edge-right"></div>
+    <!-- Velo fuerte solo en zona de texto -->
+    <div
+      class="absolute inset-0 z-[1]"
+      style={`background: linear-gradient(to right, ${bleedColor}cc 0%, ${bleedColor}99 30%, ${bleedColor}59 55%, ${bleedColor}26 75%, transparent 100%)`}
+    >
+    </div>
   </div>
 
   <div class="page-gutter relative z-10 w-full pt-36 pb-12 md:pt-34 md:pb-14 lg:pt-30 lg:pb-8">
@@ -105,35 +117,5 @@ const hasDossier = Boolean(hrefSecondary?.trim());
 <style>
   .typology-hero {
     background-color: var(--typology-bleed);
-  }
-
-  .typology-hero-edge {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: clamp(4rem, 18vw, 14rem);
-    pointer-events: none;
-  }
-
-  .typology-hero-edge-left {
-    left: 0;
-    width: clamp(12rem, 48vw, 36rem);
-    background: linear-gradient(
-      to right,
-      color-mix(in srgb, var(--typology-bleed) 88%, transparent) 0%,
-      color-mix(in srgb, var(--typology-bleed) 72%, transparent) 28%,
-      color-mix(in srgb, var(--typology-bleed) 35%, transparent) 58%,
-      transparent 100%
-    );
-  }
-
-  .typology-hero-edge-right {
-    right: 0;
-    background: linear-gradient(
-      to left,
-      var(--typology-bleed) 0%,
-      color-mix(in srgb, var(--typology-bleed) 55%, transparent) 45%,
-      transparent 100%
-    );
   }
 </style>

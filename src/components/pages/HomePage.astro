@@ -54,7 +54,7 @@ const experienceItems = HOME_EVENT_TYPE_SLUGS.map((slug) => {
   return {
     title: copy.title,
     description: copy.description,
-    image: typology?.coverImage ?? '',
+    image: typology?.coverImage.src ?? '',
     href: eventTypeHref(slug, lang, base),
   };
 });
