@@ -72,6 +72,36 @@ export const en: Translations = {
         'Tell us your idea and we will help make it real. We work fully tailored to your priorities.',
       formCta: 'Fill in the form',
       formIframeTitle: 'Nuar Events contact form',
+      faq: {
+        title: 'Frequently asked questions',
+        items: [
+          {
+            question: 'Do you organise events only in Valencia?',
+            answer:
+              'We organise events across the Valencian Community, with a special focus on Valencia. Looking ahead, our plan is to also support celebrations across the rest of Spain.',
+          },
+          {
+            question: 'What kinds of events do you design?',
+            answer:
+              'Weddings, birthdays, graduations, corporate events and other celebrations. We love adapting to each client’s taste, because the goal is for the event to feel special: something you identify with, not just another plan.',
+          },
+          {
+            question: 'How does the process with Nuar start?',
+            answer:
+              'You can call us, email us, or fill in our form. If you reach out by email or form, we usually prepare a first proposal in under a week. If the event is more urgent, it’s better to call.',
+          },
+          {
+            question: 'Do you offer fixed packages or custom work?',
+            answer:
+              'We offer fixed packages, but we also love working custom: everyone deserves an event adapted to their pace and needs. We don’t start from rigid formulas: we adapt the rhythm, space and details to your story and priorities.',
+          },
+          {
+            question: 'How can I request a quote?',
+            answer:
+              'Email us at hola@nuarevents.es, call +34 656 49 93 02, or fill in the contact form. The more you tell us about your idea, the better we can guide you.',
+          },
+        ],
+      },
     },
     aboutNuar: {
       title: 'About Nuar',

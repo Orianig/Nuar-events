@@ -57,6 +57,21 @@ export function organizationJsonLd(siteOrigin: string, lang: 'es' | 'en' = 'es')
   };
 }
 
+export function faqPageJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 export function storyArticleJsonLd(input: {
   siteOrigin: string;
   url: string;

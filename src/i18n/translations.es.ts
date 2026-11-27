@@ -72,6 +72,36 @@ export const es: Translations = {
         'Cuéntanos tu idea y te ayudamos a hacerla realidad. Trabajamos a medida, según tus prioridades.',
       formCta: 'Rellenar formulario',
       formIframeTitle: 'Formulario de contacto Nuar Events',
+      faq: {
+        title: 'Preguntas frecuentes',
+        items: [
+          {
+            question: '¿Organizáis eventos solo en Valencia?',
+            answer:
+              'Organizamos eventos en toda la Comunidad Valenciana, con especial énfasis en Valencia. A medio plazo, nuestro plan es poder acompañaros también en celebraciones por el resto de España.',
+          },
+          {
+            question: '¿Qué tipo de eventos diseñáis?',
+            answer:
+              'Bodas, cumpleaños, graduaciones, eventos corporativos y otras celebraciones. Nos gusta adaptarnos a los gustos de cada cliente, porque al final la idea es que el evento se sienta especial: algo con lo que os identifiquéis, no un plan más.',
+          },
+          {
+            question: '¿Cómo empieza el proceso con Nuar?',
+            answer:
+              'Puedes llamarnos, escribirnos un correo o rellenar nuestro formulario. Si nos contactáis por correo o formulario, solemos preparar una primera propuesta en menos de una semana. Si el evento corre más prisa, mejor llamarnos.',
+          },
+          {
+            question: '¿Tenéis packs cerrados o trabajáis a medida?',
+            answer:
+              'Tenemos packs cerrados, pero también nos gusta trabajar a medida: cada persona merece un evento adaptado a su ritmo y a sus necesidades. No partimos de fórmulas fijas: adaptamos el ritmo, el espacio y los detalles a tu historia y a tus prioridades.',
+          },
+          {
+            question: '¿Cómo puedo pediros presupuesto?',
+            answer:
+              'Escríbenos a hola@nuarevents.es, llámanos al +34 656 49 93 02 o rellena el formulario de contacto. Cuanto más nos cuentes sobre tu idea, mejor podremos orientarte.',
+          },
+        ],
+      },
     },
     aboutNuar: {
       title: 'Sobre Nuar',

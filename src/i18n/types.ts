@@ -86,6 +86,10 @@ export interface Translations {
       formIntro: string;
       formCta: string;
       formIframeTitle: string;
+      faq: {
+        title: string;
+        items: { question: string; answer: string }[];
+      };
     };
     aboutNuar: {
       title: string;
