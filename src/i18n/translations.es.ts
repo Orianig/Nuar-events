@@ -32,7 +32,6 @@ export const es: Translations = {
     ctaSecondary: 'Descubre NUAR',
   },
   footer: {
-    contact: 'Contacto',
     sloganLine1: 'Creando momentos, porque al',
     sloganLine2: 'final, la vida se mide en ellos',
     followUs: 'SÍGUENOS',
@@ -73,12 +72,6 @@ export const es: Translations = {
         'Cuéntanos tu idea y te ayudamos a hacerla realidad. Trabajamos a medida, según tus prioridades.',
       formCta: 'Rellenar formulario',
       formIframeTitle: 'Formulario de contacto Nuar Events',
-    },
-    projects: {
-      title: 'Proyectos - Nuar',
-      heading: 'Hola, soy Projects',
-      goHome: 'Ir a Inicio',
-      goContact: 'Ir a Contacto',
     },
     aboutNuar: {
       title: 'NUAR',
@@ -293,28 +286,6 @@ export const es: Translations = {
     kicker: 'Momentos que hemos creado',
     title: 'Historias reales, emociones reales.',
     ctaLabel: 'Ver eventos',
-    cards: [
-      {
-        event: 'Graduación de master',
-        attendees: '65 Asistentes',
-        location: 'Pelikano Beach Club',
-      },
-      {
-        event: 'Evento corporativo',
-        attendees: '13 Asistentes',
-        location: 'Alqueria La Albufera',
-      },
-      {
-        event: 'Cumpleaños 18',
-        attendees: '32 Asistentes',
-        location: 'Pelikano Beach Club',
-      },
-      {
-        event: 'Despedida de soltera',
-        attendees: '27 Asistentes',
-        location: 'Caseta del Perellonet',
-      },
-    ],
   },
   reviews: {
     kicker: 'Lo que dicen de NUAR',
@@ -368,47 +339,5 @@ export const es: Translations = {
       'y cuidando cada detalle.',
     ],
     bottomCtaLabel: 'Cuéntanos tu idea',
-  },
-  sectionOne: {
-    image1: '/SectionOne-PictureOne.jpg',
-    image2: '/SectionOne-PictureTwo.jpg',
-    title: 'Creando momentos, porque la vida se mide en ellos',
-    paragraph:
-      'Diseñamos eventos y experiencias en Valencia para marcas y personas que buscan algo más que un plan. Creamos celebraciones donde el ritmo se desacelera y las personas vuelven a ser el centro.',
-    bullets: [
-      'Celebraciones que se viven despacio',
-      'Espacios que invitan a quedarse',
-      'Recuerdos que perduran',
-    ],
-  },
-  sectionTwo: {
-    sectionTitle: '',
-    items: [
-      {
-        image: '',
-        title: 'El ritmo importa.',
-        description:
-          'No todo tiene que pasar rápido para ser valioso. Diseñamos eventos donde las personas pueden parar, conversar y habitar el momento sin prisas ni estímulos innecesarios.',
-      },
-      {
-        image: '',
-        title: 'La experiencia es el centro.',
-        description:
-          'No organizamos eventos para impresionar. Cada decisión,desde el espacio hasta los pequeños detalles, busca crear una experiencia que se sienta auténtica y cercana.',
-      },
-      {
-        image: '',
-        title: 'El proceso también es parte.',
-        description:
-          'Creemos que un buen evento empieza mucho antes del día señalado. Acompañamos cada proyecto desde el principio para que el camino sea tan cuidado como el resultado final.',
-      },
-    ],
-  },
-  sectionThree: {
-    image: '',
-    centerText: 'Nuestros valores',
-    quote:
-      'Especie específica nativa protegida pero nuevo en ecosistemas dañados',
-    imageAlt: 'Imagen con efecto',
   },
 };

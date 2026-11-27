@@ -18,7 +18,6 @@ export default defineConfig({
   ],
   redirects: {
     '/es': '/',
-    '/es/projects': '/projects',
     '/es/contact': '/contact',
   },
   vite: {

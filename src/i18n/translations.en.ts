@@ -32,7 +32,6 @@ export const en: Translations = {
     ctaSecondary: 'Discover NUAR',
   },
   footer: {
-    contact: 'Contact',
     sloganLine1: 'Creating moments, because in',
     sloganLine2: 'the end, life is measured by them',
     followUs: 'FOLLOW US',
@@ -73,12 +72,6 @@ export const en: Translations = {
         'Tell us your idea and we will help make it real. We work fully tailored to your priorities.',
       formCta: 'Fill in the form',
       formIframeTitle: 'Nuar Events contact form',
-    },
-    projects: {
-      title: 'Projects - Nuar',
-      heading: 'Hello, I am Projects',
-      goHome: 'Go to Home',
-      goContact: 'Go to Contact',
     },
     aboutNuar: {
       title: 'NUAR',
@@ -293,28 +286,6 @@ export const en: Translations = {
     kicker: 'Moments we have created',
     title: 'Real stories, real emotions.',
     ctaLabel: 'See events',
-    cards: [
-      {
-        event: 'Master’s graduation',
-        attendees: '65 Guests',
-        location: 'Pelikano Beach Club',
-      },
-      {
-        event: 'Corporate event',
-        attendees: '13 Guests',
-        location: 'Alqueria La Albufera',
-      },
-      {
-        event: '18th birthday',
-        attendees: '32 Guests',
-        location: 'Pelikano Beach Club',
-      },
-      {
-        event: 'Hen party',
-        attendees: '27 Guests',
-        location: 'Caseta del Perellonet',
-      },
-    ],
   },
   reviews: {
     kicker: 'What they say about NUAR',
@@ -368,47 +339,5 @@ export const en: Translations = {
       'and care in every detail.',
     ],
     bottomCtaLabel: 'Tell us your idea',
-  },
-  sectionOne: {
-    image1: '/SectionOne-PictureOne.jpg',
-    image2: '/SectionOne-PictureTwo.jpg',
-    title: 'Creating moments, because life is measured by them',
-    paragraph:
-      'We design events and experiences in Valencia for brands and people looking for something more. We create celebrations where the pace slows down and people truly take center stage.',
-    bullets: [
-      'Celebrations to be lived slowly',
-      'Spaces that invite you to stay',
-      'Memories that last',
-    ],
-  },
-  sectionTwo: {
-    sectionTitle: '',
-    items: [
-      {
-        image: '',
-        title: 'The rhythm matters.',
-        description:
-          'Not everything has to happen fast to be valuable. We design events where people can pause, talk and inhabit the moment without rush or unnecessary stimuli.',
-      },
-      {
-        image: '',
-        title: 'The experience is the centre.',
-        description:
-          "We don't organise events to impress. Every decision, from the space to the smallest details, aims to create an experience that feels authentic and close.",
-      },
-      {
-        image: '',
-        title: 'The process is part of it too.',
-        description:
-          'We believe a good event starts long before the big day. We accompany each project from the beginning so the journey is as cared for as the final result.',
-      },
-    ],
-  },
-  sectionThree: {
-    image: '',
-    centerText: 'Our values',
-    quote: 
-    'Native protected specific species but new in damaged ecosystems',
-    imageAlt: 'Image with effect',
   },
 };

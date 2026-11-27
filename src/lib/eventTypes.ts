@@ -15,8 +15,6 @@ export const HOME_EVENT_TYPE_SLUGS = [
   'graduaciones',
 ] as const;
 
-export type HomeEventTypeSlug = (typeof HOME_EVENT_TYPE_SLUGS)[number];
-
 export function eventTypeHref(slug: EventTypeSlug, lang: 'es' | 'en', base = ''): string {
   const b = base.endsWith('/') ? base.slice(0, -1) : base;
   if (lang === 'en') {

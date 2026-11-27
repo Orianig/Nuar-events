@@ -1,11 +1,5 @@
 import type { Lang } from '../i18n/types';
 
-export interface SectionItem {
-  image: string;
-  title: string;
-  description: string;
-}
-
 export interface NavEventType {
   label: string;
   href: string;
@@ -111,7 +105,6 @@ export interface FooterProps {
   sloganLine2?: string;
   followUs?: string;
   privacy?: string;
-  contactText?: string;
   currentLang?: Lang;
   base?: string;
 }
@@ -129,9 +122,6 @@ export interface HeroProps {
   hrefPrimary?: string;
   hrefSecondary?: string;
   backgroundImage?: string;
-  /** @deprecated use backgroundImage */
-  slogan?: string;
-  backgroundVideo?: string;
   height?: string;
 }
 
@@ -140,27 +130,7 @@ export interface IntroAnimationProps {
   backgroundColor?: string;
 }
 
-export interface SectionOneProps {
-  image1: string;
-  image2: string;
-  title: string;
-  paragraph: string;
-  bullets: string[];
-  backgroundColor?: string;
-}
-
-export interface SectionTwoProps {
-  sectionTitle?: string;
-  items?: SectionItem[];
-  backgroundColor?: string;
-}
-
 export interface SectionThreeProps {
-  image?: string;
-  centerText?: string;
-  quote?: string;
-  imageAlt?: string;
-  effectType?: 'reveal' | 'zoom';
   backgroundColor?: string;
 }
 

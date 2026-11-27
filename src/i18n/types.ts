@@ -1,14 +1,4 @@
-/**
- * Tipos para las traducciones
- */
-
 export type Lang = 'es' | 'en';
-
-export interface SectionItem {
-  image: string;
-  title: string;
-  description: string;
-}
 
 export interface AboutPillar {
   icon: string;
@@ -65,7 +55,6 @@ export interface Translations {
     ctaSecondary: string;
   };
   footer: {
-    contact: string;
     sloganLine1: string;
     sloganLine2: string;
     followUs: string;
@@ -97,12 +86,6 @@ export interface Translations {
       formIntro: string;
       formCta: string;
       formIframeTitle: string;
-    };
-    projects: {
-      title: string;
-      heading: string;
-      goHome: string;
-      goContact: string;
     };
     aboutNuar: {
       title: string;
@@ -166,11 +149,6 @@ export interface Translations {
     kicker: string;
     title: string;
     ctaLabel: string;
-    cards: {
-      event: string;
-      attendees: string;
-      location: string;
-    }[];
   };
   reviews: {
     kicker: string;
@@ -212,22 +190,5 @@ export interface Translations {
     bottomCtaTitle: string;
     bottomCtaDescriptionLines: string[];
     bottomCtaLabel: string;
-  };
-  sectionOne: {
-    image1: string;
-    image2: string;
-    title: string;
-    paragraph: string;
-    bullets: string[];
-  };
-  sectionTwo: {
-    sectionTitle: string;
-    items: SectionItem[];
-  };
-  sectionThree: {
-    image: string;
-    centerText: string;
-    quote: string;
-    imageAlt: string;
   };
 }
