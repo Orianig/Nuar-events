@@ -14,21 +14,22 @@ const {
 } = Astro.props as HeroProps;
 ---
 
-<section class={`relative flex ${height} items-center overflow-hidden bg-hero-bleed`}>
-  <div class="pointer-events-none absolute inset-0 flex justify-center" aria-hidden="true">
-    <div class="hero-bg-frame relative h-full w-full max-w-370">
-      <img
-        src={backgroundImage}
-        alt=""
-        width="1480"
-        height="640"
-        class="h-full w-full object-cover object-[center_40%] opacity-45 md:opacity-100 md:object-center"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-      />
-      <div class="hero-bg-edge hero-bg-edge-left"></div>
-      <div class="hero-bg-edge hero-bg-edge-right"></div>
+<section class={`relative flex ${height} items-center overflow-hidden bg-[#16202c]`}>
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <img
+      src={backgroundImage}
+      alt=""
+      width="1480"
+      height="640"
+      class="absolute inset-0 h-full w-full object-cover object-[center_72%]"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <!-- Velo más opaco a la izquierda (texto) → más limpio a la derecha -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[#16202c]/82 via-[#16202c]/55 to-[#16202c]/18 md:from-[#16202c]/78 md:via-[#16202c]/42 md:to-transparent"
+    >
     </div>
   </div>
 
