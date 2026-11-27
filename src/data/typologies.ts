@@ -1,356 +1,273 @@
 import type { EventTypeSlug } from '../lib/eventTypes';
 import type { LocalizedString } from './stories';
 
-/** Keys internas ↔ rutas `/eventos/[slug]` */
-export const TYPOLOGY_KEYS = {
-  corporate: 'corporativos',
-  privateCelebrations: 'celebraciones',
-  weddings: 'bodas',
-  nuarExperiences: 'experiencias-nuar',
-} as const;
-
-export type TypologyKey = keyof typeof TYPOLOGY_KEYS;
-
 export type TypologyItem = {
   logo: string;
   title: LocalizedString;
   description: LocalizedString;
 };
 
-/**
- * Contenido de cada página de tipología.
- * Tipology → slug de ruta (corporativos | celebraciones | bodas | experiencias-nuar)
- * Textos placeholder: sustituir cuando llegue el copy definitivo.
- */
 export type Typology = {
-  /** Ruta: corporativos | celebraciones | bodas | experiencias-nuar */
   id: EventTypeSlug;
-  /** Clave legible: corporate | privateCelebrations | weddings | nuarExperiences */
-  key: TypologyKey;
-  /** Etiqueta corta de tipología */
   typology: LocalizedString;
-  /** Título grande del hero (usar \\n para saltos de línea) */
   titleHero: LocalizedString;
   descriptionHero: LocalizedString;
-  /** Título slogan / cursiva encima del título */
   littleTitleHero: LocalizedString;
   title: LocalizedString;
   description: LocalizedString;
   items: TypologyItem[];
   coverImage: string;
-  /** Color de bleed lateral acorde a la imagen del hero */
   bleedColor: string;
-  /** PDF u otro recurso descargable; vacío si aún no hay */
   dossier: string;
 };
+
+const loc = (es: string, en = es): LocalizedString => ({ es, en });
 
 export const typologies: Typology[] = [
   {
     id: 'corporativos',
-    key: 'corporate',
-    typology: {
-      es: 'Corporativo',
-      en: 'Corporate',
-    },
-    littleTitleHero: {
-      es: 'Experiencias que conectan',
-      en: 'Experiences that connect',
-    },
-    titleHero: {
-      es: 'EVENTOS\nCORPORATIVOS',
-      en: 'CORPORATE\nEVENTS',
-    },
-    descriptionHero: {
-      es: 'Encuentros que fortalecen equipos, celebran logros y crean conexiones más allá del entorno de trabajo.',
-      en: 'Gatherings that strengthen teams, celebrate achievements and create connections beyond the workplace.',
-    },
-    title: {
-      es: 'Cada equipo tiene su propia historia.',
-      en: 'Every team has its own story.',
-    },
-    description: {
-      es: 'Diseñamos eventos que responden a la identidad de cada empresa, desde pequeños encuentros de equipo hasta grandes celebraciones, cuidando cada detalle y el entorno en el que suceden.',
-      en: 'We design events that reflect each company’s identity, from small team gatherings to large celebrations, caring for every detail and the setting where they take place.',
-    },
+    typology: loc('Eventos corporativos', 'Corporate events'),
+    littleTitleHero: loc('Experiencias que conectan', 'Experiences that connect'),
+    titleHero: loc('EVENTOS\nCORPORATIVOS', 'CORPORATE\nEVENTS'),
+    descriptionHero: loc(
+      'Hay equipos que necesitan algo más que una reunión. Creamos eventos corporativos que fortalecen relaciones, celebran logros y hacen que las personas conecten más allá del trabajo.',
+      'Some teams need more than a meeting. We create corporate events that strengthen relationships, celebrate achievements and help people connect beyond work.',
+    ),
+    title: loc('Cada equipo tiene su propia historia.', 'Every team has its own story.'),
+    description: loc(
+      'Diseñamos eventos que responden a la identidad de cada empresa, desde pequeños encuentros de equipo hasta grandes celebraciones. Nos ocupamos de la organización, los proveedores y los detalles para que todo tenga sentido y vosotros podáis centraros en lo importante: disfrutar, compartir y conectar.',
+    ),
     items: [
       {
         logo: '/icons/people.png',
-        title: {
-          es: 'Team buildings',
-          en: 'Team buildings',
-        },
-        description: {
-          es: 'Actividades que fortalecen la conexión del equipo.',
-          en: 'Activities that strengthen team connection.',
-        },
-      },
-      {
-        logo: '/icons/sign.png',
-        title: {
-          es: 'Comidas y cenas de empresa',
-          en: 'Company lunches and dinners',
-        },
-        description: {
-          es: 'Encuentros distendidos para compartir y celebrar.',
-          en: 'Relaxed gatherings to share and celebrate.',
-        },
-      },
-      {
-        logo: '/icons/stars.png',
-        title: {
-          es: 'Celebraciones y aniversarios',
-          en: 'Celebrations and anniversaries',
-        },
-        description: {
-          es: 'Momentos especiales que refuerzan la cultura de la empresa.',
-          en: 'Special moments that reinforce company culture.',
-        },
+        title: loc('Team building'),
+        description: loc(
+          'Actividades que sacan al equipo de la rutina, fomentan la conexión y crean recuerdos compartidos.',
+        ),
       },
       {
         logo: '/icons/leaf.png',
-        title: {
-          es: 'Jornadas y encuentros',
-          en: 'Workshops and gatherings',
-        },
-        description: {
-          es: 'Espacios para inspirar, crear y planificar el futuro.',
-          en: 'Spaces to inspire, create and plan the future.',
-        },
+        title: loc('Comidas y cenas de empresa'),
+        description: loc(
+          'Encuentros para celebrar objetivos, brindar por los logros y disfrutar del equipo sin mirar el reloj.',
+        ),
+      },
+      {
+        logo: '/icons/stars.png',
+        title: loc('Celebraciones y aniversarios'),
+        description: loc(
+          'Momentos especiales que refuerzan la cultura de empresa y ponen en valor todo lo conseguido juntos.',
+        ),
+      },
+      {
+        logo: '/icons/idea.png',
+        title: loc('Jornadas y encuentros'),
+        description: loc(
+          'Espacios para inspirar, compartir ideas y planificar el futuro, con una organización que deja sitio para que surjan las mejores conversaciones.',
+        ),
+      },
+      {
+        logo: '/icons/heart.png',
+        title: loc('Experiencias para conectar'),
+        description: loc(
+          'Talleres creativos, dinámicas participativas y actividades diferentes para conocerse desde otra perspectiva.',
+        ),
       },
     ],
-    coverImage: '/events/corporate%20events/corporate-bg-page.jpg',
-    bleedColor: '#120e0a',
+    coverImage: '/general/tipolgyEvents/corporateEvent/hero1.png',
+    bleedColor: '#241810',
     dossier: '/documents/NuarEvents2026-Empresas.pdf',
   },
   {
-    id: 'celebraciones',
-    key: 'privateCelebrations',
-    typology: {
-      es: 'Celebración privada',
-      en: 'Private celebration',
-    },
-    littleTitleHero: {
-      es: 'Experiencias que conectan',
-      en: 'Experiences that connect',
-    },
-    titleHero: {
-      es: 'CELEBRACIONES\nPRIVADAS',
-      en: 'PRIVATE\nCELEBRATIONS',
-    },
-    descriptionHero: {
-      es: 'Momentos personales diseñados con calma, detalle y una identidad propia para cada celebración.',
-      en: 'Personal moments designed with calm, detail and a unique identity for every celebration.',
-    },
-    title: {
-      es: 'Cada celebración tiene su propia historia.',
-      en: 'Every celebration has its own story.',
-    },
-    description: {
-      es: 'Acompañamos cumpleaños, despedidas, graduaciones y encuentros íntimos con una mirada cercana, cuidando el ritmo, el espacio y los detalles que hacen único cada momento.',
-      en: 'We accompany birthdays, farewells, graduations and intimate gatherings with a close eye, caring for pace, space and the details that make each moment unique.',
-    },
-    items: [
-      {
-        logo: '/icons/stars.png',
-        title: {
-          es: 'Cumpleaños y hitos',
-          en: 'Birthdays and milestones',
-        },
-        description: {
-          es: 'Celebraciones personales pensadas para marcar una etapa.',
-          en: 'Personal celebrations designed to mark a chapter.',
-        },
-      },
-      {
-        logo: '/icons/people.png',
-        title: {
-          es: 'Despedidas y encuentros',
-          en: 'Farewells and gatherings',
-        },
-        description: {
-          es: 'Momentos cercanos para compartir y disfrutar en grupo.',
-          en: 'Warm moments to share and enjoy together.',
-        },
-      },
-      {
-        logo: '/icons/idea.png',
-        title: {
-          es: 'Graduaciones',
-          en: 'Graduations',
-        },
-        description: {
-          es: 'Cierres de etapa con ambiente cálido y cuidado.',
-          en: 'Chapter endings with a warm, carefully crafted atmosphere.',
-        },
-      },
-      {
-        logo: '/icons/leaf.png',
-        title: {
-          es: 'Celebraciones íntimas',
-          en: 'Intimate celebrations',
-        },
-        description: {
-          es: 'Encuentros pequeños con identidad propia.',
-          en: 'Small gatherings with their own identity.',
-        },
-      },
-    ],
-    coverImage: '/events/private%20celebrations/celebrations-bg-page.jpg',
-    bleedColor: '#120e0a',
-    dossier: '',
-  },
-  {
     id: 'bodas',
-    key: 'weddings',
-    typology: {
-      es: 'Boda',
-      en: 'Wedding',
-    },
-    littleTitleHero: {
-      es: 'Experiencias que conectan',
-      en: 'Experiences that connect',
-    },
-    titleHero: {
-      es: 'BODAS',
-      en: 'WEDDINGS',
-    },
-    descriptionHero: {
-      es: 'El día más importante, pensado con sensibilidad, ritmo y cuidado en cada detalle.',
-      en: 'The most important day, planned with sensitivity, pace and care in every detail.',
-    },
-    title: {
-      es: 'Cada boda tiene su propia historia.',
-      en: 'Every wedding has its own story.',
-    },
-    description: {
-      es: 'Diseñamos el día con calma y atención: desde la ceremonia hasta la celebración, cuidando el entorno, el ritmo y aquello que os representa.',
-      en: 'We design the day with calm and care: from the ceremony to the celebration, looking after the setting, the pace and what represents you.',
-    },
+    typology: loc('Bodas', 'Weddings'),
+    littleTitleHero: loc('El día que lo cambia todo', 'The day that changes everything'),
+    titleHero: loc('BODAS', 'WEDDINGS'),
+    descriptionHero: loc(
+      'Cada pareja tiene su historia y cada boda debería contarla a su manera. Os acompañamos para crear una celebración que hable de vosotros, con esos pequeños detalles que hacen que todo encaje y que vuestros invitados se sientan parte de algo especial.',
+    ),
+    title: loc('Vuestra historia, a vuestra manera.', 'Your story, your way.'),
+    description: loc(
+      'No creemos en las bodas hechas en serie. Creemos en las que tienen sentido para quienes las viven. Nos encargamos de dar forma a vuestras ideas, encontrar los espacios y proveedores adecuados y cuidar cada detalle para que disfrutéis del proceso y, sobre todo, de vuestro día.',
+    ),
     items: [
       {
         logo: '/icons/heart.png',
-        title: {
-          es: 'Ceremonias',
-          en: 'Ceremonies',
-        },
-        description: {
-          es: 'Espacios y rituales con sentido para vuestra historia.',
-          en: 'Spaces and rituals that honour your story.',
-        },
+        title: loc('Una celebración con vuestra esencia'),
+        description: loc(
+          'Escuchamos vuestras ideas y las convertimos en una propuesta que refleje quiénes sois.',
+        ),
       },
       {
         logo: '/icons/leaf.png',
-        title: {
-          es: 'Banquetes y celebraciones',
-          en: 'Receptions and celebrations',
-        },
-        description: {
-          es: 'Mesas, ambiente y detalles que invitan a compartir.',
-          en: 'Tables, atmosphere and details that invite sharing.',
-        },
-      },
-      {
-        logo: '/icons/people.png',
-        title: {
-          es: 'Welcome y brunch',
-          en: 'Welcome and brunch',
-        },
-        description: {
-          es: 'Encuentros previos o posteriores con el mismo cuidado.',
-          en: 'Pre- or post-wedding gatherings with the same care.',
-        },
+        title: loc('Espacios con sentido'),
+        description: loc(
+          'Buscamos el lugar que encaje con vuestra historia: jardín, masía, playa o el rincón que os haga decir «es aquí».',
+        ),
       },
       {
         logo: '/icons/stars.png',
-        title: {
-          es: 'Detalles y estilo',
-          en: 'Details and styling',
-        },
-        description: {
-          es: 'Identidad visual y ambientación coherente con vuestra esencia.',
-          en: 'Visual identity and styling consistent with your essence.',
-        },
+        title: loc('Detalles que se notan'),
+        description: loc(
+          'Ambientación, ritmo del día y proveedores alineados para que todo fluya sin que tengáis que estar encima.',
+        ),
+      },
+      {
+        logo: '/icons/people.png',
+        title: loc('Invitados que se sienten parte'),
+        description: loc(
+          'Cuidamos la experiencia de quienes os acompañan para que también vivan un día memorable.',
+        ),
       },
     ],
-    coverImage: '/events/weddings/weddings-bg-page.jpg',
-    bleedColor: '#120e0a',
+    coverImage: '/general/tipolgyEvents/wedding/hero1.jpg',
+    bleedColor: '#2a241c',
     dossier: '',
   },
   {
-    id: 'experiencias-nuar',
-    key: 'nuarExperiences',
-    typology: {
-      es: 'Experiencia NUAR',
-      en: 'NUAR experience',
-    },
-    littleTitleHero: {
-      es: 'Experiencias que conectan',
-      en: 'Experiences that connect',
-    },
-    titleHero: {
-      es: 'EXPERIENCIAS\nNUAR',
-      en: 'NUAR\nEXPERIENCES',
-    },
-    descriptionHero: {
-      es: 'Encuentros creados por nosotras para descubrir, compartir y conectar con las personas.',
-      en: 'Gatherings created by us to discover, share and connect with people.',
-    },
-    title: {
-      es: 'Cada experiencia tiene su propia historia.',
-      en: 'Every experience has its own story.',
-    },
-    description: {
-      es: 'Proponemos encuentros pensados por NUAR: propuestas abiertas para descubrir, compartir y conectar en entornos cuidados y con sentido.',
-      en: 'We create gatherings designed by NUAR: open proposals to discover, share and connect in carefully chosen, meaningful settings.',
-    },
+    id: 'cumpleanos',
+    typology: loc('Cumpleaños', 'Birthdays'),
+    littleTitleHero: loc('Celebrar a tu manera', 'Celebrate your way'),
+    titleHero: loc('CUMPLEAÑOS', 'BIRTHDAYS'),
+    descriptionHero: loc(
+      'Hay cumpleaños que se celebran por cumplir años y otros que se celebran porque sí. Nosotros preferimos los segundos. Diseñamos celebraciones con personalidad, para que ese día se sienta especial de verdad.',
+    ),
+    title: loc('Porque todo se celebra mejor en buena compañía.', 'Because everything is better celebrated together.'),
+    description: loc(
+      'Ya sea una celebración íntima, de fiesta por todo lo alto o de un plan diferente que nadie se espere. En NUAR damos forma a tus ideas y nos ocupamos de los detalles para que tu cumpleaños tenga tu personalidad de principio a fin.',
+    ),
     items: [
       {
-        logo: '/icons/leaf.png',
-        title: {
-          es: 'Encuentros al aire libre',
-          en: 'Outdoor gatherings',
-        },
-        description: {
-          es: 'Experiencias en entornos naturales para desconectar y compartir.',
-          en: 'Experiences in natural settings to disconnect and share.',
-        },
+        logo: '/icons/stars.png',
+        title: loc('Celebraciones a tu medida'),
+        description: loc(
+          'Diseñamos un plan que encaje contigo, con tu gente y con las ganas que tengas de celebrar. Aquí no hay cumpleaños de catálogo.',
+        ),
       },
       {
-        logo: '/icons/people.png',
-        title: {
-          es: 'Comunidades y talleres',
-          en: 'Communities and workshops',
-        },
-        description: {
-          es: 'Espacios para aprender, crear y conocernos.',
-          en: 'Spaces to learn, create and meet each other.',
-        },
+        logo: '/icons/leaf.png',
+        title: loc('Lugares con encanto'),
+        description: loc(
+          'Buscamos ese espacio que te haga decir «es aquí», desde una casa rural hasta una terraza, una masía o un rincón especial.',
+        ),
       },
       {
         logo: '/icons/idea.png',
-        title: {
-          es: 'Propuestas de temporada',
-          en: 'Seasonal proposals',
-        },
-        description: {
-          es: 'Ideas puntuales con ritmo propio a lo largo del año.',
-          en: 'Timely ideas with their own rhythm throughout the year.',
-        },
+        title: loc('Una fiesta con personalidad'),
+        description: loc(
+          'Decoración, música, rincones especiales y detalles que convierten cualquier espacio en el escenario perfecto para celebrar.',
+        ),
+      },
+      {
+        logo: '/icons/people.png',
+        title: loc('Planes para disfrutar juntos'),
+        description: loc(
+          'Brunch, picoteo, cena, cóctel o lo que os apetezca. Diseñamos una experiencia en la que lo importante sea disfrutar de la compañía.',
+        ),
+      },
+      {
+        logo: '/icons/heart.png',
+        title: loc('Detalles que sorprenden'),
+        description: loc(
+          'Regalos personalizados, pequeños guiños y sorpresas que hacen que el protagonista se sienta todavía más especial.',
+        ),
+      },
+    ],
+    coverImage: '/general/tipolgyEvents/birthday/hero1.png',
+    bleedColor: '#2c2618',
+    dossier: '',
+  },
+  {
+    id: 'graduaciones',
+    typology: loc('Graduaciones', 'Graduations'),
+    littleTitleHero: loc('El fin de una etapa', 'The end of a chapter'),
+    titleHero: loc('GRADUACIONES', 'GRADUATIONS'),
+    descriptionHero: loc(
+      'Después de tanto esfuerzo, toca celebrar lo conseguido. Diseñamos graduaciones únicas para compartir con compañeros, amigos y familia, cuidando cada detalle para que el final de una etapa sea el comienzo de un recuerdo inolvidable.',
+    ),
+    title: loc(
+      'El fin de una etapa que merece celebrarse por todo lo alto.',
+      'The end of a chapter that deserves a proper celebration.',
+    ),
+    description: loc(
+      'Sabemos todo lo que hay detrás de llegar hasta aquí. Por eso, queremos que ese día esté a la altura. Nos encargamos de dar forma a una celebración que os represente, desde los primeros preparativos hasta el último brindis.',
+    ),
+    items: [
+      {
+        logo: '/icons/people.png',
+        title: loc('Celebraciones a medida'),
+        description: loc(
+          'Desde una celebración íntima hasta una gran fiesta de promoción. Adaptamos cada propuesta a vuestro grupo, vuestras ideas y vuestro presupuesto.',
+        ),
+      },
+      {
+        logo: '/icons/leaf.png',
+        title: loc('Espacios con personalidad'),
+        description: loc(
+          'Buscamos el lugar perfecto para reuniros, brindar y celebrar todo lo que habéis conseguido juntos.',
+        ),
       },
       {
         logo: '/icons/stars.png',
-        title: {
-          es: 'Momentos NUAR',
-          en: 'NUAR moments',
-        },
-        description: {
-          es: 'Encuentros pequeños con la esencia de la marca.',
-          en: 'Small gatherings with the essence of the brand.',
-        },
+        title: loc('Una fiesta con vuestro rollo'),
+        description: loc('Música, decoración, photocall y detalles que hablen de vosotros.'),
+      },
+      {
+        logo: '/icons/idea.png',
+        title: loc('Recuerdos para siempre'),
+        description: loc(
+          'Creamos rincones y momentos especiales para que las fotos de ese día no se queden solo en la galería del móvil.',
+        ),
       },
     ],
-    coverImage: '/events/nuar%20experiences/experience-bg-page.avif',
-    bleedColor: '#120e0a',
+    coverImage: '/general/tipolgyEvents/graduation/hero1.png',
+    bleedColor: '#1f2418',
+    dossier: '',
+  },
+  {
+    id: 'otros',
+    typology: loc('Otros eventos', 'Other events'),
+    littleTitleHero: loc('Ideas con identidad', 'Ideas with identity'),
+    titleHero: loc('OTROS\nEVENTOS', 'OTHER\nEVENTS'),
+    descriptionHero: loc(
+      'Bautizos, despedidas, reuniones familiares, inauguraciones o ese evento que todavía no sabes muy bien cómo explicar. Cuéntanos qué tienes en mente y construiremos una propuesta a tu medida.',
+    ),
+    title: loc('¿Tienes una idea? Vamos a darle forma.', 'Got an idea? Let’s shape it.'),
+    description: loc(
+      'No todos los eventos caben en una categoría, y eso es precisamente lo divertido. Si tienes algo que celebrar, una idea rondándote la cabeza o ganas de organizar un encuentro diferente, estamos aquí para ayudarte a convertirlo en un plan de verdad.',
+    ),
+    items: [
+      {
+        logo: '/icons/people.png',
+        title: loc('Celebraciones familiares'),
+        description: loc(
+          'Bautizos, reuniones y días especiales para juntar a los tuyos y disfrutar de estar todos en el mismo sitio.',
+        ),
+      },
+      {
+        logo: '/icons/heart.png',
+        title: loc('Despedidas de soltería y soltero'),
+        description: loc(
+          'Planes pensados para celebrar a lo grande, compartir risas y crear recuerdos antes de una nueva aventura.',
+        ),
+      },
+      {
+        logo: '/icons/stars.png',
+        title: loc('Inauguraciones y eventos de marca'),
+        description: loc(
+          'Damos forma a encuentros para presentar proyectos, abrir nuevas etapas y compartir lo que hace especial a tu marca.',
+        ),
+      },
+      {
+        logo: '/icons/idea.png',
+        title: loc('Eventos personalizados'),
+        description: loc(
+          '¿Tienes una idea poco convencional? Nos encantan los retos. Diseñamos propuestas desde cero para que el resultado encaje contigo.',
+        ),
+      },
+    ],
+    coverImage: '/general/tipolgyEvents/otherEvent/hero1.png',
+    bleedColor: '#241810',
     dossier: '',
   },
 ];
@@ -359,13 +276,6 @@ export function getTypology(id: EventTypeSlug): Typology | undefined {
   return typologies.find((t) => t.id === id);
 }
 
-export function getTypologyByKey(key: TypologyKey): Typology | undefined {
-  return typologies.find((t) => t.key === key);
-}
-
 export function typologyTitleLines(titleHero: LocalizedString, lang: 'es' | 'en'): string[] {
-  return titleHero[lang]
-    .split('\n')
-    .map((line) => line.trim())
-    .filter(Boolean);
+  return titleHero[lang].split('\n').map((l) => l.trim()).filter(Boolean);
 }

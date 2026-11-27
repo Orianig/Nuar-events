@@ -50,9 +50,10 @@ export interface Translations {
     menuToggle: string;
     eventTypes: {
       corporate: string;
-      celebrations: string;
       weddings: string;
-      experiences: string;
+      birthdays: string;
+      graduations: string;
+      others: string;
       all: string;
     };
   };
@@ -136,9 +137,9 @@ export interface Translations {
     ctaLabel: string;
     cards: {
       corporate: { title: string; description: string };
-      celebrations: { title: string; description: string };
       weddings: { title: string; description: string };
-      experiences: { title: string; description: string };
+      birthdays: { title: string; description: string };
+      graduations: { title: string; description: string };
     };
   };
   values: {

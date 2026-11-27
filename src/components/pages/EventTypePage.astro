@@ -10,7 +10,7 @@ import ContactSection from '../home/ContactSection.astro';
 import { getTranslations } from '../../i18n';
 import { EVENT_TYPE_SLUGS, allEventsHref, type EventTypeSlug } from '../../lib/eventTypes';
 import { getTypology, typologyTitleLines } from '../../data/typologies';
-import { getStoriesByType, localize, storyHref } from '../../data/stories';
+import { attendeesText, getStoriesByType, localize, storyHref } from '../../data/stories';
 import type { PageProps } from '../../types';
 
 interface Props extends PageProps {
@@ -27,9 +27,10 @@ const typology = getTypology(eventType);
 
 const labels = {
   corporativos: t.nav.eventTypes.corporate,
-  celebraciones: t.nav.eventTypes.celebrations,
   bodas: t.nav.eventTypes.weddings,
-  'experiencias-nuar': t.nav.eventTypes.experiences,
+  cumpleanos: t.nav.eventTypes.birthdays,
+  graduaciones: t.nav.eventTypes.graduations,
+  otros: t.nav.eventTypes.others,
 } as const;
 
 const pageTitle = typology
@@ -68,8 +69,7 @@ const bodyItems =
 const featuredStories = getStoriesByType(eventType, 4);
 const featuredItems = featuredStories.map((story) => ({
   event: localize(story.name, lang),
-  attendees:
-    lang === 'en' ? `${story.attendees} guests` : `${story.attendees} Asistentes`,
+  attendees: attendeesText(story, lang),
   location: localize(story.location, lang),
   image: story.coverImage,
   href: storyHref(story.code, lang, base),
@@ -130,7 +130,7 @@ const featuredItems = featuredStories.map((story) => ({
           descriptionLines={[...t.typologyPage.bottomCtaDescriptionLines]}
           ctaLabel={t.typologyPage.bottomCtaLabel}
           hrefContact={hrefContact}
-          backgroundImage="/events/all-events-bg-section.avif"
+          backgroundImage="/general/home/preFooter/hero1.png"
         />
       </>
     ) : (

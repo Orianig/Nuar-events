@@ -4,8 +4,9 @@ import type { EventTypeSlug } from '../../lib/eventTypes';
 import Button from './Button.astro';
 import SocialIcon from './SocialIcon.astro';
 import Briefcase from '@lucide/astro/icons/briefcase';
-import PartyPopper from '@lucide/astro/icons/party-popper';
 import Heart from '@lucide/astro/icons/heart';
+import Cake from '@lucide/astro/icons/cake';
+import GraduationCap from '@lucide/astro/icons/graduation-cap';
 import Sparkles from '@lucide/astro/icons/sparkles';
 
 interface Props {
@@ -44,13 +45,15 @@ const iconClass = compact ? 'size-4 text-stone-light' : 'size-5 text-stone-light
 const EventTypeIcon =
   eventType === 'corporativos'
     ? Briefcase
-    : eventType === 'celebraciones'
-      ? PartyPopper
-      : eventType === 'bodas'
-        ? Heart
-        : eventType === 'experiencias-nuar'
-          ? Sparkles
-          : null;
+    : eventType === 'bodas'
+      ? Heart
+      : eventType === 'cumpleanos'
+        ? Cake
+        : eventType === 'graduaciones'
+          ? GraduationCap
+          : eventType === 'otros'
+            ? Sparkles
+            : null;
 
 const cardClass = [
   'group/card relative flex w-full min-w-0 flex-col overflow-hidden rounded-xl border-[0.8px] border-olive-light bg-white',

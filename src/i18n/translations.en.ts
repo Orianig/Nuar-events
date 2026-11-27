@@ -11,9 +11,10 @@ export const en: Translations = {
     menuToggle: 'Open menu',
     eventTypes: {
       corporate: 'Corporate events',
-      celebrations: 'Private celebrations',
       weddings: 'Weddings',
-      experiences: 'NUAR experiences',
+      birthdays: 'Birthdays',
+      graduations: 'Graduations',
+      others: 'Other events',
       all: 'All events',
     },
   },
@@ -224,20 +225,20 @@ export const en: Translations = {
         description:
           'Brand and team gatherings designed to create connection beyond the event.',
       },
-      celebrations: {
-        title: 'Celebrations',
-        description:
-          'Birthdays, baptisms, graduations and any occasion you want to celebrate.',
-      },
       weddings: {
         title: 'Weddings',
         description:
           'Designed around your story, your way of celebrating and your rhythm.',
       },
-      experiences: {
-        title: 'NUAR Experiences',
+      birthdays: {
+        title: 'Birthdays',
         description:
-          'Gatherings created by us to discover, share and connect with people.',
+          'Celebrations with personality, from intimate plans to unexpected parties.',
+      },
+      graduations: {
+        title: 'Graduations',
+        description:
+          'The end of a chapter celebrated with classmates, friends and family.',
       },
     },
   },

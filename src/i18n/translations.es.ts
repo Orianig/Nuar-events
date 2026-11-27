@@ -11,9 +11,10 @@ export const es: Translations = {
     menuToggle: 'Abrir menú',
     eventTypes: {
       corporate: 'Eventos corporativos',
-      celebrations: 'Celebraciones privadas',
       weddings: 'Bodas',
-      experiences: 'Experiencias NUAR',
+      birthdays: 'Cumpleaños',
+      graduations: 'Graduaciones',
+      others: 'Otros eventos',
       all: 'Todos los eventos',
     },
   },
@@ -224,20 +225,20 @@ export const es: Translations = {
         description:
           'Encuentros de marca y de equipo pensados para generar conexión más allá del evento.',
       },
-      celebrations: {
-        title: 'Celebraciones',
-        description:
-          'Cumpleaños, bautizos, graduaciones y cualquier ocasión que quieras celebrar.',
-      },
       weddings: {
         title: 'Bodas',
         description:
           'Diseñadas alrededor de vuestra historia, vuestra forma de celebrar y vuestro ritmo.',
       },
-      experiences: {
-        title: 'Experiencias NUAR',
+      birthdays: {
+        title: 'Cumpleaños',
         description:
-          'Encuentros creados por nosotras para descubrir, compartir y conectar con las personas.',
+          'Celebraciones con personalidad, del plan íntimo a la fiesta que nadie se espera.',
+      },
+      graduations: {
+        title: 'Graduaciones',
+        description:
+          'El cierre de una etapa celebrado con compañeros, amigos y familia.',
       },
     },
   },

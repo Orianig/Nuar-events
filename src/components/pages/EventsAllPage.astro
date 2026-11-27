@@ -17,9 +17,10 @@ const hrefContact = lang === 'es' ? (b ? `${b}/contact` : '/contact') : (b ? `${
 
 const typeLabels: Record<EventTypeSlug, string> = {
   corporativos: t.nav.eventTypes.corporate,
-  celebraciones: t.nav.eventTypes.celebrations,
   bodas: t.nav.eventTypes.weddings,
-  'experiencias-nuar': t.nav.eventTypes.experiences,
+  cumpleanos: t.nav.eventTypes.birthdays,
+  graduaciones: t.nav.eventTypes.graduations,
+  otros: t.nav.eventTypes.others,
 };
 
 const filters = [
@@ -27,12 +28,12 @@ const filters = [
   ...EVENT_TYPE_SLUGS.map((slug) => ({ value: slug, label: typeLabels[slug] })),
 ];
 
-const cardsBase = stories.map((story) => {
+const cards = stories.map((story) => {
   const name = localize(story.name, lang);
   const location = localize(story.location, lang);
   const experience = localize(story.experience, lang);
   const attendees =
-    lang === 'en' ? `${story.attendees} guests` : `${story.attendees} asistentes`;
+    lang === 'en' ? `${story.attendeesLabel} guests` : `${story.attendeesLabel} asistentes`;
 
   return {
     code: story.code,
@@ -44,9 +45,6 @@ const cardsBase = stories.map((story) => {
     href: storyHref(story.code, lang, base),
   };
 });
-
-// Preview: triplicate content to judge denser grid layout
-const cards = [...cardsBase, ...cardsBase, ...cardsBase];
 
 const pageTitle = `${t.eventsAll.title} - Nuar`;
 ---
@@ -140,7 +138,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
     >
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
         <img
-          src="/events/all-events-bg-section.avif"
+          src="/general/home/preFooter/hero1.png"
           alt=""
           width="1480"
           height="640"

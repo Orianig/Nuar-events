@@ -1,18 +1,22 @@
 export const EVENT_TYPE_SLUGS = [
   'corporativos',
-  'celebraciones',
   'bodas',
-  'experiencias-nuar',
+  'cumpleanos',
+  'graduaciones',
+  'otros',
 ] as const;
 
 export type EventTypeSlug = (typeof EVENT_TYPE_SLUGS)[number];
 
-export const EVENT_TYPE_IMAGES: Record<EventTypeSlug, string> = {
-  corporativos: '/events/corporate%20events/corporate-card-picture.jpg',
-  celebraciones: '/events/private%20celebrations/celebrations-card-picture.jpg',
-  bodas: '/events/weddings/weddings-card-picture.jpg',
-  'experiencias-nuar': '/events/nuar%20experiences/nuar-experiences-card-picture.png',
-};
+/** Tipologías visibles en el home (4 cards). */
+export const HOME_EVENT_TYPE_SLUGS = [
+  'corporativos',
+  'bodas',
+  'cumpleanos',
+  'graduaciones',
+] as const;
+
+export type HomeEventTypeSlug = (typeof HOME_EVENT_TYPE_SLUGS)[number];
 
 export function eventTypeHref(slug: EventTypeSlug, lang: 'es' | 'en', base = ''): string {
   const b = base.endsWith('/') ? base.slice(0, -1) : base;

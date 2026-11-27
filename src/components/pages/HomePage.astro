@@ -12,9 +12,10 @@ import ReviewsSection from '../home/ReviewsSection.astro';
 import ContactSection from '../home/ContactSection.astro';
 import IntroAnimation from '../home/IntroAnimation.astro';
 import { getTranslations } from '../../i18n';
-import { EVENT_TYPE_IMAGES, eventTypeHref, allEventsHref } from '../../lib/eventTypes';
+import { HOME_EVENT_TYPE_SLUGS, eventTypeHref, allEventsHref } from '../../lib/eventTypes';
 import { reviews } from '../../data/reviews';
-import { getFeaturedStories, localize, storyHref } from '../../data/stories';
+import { getFeaturedStories, localize, storyHref, attendeesText } from '../../data/stories';
+import { getTypology } from '../../data/typologies';
 import type { PageProps } from '../../types';
 
 const { lang, currentPath, base } = Astro.props as PageProps;
@@ -34,38 +35,29 @@ const hrefAllEvents = allEventsHref(lang, base);
 
 const momentItems = getFeaturedStories().map((story) => ({
   event: localize(story.name, lang),
-  attendees: lang === 'en' ? `${story.attendees} Guests` : `${story.attendees} Asistentes`,
+  attendees: attendeesText(story, lang),
   location: localize(story.location, lang),
   image: story.coverImage,
   href: storyHref(story.code, lang, base),
 }));
 
-const experienceItems = [
-  {
-    title: t.experiences.cards.corporate.title,
-    description: t.experiences.cards.corporate.description,
-    image: EVENT_TYPE_IMAGES.corporativos,
-    href: eventTypeHref('corporativos', lang, base),
-  },
-  {
-    title: t.experiences.cards.celebrations.title,
-    description: t.experiences.cards.celebrations.description,
-    image: EVENT_TYPE_IMAGES.celebraciones,
-    href: eventTypeHref('celebraciones', lang, base),
-  },
-  {
-    title: t.experiences.cards.weddings.title,
-    description: t.experiences.cards.weddings.description,
-    image: EVENT_TYPE_IMAGES.bodas,
-    href: eventTypeHref('bodas', lang, base),
-  },
-  {
-    title: t.experiences.cards.experiences.title,
-    description: t.experiences.cards.experiences.description,
-    image: EVENT_TYPE_IMAGES['experiencias-nuar'],
-    href: eventTypeHref('experiencias-nuar', lang, base),
-  },
-];
+const homeCardCopy = {
+  corporativos: t.experiences.cards.corporate,
+  bodas: t.experiences.cards.weddings,
+  cumpleanos: t.experiences.cards.birthdays,
+  graduaciones: t.experiences.cards.graduations,
+} as const;
+
+const experienceItems = HOME_EVENT_TYPE_SLUGS.map((slug) => {
+  const typology = getTypology(slug);
+  const copy = homeCardCopy[slug];
+  return {
+    title: copy.title,
+    description: copy.description,
+    image: typology?.coverImage ?? '',
+    href: eventTypeHref(slug, lang, base),
+  };
+});
 ---
 
 <Layout title={t.pages.home.title} description={t.hero.slogan} lang={lang} currentPath={currentPath}>
@@ -91,7 +83,7 @@ const experienceItems = [
     ctaSecondary={t.hero.ctaSecondary}
     hrefPrimary={hrefContact}
     hrefSecondary={hrefAboutNuar}
-    backgroundImage={`${assetBase}home-bg-header.jpg`}
+    backgroundImage={`${assetBase}general/home/hero/hero1.png`}
   />
 
   <ExperiencesSection
@@ -155,7 +147,7 @@ const experienceItems = [
     titleLines={[...t.contactCta.titleLines]}
     ctaLabel={t.contactCta.ctaLabel}
     hrefContact={hrefContact}
-    backgroundImage={`${assetBase}home-bg-section.jpg`}
+    backgroundImage={`${assetBase}general/home/preFooter/hero1.png`}
   />
 
   <Footer brandName={t.nav.brandName} sloganLine1={t.footer.sloganLine1} sloganLine2={t.footer.sloganLine2} followUs={t.footer.followUs} privacy={t.footer.privacy} currentLang={lang} base={base} />

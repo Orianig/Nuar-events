@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
 import { getTranslations } from '../../i18n';
-import { localize, type Story } from '../../data/stories';
+import { attendeesText, localize, type Story } from '../../data/stories';
 import type { PageProps } from '../../types';
 
 interface Props extends PageProps {
@@ -13,15 +13,14 @@ interface Props extends PageProps {
 const { lang, currentPath, base, story } = Astro.props as Props;
 const t = getTranslations(lang);
 
+const creativeTitle = localize(story.title, lang);
 const name = localize(story.name, lang);
 const location = localize(story.location, lang);
 const experience = localize(story.experience, lang);
 const details = localize(story.details, lang);
+const attendeesLabel = attendeesText(story, lang);
 
-const attendeesLabel =
-  lang === 'en' ? `${story.attendees} Guests` : `${story.attendees} Asistentes`;
-
-const title = `${name} - Nuar`;
+const title = `${creativeTitle || name} - Nuar`;
 const description = experience.slice(0, 160);
 ---
 
@@ -42,7 +41,7 @@ const description = experience.slice(0, 160);
   <main class="bg-stone pb-16 pt-28 text-bark">
     <div class="page-gutter">
       <div class="page-shell mx-auto max-w-3xl">
-        <p class="font-slogan text-xl text-olive md:text-2xl">{t.moments.kicker}</p>
+        <p class="font-slogan text-xl text-olive md:text-2xl">{creativeTitle || t.moments.kicker}</p>
         <h1 class="mt-3 font-body text-3xl font-normal leading-snug text-olive md:text-[32px]">
           {name}
         </h1>
@@ -81,9 +80,9 @@ const description = experience.slice(0, 160);
         </section>
 
         {
-          story.images.length > 1 && (
+          story.images.length > 0 && (
             <section class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {story.images.slice(1).map((src) => (
+              {story.images.map((src) => (
                 <div class="overflow-hidden rounded-[14px]">
                   <img
                     src={src}
