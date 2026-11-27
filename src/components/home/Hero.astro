@@ -10,11 +10,11 @@ const {
   hrefPrimary = '/contact',
   hrefSecondary = '/about-nuar',
   backgroundImage = '/general/home/hero/hero1.png',
-  height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-[520px]',
+  height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-130',
 } = Astro.props as HeroProps;
 ---
 
-<section class={`relative flex ${height} items-center overflow-hidden bg-[#16202c]`}>
+<section class={`relative flex ${height} items-center overflow-hidden bg-hero-bleed`}>
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
     <img
       src={backgroundImage}
@@ -27,7 +27,7 @@ const {
       fetchpriority="high"
     />
     <div
-      class="absolute inset-0 bg-gradient-to-r from-[#16202c]/82 via-[#16202c]/55 to-[#16202c]/18 md:from-[#16202c]/78 md:via-[#16202c]/42 md:to-transparent"
+      class="absolute inset-0 bg-gradient-to-r from-hero-bleed/82 via-hero-bleed/55 to-hero-bleed/18 md:from-hero-bleed/78 md:via-hero-bleed/42 md:to-transparent"
     >
     </div>
   </div>

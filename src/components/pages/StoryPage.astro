@@ -102,7 +102,7 @@ const backTargets = {
               <img
                 src={story.coverImage}
                 alt=""
-                class="aspect-[2.4/1] max-h-[280px] w-full object-cover md:max-h-[320px]"
+                class="aspect-[2.4/1] max-h-70 w-full object-cover md:max-h-80"
                 loading="eager"
                 decoding="async"
                 fetchpriority="high"
@@ -154,7 +154,7 @@ const backTargets = {
                 {story.images.map((src, i) => (
                   <button
                     type="button"
-                    class="group/gallery relative aspect-[4/3] cursor-pointer overflow-hidden rounded-[10px] border-0 bg-transparent p-0 text-left outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
+                    class="group/gallery relative aspect-4/3 cursor-pointer overflow-hidden rounded-[10px] border-0 bg-transparent p-0 text-left outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
                     data-gallery-open
                     data-gallery-index={i}
                     aria-label={`${t.storyPage.galleryLabel} ${i + 1}`}
@@ -202,7 +202,7 @@ const backTargets = {
               <img
                 src={story.images[0]}
                 alt=""
-                class="mx-auto max-h-[78vh] w-auto max-w-full rounded-[12px] object-contain"
+                class="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl object-contain"
                 data-lightbox-image
                 decoding="async"
               />

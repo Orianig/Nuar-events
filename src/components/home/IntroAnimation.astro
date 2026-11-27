@@ -27,11 +27,11 @@ const logoPath = logoSrc.startsWith('http')
   aria-hidden="true"
 >
   <div class="absolute inset-0 flex h-full w-full items-center justify-center bg-transparent">
-    <div class="intro-anim-logo relative z-60 w-[35%] max-w-[250px] max-md:w-[40%]">
+    <div class="intro-anim-logo relative z-60 w-[35%] max-w-62.5 max-md:w-[40%]">
       <img src={logoPath} alt="" class="block h-auto w-full" width="250" height="80" />
     </div>
     <div
-      class="intro-anim-reveal absolute bottom-0 left-1/2 z-55 h-0 w-[200px] -translate-x-1/2 bg-transparent max-md:w-[160px]"
+      class="intro-anim-reveal absolute bottom-0 left-1/2 z-55 h-0 w-50 -translate-x-1/2 bg-transparent max-md:w-40"
       style={`--mask-color: ${backgroundColor};`}
     >
     </div>

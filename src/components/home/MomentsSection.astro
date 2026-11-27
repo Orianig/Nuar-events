@@ -15,7 +15,7 @@ const { kicker, title, ctaLabel, hrefEvents, items = [] } = Astro.props as Momen
     <div class="page-shell">
       <div class="h-px w-full bg-sand-light" aria-hidden="true"></div>
       <p class="mt-8 font-slogan text-xl leading-none text-olive md:text-2xl">{kicker}</p>
-      <h2 class="mt-3 font-body text-2xl font-normal leading-[1.25] text-olive md:text-[32px]">
+      <h2 class="mt-3 font-body text-2xl font-normal leading-tight text-olive md:text-[32px]">
         {title}
       </h2>
 
@@ -28,7 +28,7 @@ const { kicker, title, ctaLabel, hrefEvents, items = [] } = Astro.props as Momen
               return (
                 <a
                   href={href}
-                  class="group/moment relative flex aspect-square w-full flex-col overflow-hidden rounded-[14px] bg-white shadow-[0_1px_4px_rgb(91_88_53_/_8%)] no-underline outline-none transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgb(91_88_53_/_14%)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
+                  class="group/moment relative flex aspect-square w-full flex-col overflow-hidden rounded-[14px] bg-white shadow-[0_1px_4px_rgb(91_88_53/8%)] no-underline outline-none transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgb(91_88_53/14%)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
                 >
                   <div class="min-h-0 flex-1 overflow-hidden bg-cream-light/60">
                     {item.image ? (

@@ -57,7 +57,7 @@ const EventTypeIcon =
 
 const cardClass = [
   'group/card relative flex w-full min-w-0 flex-col overflow-hidden rounded-xl border-[0.8px] border-olive-light bg-white',
-  compact ? 'h-full' : 'aspect-[341/420]',
+  compact ? 'h-full' : 'aspect-341/420',
   'origin-center transition-[box-shadow,transform] duration-200',
   isHoverPreview ? 'scale-[1.02] shadow-btn' : 'shadow-none hover:scale-[1.02] hover:shadow-btn',
   className,
@@ -115,11 +115,11 @@ const bodyClass = [
       }
     </span>
 
-    <div class="flex w-full max-w-[301px] flex-col items-center">
+    <div class="flex w-full max-w-75.25 flex-col items-center">
       <h3
         class:list={[
           'w-full font-body font-medium leading-snug text-olive',
-          compact ? 'line-clamp-2 min-h-[2.5rem] text-base' : 'text-lg',
+          compact ? 'line-clamp-2 min-h-10 text-base' : 'text-lg',
         ]}
       >
         {title}

@@ -74,7 +74,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
       <div class="page-shell relative pb-6 sm:pb-8">
         <header class="max-w-2xl">
           <p class="font-slogan text-xl leading-none text-olive md:text-2xl">{t.eventsAll.kicker}</p>
-          <h1 class="mt-3 font-body text-2xl font-normal leading-[1.25] text-olive md:text-[32px]">
+          <h1 class="mt-3 font-body text-2xl font-normal leading-tight text-olive md:text-[32px]">
             {t.eventsAll.title}
           </h1>
           <p class="mt-4 font-body text-base leading-relaxed text-olive/85">
@@ -133,7 +133,7 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
     </div>
 
     <section
-      class="events-all-cta relative z-[1] -mb-px flex w-full min-h-[240px] items-center overflow-hidden bg-[#24281a] md:min-h-[280px] lg:min-h-[320px]"
+      class="events-all-cta relative z-1 -mb-px flex w-full min-h-60 items-center overflow-hidden bg-[#24281a] md:min-h-70 lg:min-h-80"
       aria-labelledby="events-all-cta-title"
     >
       <div class="pointer-events-none absolute inset-0" aria-hidden="true">
@@ -148,12 +148,12 @@ const pageTitle = `${t.eventsAll.title} - Nuar`;
           decoding="async"
         />
         <div
-          class="absolute inset-0 z-[1]"
+          class="absolute inset-0 z-1"
           style="background: linear-gradient(to right, #24281acc 0%, #24281a99 32%, #24281a59 58%, #24281a26 78%, transparent 100%)"
         >
         </div>
-        <div class="events-all-cta-edge events-all-cta-edge-left z-[1]"></div>
-        <div class="events-all-cta-edge events-all-cta-edge-right z-[1]"></div>
+        <div class="events-all-cta-edge events-all-cta-edge-left z-1"></div>
+        <div class="events-all-cta-edge events-all-cta-edge-right z-1"></div>
       </div>
 
       <div class="page-gutter relative z-10 w-full py-7 md:py-8 lg:py-9">

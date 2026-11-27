@@ -36,22 +36,22 @@ const icons = [MessageSquare, SwatchBook, FileText, Heart] as const;
                   showArrow && (
                     <div
                       aria-hidden="true"
-                      class="pointer-events-none absolute top-[26px] left-[calc(55px+58px)] right-[calc(-2.5rem+58px)] z-0 hidden items-center lg:flex"
+                      class="pointer-events-none absolute top-6.5 left-28.25 right-4.5 z-0 hidden items-center lg:flex"
                     >
-                      <span class="h-[3px] w-full bg-olive/45" />
+                      <span class="h-0.75 w-full bg-olive/45" />
                       <ArrowRight class="size-5 -ml-1 shrink-0 text-olive/55" stroke-width={2.5} />
                     </div>
                   )
                 }
 
-                <div class="relative z-10 flex size-[55px] items-center justify-center text-olive">
-                  <Icon class="size-[55px]" stroke-width={1.4} aria-hidden="true" />
+                <div class="relative z-10 flex size-13.75 items-center justify-center text-olive">
+                  <Icon class="size-13.75" stroke-width={1.4} aria-hidden="true" />
                 </div>
 
-                <h3 class="font-body !text-[20px] font-bold leading-snug text-olive">
+                <h3 class="font-body text-[20px]! font-bold leading-snug text-olive">
                   {item.title}
                 </h3>
-                <p class="font-body !text-[18px] leading-relaxed text-olive/90">
+                <p class="font-body text-[18px]! leading-relaxed text-olive/90">
                   {item.description}
                 </p>
               </article>
@@ -62,7 +62,7 @@ const icons = [MessageSquare, SwatchBook, FileText, Heart] as const;
 
       {
         ctaLabel && hrefContact && (
-          <div class="pt-[15px]">
+          <div class="pt-3.75">
             <Button href={hrefContact} variant="text" size="md" class="!px-0 !text-olive">
               {ctaLabel}
             </Button>

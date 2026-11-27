@@ -29,7 +29,7 @@ const {
   backgroundImage,
   bleedColor = '#120e0a',
   objectPosition = 'center 40%',
-  height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-[520px]',
+  height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-130',
 } = Astro.props as Props;
 
 const hasDossier = Boolean(hrefSecondary?.trim());
@@ -54,7 +54,7 @@ const hasDossier = Boolean(hrefSecondary?.trim());
       decoding="async"
     />
     <div
-      class="absolute inset-0 z-[1]"
+      class="absolute inset-0 z-1"
       style={`background: linear-gradient(to right, ${bleedColor}cc 0%, ${bleedColor}99 30%, ${bleedColor}59 55%, ${bleedColor}26 75%, transparent 100%)`}
     >
     </div>

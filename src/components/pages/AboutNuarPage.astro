@@ -29,7 +29,7 @@ const sectionTwo = p.originStory;
     <section class="relative bg-white">
       <div class="pointer-events-none absolute inset-0 bg-sand-light/30" aria-hidden="true"></div>
       <div class="page-gutter relative">
-        <div class="page-shell flex flex-col gap-6 pb-6 pt-[96px] md:flex-row md:pb-10 md:pt-[100px]">
+        <div class="page-shell flex flex-col gap-6 pb-6 pt-24 md:flex-row md:pb-10 md:pt-25">
           <div class="w-full text-bark md:w-[55%] md:pr-8">
             <div class="flex w-full flex-col gap-5">
               <div class="flex items-start">
@@ -56,7 +56,7 @@ const sectionTwo = p.originStory;
                 ))}
               </div>
 
-              <div class="flex w-full flex-col gap-8 pt-4 sm:flex-row sm:items-start sm:gap-[50px]">
+              <div class="flex w-full flex-col gap-8 pt-4 sm:flex-row sm:items-start sm:gap-12.5">
                 {sectionOne.pillars.map((pillar, i) => (
                   <article
                     class:list={[
@@ -67,7 +67,7 @@ const sectionTwo = p.originStory;
                     {i > 0 && (
                       <span
                         aria-hidden="true"
-                        class="pointer-events-none absolute top-0 bottom-0 hidden w-px bg-bark/25 sm:block sm:-left-[25px]"
+                        class="pointer-events-none absolute top-0 bottom-0 hidden w-px bg-bark/25 sm:block sm:-left-6.25"
                       />
                     )}
                     <img
@@ -109,7 +109,7 @@ const sectionTwo = p.originStory;
               </div>
             </div>
           </div>
-          <div class="relative mt-2 flex w-full justify-center overflow-hidden md:mt-0 md:w-[45%] md:min-h-[720px] md:justify-start md:overflow-visible">
+          <div class="relative mt-2 flex w-full justify-center overflow-hidden md:mt-0 md:w-[45%] md:min-h-180 md:justify-start md:overflow-visible">
             <img
               src="/general/aboutNuar/hero1.png"
               alt=""
@@ -144,14 +144,14 @@ const sectionTwo = p.originStory;
         <div class="relative pt-4 pl-5 flex flex-col gap-5">
           <div
             aria-hidden="true"
-            class="about-origin-timeline-line absolute left-[27px] top-0 bottom-3 w-[2px]"
+            class="about-origin-timeline-line absolute left-6.75 top-0 bottom-3 w-0.5"
           ></div>
           {sectionTwo.blocks.map((block, idx) => {
             const icon = block.icon ?? '/icons/leaf.png';
             return (
               <div class="flex items-start gap-3 md:gap-4">
                 <div class="relative w-6 md:w-7 shrink-0 pt-2">
-                  <span class="absolute left-[8px] top-[14px] -translate-x-1/2 h-2 w-2 rounded-full bg-bark"></span>
+                  <span class="absolute left-2 top-3.5 -translate-x-1/2 h-2 w-2 rounded-full bg-bark"></span>
                 </div>
                 <img src={icon} alt="" aria-hidden="true" class="w-6 h-6 md:w-9 md:h-9 object-contain shrink-0 mt-2" />
                 <div class="text-base leading-relaxed md:leading-loose">
@@ -191,7 +191,7 @@ const sectionTwo = p.originStory;
           controls
           preload="metadata"
           playsinline
-          class="w-full max-w-full rounded-[16px] object-cover"
+          class="w-full max-w-full rounded-2xl object-cover"
         >
           <track kind="captions" />
         </video>

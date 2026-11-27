@@ -90,18 +90,18 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
 ></div>
 <nav
   id="main-nav"
-  class="fixed top-0 left-0 right-0 z-45 min-h-[65px] border-b-[0.5px] border-stone bg-stone-light/58 transition-[box-shadow,background-color] duration-300"
+  class="fixed top-0 left-0 right-0 z-45 min-h-16.25 border-b-[0.5px] border-stone bg-stone-light/58 transition-[box-shadow,background-color] duration-300"
 >
   <div class="page-gutter">
     <div class="page-shell-nav py-2.5">
-      <div class="flex min-h-[65px] w-full items-center justify-between gap-2.5">
+      <div class="flex min-h-16.25 w-full items-center justify-between gap-2.5">
         <a href={hrefHome} class="inline-flex items-center transition-opacity hover:opacity-80">
           <img
             src="/logos/darkLogo.png"
             alt={brandName}
             width="126"
             height="38"
-            class="h-[38px] w-auto object-contain"
+            class="h-9.5 w-auto object-contain"
             loading="eager"
             decoding="async"
           />
@@ -230,7 +230,7 @@ const disabledNavClassMobile = 'cursor-not-allowed select-none text-sm text-bark
             {home}
           </a>
 
-          <div class="w-full max-w-[260px]">
+          <div class="w-full max-w-65">
             <button
               id="mobile-events-button"
               type="button"
