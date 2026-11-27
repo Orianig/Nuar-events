@@ -13,9 +13,7 @@ interface Props {
   hrefPrimary: string;
   hrefSecondary?: string;
   backgroundImage: ImageMetadata;
-  /** Bleed / velo de texto; debe armonizar con la foto */
   bleedColor?: string;
-  /** Encuadre vertical/horizontal de la foto (solo esta tipología) */
   objectPosition?: string;
   height?: string;
 }
@@ -55,7 +53,6 @@ const hasDossier = Boolean(hrefSecondary?.trim());
       fetchpriority="high"
       decoding="async"
     />
-    <!-- Velo fuerte solo en zona de texto -->
     <div
       class="absolute inset-0 z-[1]"
       style={`background: linear-gradient(to right, ${bleedColor}cc 0%, ${bleedColor}99 30%, ${bleedColor}59 55%, ${bleedColor}26 75%, transparent 100%)`}

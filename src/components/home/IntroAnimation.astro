@@ -2,47 +2,68 @@
 import type { IntroAnimationProps } from '../../types';
 
 const {
-  logoSrc = "/logos/greenClearLogo.png",
-  backgroundColor = "#d1cda7"
+  logoSrc = '/logos/greenClearLogo.png',
+  backgroundColor = '#d1cda7',
 } = Astro.props as IntroAnimationProps;
 
 const base = import.meta.env.BASE_URL;
-const assetBase = base.endsWith('/') ? base : base + '/';
+const assetBase = base.endsWith('/') ? base : `${base}/`;
 const logoPath = logoSrc.startsWith('http')
   ? logoSrc
   : `${assetBase}${logoSrc.replace(/^\/+/, '')}`;
 ---
 
-<div id="intro-animation" class="fixed inset-0 w-screen h-screen z-50 pointer-events-none hidden">
-  <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-transparent">
-    <div class="w-[35%] max-md:w-[40%] max-w-[250px] relative z-60 intro-anim-logo">
-      <img src={logoPath} alt="NUAR Logo" class="w-full h-auto block" />
+<script is:inline>
+  try {
+    if (sessionStorage.getItem('nuar-intro-played') === '1') {
+      document.documentElement.classList.add('nuar-intro-skip');
+    }
+  } catch (e) {}
+</script>
+
+<div
+  id="intro-animation"
+  class="nuar-intro fixed inset-0 z-50 hidden h-screen w-screen pointer-events-none"
+  aria-hidden="true"
+>
+  <div class="absolute inset-0 flex h-full w-full items-center justify-center bg-transparent">
+    <div class="intro-anim-logo relative z-60 w-[35%] max-w-[250px] max-md:w-[40%]">
+      <img src={logoPath} alt="" class="block h-auto w-full" width="250" height="80" />
     </div>
     <div
-      class="intro-anim-reveal absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] max-md:w-[160px] h-0 bg-transparent z-55"
+      class="intro-anim-reveal absolute bottom-0 left-1/2 z-55 h-0 w-[200px] -translate-x-1/2 bg-transparent max-md:w-[160px]"
       style={`--mask-color: ${backgroundColor};`}
-    ></div>
+    >
+    </div>
   </div>
 </div>
 
 <script>
-  const introElement = document.getElementById('intro-animation');
-  if (!introElement) throw null;
-
   const SESSION_KEY = 'nuar-intro-played';
-  const alreadyPlayed = sessionStorage.getItem(SESSION_KEY) === '1';
+  const introElement = document.getElementById('intro-animation');
+  if (
+    introElement &&
+    (document.documentElement.classList.contains('nuar-intro-skip') ||
+      sessionStorage.getItem(SESSION_KEY) === '1')
+  ) {
+    document.documentElement.classList.add('nuar-intro-skip');
+    introElement.remove();
+  } else if (introElement) {
+    try {
+      sessionStorage.setItem(SESSION_KEY, '1');
+    } catch (e) {}
 
-  if (alreadyPlayed) {
-    introElement.classList.add('hidden');
-  } else {
-    sessionStorage.setItem(SESSION_KEY, '1');
     introElement.classList.remove('hidden');
+    introElement.classList.add('is-playing');
     document.body.style.overflow = 'hidden';
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       document.body.style.overflow = '';
-      setTimeout(() => {
+      window.setTimeout(() => {
+        document.documentElement.classList.add('nuar-intro-skip');
         introElement.classList.add('hidden');
+        introElement.classList.remove('is-playing');
+        introElement.remove();
       }, 300);
     }, 4700);
   }

@@ -35,7 +35,6 @@ export const stories: Story[] = generatedEvents.map((event) => ({
   published: event.published,
 }));
 
-/** Featured en home: prioriza 001–004 si existen. */
 export const FEATURED_STORY_CODES = ['001', '002', '003', '004'] as const;
 
 export function getStory(code: string): Story | undefined {

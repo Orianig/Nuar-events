@@ -176,16 +176,27 @@ button.btn-primary-fill.is-active-preview {
   transform: scaleX(1.15);
 }
 
-/* --- IntroAnimation: animaciones y máscara --- */
-.intro-anim-logo {
+html.nuar-intro-skip .nuar-intro {
+  display: none !important;
+}
+
+.intro-anim-logo,
+.intro-anim-reveal {
+  animation: none;
+}
+
+.intro-anim-reveal {
+  box-shadow: 0 0 0 9999px var(--mask-color, #d1cda7);
+}
+
+#intro-animation.is-playing .intro-anim-logo {
   animation:
     intro-logo-push-up 1s ease-out forwards,
     intro-logo-fly 1s ease-in forwards;
   animation-delay: 1.5s, 3s;
 }
 
-.intro-anim-reveal {
-  box-shadow: 0 0 0 9999px var(--mask-color, #d1cda7);
+#intro-animation.is-playing .intro-anim-reveal {
   animation:
     intro-window-grow 1s ease-out forwards,
     intro-window-expand 1.5s ease-in-out forwards;
@@ -214,14 +225,14 @@ button.btn-primary-fill.is-active-preview {
 }
 
 @media (max-width: 768px) {
-  .intro-anim-logo {
+  #intro-animation.is-playing .intro-anim-logo {
     animation:
       intro-logo-push-up-sm 1s ease-out forwards,
       intro-logo-fly-sm 1s ease-in forwards;
     animation-delay: 1.5s, 3s;
   }
 
-  .intro-anim-reveal {
+  #intro-animation.is-playing .intro-anim-reveal {
     animation:
       intro-window-grow-sm 1s ease-out forwards,
       intro-window-expand-sm 1.5s ease-in-out forwards;

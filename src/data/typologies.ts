@@ -25,7 +25,6 @@ export type Typology = {
   items: TypologyItem[];
   coverImage: ImageMetadata;
   bleedColor: string;
-  /** Encuadre del hero; por defecto center */
   heroObjectPosition?: string;
   dossier: string;
 };
@@ -38,7 +37,6 @@ const ITEM_ICONS = [
   '/icons/heart.png',
 ] as const;
 
-/** Presentación local (no viene del Excel): imagen Astro, bleed, slogan y encuadre. */
 const PRESENTATION: Record<
   EventTypeSlug,
   {

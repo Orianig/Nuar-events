@@ -8,7 +8,6 @@ export const EVENT_TYPE_SLUGS = [
 
 export type EventTypeSlug = (typeof EVENT_TYPE_SLUGS)[number];
 
-/** Tipologías visibles en el home (4 cards). */
 export const HOME_EVENT_TYPE_SLUGS = [
   'corporativos',
   'bodas',

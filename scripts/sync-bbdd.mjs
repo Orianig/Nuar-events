@@ -168,7 +168,6 @@ function resolveDossier(value) {
 function resolveTypologyCoverFolder(value) {
   if (value == null || value === '') return '';
   let folder = String(value).trim().replace(/^\/+/, '').replace(/\\/g, '/');
-  // Fix known typos in CSV / folder naming
   folder = folder.replace(/oterEvent/g, 'otherEvent');
   const candidates = [
     folder,

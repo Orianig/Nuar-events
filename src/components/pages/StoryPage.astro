@@ -304,7 +304,6 @@ const backTargets = {
         return apply(backTarget, label);
       }
 
-      // Otra página del sitio (p. ej. contacto): volver ahí
       if (path !== normalizePath(window.location.pathname)) {
         return apply(backTarget, fallbackLabel);
       }
@@ -383,7 +382,6 @@ const backTargets = {
       e.stopPropagation();
     });
 
-    // Clic en el fondo oscuro (fuera del panel) cierra el carrusel
     dialog.addEventListener('click', (e) => {
       if (e.target === dialog) close();
     });

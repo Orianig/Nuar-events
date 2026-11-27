@@ -13,7 +13,6 @@ const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionTwoP
       </h2>
     )}
 
-    <!-- Desktop: 3 columnas -->
     <div class="hidden md:grid gap-8 md:grid-cols-3 md:justify-items-center">
       {items.map((item) => (
         <article class="section-two-panel w-full md:max-w-[320px]">
@@ -30,7 +29,6 @@ const { sectionTitle, items = [], backgroundColor } = Astro.props as SectionTwoP
       ))}
     </div>
 
-    <!-- Mobile: carrusel con tres puntitos -->
     <div id="section-two-carousel" class="md:hidden overflow-hidden">
       <div
         id="section-two-track"
