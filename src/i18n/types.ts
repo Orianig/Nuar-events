@@ -191,6 +191,18 @@ export interface Translations {
     ctaLabel: string;
     emptyFilter: string;
   };
+  storyPage: {
+    backDefault: string;
+    backHome: string;
+    experience: string;
+    details: string;
+    eventTypeLabel: string;
+    locationLabel: string;
+    galleryLabel: string;
+    lightboxClose: string;
+    lightboxPrev: string;
+    lightboxNext: string;
+  };
   typologyPage: {
     ctaPrimary: string;
     ctaSecondary: string;

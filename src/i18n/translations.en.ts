@@ -344,6 +344,18 @@ export const en: Translations = {
     emptyFilter:
       'We don’t have events of this type yet. We hope to update this soon.',
   },
+  storyPage: {
+    backDefault: 'Our events',
+    backHome: 'Home',
+    experience: 'The experience',
+    details: 'The details',
+    eventTypeLabel: 'Event type',
+    locationLabel: 'Location',
+    galleryLabel: 'Gallery',
+    lightboxClose: 'Close',
+    lightboxPrev: 'Previous',
+    lightboxNext: 'Next',
+  },
   typologyPage: {
     ctaPrimary: 'Request a quote',
     ctaSecondary: 'Download dossier',

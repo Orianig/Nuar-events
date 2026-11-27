@@ -344,6 +344,18 @@ export const es: Translations = {
     emptyFilter:
       'Ahora no contamos con eventos de este tipo. Esperamos actualizarlo próximamente.',
   },
+  storyPage: {
+    backDefault: 'Nuestros eventos',
+    backHome: 'Inicio',
+    experience: 'La experiencia',
+    details: 'Los detalles',
+    eventTypeLabel: 'Tipo de evento',
+    locationLabel: 'Ubicación',
+    galleryLabel: 'Galería',
+    lightboxClose: 'Cerrar',
+    lightboxPrev: 'Anterior',
+    lightboxNext: 'Siguiente',
+  },
   typologyPage: {
     ctaPrimary: 'Solicitar presupuesto',
     ctaSecondary: 'Descargar dossier',

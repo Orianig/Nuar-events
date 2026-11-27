@@ -2,8 +2,16 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../layout/Navbar.astro';
 import Footer from '../layout/Footer.astro';
+import ContactSection from '../home/ContactSection.astro';
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import X from '@lucide/astro/icons/x';
+import Users from '@lucide/astro/icons/users';
+import Calendar from '@lucide/astro/icons/calendar';
+import MapPin from '@lucide/astro/icons/map-pin';
 import { getTranslations } from '../../i18n';
 import { attendeesText, localize, type Story } from '../../data/stories';
+import { allEventsHref, eventTypeHref } from '../../lib/eventTypes';
 import type { PageProps } from '../../types';
 
 interface Props extends PageProps {
@@ -12,6 +20,11 @@ interface Props extends PageProps {
 
 const { lang, currentPath, base, story } = Astro.props as Props;
 const t = getTranslations(lang);
+const b = base.endsWith('/') ? base.slice(0, -1) : base;
+const hrefContact = lang === 'es' ? (b ? `${b}/contact` : '/contact') : (b ? `${b}/en/contact` : '/en/contact');
+const hrefHome = lang === 'es' ? (b ? `${b}/` : '/') : (b ? `${b}/en/` : '/en/');
+const hrefAllEvents = allEventsHref(lang, base);
+const hrefTypology = eventTypeHref(story.type, lang, base);
 
 const creativeTitle = localize(story.title, lang);
 const name = localize(story.name, lang);
@@ -20,11 +33,28 @@ const experience = localize(story.experience, lang);
 const details = localize(story.details, lang);
 const attendeesLabel = attendeesText(story, lang);
 
-const title = `${creativeTitle || name} - Nuar`;
-const description = experience.slice(0, 160);
+const typeLabels = {
+  corporativos: t.nav.eventTypes.corporate,
+  bodas: t.nav.eventTypes.weddings,
+  cumpleanos: t.nav.eventTypes.birthdays,
+  graduaciones: t.nav.eventTypes.graduations,
+  otros: t.nav.eventTypes.others,
+} as const;
+
+const typeLabel = typeLabels[story.type];
+const eyebrow = `${typeLabel} · ${location}`.toUpperCase();
+
+const pageTitle = `${creativeTitle || name} - Nuar`;
+const pageDescription = experience.slice(0, 160);
+
+const backTargets = {
+  home: { href: hrefHome, label: t.storyPage.backHome },
+  all: { href: hrefAllEvents, label: t.eventsAll.title },
+  typology: { href: hrefTypology, label: typeLabel },
+} as const;
 ---
 
-<Layout title={title} description={description} lang={lang} currentPath={currentPath}>
+<Layout title={pageTitle} description={pageDescription} lang={lang} currentPath={currentPath}>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -38,66 +68,178 @@ const description = experience.slice(0, 160);
     base={base}
   />
 
-  <main class="bg-stone pb-16 pt-28 text-bark">
-    <div class="page-gutter">
-      <div class="page-shell mx-auto max-w-3xl">
-        <p class="font-slogan text-xl text-olive md:text-2xl">{creativeTitle || t.moments.kicker}</p>
-        <h1 class="mt-3 font-body text-3xl font-normal leading-snug text-olive md:text-[32px]">
-          {name}
-        </h1>
+  <main class="text-bark" data-story-page>
+    <div class="relative bg-white">
+      <div class="pointer-events-none absolute inset-0 bg-sand-light/30" aria-hidden="true"></div>
+      <div class="page-gutter relative pt-28 pb-12 md:pb-16">
+      <div class="page-shell mx-auto max-w-4xl">
+        <a
+          href={hrefAllEvents}
+          data-story-back
+          data-back-home={backTargets.home.href}
+          data-back-home-label={backTargets.home.label}
+          data-back-all={backTargets.all.href}
+          data-back-all-label={backTargets.all.label}
+          data-back-typology={backTargets.typology.href}
+          data-back-typology-label={backTargets.typology.label}
+          data-lang={lang}
+          class="inline-flex items-center gap-2 font-body text-sm text-olive/80 transition-opacity hover:opacity-80"
+        >
+          <ArrowLeft class="size-4 shrink-0" stroke-width={1.8} aria-hidden="true" />
+          <span data-story-back-label>{t.storyPage.backDefault}</span>
+        </a>
 
-        <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-body text-sm text-olive/90">
-          <span>{attendeesLabel}</span>
-          <span>{location}</span>
-        </div>
+        <p class="mt-8 font-body text-xs font-medium uppercase tracking-[0.14em] text-olive/70 md:text-sm">
+          {eyebrow}
+        </p>
+        <h1 class="mt-3 font-body text-2xl font-normal leading-snug text-olive md:text-[32px] lg:text-[36px]">
+          {creativeTitle || name}
+        </h1>
 
         {
           story.coverImage && (
-            <div class="mt-8 overflow-hidden rounded-[14px]">
+            <div class="mt-6 overflow-hidden rounded-[14px] md:mt-8">
               <img
                 src={story.coverImage}
                 alt=""
-                class="aspect-[16/10] w-full object-cover"
+                class="aspect-[2.4/1] max-h-[280px] w-full object-cover md:max-h-[320px]"
                 loading="eager"
                 decoding="async"
+                fetchpriority="high"
               />
             </div>
           )
         }
 
-        <section class="mt-10">
-          <h2 class="font-body text-lg font-medium text-olive">
-            {lang === 'en' ? 'The experience' : 'La experiencia'}
-          </h2>
-          <p class="mt-3 font-body text-base leading-relaxed text-olive/90">{experience}</p>
+        <div
+          class="mt-8 grid grid-cols-1 divide-y divide-olive/20 border-y border-olive/20 sm:grid-cols-3 sm:divide-x sm:divide-y-0"
+          role="list"
+        >
+          <div class="flex items-center gap-3 px-1 py-4 sm:justify-center sm:px-4" role="listitem">
+            <Users class="size-5 shrink-0 text-olive" stroke-width={1.6} aria-hidden="true" />
+            <div class="min-w-0">
+              <p class="font-body text-sm font-medium text-olive md:text-base">{attendeesLabel}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-1 py-4 sm:justify-center sm:px-4" role="listitem">
+            <Calendar class="size-5 shrink-0 text-olive" stroke-width={1.6} aria-hidden="true" />
+            <div class="min-w-0">
+              <p class="font-body text-sm font-medium text-olive md:text-base">{typeLabel}</p>
+              <p class="font-body text-xs text-olive/65">{t.storyPage.eventTypeLabel}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 px-1 py-4 sm:justify-center sm:px-4" role="listitem">
+            <MapPin class="size-5 shrink-0 text-olive" stroke-width={1.6} aria-hidden="true" />
+            <div class="min-w-0">
+              <p class="font-body text-sm font-medium text-olive md:text-base">{location}</p>
+              <p class="font-body text-xs text-olive/65">{t.storyPage.locationLabel}</p>
+            </div>
+          </div>
+        </div>
+
+        <section class="mt-10 md:mt-12">
+          <h2 class="font-body text-xl font-normal text-olive md:text-2xl">{t.storyPage.experience}</h2>
+          <p class="mt-4 max-w-2xl font-body text-base leading-relaxed text-olive/90">{experience}</p>
         </section>
 
-        <section class="mt-8">
-          <h2 class="font-body text-lg font-medium text-olive">
-            {lang === 'en' ? 'The details' : 'Los detalles'}
-          </h2>
-          <p class="mt-3 font-body text-base leading-relaxed text-olive/90">{details}</p>
+        <section class="mt-8 md:mt-10">
+          <h2 class="font-body text-xl font-normal text-olive md:text-2xl">{t.storyPage.details}</h2>
+          <p class="mt-4 max-w-2xl font-body text-base leading-relaxed text-olive/90">{details}</p>
         </section>
 
         {
           story.images.length > 0 && (
-            <section class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {story.images.map((src) => (
-                <div class="overflow-hidden rounded-[14px]">
-                  <img
-                    src={src}
-                    alt=""
-                    class="aspect-square w-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
+            <section class="mt-10 md:mt-12" aria-label={t.storyPage.galleryLabel} data-story-gallery>
+              <div class="grid grid-cols-3 gap-2.5 sm:gap-3 md:gap-4">
+                {story.images.map((src, i) => (
+                  <button
+                    type="button"
+                    class="group/gallery relative aspect-[4/3] cursor-pointer overflow-hidden rounded-[10px] border-0 bg-transparent p-0 text-left outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
+                    data-gallery-open
+                    data-gallery-index={i}
+                    aria-label={`${t.storyPage.galleryLabel} ${i + 1}`}
+                  >
+                    <img
+                      src={src}
+                      alt=""
+                      class="h-full w-full object-cover transition-transform duration-300 group-hover/gallery:scale-[1.05] motion-reduce:transition-none"
+                      loading="lazy"
+                      decoding="async"
+                      data-gallery-src={src}
+                    />
+                    <span class="pointer-events-none absolute inset-0 bg-bark/0 transition-colors duration-300 group-hover/gallery:bg-bark/15" aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
             </section>
           )
         }
       </div>
+      </div>
     </div>
+
+    {
+      story.images.length > 0 && (
+        <dialog
+          class="story-lightbox fixed inset-0 z-50 m-0 h-full max-h-none w-full max-w-none cursor-zoom-out border-0 bg-bark/88 p-0 open:grid open:place-items-center"
+          data-story-lightbox
+          aria-label={t.storyPage.galleryLabel}
+        >
+          <div
+            class="relative z-10 flex w-[min(100%,72rem)] cursor-default items-center gap-2 px-3 md:gap-4 md:px-6"
+            data-lightbox-panel
+          >
+            <button
+              type="button"
+              class="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-stone-light/40 bg-bark/50 text-stone-light transition-opacity hover:opacity-80 md:size-12"
+              data-lightbox-prev
+              aria-label={t.storyPage.lightboxPrev}
+            >
+              <ArrowLeft class="size-5" stroke-width={1.8} aria-hidden="true" />
+            </button>
+
+            <div class="relative min-w-0 flex-1">
+              <img
+                src={story.images[0]}
+                alt=""
+                class="mx-auto max-h-[78vh] w-auto max-w-full rounded-[12px] object-contain"
+                data-lightbox-image
+                decoding="async"
+              />
+              <p class="mt-3 text-center font-body text-sm text-stone-light/80" data-lightbox-counter>
+                1 / {story.images.length}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-stone-light/40 bg-bark/50 text-stone-light transition-opacity hover:opacity-80 md:size-12"
+              data-lightbox-next
+              aria-label={t.storyPage.lightboxNext}
+            >
+              <ArrowRight class="size-5" stroke-width={1.8} aria-hidden="true" />
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="absolute top-4 right-4 z-20 inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-stone-light/40 bg-bark/50 text-stone-light transition-opacity hover:opacity-80 md:top-6 md:right-6"
+            data-lightbox-close
+            aria-label={t.storyPage.lightboxClose}
+          >
+            <X class="size-5" stroke-width={1.8} aria-hidden="true" />
+          </button>
+        </dialog>
+      )
+    }
+
+    <ContactSection
+      titleLines={[t.eventsAll.ctaTitle]}
+      descriptionLines={[...t.eventsAll.ctaDescriptionLines]}
+      ctaLabel={t.eventsAll.ctaLabel}
+      hrefContact={hrefContact}
+      backgroundImage="/general/home/preFooter/hero1.png"
+    />
   </main>
 
   <Footer
@@ -110,3 +252,162 @@ const description = experience.slice(0, 160);
     base={base}
   />
 </Layout>
+
+<script>
+  function normalizePath(path: string): string {
+    if (!path) return '/';
+    const clean = path.split('?')[0].split('#')[0];
+    if (clean.length > 1 && clean.endsWith('/')) return clean.slice(0, -1);
+    return clean || '/';
+  }
+
+  function resolveStoryBack() {
+    const link = document.querySelector<HTMLAnchorElement>('[data-story-back]');
+    const labelEl = document.querySelector<HTMLElement>('[data-story-back-label]');
+    if (!link || !labelEl) return;
+
+    const fallbackHref = link.dataset.backAll || '/eventos';
+    const fallbackLabel = link.dataset.backAllLabel || labelEl.textContent || '';
+    const homeHref = link.dataset.backHome || '/';
+    const homeLabel = link.dataset.backHomeLabel || fallbackLabel;
+    const typologyHref = link.dataset.backTypology || fallbackHref;
+    const typologyLabel = link.dataset.backTypologyLabel || fallbackLabel;
+
+    const apply = (href: string, label: string) => {
+      link.href = href;
+      labelEl.textContent = label;
+    };
+
+    try {
+      const ref = document.referrer;
+      if (!ref) return apply(fallbackHref, fallbackLabel);
+
+      const url = new URL(ref);
+      if (url.origin !== window.location.origin) return apply(fallbackHref, fallbackLabel);
+
+      const path = normalizePath(url.pathname);
+      const homePath = normalizePath(homeHref);
+      const allPath = normalizePath(fallbackHref);
+      const typologyPath = normalizePath(typologyHref);
+      const backTarget = `${url.pathname}${url.search}`;
+
+      if (path === homePath || path === '/' || path === '/en') {
+        return apply(homeHref, homeLabel);
+      }
+
+      if (path === allPath) {
+        return apply(fallbackHref, fallbackLabel);
+      }
+
+      if (/\/eventos\/(corporativos|bodas|cumpleanos|graduaciones|otros)$/.test(path)) {
+        const label = path === typologyPath ? typologyLabel : fallbackLabel;
+        return apply(backTarget, label);
+      }
+
+      // Otra página del sitio (p. ej. contacto): volver ahí
+      if (path !== normalizePath(window.location.pathname)) {
+        return apply(backTarget, fallbackLabel);
+      }
+
+      return apply(fallbackHref, fallbackLabel);
+    } catch {
+      return apply(fallbackHref, fallbackLabel);
+    }
+  }
+
+  resolveStoryBack();
+  document.addEventListener('astro:page-load', resolveStoryBack);
+
+  function initStoryLightbox() {
+    const root = document.querySelector<HTMLElement>('[data-story-page]');
+    const dialog = document.querySelector<HTMLDialogElement>('[data-story-lightbox]');
+    if (!root || !dialog || dialog.dataset.ready === '1') return;
+    dialog.dataset.ready = '1';
+
+    const imageEl = dialog.querySelector<HTMLImageElement>('[data-lightbox-image]');
+    const counterEl = dialog.querySelector<HTMLElement>('[data-lightbox-counter]');
+    const openers = Array.from(document.querySelectorAll<HTMLElement>('[data-gallery-open]'));
+    const sources = openers
+      .map((btn) => btn.querySelector<HTMLImageElement>('[data-gallery-src]')?.dataset.gallerySrc || '')
+      .filter(Boolean);
+
+    if (!imageEl || sources.length === 0) return;
+
+    let index = 0;
+
+    const render = () => {
+      imageEl.src = sources[index] || '';
+      if (counterEl) counterEl.textContent = `${index + 1} / ${sources.length}`;
+    };
+
+    const openAt = (i: number) => {
+      index = ((i % sources.length) + sources.length) % sources.length;
+      render();
+      if (!dialog.open) dialog.showModal();
+    };
+
+    const close = () => {
+      if (dialog.open) dialog.close();
+    };
+
+    const next = () => {
+      index = (index + 1) % sources.length;
+      render();
+    };
+
+    const prev = () => {
+      index = (index - 1 + sources.length) % sources.length;
+      render();
+    };
+
+    openers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const i = Number(btn.dataset.galleryIndex || '0');
+        openAt(Number.isFinite(i) ? i : 0);
+      });
+    });
+
+    dialog.querySelector('[data-lightbox-close]')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      close();
+    });
+    dialog.querySelector('[data-lightbox-next]')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      next();
+    });
+    dialog.querySelector('[data-lightbox-prev]')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prev();
+    });
+    dialog.querySelector('[data-lightbox-panel]')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Clic en el fondo oscuro (fuera del panel) cierra el carrusel
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) close();
+    });
+
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        next();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prev();
+      } else if (e.key === 'Escape') {
+        close();
+      }
+    });
+  }
+
+  initStoryLightbox();
+  document.addEventListener('astro:page-load', initStoryLightbox);
+</script>
+
+<style>
+  .story-lightbox::backdrop {
+    background: transparent;
+  }
+</style>
+
