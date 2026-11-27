@@ -100,6 +100,16 @@ export const en: Translations = {
             answer:
               'Email us at hola@nuarevents.es, call +34 656 49 93 02, or fill in the contact form. The more you tell us about your idea, the better we can guide you.',
           },
+          {
+            question: 'How far in advance should I book my event in Valencia?',
+            answer:
+              'For weddings or large corporate events we recommend 3 to 6 months. For birthdays, hen/stag parties or private workshops, 3 to 4 weeks is often enough. That doesn’t rule out organising something sooner (even within a week) if we have availability and it is feasible.',
+          },
+          {
+            question: 'Do you have your own venue, or do you find the place for us?',
+            answer:
+              'We don’t rely on a single owned venue: we work with a curated network of spaces, estates, farmhouses and venues in Valencia and nearby areas, and we help you find the place that best fits the style of your event.',
+          },
         ],
       },
     },

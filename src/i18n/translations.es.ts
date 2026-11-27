@@ -100,6 +100,16 @@ export const es: Translations = {
             answer:
               'Escríbenos a hola@nuarevents.es, llámanos al +34 656 49 93 02 o rellena el formulario de contacto. Cuanto más nos cuentes sobre tu idea, mejor podremos orientarte.',
           },
+          {
+            question: '¿Con cuánta antelación debo reservar mi evento en Valencia?',
+            answer:
+              'Para bodas o eventos corporativos grandes recomendamos entre 3 y 6 meses. Para cumpleaños, despedidas o talleres privados, suele bastar con 3 o 4 semanas. Eso no descarta organizar algo en un plazo más corto (incluso 1 semana) si tenemos disponibilidad y es viable.',
+          },
+          {
+            question: '¿Tenéis espacio propio o buscáis el lugar por nosotros?',
+            answer:
+              'No tenemos un único espacio propio: trabajamos con una red seleccionada de espacios, fincas, alquerías y locales en Valencia y alrededores, y os ayudamos a encontrar el lugar que mejor encaje con el estilo de vuestro evento.',
+          },
         ],
       },
     },
