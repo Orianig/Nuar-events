@@ -10,15 +10,16 @@ const {
   hrefPrimary = '/contact',
   hrefSecondary = '/about-nuar',
   backgroundImage = '/general/home/hero/hero1.png',
+  imageAlt = 'Celebración diseñada por Nuar Events',
   height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-130',
 } = Astro.props as HeroProps;
 ---
 
 <section class={`relative flex ${height} items-center overflow-hidden bg-hero-bleed`}>
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+  <div class="pointer-events-none absolute inset-0">
     <img
       src={backgroundImage}
-      alt=""
+      alt={imageAlt}
       width="1480"
       height="640"
       class="absolute inset-0 h-full w-full object-cover object-[center_72%]"

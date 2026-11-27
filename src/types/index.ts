@@ -122,6 +122,7 @@ export interface HeroProps {
   hrefPrimary?: string;
   hrefSecondary?: string;
   backgroundImage?: string;
+  imageAlt?: string;
   height?: string;
 }
 
@@ -140,6 +141,9 @@ export interface LayoutProps {
   lang?: Lang;
   currentPath?: string;
   noindex?: boolean;
+  /** Relative or absolute image used for Open Graph / Twitter */
+  image?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export interface PageProps {

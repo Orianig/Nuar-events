@@ -12,6 +12,7 @@ import MapPin from '@lucide/astro/icons/map-pin';
 import { getTranslations } from '../../i18n';
 import { attendeesText, localize, type Story } from '../../data/stories';
 import { allEventsHref, eventTypeHref } from '../../lib/eventTypes';
+import { storyArticleJsonLd } from '../../lib/seo';
 import type { PageProps } from '../../types';
 
 interface Props extends PageProps {
@@ -44,8 +45,20 @@ const typeLabels = {
 const typeLabel = typeLabels[story.type];
 const eyebrow = `${typeLabel} · ${location}`.toUpperCase();
 
-const pageTitle = `${creativeTitle || name} - Nuar`;
+const pageTitle = creativeTitle || name;
 const pageDescription = experience.slice(0, 160);
+const coverAlt =
+  lang === 'en'
+    ? `${pageTitle} event by Nuar Events in ${location}`
+    : `Evento ${pageTitle} de Nuar Events en ${location}`;
+const articleJsonLd = storyArticleJsonLd({
+  siteOrigin: 'https://www.nuarevents.es',
+  url: currentPath,
+  headline: pageTitle,
+  description: pageDescription,
+  image: story.coverImage,
+  lang,
+});
 
 const backTargets = {
   home: { href: hrefHome, label: t.storyPage.backHome },
@@ -54,7 +67,14 @@ const backTargets = {
 } as const;
 ---
 
-<Layout title={pageTitle} description={pageDescription} lang={lang} currentPath={currentPath}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  lang={lang}
+  currentPath={currentPath}
+  image={story.coverImage || '/general/home/hero/hero1.png'}
+  jsonLd={articleJsonLd}
+>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -101,7 +121,7 @@ const backTargets = {
             <div class="mt-6 overflow-hidden rounded-[14px] md:mt-8">
               <img
                 src={story.coverImage}
-                alt=""
+                alt={coverAlt}
                 class="aspect-[2.4/1] max-h-70 w-full object-cover md:max-h-80"
                 loading="eager"
                 decoding="async"
@@ -161,7 +181,7 @@ const backTargets = {
                   >
                     <img
                       src={src}
-                      alt=""
+                      alt={`${pageTitle} — ${t.storyPage.galleryLabel} ${i + 1}`}
                       class="h-full w-full object-cover transition-transform duration-300 group-hover/gallery:scale-[1.05] motion-reduce:transition-none"
                       loading="lazy"
                       decoding="async"
@@ -201,7 +221,7 @@ const backTargets = {
             <div class="relative min-w-0 flex-1">
               <img
                 src={story.images[0]}
-                alt=""
+                alt={`${pageTitle} — ${t.storyPage.galleryLabel}`}
                 class="mx-auto max-h-[78vh] w-auto max-w-full rounded-xl object-contain"
                 data-lightbox-image
                 decoding="async"
@@ -326,21 +346,29 @@ const backTargets = {
     const imageEl = dialog.querySelector<HTMLImageElement>('[data-lightbox-image]');
     const counterEl = dialog.querySelector<HTMLElement>('[data-lightbox-counter]');
     const openers = Array.from(document.querySelectorAll<HTMLElement>('[data-gallery-open]'));
-    const sources = openers
-      .map((btn) => btn.querySelector<HTMLImageElement>('[data-gallery-src]')?.dataset.gallerySrc || '')
-      .filter(Boolean);
+    const slides = openers
+      .map((btn) => {
+        const img = btn.querySelector<HTMLImageElement>('[data-gallery-src]');
+        return {
+          src: img?.dataset.gallerySrc || '',
+          alt: img?.alt || '',
+        };
+      })
+      .filter((slide) => Boolean(slide.src));
 
-    if (!imageEl || sources.length === 0) return;
+    if (!imageEl || slides.length === 0) return;
 
     let index = 0;
 
     const render = () => {
-      imageEl.src = sources[index] || '';
-      if (counterEl) counterEl.textContent = `${index + 1} / ${sources.length}`;
+      const slide = slides[index];
+      imageEl.src = slide?.src || '';
+      imageEl.alt = slide?.alt || imageEl.alt;
+      if (counterEl) counterEl.textContent = `${index + 1} / ${slides.length}`;
     };
 
     const openAt = (i: number) => {
-      index = ((i % sources.length) + sources.length) % sources.length;
+      index = ((i % slides.length) + slides.length) % slides.length;
       render();
       if (!dialog.open) dialog.showModal();
     };
@@ -350,12 +378,12 @@ const backTargets = {
     };
 
     const next = () => {
-      index = (index + 1) % sources.length;
+      index = (index + 1) % slides.length;
       render();
     };
 
     const prev = () => {
-      index = (index - 1 + sources.length) % sources.length;
+      index = (index - 1 + slides.length) % slides.length;
       render();
     };
 

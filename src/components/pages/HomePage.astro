@@ -60,7 +60,13 @@ const experienceItems = HOME_EVENT_TYPE_SLUGS.map((slug) => {
 });
 ---
 
-<Layout title={t.pages.home.title} description={t.hero.slogan} lang={lang} currentPath={currentPath}>
+<Layout
+  title={t.pages.home.title}
+  description={t.hero.slogan}
+  lang={lang}
+  currentPath={currentPath}
+  image="/general/home/hero/hero1.png"
+>
   <IntroAnimation />
 
   <Navbar
@@ -84,6 +90,11 @@ const experienceItems = HOME_EVENT_TYPE_SLUGS.map((slug) => {
     hrefPrimary={hrefContact}
     hrefSecondary={hrefAboutNuar}
     backgroundImage={`${assetBase}general/home/hero/hero1.png`}
+    imageAlt={
+      isSpanish
+        ? 'Ambiente de celebración diseñado por Nuar Events'
+        : 'Celebration atmosphere designed by Nuar Events'
+    }
   />
 
   <ExperiencesSection

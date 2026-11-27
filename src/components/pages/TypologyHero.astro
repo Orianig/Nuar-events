@@ -13,6 +13,7 @@ interface Props {
   hrefPrimary: string;
   hrefSecondary?: string;
   backgroundImage: ImageMetadata;
+  imageAlt?: string;
   bleedColor?: string;
   objectPosition?: string;
   height?: string;
@@ -27,22 +28,27 @@ const {
   hrefPrimary,
   hrefSecondary,
   backgroundImage,
+  imageAlt = '',
   bleedColor = '#120e0a',
   objectPosition = 'center 40%',
   height = 'h-auto lg:h-[min(62svh,640px)] lg:min-h-130',
 } = Astro.props as Props;
 
 const hasDossier = Boolean(hrefSecondary?.trim());
+const resolvedAlt =
+  imageAlt.trim() ||
+  (titleLines.length > 0 ? titleLines.join(' ') : littleTitle) ||
+  'Evento Nuar Events';
 ---
 
 <section
   class={`typology-hero relative flex ${height} items-center overflow-hidden`}
   style={`--typology-bleed: ${bleedColor}`}
 >
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+  <div class="pointer-events-none absolute inset-0">
     <Image
       src={backgroundImage}
-      alt=""
+      alt={resolvedAlt}
       widths={[720, 1080, 1440, 1920]}
       sizes="100vw"
       quality={88}
@@ -55,6 +61,7 @@ const hasDossier = Boolean(hrefSecondary?.trim());
     />
     <div
       class="absolute inset-0 z-1"
+      aria-hidden="true"
       style={`background: linear-gradient(to right, ${bleedColor}cc 0%, ${bleedColor}99 30%, ${bleedColor}59 55%, ${bleedColor}26 75%, transparent 100%)`}
     >
     </div>

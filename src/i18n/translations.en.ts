@@ -39,10 +39,10 @@ export const en: Translations = {
   },
   pages: {
     home: {
-      title: 'Home - Nuar',
+      title: '',
     },
     contact: {
-      title: 'Contact - Nuar',
+      title: 'Contact',
       description:
         'Contact Nuar Events to design meaningful celebrations from start to finish.',
       copyFeedback: 'Copied to clipboard',
@@ -74,8 +74,9 @@ export const en: Translations = {
       formIframeTitle: 'Nuar Events contact form',
     },
     aboutNuar: {
-      title: 'NUAR',
-      description: "Get to know NUAR's origin and mission",
+      title: 'About Nuar',
+      description:
+        'Discover the origin and mission of Nuar Events: intentional celebrations and experiences designed in Valencia.',
       whatIsNuar: {
         kicker: 'What is',
         hero: {

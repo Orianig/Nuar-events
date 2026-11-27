@@ -39,10 +39,10 @@ export const es: Translations = {
   },
   pages: {
     home: {
-      title: 'Inicio - Nuar',
+      title: '',
     },
     contact: {
-      title: 'Contacto - Nuar',
+      title: 'Contacto',
       description:
         'Contacta con Nuar Events para diseñar experiencias y celebraciones cuidadas de principio a fin.',
       copyFeedback: 'Copiado al portapapeles',
@@ -74,8 +74,9 @@ export const es: Translations = {
       formIframeTitle: 'Formulario de contacto Nuar Events',
     },
     aboutNuar: {
-      title: 'NUAR',
-      description: 'Conoce el origen y la misión de NUAR',
+      title: 'Sobre Nuar',
+      description:
+        'Conoce el origen y la misión de Nuar Events: experiencias y celebraciones diseñadas con intención en Valencia.',
       whatIsNuar: {
         kicker: 'Qué es',
         hero: {

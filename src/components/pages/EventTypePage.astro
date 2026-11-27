@@ -33,14 +33,16 @@ const labels = {
   otros: t.nav.eventTypes.others,
 } as const;
 
-const pageTitle = typology
-  ? `${localize(typology.typology, lang)} - Nuar`
-  : `${labels[eventType]} - Nuar`;
+const pageTitle = typology ? localize(typology.typology, lang) : labels[eventType];
 const pageDescription = typology
   ? localize(typology.descriptionHero, lang)
   : lang === 'en'
     ? `Nuar Events — ${labels[eventType]}.`
     : `Nuar Events — ${labels[eventType]}.`;
+const socialImage = typology?.socialImage || '/general/home/hero/hero1.png';
+const heroAlt = typology
+  ? `${localize(typology.typology, lang)} — Nuar Events`
+  : labels[eventType];
 
 const eventTypes = EVENT_TYPE_SLUGS.map((slug) => ({
   label: labels[slug],
@@ -76,7 +78,13 @@ const featuredItems = featuredStories.map((story) => ({
 }));
 ---
 
-<Layout title={pageTitle} description={pageDescription} lang={lang} currentPath={currentPath}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  lang={lang}
+  currentPath={currentPath}
+  image={socialImage}
+>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -103,6 +111,7 @@ const featuredItems = featuredStories.map((story) => ({
           hrefPrimary={hrefContact}
           hrefSecondary={dossierHref}
           backgroundImage={typology.coverImage}
+          imageAlt={heroAlt}
           bleedColor={typology.bleedColor}
           objectPosition={typology.heroObjectPosition}
         />

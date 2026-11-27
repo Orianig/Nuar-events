@@ -36,7 +36,13 @@ const CONTACT_HERO_IMG_BLEED = '#241810';
 const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
 ---
 
-<Layout title={p.title} description={p.description} lang={lang} currentPath={currentPath}>
+<Layout
+  title={p.title}
+  description={p.description}
+  lang={lang}
+  currentPath={currentPath}
+  image={CONTACT_HERO_IMAGE_JPG}
+>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -66,7 +72,11 @@ const CONTACT_STORY_IMG_BLEED = '#dcc4a9';
           <source srcset={CONTACT_HERO_IMAGE_AVIF} type="image/avif" />
           <img
             src={CONTACT_HERO_IMAGE_JPG}
-            alt=""
+            alt={
+              lang === 'en'
+                ? 'People celebrating at a Nuar Events gathering'
+                : 'Personas celebrando en un encuentro de Nuar Events'
+            }
             width="1600"
             height="900"
             class="absolute inset-0 h-full w-full object-cover object-[center_28%] lg:object-[center_35%]"

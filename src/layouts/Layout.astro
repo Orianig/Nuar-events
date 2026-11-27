@@ -1,6 +1,12 @@
 ---
 import '../styles/global.css';
 import type { LayoutProps } from '../types';
+import {
+  DEFAULT_OG_IMAGE,
+  absoluteUrl,
+  buildPageTitle,
+  organizationJsonLd,
+} from '../lib/seo';
 
 const {
   title,
@@ -8,10 +14,11 @@ const {
   lang = 'es',
   currentPath = '/',
   noindex = false,
+  image = DEFAULT_OG_IMAGE,
+  jsonLd,
 } = Astro.props as LayoutProps;
 
-const siteName = 'Nuar Events';
-const pageTitle = title ? `${siteName} | ${title}` : siteName;
+const pageTitle = buildPageTitle(title);
 const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
 const normalizedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
 const canonicalUrl = siteOrigin ? `${siteOrigin}${normalizedPath}` : undefined;
@@ -25,6 +32,13 @@ const enPath =
 const hrefEs = siteOrigin ? `${siteOrigin}${esPath}` : undefined;
 const hrefEn = siteOrigin ? `${siteOrigin}${enPath}` : undefined;
 const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
+const ogImage = absoluteUrl(image, siteOrigin);
+const structuredData = noindex
+  ? []
+  : [
+      organizationJsonLd(siteOrigin || 'https://www.nuarevents.es', lang),
+      ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+    ];
 ---
 
 <!doctype html>
@@ -46,17 +60,23 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 		{!noindex && (
 			<>
 				<meta property="og:type" content="website" />
-				<meta property="og:site_name" content={siteName} />
+				<meta property="og:site_name" content="Nuar Events" />
 				<meta property="og:title" content={pageTitle} />
 				<meta property="og:description" content={description} />
 				{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+				{ogImage && <meta property="og:image" content={ogImage} />}
 				<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
+				<meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_US'} />
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:title" content={pageTitle} />
 				<meta name="twitter:description" content={description} />
+				{ogImage && <meta name="twitter:image" content={ogImage} />}
 			</>
 		)}
 		<title>{pageTitle}</title>
+		{structuredData.map((data) => (
+			<script type="application/ld+json" set:html={JSON.stringify(data)} />
+		))}
 	</head>
 	<body>
 		<slot />

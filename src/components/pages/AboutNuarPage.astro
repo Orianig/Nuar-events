@@ -12,7 +12,13 @@ const sectionOne = p.whatIsNuar;
 const sectionTwo = p.originStory;
 ---
 
-<Layout title={p.title} description={p.description} lang={lang} currentPath={currentPath}>
+<Layout
+  title={p.title}
+  description={p.description}
+  lang={lang}
+  currentPath={currentPath}
+  image="/general/aboutNuar/hero1.png"
+>
   <Navbar
     currentPath={currentPath}
     brandName={t.nav.brandName}
@@ -35,7 +41,7 @@ const sectionTwo = p.originStory;
               <div class="flex items-start">
                 <div>
                   <p class="font-body text-2xl md:text-4xl">{sectionOne.kicker}</p>
-                  <h1 class="font-body text-6xl leading-none md:text-8xl">{p.title}</h1>
+                  <h1 class="font-body text-6xl leading-none md:text-8xl">{t.nav.brandName}</h1>
                 </div>
                 <img
                   src="/icons/leaf1.png"
@@ -112,8 +118,11 @@ const sectionTwo = p.originStory;
           <div class="relative mt-2 flex w-full justify-center overflow-hidden md:mt-0 md:w-[45%] md:min-h-180 md:justify-start md:overflow-visible">
             <img
               src="/general/aboutNuar/hero1.png"
-              alt=""
-              aria-hidden="true"
+              alt={
+                lang === 'en'
+                  ? 'Nuar Events team and celebration atmosphere'
+                  : 'Equipo y ambiente de celebración de Nuar Events'
+              }
               class="relative w-[120%] max-w-none -translate-x-[5%] object-contain object-center md:absolute md:right-0 md:top-[12%] md:w-[130%] md:max-w-none md:translate-x-0"
               loading="lazy"
               decoding="async"
@@ -197,7 +206,11 @@ const sectionTwo = p.originStory;
         </video>
         <img
           src="/general/aboutNuar/hero2.png"
-          alt=""
+          alt={
+            lang === 'en'
+              ? 'Origin story of Nuar Events'
+              : 'Historia del origen de Nuar Events'
+          }
           aria-hidden="true"
           class="w-full max-w-full object-contain"
           loading="lazy"

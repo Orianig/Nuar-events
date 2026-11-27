@@ -24,6 +24,7 @@ export type Typology = {
   description: LocalizedString;
   items: TypologyItem[];
   coverImage: ImageMetadata;
+  socialImage: string;
   bleedColor: string;
   heroObjectPosition?: string;
   dossier: string;
@@ -107,6 +108,7 @@ export const typologies: Typology[] = generatedTipologias.map((row) => {
     description: { ...row.description },
     items,
     coverImage: presentation.coverImage,
+    socialImage: row.coverImagePath,
     bleedColor: presentation.bleedColor,
     heroObjectPosition: presentation.heroObjectPosition,
     dossier: row.dossier || '',
